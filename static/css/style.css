@@ -4,6 +4,10 @@ body {
     padding: 0;
     background-color: #f9f9f9;
     color: #333;
+    box-sizing: border-box;
+}
+div, button, select {
+    box-sizing: border-box;
 }
 .catalog-container {
     display: flex;
@@ -24,14 +28,15 @@ body {
     border-bottom: 2px solid #007bff;
     padding-bottom: 10px;
 }
-.filters label {
+.filters__section-label {
     display: block;
     margin: 15px 0 5px;
     font-size: 0.9em;
     font-weight: bold;
 }
-.filters input, .filters select, .filters button {
+.filters__number-input, .filters select, .filters button {
     width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -45,10 +50,23 @@ body {
     text-transform: uppercase;
     border: none;
     cursor: pointer;
-    font-weight: bold;
 }
 .filters button:hover {
     background-color: #0056b3;
+}
+.filters__reset-button {
+    padding: 8px 20px;
+    width: 100%;
+    background-color: rgb(148, 148, 148);
+    text-align: center;
+    cursor: pointer;
+}
+.filters__reset-button:hover {
+    background-color: rgb(104, 104, 104);
+}
+.filters__reset-button a {
+    text-decoration: none;
+    color: white;
 }
 .house-list {
     width: 75%;
@@ -91,4 +109,7 @@ body {
     font-size: 1em;
     color: #333;
     font-weight: bold;
+}
+.filters__checkbox {
+    width: 20px;
 }
