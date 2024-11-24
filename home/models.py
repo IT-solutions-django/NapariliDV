@@ -12,32 +12,6 @@ class Slide(models.Model):
         verbose_name_plural = 'Слайды'
 
 
-class CompanyAdvantage(models.Model): 
-    name = models.CharField('Название', max_length=100), 
-    photo = models.ImageField('Фото', upload_to='home/company_advantages')
-    description = models.TextField('Описание')
-
-    class Meta: 
-        verbose_name = 'Преимущество'
-        verbose_name_plural = 'Преимущества компании'
-
-
-class CompanyFact(models.Model): 
-    name = models.CharField('Название', max_length=100)
-
-    class Meta: 
-        verbose_name = 'Факт'
-        verbose_name_plural = 'Факты о компании'
-
-
-class CompanyService(models.Model): 
-    name = models.CharField('Название', max_length=50)
-
-    class Meta: 
-        verbose_name = 'Услуга'
-        verbose_name_plural = 'Услуги компании'
-
-
 class CompanyInfo(models.Model): 
     description = models.TextField('Описание')
     history = models.TextField('История компании')
@@ -70,6 +44,50 @@ class CompanyInfo(models.Model):
     
     def __str__(self) -> str: 
         return 'Информация о компании'
+    
+
+class CompanyFact(models.Model): 
+    name = models.CharField('Название', max_length=100)
+    company_info = models.ForeignKey(
+        verbose_name='Информация о компании', 
+        to=CompanyInfo,
+        on_delete=models.CASCADE, 
+        related_name='facts', 
+    )
+
+    class Meta: 
+        verbose_name = 'Факт'
+        verbose_name_plural = 'Факты о компании'
+
+
+class CompanyService(models.Model): 
+    name = models.CharField('Название', max_length=50)
+    company_info = models.ForeignKey(
+        verbose_name='Услуги компании', 
+        to=CompanyInfo,
+        on_delete=models.CASCADE, 
+        related_name='services', 
+    )
+
+    class Meta: 
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги компании'
+
+
+class CompanyAdvantage(models.Model): 
+    name = models.CharField('Название', max_length=100)
+    description = models.TextField('Описание')
+    photo = models.ImageField('Фото', upload_to='home/company_advantages')
+    company_info = models.ForeignKey(
+        verbose_name='Преимущества компании', 
+        to=CompanyInfo,
+        on_delete=models.CASCADE, 
+        related_name='advantages', 
+    )
+
+    class Meta: 
+        verbose_name = 'Преимущество'
+        verbose_name_plural = 'Преимущества компании'
     
 
 class CooperationStage(models.Model): 
