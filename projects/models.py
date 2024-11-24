@@ -27,6 +27,7 @@ class RoofType(models.Model):
 
 
 class Project(models.Model): 
+    name = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
     square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
     price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
