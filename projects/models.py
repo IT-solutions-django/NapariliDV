@@ -9,6 +9,9 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
+    def __str__(self) -> str: 
+        return f'{self.name}'
+
 
 class Material(models.Model): 
     name = models.CharField('Название', max_length=100)
@@ -17,6 +20,9 @@ class Material(models.Model):
         verbose_name = 'Материал'
         verbose_name_plural = 'Материалы'
 
+    def __str__(self) -> str: 
+        return f'{self.name}'
+
 
 class RoofType(models.Model): 
     name = models.CharField('Название', max_length=100)
@@ -24,6 +30,9 @@ class RoofType(models.Model):
     class Meta: 
         verbose_name = 'Тип кровли'
         verbose_name_plural = 'Типы кровли'
+
+    def __str__(self) -> str: 
+        return f'{self.name}'
 
 
 class Project(models.Model): 
@@ -46,7 +55,7 @@ class Project(models.Model):
     )
     roof_type = models.ForeignKey(
         verbose_name='Тип кровли', 
-        to=Material, 
+        to=RoofType, 
         on_delete=models.CASCADE, 
         related_name='roof_type_projects'
     )
