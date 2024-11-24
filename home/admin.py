@@ -6,7 +6,8 @@ from .models import (
     CompanyService, 
     CompanyInfo, 
     CooperationStage, 
-    PopularQuestion
+    PopularQuestion, 
+    PrivacyPolicy,
 )
 
 
@@ -53,3 +54,9 @@ class CooperationStageAdmin(admin.ModelAdmin):
 class PopularQuestionAdmin(admin.ModelAdmin): 
     list_display = ['question', 'answer']
     search_fields = ['question', 'answer']
+
+
+@admin.register(PrivacyPolicy)
+class PrivacyPolicyAdmin(admin.ModelAdmin): 
+    list_display = ['admin_panel_title']
+    exclude = ['admin_panel_title']
