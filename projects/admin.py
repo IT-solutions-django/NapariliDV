@@ -4,7 +4,8 @@ from .models import (
     Category, 
     Material, 
     RoofType, 
-    Floor
+    Floor, 
+    ProjectPhoto
 )
 
 
@@ -30,10 +31,16 @@ class FloorInline(admin.TabularInline):
     verbose_name_plural = 'Этажи'
 
 
+class ProjectPhotoInline(admin.TabularInline): 
+    model = ProjectPhoto
+    extra = 0
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin): 
     list_display = ['id', 'name', 'description', 'square', 'price', 'rooms_quantity']
 
     inlines = [
         FloorInline,
+        ProjectPhotoInline,
     ] 

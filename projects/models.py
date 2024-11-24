@@ -64,6 +64,9 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
+    def __str__(self) -> str: 
+        return f'{self.name} | {self.price} р'
+
 
 class Floor(models.Model): 
     number = models.SmallIntegerField('Номер', validators=[MinValueValidator(0.0)])
@@ -83,3 +86,10 @@ class Floor(models.Model):
 class ProjectPhoto(models.Model): 
     image = models.ImageField('Изображение', upload_to='projects', null=True, blank=True)
     project = models.ForeignKey(verbose_name='Проект', to=Project, on_delete=models.CASCADE, related_name='photos', null=True)
+
+    class Meta: 
+        verbose_name = 'Фото проекта'
+        verbose_name_plural = 'Фото проекта'
+
+    def __str__(self) -> str: 
+        return f'{self.image}'
