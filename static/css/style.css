@@ -113,3 +113,11 @@ div, button, select {
 .filters__checkbox {
     width: 20px;
 }
+
+.house-card__heading {
+    text-decoration: none;
+    color: black;
+}
+.house-card__heading:hover {
+    color:#007bff
+}

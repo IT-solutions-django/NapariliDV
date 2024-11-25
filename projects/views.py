@@ -50,3 +50,14 @@ class CatalogView(View):
             'projects': projects
         }
         return render(request, self.template_name, context)
+    
+
+class ProjectView(View): 
+    template_name = 'projects/project.html'
+    
+    def get(self, request, id: int): 
+        project = Project.objects.get(pk=id) 
+        context = {
+            'project': project,
+        }
+        return render(request, self.template_name, context)
