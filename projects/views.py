@@ -28,6 +28,10 @@ class CatalogView(View):
             if selected_materials:
                 projects = projects.filter(material__id__in=selected_materials)
 
+            selected_roof_types = cd.get('roof_types')
+            if selected_roof_types:
+                projects = projects.filter(roof_type__id__in=selected_roof_types)
+
             price_min = cd.get('price_min')
             if price_min is not None:
                 projects = projects.filter(price__gte=price_min)
