@@ -1,0 +1,82 @@
+<div class="project-card">
+    <h1 class="project-name">{{ project.name }}</h1>
+    <div>
+      <img class="project-image" src="{{ project.photos.all.0.image.url }}" alt="">
+    </div>
+    <div class="project-details">
+      <p class="project-description">{{ project.description }}</p>
+      <ul class="project-info">
+        <li><strong>Площадь:</strong> {{ project.square }} м²</li>
+        <li><strong>Цена:</strong> {{ project.price }} р</li>
+        <li><strong>Количество комнат:</strong> {{ project.rooms_quantity }}</li>
+        <li><strong>Категория:</strong> {{ project.category }}</li>
+        <li><strong>Материал:</strong> {{ project.material }}</li>
+        <li><strong>Тип кровли:</strong> {{ project.roof_type }}</li>
+      </ul>
+    </div>
+  </div>
+  
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          line-height: 1.6;
+          background-color: #f9f9f9;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+      }
+  
+      .project-card {
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          max-width: 600px;
+          width: 100%;
+          margin: 20px;
+      }
+  
+      .project-name {
+          font-size: 24px;
+          margin-bottom: 10px;
+          color: #333;
+      }
+  
+      .project-image {
+          max-width: 100%;
+          height: auto; /* Сохраняет пропорции изображения */
+          border-radius: 8px; /* Закругляет углы изображения */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляет тень к изображению */
+          margin-bottom: 20px; /* Отступ снизу для отделения от текста */
+      }
+  
+      .project-details {
+          margin-top: 10px;
+      }
+  
+      .project-description {
+          font-size: 16px;
+          color: #666;
+          margin-bottom: 20px;
+      }
+  
+      .project-info {
+          list-style: none;
+          padding: 0;
+      }
+  
+      .project-info li {
+          margin-bottom: 10px;
+          font-size: 14px;
+          color: #444;
+      }
+  
+      .project-info strong {
+          color: #000;
+      }
+  </style>
+  
