@@ -1,9 +1,9 @@
 from django.contrib import admin
 from .models import (
-    TwoGISReview,
+    Review,
 )
 
 
-@admin.register(TwoGISReview)
-class TwoGISReviewAdmin(admin.ModelAdmin): 
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin): 
     list_display = ['id', 'username', 'content', 'created_at']

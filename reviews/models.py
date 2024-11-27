@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-class TwoGISReview(models.Model): 
+class Review(models.Model): 
     rate = models.SmallIntegerField('Оценка', validators=[
         MinValueValidator(1), 
         MaxValueValidator(5)
