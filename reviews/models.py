@@ -12,8 +12,8 @@ class Review(models.Model):
     created_at = models.DateTimeField('Дата и время публикации')
 
     class Meta: 
-        verbose_name = 'Отзыв с 2GIS'
-        verbose_name_plural = 'Отзывы с 2GIS'
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
         ordering = ['-created_at']
 
     def __str__(self) -> str: 
