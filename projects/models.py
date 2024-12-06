@@ -41,6 +41,7 @@ class Project(models.Model):
     description = models.TextField('Описание')
     square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
     price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
+    bedrooms_quantity = models.SmallIntegerField('Количество спален', default=1)
     rooms_quantity = models.SmallIntegerField('Количество комнат', validators=[MinValueValidator(0.0)])
     category = models.ForeignKey(
         verbose_name='Категория', 

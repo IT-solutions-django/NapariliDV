@@ -22,8 +22,8 @@
             <div class="header__row">
                 <div class="header__left-part">
                     <div class="header__logo">
-                        <a href="/" class="header__logo-link">
-                            <img src="static/images/logo.svg" alt="">
+                        <a href="{% url 'home:home' %}" class="header__logo-link">
+                            <img src="{% static 'images/logo.svg' %}" alt="">
                         </a>
                     </div>
                     <div class="header__company-name">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="header__menu">
                     <div class="header__menu-link">
-                        <a href="{% url 'projects:catalog' %}" >Каталог</a>
+                        <a href="{% url 'projects:catalog' %}">Каталог</a>
                     </div>
                     <div class="nav__dropdown">
                         <a class="nav__dropdown-button nav__link">О компании</a>
@@ -60,7 +60,7 @@
                         <p>+7 953 223-49-73</p>
                     </div>
                     <div class="header__call-button">
-                        <button>Позвоните мне</button>
+                        <a href="">Позвоните мне</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
 
             <div class="footer__button">
                 <button>
-                    <img src="/static/images/leave-request.svg" alt="">
+                    <img src="{% static 'images/leave-request.svg' %}" alt="">
                 </button>
             </div>
         </div>
