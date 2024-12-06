@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel=icon type=image/png sizes=16x16 href="{% static 'images/logo.svg' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
@@ -26,12 +27,12 @@
                         </a>
                     </div>
                     <div class="header__company-name">
-                        <a href="http://127.0.0.1:5500/home.html">Напарили ДВ</a>
+                        <a href="{% url 'home:home' %}">Напарили ДВ</a>
                     </div>
                 </div>
                 <div class="header__menu">
                     <div class="header__menu-link">
-                        <a href="http://127.0.0.1:5500/catalog.html" >Каталог</a>
+                        <a href="{% url 'projects:catalog' %}" >Каталог</a>
                     </div>
                     <div class="nav__dropdown">
                         <a class="nav__dropdown-button nav__link">О компании</a>
@@ -45,13 +46,13 @@
                         </div>
                     </div>
                     <div class="header__menu-link">
-                        <a href="http://127.0.0.1:5500/catalog.html" >Портфолио</a>
+                        <a href="http://127.0.0.1:5500/catalog.html">Портфолио</a>
                     </div>
                     <div class="header__menu-link">
-                        <a href="http://127.0.0.1:5500/catalog.html" >Новости</a>
+                        <a href="http://127.0.0.1:5500/catalog.html">Новости</a>
                     </div>
                     <div class="header__menu-link">
-                        <a href="http://127.0.0.1:5500/catalog.html" >Контакты</a>
+                        <a href="http://127.0.0.1:5500/catalog.html">Контакты</a>
                     </div>
                 </div>
                 <div class="header__right-part">
@@ -109,7 +110,7 @@
 
             <div class="footer__button">
                 <button>
-                    <img src="static/images/leave-request.svg" alt="">
+                    <img src="/static/images/leave-request.svg" alt="">
                 </button>
             </div>
         </div>

@@ -3,7 +3,7 @@
     font-family: 'Involve 600';
     font-style: normal;
     font-weight: 600;
-    src: url('static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-family: 'Involve 500';
     font-style: normal;
     font-weight: 500;
-    src: url('static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
     font-family: 'Involve';
     font-style: normal;
     font-weight: 400;
-    src: url('static/fonts/Involve-Regular.otf') format('opentype');
+    src: url('/static/fonts/Involve-Regular.otf') format('opentype');
 }
 
 .font__inter {
@@ -111,7 +111,7 @@ html{
     border: none;
     background-color: transparent;
     white-space: nowrap;
-    background-image: url('static/images/dropdown-icon.svg');
+    background-image: url('/static/images/dropdown-icon.svg');
     background-repeat: no-repeat;
     padding-right: 16px;
     background-position: right center;
@@ -394,7 +394,7 @@ html{
     font-size: 20px;
     align-self: flex-end;
     transform: translateY(10px);
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
     background-repeat: no-repeat;
     padding-right: 36px;
     background-position: right center;
@@ -476,7 +476,7 @@ html{
     -moz-appearance: none;
     appearance: none;
     padding-right: 40px;
-    background-image: url('static/images/dropdown-icon.svg');
+    background-image: url('/static/images/dropdown-icon.svg');
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -583,7 +583,7 @@ html{
 .best-projects__more-button button {
     font-family: 'Involve 500', sans-serif;
     padding-right: 36px;
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -843,25 +843,25 @@ html{
 .reviews__slider .slick-prev {
     right: 60px;
     left: auto;
-    background-image: url('static/images/left-gray-arrow.svg');
+    background-image: url('/static/images/left-gray-arrow.svg');
 }
 
 .gallery__slider .slick-prev {
     right: 400px;
     left: auto;
-    background-image: url('static/images/left-gray-arrow.svg');
+    background-image: url('/static/images/left-gray-arrow.svg');
 }
 
 .reviews__slider .slick-next,
 .team__cards .slick-next {
     right: 0px;
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
 }
 
 .gallery__slider .slick-next {
     right: 340px;
     /* = padding-right в .container */
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
 }
 
 .team__cards .slick-prev:hover,
@@ -877,13 +877,13 @@ html{
 .team__cards .slick-prev:hover,
 .reviews__slider .slick-prev:hover,
 .gallery__slider .slick-prev:hover {
-    background-image: url('static/images/left-white-arrow.svg');
+    background-image: url('/static/images/left-white-arrow.svg');
 }
 
 .team__cards .slick-next:hover,
 .reviews__slider .slick-next:hover,
 .gallery__slider .slick-next:hover {
-    background-image: url('static/images/right-white-arrow.svg');
+    background-image: url('/static/images/right-white-arrow.svg');
 }
 
 .team__cards .slick-prev,
@@ -910,7 +910,7 @@ html{
 }
 
 .feedback__background {
-    background-image: url('static/images/feedback-background.png');
+    background-image: url('/static/images/feedback-background.png');
     height: 600px;
 }
 
@@ -1022,7 +1022,7 @@ html{
     }
 
     &:has(input:checked)::after {
-        background-image: url('static/images/check-mark.svg');
+        background-image: url('/static/images/check-mark.svg');
         background-repeat: no-repeat;
         background-position: center center;
         color: black;
@@ -1178,7 +1178,7 @@ html{
 .news__header-more {
     padding-right: 36px;
     float: right;
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -1543,16 +1543,16 @@ footer hr {
     background-position: center center;
 }
 .catalog__pagination-arrow-left {
-    background-image: url('static/images/left-gray-arrow.svg');
+    background-image: url('/static/images/left-gray-arrow.svg');
 }
 .catalog__pagination-arrow-right {
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
 }
 .catalog__pagination-arrow-right:hover {
-    background-image: url('static/images/right-white-arrow.svg');
+    background-image: url('/static/images/right-white-arrow.svg');
 }
 .catalog__pagination-arrow-left:hover {
-    background-image: url('static/images/left-white-arrow.svg');
+    background-image: url('/static/images/left-white-arrow.svg');
 }
 .catalog__pagination-arrow:hover  {
     background-color:#FF1A1A;
