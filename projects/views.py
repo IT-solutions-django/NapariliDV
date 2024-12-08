@@ -20,17 +20,17 @@ class CatalogView(View):
             cd = form.cleaned_data
             projects = Project.objects.all()
             
-            selected_categories = cd.get('categories')
-            if selected_categories:
-                projects = projects.filter(category__id__in=selected_categories)
+            # selected_categories = cd.get('categories')
+            # if selected_categories:
+            #     projects = projects.filter(category__id__in=selected_categories)
 
-            selected_materials = cd.get('materials')
-            if selected_materials:
-                projects = projects.filter(material__id__in=selected_materials)
+            # selected_materials = cd.get('materials')
+            # if selected_materials:
+            #     projects = projects.filter(material__id__in=selected_materials)
 
-            selected_roof_types = cd.get('roof_types')
-            if selected_roof_types:
-                projects = projects.filter(roof_type__id__in=selected_roof_types)
+            # selected_roof_types = cd.get('roof_types')
+            # if selected_roof_types:
+            #     projects = projects.filter(roof_type__id__in=selected_roof_types)
 
             price_min = cd.get('price_min')
             if price_min is not None:

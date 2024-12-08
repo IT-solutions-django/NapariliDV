@@ -22,61 +22,35 @@
     <div class="catalog__filters">
         <form action="">
             <div class="catalog__filters-categories">
-                <div  class="catalog__filters-category">
-                    <div class="catalog__checkbox-wrap">
-                        <input type="checkbox" id="consent" name="consent" required>
+                {% for category in form.categories %}
+                    <div  class="catalog__filters-category">
+                        <div class="catalog__checkbox-wrap">
+                            {{ category.tag }}
+                        </div>
+                        <div>
+                            <label for="consent">
+                                {{ category.choice_label }}
+                            </label>
+                        </div>
                     </div>
-                    <div>
-                        <label for="consent">
-                            Дома
-                        </label>
-                    </div>
-                </div>
-                <div class="catalog__filters-category">
-                    <div class="catalog__checkbox-wrap">
-                        <input type="checkbox" id="consent" name="consent" required>
-                    </div>
-                    <div>
-                        <label for="consent">
-                            Коттеджи
-                        </label>
-                    </div>
-                </div>
-                <div class="catalog__filters-category">
-                    <div class="catalog__checkbox-wrap">
-                        <input type="checkbox" id="consent" name="consent" required>
-                    </div>
-                    <div>
-                        <label for="consent">
-                            Бани
-                        </label>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <hr>
             <div class="catalog__filters-parameters">
                 <div>
                     <div class="catalog__filters-label">
-                        <p>Выберите материал</p>
+                        <p>{{ form.materials.label }}</p>
                     </div>
                     <div class="catalog__select-filter">
-                        <select>
-                            <option>Дом из газоблока</option>
-                            <option>Дом из газоблока</option>
-                            <option>Дом из газоблока</option>
-                        </select>
+                        {{ form.materials }}
                     </div>
                 </div>
                 <div>
                     <div class="catalog__filters-label">
-                        <p>Выберите тип кровли</p>
+                        <p>{{ form.roof_types.label }}</p>
                     </div>
                     <div class="catalog__select-filter">
-                        <select>
-                            <option>Металлочерепица</option>
-                            <option>Металлочерепица</option>
-                            <option>Металлочерепица</option>
-                        </select>
+                        {{ form.roof_types }}
                     </div>
                 </div>
                 <div>
@@ -86,26 +60,26 @@
                     <div class="catalog__range-filter">
                         <div class="catalog__filters-number-square">
                             <label for="min-price">От</label>
-                            <input type="number" id="min-price" placeholder="80">
+                            {{ form.square_min }}
                         </div>
                         <div class="catalog__filters-number-square">
                             <label for="max-price">До</label>
-                            <input type="number" id="max-price" placeholder="120">
+                            {{ form.square_max }}
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="catalog__filters-label">
-                        <p>Выберите площадь (м2)</p>
+                        <p>Выберите стоимость</p>
                     </div>
                     <div class="catalog__range-filter">
                         <div class="catalog__filters-number-price">
                             <label for="min-price">От</label>
-                            <input type="number" id="min-price" placeholder="1 500 000">
+                            {{ form.price_min }}
                         </div>
                         <div class="catalog__filters-number-price">
                             <label for="max-price">До</label>
-                            <input type="number" id="max-price" placeholder="15 000 000">
+                            {{ form.price_max }}
                         </div>
                     </div>
                 </div>
@@ -115,56 +89,33 @@
                 <div class="catalog__filters-radio-block">
                     <label for="" class="best-projects__filters-label">Этажей</label>
                     <div class="catalog__radio-group">
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="floors-1" name="floors" value="1">
-                            <label for="floors-1">1</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="floors-2" name="floors" value="2">
-                            <label for="floors-2">2</label>
-                        </div>
+                        {% for floor in form.floors_quantity %}
+                            <div class="catalog__radio-button">
+                                <input type="radio" id="floors-1" name="floors" value="1">
+                                {{ floor }}
+                                <!-- <label for="floors-1">1</label> -->
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="catalog__filters-radio-block">
                     <label for="" class="best-projects__filters-label">Количество спален</label>
                     <div class="catalog__radio-group">
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bedrooms-1" name="bedrooms" value="1">
-                            <label for="bedrooms-1">1</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bedrooms-2" name="bedrooms" value="2">
-                            <label for="bedrooms-2">2</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bedrooms-3" name="bedrooms" value="3">
-                            <label for="bedrooms-3">3</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bedrooms-4" name="bedrooms" value="4">
-                            <label for="bedrooms-4">4</label>
-                        </div>
+                        {% for bedroom in form.bedrooms_quantity %}
+                            <div class="catalog__radio-button">
+                                {{ bedroom }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="catalog__filters-radio-block">
                     <label for="" class="best-projects__filters-label">Количество санузлов</label>
                     <div class="catalog__radio-group">
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bathroom-1" name="bathroom" value="1">
-                            <label for="bathroom-1">1</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bathroom-2" name="bathroom" value="2">
-                            <label for="bathroom-2">2</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bathroom-3" name="bathroom" value="3">
-                            <label for="bathroom-3">3</label>
-                        </div>
-                        <div class="catalog__radio-button">
-                            <input type="radio" id="bathroom-4" name="bathroom" value="4">
-                            <label for="bathroom-4">4</label>
-                        </div>
+                        {% for bathroom in form.bathrooms_quantity %}
+                            <div class="catalog__radio-button">
+                                {{ bathroom }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
