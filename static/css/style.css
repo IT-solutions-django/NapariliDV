@@ -3,7 +3,7 @@
     font-family: 'Involve 600';
     font-style: normal;
     font-weight: 600;
-    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-family: 'Involve 500';
     font-style: normal;
     font-weight: 500;
-    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
     font-family: 'Involve';
     font-style: normal;
     font-weight: 400;
-    src: url('/static/fonts/Involve-Regular.otf') format('opentype');
+    src: url('static/fonts/Involve-Regular.otf') format('opentype');
 }
 
 .font__inter {
@@ -192,6 +192,24 @@ html{
     margin-bottom: 100px;
 }
 
+.slider-heading hr {
+    margin-top: 28px;
+    margin-bottom: 20px;
+    
+}
+
+.slider-heading__promo {
+    font-family: 'Involve 600', sans-serif;
+    font-size: 20px;
+    position: relative;
+}
+
+.slider-heading__want-the-house-button {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
 .slick-dotted.slick-slider {
     margin-bottom: 100px;
 }
@@ -199,7 +217,7 @@ html{
 .slider-item {
     position: relative;
     text-align: left;
-    height: 836px;
+    height: 930px;
 }
 
 .slider-image {
@@ -1160,19 +1178,26 @@ html{
 }
 
 .gallery__heading,
-.news__heading, 
 .similar-projects__heading {
     margin-bottom: 40px;
 }
 
 .news {
     margin-bottom: 100px;
+    justify-content: center;
 }
 
 .news__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.news__header-left {
+    align-content: center;
+    justify-self: center;
 }
 
 .news__header-right {
@@ -1212,6 +1237,12 @@ html{
 
 .news__header-more a:hover {
     color: #FF1A1A
+}
+
+.news__read-button {
+    position: absolute;
+    right: 0px;
+    top: 280px
 }
 
 .news__content {
@@ -1417,7 +1448,8 @@ html{
 .reviews__heading, 
 .catalog__heading, 
 .info__heading, 
-.gallery__heading {
+.gallery__heading, 
+.news__heading {
     font-size: 60px;
 }
 .info__heading, 
@@ -1615,7 +1647,8 @@ footer hr,
 .tab hr, 
 .team__slider-item hr, 
 .about-company__heading hr, 
-.project__heading hr {
+.project__heading hr, 
+.slider-heading hr {
     border: none;
     height: 1px;
     background-color: #595959;
