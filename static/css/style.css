@@ -185,6 +185,20 @@ html{
     white-space: nowrap;
 }
 
+/* Исходное состояние (хедер виден) */
+.header {
+    transition: top 0.3s ease-in-out;
+    top: 0;
+}
+
+.header.nav-up {
+    top: -100px; 
+}
+
+.header.nav-down {
+    top: 0;
+}
+
 .slider {
     position: relative;
     width: 100%;
