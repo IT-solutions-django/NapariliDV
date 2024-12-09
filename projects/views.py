@@ -6,6 +6,7 @@ from .models import (
     Material, 
     RoofType, 
 )
+import random
 from .forms import CatalogFiltersForm
 
 
@@ -61,7 +62,9 @@ class ProjectView(View):
     
     def get(self, request, id: int): 
         project = Project.objects.get(pk=id) 
+        similar_projects = random.choices(Project.objects.all(), k=5)
         context = {
             'project': project,
+            'similar_projects': similar_projects,
         }
         return render(request, self.template_name, context)

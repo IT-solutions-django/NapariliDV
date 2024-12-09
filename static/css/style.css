@@ -565,13 +565,15 @@ html{
     height: 358px;
 }
 
-.best-projects__card-heading {
+.best-projects__card-heading, 
+.similar-projects__card-heading {
     font-family: 'Involve 500', sans-serif;
     font-size: 20px;
     margin-bottom: 11px;
 }
 
-.best-projects__card hr {
+.best-projects__card hr,
+.similar-projects__card-heading hr {
     border: none;
     height: 1px;
     background-color: rgba(89, 89, 89, 1);
@@ -1713,12 +1715,12 @@ footer hr,
 }
 .project__current-slide .slick-prev {
     left: 20px;
-    background-image: url('static/images/left-gray-arrow.svg');
+    background-image: url('/static/images/left-gray-arrow.svg');
 }
 .project__current-slide .slick-next {
     left: auto;
     right: 20px;
-    background-image: url('static/images/right-gray-arrow.svg');
+    background-image: url('/static/images/right-gray-arrow.svg');
 }
 
 .project__current-slide .slick-next::before, 
@@ -1726,9 +1728,10 @@ footer hr,
     content: "";
 }
 .project__current-slide img {
-    object-fit:cover;
+    object-fit: cover;
     margin-bottom: 20px;
     width: 100%;
+    border-radius: 20px;
 }
 .project__current-slide .slick-slide {
     width: 100%;
@@ -1739,6 +1742,7 @@ footer hr,
 }
 .project__slide img {
     height: 116px;
+    border-radius: 10px;
 }
 
 .project__slide {
@@ -1826,6 +1830,8 @@ footer hr,
 }
 
 .similar-projects__slider-item img {
+    object-fit: cover;
     width: 100%;
     border-radius: 15px;
+    height: 300px;
 }

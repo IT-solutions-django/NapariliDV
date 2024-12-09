@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %} 
+{% load price_filters %}
 
 {% block title %}
 {{ project.name }}
@@ -8,52 +9,38 @@
 {% block content %}
     <div class="breadcrumbs container font__inter">
         <div>
-            <a>Главная</a>
+            <a href="{% url 'home:home' %}">Главная</a>
         </div>
         <div>
-            <img src="static/images/right-gray-arrow.svg" alt="">
+            <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
         </div>
         <div>
-            <a>Каталог</a>
+            <a href="{% url 'projects:catalog' %}">Каталог</a>
         </div>
         <div>
-            <img src="static/images/right-gray-arrow.svg" alt="">
+            <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
         </div>
         <div>
-            <a>Каркасный дом БАРН</a>
+            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
         </div>
     </div>
 
     <div class="project container">
         <div class="project__slider">
             <div class="project__current-slide">
-                <div>
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div>
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div>
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div>
-                    <img src="static/images/project.png" alt="">
-                </div>
+                {% for photo in project.photos.all %}
+                    <div>
+                        <img src="{{ photo.image.url }}" alt="">
+                    </div>
+                {% endfor %}
             </div>
            
             <div class="project__slider-nav">
-                <div class="project__slide">
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div class="project__slide">
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div class="project__slide">
-                    <img src="static/images/project.png" alt="">
-                </div>
-                <div class="project__slide">
-                    <img src="static/images/project.png" alt="">
-                </div>
+                {% for photo in project.photos.all %}
+                    <div class="project__slide">
+                        <img src="{{ photo.image.url }}" alt="">
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <div class="project__details">
@@ -66,18 +53,18 @@
                 </div>
             </div>
             <div class="project__heading">
-                <h1>Каркасный дом БАРН</h1>
+                <h1>{{ project.name }}</h1>
                 <hr>
             </div>
             <div class="project__parameters">
                 <ul class="table-of-contents">
-                    <li><span>Этажи</span><span>1</span></li>
-                    <li><span>Площадь</span><span>84 м²</span></li>
-                    <li><span>Количество спален</span><span>1</span></li>
-                    <li><span>Количество санузлов</span><span>1</span></li>
-                    <li><span>Материал</span><span>Каркас</span></li>
-                    <li><span>Кровля</span><span>Металлочерепица</span></li>
-                    <li><span>Стоимость</span><span>от 5 170 000 р</span></li>
+                    <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
+                    <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                    <li><span>Количество санузлов</span><span>{{ bathrooms_quantity }}</span></li>
+                    <li><span>Материал</span><span>{{ project.material }}</span></li>
+                    <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+                    <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
                 </ul>
             </div>
             <div class="project__credit">
@@ -85,7 +72,7 @@
             </div>
             <div class="project__order-button">
                 <button>
-                    <img src="static/images/order.svg" alt="">
+                    <img src="{% static 'images/order.svg' %}" alt="">
                 </button>
             </div>
         </div>
@@ -115,129 +102,37 @@
             <h4 class="similar-projects__heading">Похожие проекты</h4>
         </div>
         <div class="similar-projects__cards">
-            <div class="similar-projects__slider-item">
-                <div class="photo-slider">
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
+            {% for project in similar_projects %}
+                <div class="similar-projects__slider-item">
+                    <div class="photo-slider">
+                        {% for photo in project.photos.all %}
+                            <div class="similar-projects__card-image photo-slider-item">
+                                <img src="{{ photo.image.url }}" alt="">
+                            </div>
+                        {% endfor %}
                     </div>
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
+                    <div class="similar-projects__card-text-container">
+                        <div class="similar-projects__card-heading">
+                            <p>{{ project.name }}</p>
+                        </div>
+                        <hr>
+                        <div class="similar-projects__card-content">
+                            <ul class="table-of-contents">
+                                <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="similar-projects__card-text-container">
-                    <div class="similar-projects__card-heading">
-                        <p>Каркасный дом БАРН</p>
+                    <div class="similar-projects__order-button">
+                        <button>Заказать строительство</button>
                     </div>
-                    <hr>
-                    <div class="similar-projects__card-content">
-                        <ul class="table-of-contents">
-                            <li><span>Площадь</span><span>84 м²</span></li>
-                            <li><span>Количество спален</span><span>1</span></li>
-                            <li><span>Количество санузлов</span><span>1</span></li>
-                            <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="similar-projects__order-button">
-                    <button>Заказать строительство</button>
-                </div>
-                <div class="similar-projects__more-button">
-                    <button>Узнать подробнее</button>
-                </div>
-            </div>
-            
-            <div class="similar-projects__slider-item">
-                <div class="photo-slider">
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
-                    </div>
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
+                    <div class="similar-projects__more-button">
+                        <button>Узнать подробнее</button>
                     </div>
                 </div>
-                <div class="similar-projects__card-text-container">
-                    <div class="similar-projects__card-heading">
-                        <p>Каркасный дом БАРН</p>
-                    </div>
-                    <hr>
-                    <div class="similar-projects__card-content">
-                        <ul class="table-of-contents">
-                            <li><span>Площадь</span><span>84 м²</span></li>
-                            <li><span>Количество спален</span><span>1</span></li>
-                            <li><span>Количество санузлов</span><span>1</span></li>
-                            <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="similar-projects__order-button">
-                    <button>Заказать строительство</button>
-                </div>
-                <div class="similar-projects__more-button">
-                    <button>Узнать подробнее</button>
-                </div>
-            </div>
-
-            <div class="similar-projects__slider-item">
-                <div class="photo-slider">
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
-                    </div>
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
-                    </div>
-                </div>
-                <div class="similar-projects__card-text-container">
-                    <div class="similar-projects__card-heading">
-                        <p>Каркасный дом БАРН</p>
-                    </div>
-                    <hr>
-                    <div class="similar-projects__card-content">
-                        <ul class="table-of-contents">
-                            <li><span>Площадь</span><span>84 м²</span></li>
-                            <li><span>Количество спален</span><span>1</span></li>
-                            <li><span>Количество санузлов</span><span>1</span></li>
-                            <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="similar-projects__order-button">
-                    <button>Заказать строительство</button>
-                </div>
-                <div class="similar-projects__more-button">
-                    <button>Узнать подробнее</button>
-                </div>
-            </div>
-
-            <div class="similar-projects__slider-item">
-                <div class="photo-slider">
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
-                    </div>
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <img src="static/images/card1.png" alt="">
-                    </div>
-                </div>
-                <div class="similar-projects__card-text-container">
-                    <div class="similar-projects__card-heading">
-                        <p>Каркасный дом БАРН</p>
-                    </div>
-                    <hr>
-                    <div class="similar-projects__card-content">
-                        <ul class="table-of-contents">
-                            <li><span>Площадь</span><span>84 м²</span></li>
-                            <li><span>Количество спален</span><span>1</span></li>
-                            <li><span>Количество санузлов</span><span>1</span></li>
-                            <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="similar-projects__order-button">
-                    <button>Заказать строительство</button>
-                </div>
-                <div class="similar-projects__more-button">
-                    <button>Узнать подробнее</button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -248,7 +143,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-1.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
@@ -261,7 +156,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-2.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
@@ -274,7 +169,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-3.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
@@ -310,7 +205,7 @@
       asNavFor: '.project__current-slide',
       dots: false,
       arrows: false,
-      focusOnSelect: true
+      focusOnSelect: true, 
     });
     $(document).ready(function () {
         $('.similar-projects__cards').slick({
