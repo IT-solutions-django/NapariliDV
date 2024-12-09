@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.filter(name='price_format')
-def intspace(value: str):
+def price_format(value: str):
     try:
         value = int(value)
         locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')

@@ -1,11 +1,18 @@
 from django import forms 
+from django.db import models
 from .models import (
     Project, 
     Category, 
     Material, 
     RoofType, 
 )
-from .services import get_max_project_price
+from .templatetags.price_filters import price_format
+from .services import (
+    get_max_project_price, 
+    get_min_project_price, 
+    get_max_project_square, 
+    get_min_project_square
+)
 
 
 class CatalogFiltersForm(forms.Form): 
@@ -13,30 +20,31 @@ class CatalogFiltersForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         self.max_product_price = round(get_max_project_price(), 0)
-        self.fields['price_max'].widget.attrs['placeholder'] = f'{self.max_product_price} ₽'
+        self.fields['price_max'].widget.attrs['max'] = self.max_product_price
+        self.fields['price_max'].widget.attrs['placeholder'] = f'{price_format(self.max_product_price)} ₽'
+
+        self.min_product_price = round(get_min_project_price(), 0)
+        self.fields['price_min'].widget.attrs['min'] = self.min_product_price
+        self.fields['price_min'].widget.attrs['placeholder'] = f'{price_format(self.min_product_price)} ₽'
 
         self.fields['categories'].choices = [(category.id, category.name) for category in Category.objects.all()]
 
     categories = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                'class': ''
-            }
-        ),
+        widget=forms.CheckboxSelectMultiple(),
         required=False
     )
     materials = forms.ChoiceField(
         widget=forms.Select(),
         required=False,
         label="Выберите материал",
-        choices=[(material.id, material.name) for material in Material.objects.all()],
+        choices=[(None, "Все")] + [(material.id, material.name) for material in Material.objects.all()],
     )
 
     roof_types = forms.ChoiceField(
         widget=forms.Select(),
         required=False,
         label="Выберите тип кровли",
-        choices=[(roof_type.id, roof_type.name) for roof_type in RoofType.objects.all()],
+        choices=[(None, "Все")] + [(roof_type.id, roof_type.name) for roof_type in RoofType.objects.all()],
     )
     price_min = forms.DecimalField(
         max_digits=10,
@@ -45,9 +53,7 @@ class CatalogFiltersForm(forms.Form):
         label='Мин. цена',
         widget=forms.NumberInput(
             attrs={ 
-                'placeholder': '1 500 000', 
-                'min': 0,
-                'step': 100000,
+                # 'step': 100000,
             }
         ), 
     )
@@ -57,9 +63,7 @@ class CatalogFiltersForm(forms.Form):
         required=False,
         widget=forms.NumberInput(
             attrs={ 
-                'placeholder': '15 000 000', 
-                'min': 0,
-                'step': 100000,
+                # 'step': 100000,
             }
         ), 
     )

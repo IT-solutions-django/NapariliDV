@@ -42,7 +42,9 @@ class Project(models.Model):
     square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
     price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
     bedrooms_quantity = models.SmallIntegerField('Количество спален', default=1)
-    rooms_quantity = models.SmallIntegerField('Количество комнат', validators=[MinValueValidator(0.0)])
+    rooms_quantity = models.SmallIntegerField('Количество комнат', validators=[MinValueValidator(0.0)], default=1)
+    floors_quantity = models.SmallIntegerField('Количество этажей', validators=[MinValueValidator(0.0)], default=1)
+    bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)
     category = models.ForeignKey(
         verbose_name='Категория', 
         to=Category, 
@@ -71,21 +73,6 @@ class Project(models.Model):
     
     def get_absolute_url(self): 
         return reverse('projects:project', args=[self.id])
-
-
-class Floor(models.Model): 
-    number = models.SmallIntegerField('Номер', validators=[MinValueValidator(0.0)])
-    square = models.FloatField('Площадь')
-    project = models.ForeignKey(
-        verbose_name='Проект', 
-        to=Project, 
-        on_delete=models.CASCADE, 
-        related_name='floors'
-    )
-
-    class Meta: 
-        verbose_name = 'Этаж'
-        verbose_name_plural = 'Этажи'
 
 
 class ProjectPhoto(models.Model): 

@@ -163,7 +163,7 @@ html{
     align-items: center;
 }
 
-.header__call-button button{
+.header__call-button a {
     display: inline-block;
     white-space: nowrap;
     padding: 10px 23px;
@@ -173,7 +173,7 @@ html{
     font-weight: 500;
     font-size: 16px;
 }
-.header__call-button button:hover {
+.header__call-button a:hover {
     color: white;
     border-color: transparent;
     background-color: #FF1A1A;
@@ -555,7 +555,7 @@ html{
 
 .best-projects__card, 
 .catalog__card {
-    max-width: 32%;
+    max-width: calc((100% - 2* 20px) / 3);
 }
 
 .best-projects__card-image img, 
@@ -563,6 +563,7 @@ html{
     object-fit: cover;
     border-radius: 15px;
     height: 358px;
+    width: 100%;
 }
 
 .best-projects__card-heading, 
@@ -1086,6 +1087,30 @@ html{
         align-items: center;
         justify-content: center;
     }
+}
+.catalog__filters-submit-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: left;
+}
+.catalog__filters-submit-button button {
+    background-color: white;
+    color: #595959;
+    padding-left: 33px;
+    padding-top: 10.5px;
+    padding-bottom: 10.5px;
+    padding-right: 26px;
+    border: solid 1px rgba(225, 225, 225, 1);
+    border-radius: 20px;
+    cursor: pointer;
+}
+.catalog__filters-submit-button button:hover {
+    color: white;
+    background-color: #FF1A1A;
+    border-color: transparent;
+}
+.catalog__filters-submit-button button:hover a {
+    color: white;
 }
 .feedback__checkbox-wrap{
     &::before {

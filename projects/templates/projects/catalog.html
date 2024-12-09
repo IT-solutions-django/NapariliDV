@@ -6,13 +6,13 @@
 {% block content %}
 <div class="breadcrumbs container font__inter">
     <div>
-        <a>Главная</a>
+        <a href="{% url 'home:home' %}">Главная</a>
     </div>
     <div>
-        <img src="/static/images/right-gray-arrow.svg" alt="">
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
     </div>
     <div>
-        <a>Каталог</a>
+        <a href="{% url 'projects:catalog' %}">Каталог</a>
     </div>
 </div>
 <div class="catalog container">
@@ -120,6 +120,16 @@
                     </div>
                 </div>
             </div>
+            <hr>
+            <div class="catalog__filters-submit-buttons">
+                <div class="catalog__filters-submit-button">
+                    <button type="submit">Применить фильтры</button>
+                </div>
+                <div class="catalog__filters-submit-button">
+                    <button><a href="{% url 'projects:catalog' %}">Сбросить всё</a></button>
+                </div>
+            </div>
+            
         </form>
     </div>
     <div class="catalog__projects">
@@ -213,7 +223,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-1.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
@@ -226,7 +236,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-2.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
@@ -239,7 +249,7 @@
             </div>
             <div class="contacts__block">
                 <div>
-                    <img src="static/images/contacts-icon-3.svg" alt="">
+                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
                 </div>
                 <div>
                     <div class="contacts__block-heading">
