@@ -1,6 +1,8 @@
-from .models import Project
 from django.db import models
 from decimal import Decimal
+from django.db.models.query import QuerySet
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import Project
 
 
 def get_max_project_price() -> Decimal: 
@@ -18,3 +20,14 @@ def get_max_project_square() -> float:
 def get_min_project_square() -> float: 
     min_square = Project.objects.aggregate(models.Min('square'))['square__min']
     return min_square
+
+def get_paginated_collection(request, collection: QuerySet, count_per_page: int = 10): 
+    paginator = Paginator(collection, count_per_page)
+    page_number = request.GET.get('page', 1)
+    try:
+        collection = paginator.page(page_number)
+    except PageNotAnInteger:
+        collection = paginator.page(1)
+    except EmptyPage:
+        collection = paginator.page(paginator.num_pages) 
+    return collection

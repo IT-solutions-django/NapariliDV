@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.views import View 
 from .models import (
-    Project, 
-    Category, 
-    Material, 
-    RoofType, 
+    Project,
 )
+from .services import get_paginated_collection
 import random
 from .forms import CatalogFiltersForm
 
@@ -61,11 +59,14 @@ class CatalogView(View):
             bathrooms_quantity = cd.get('bathrooms_quantity')
             if bathrooms_quantity:
                 projects = projects.filter(bathrooms_quantity=bathrooms_quantity)
+            
+        projects = get_paginated_collection(request, projects, 2)
 
         context = {
             'form': form,
             'projects': projects
         }
+
         return render(request, self.template_name, context)
 
     

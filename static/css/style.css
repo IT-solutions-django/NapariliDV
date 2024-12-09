@@ -538,7 +538,7 @@ html{
 .best-projects__cards, 
 .catalog__cards {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     gap: 20px;
     flex-wrap: wrap;
 }
@@ -1671,6 +1671,13 @@ footer hr {
     background-color:#FF1A1A;
     border: solid 1px transparent;
 }
+.catalog__pagination-disabled {
+    background-color:#F1F1F1;
+    pointer-events: none;
+}
+/* .catalog__padination-disabled:hover {
+
+} */
 .catalog__projects {
     margin-bottom: 90px;
 }

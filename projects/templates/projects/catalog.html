@@ -168,11 +168,19 @@
         </div>
         <div class="catalog__pagination">
             <div class="catalog__pagination-controls">
-                <button class="catalog__pagination-arrow catalog__pagination-arrow-left"></button>
+                {% if projects.has_previous %}
+                    <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+                {% else %}
+                    <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+                {% endif %}
                 <div>
-                    <p>1 из 5</p>
+                    <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
                 </div>
-                <button class="catalog__pagination-arrow catalog__pagination-arrow-right"></button>
+                {% if projects.has_next %}
+                    <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+                {% else %}
+                    <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+                {% endif %}
             </div>
         </div>
     </div>
