@@ -151,8 +151,8 @@
                         <div class="best-projects__card-content">
                             <ul class="table-of-contents">
                                 <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
-                                <li><span>Количество спален</span><span></span></li>
-                                <li><span>Количество санузлов</span><span>1</span></li>
+                                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
                                 <li><span>Стоимость</span><span>от {{ project.price|floatformat:0 }} р</span></li>
                             </ul>
                         </div>
