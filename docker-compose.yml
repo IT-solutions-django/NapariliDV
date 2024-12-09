@@ -18,6 +18,7 @@ services:
     volumes:
       - './nginx.conf:/etc/nginx/nginx.conf'
       - './static:/var/www/static' 
+      - './media:/media' 
     depends_on:
       - backend 
       - redis
@@ -33,6 +34,7 @@ services:
     volumes:
       - './db:/db'
       - ./static:/var/www/static
+      - ./media:/media
     networks:
       - dev
     depends_on:
