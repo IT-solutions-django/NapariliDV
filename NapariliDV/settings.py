@@ -14,6 +14,8 @@ from pathlib import Path
 import os 
 from dotenv import load_dotenv
 
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +30,11 @@ SECRET_KEY = 'django-insecure-^p^kjrv-g!ycb&f)ut8=wrcbyp*)y$=0j0t61igb9*olt8^ufb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://*.109.68.215.19',
+]
 
 
 # Application definition
@@ -84,10 +90,9 @@ WSGI_APPLICATION = 'NapariliDV.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db' / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -136,3 +141,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REDIS_HOST = 'redis' 
+
+REDIS_PORT = '6379' 
+REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
+
+# Celery
+CELERY_BROKER_URL = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0' 
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
+CELERY_RESULT_BACKEND = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0' 
+CELERY_ACCEPT_CONTENT = ['application/json'] 
+CELERY_TASK_SERIALIZER = 'json' 
+CELERY_RESULT_serializer = 'json' 
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
