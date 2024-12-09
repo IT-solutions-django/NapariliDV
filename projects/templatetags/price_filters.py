@@ -9,7 +9,6 @@ register = template.Library()
 def price_format(value: str):
     try:
         value = int(value)
-        locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
-        return locale.format_string("%d", value, grouping=True).replace(',', ' ')
+        return f"{value:,}".replace(',', ' ')
     except (ValueError, TypeError):
         return value
