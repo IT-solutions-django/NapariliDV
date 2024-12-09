@@ -28,6 +28,9 @@ class CatalogFiltersForm(forms.Form):
         self.fields['price_min'].widget.attrs['placeholder'] = f'{price_format(self.min_product_price)} ₽'
 
         self.fields['categories'].choices = [(category.id, category.name) for category in Category.objects.all()]
+        self.fields['materials'].choices = [(None, "Все")] + [(material.id, material.name) for material in Material.objects.all()]
+        self.fields['roof_types'].choices = [(None, "Все")] + [(roof_type.id, roof_type.name) for roof_type in RoofType.objects.all()]
+
 
     categories = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple(),
@@ -37,14 +40,14 @@ class CatalogFiltersForm(forms.Form):
         widget=forms.Select(),
         required=False,
         label="Выберите материал",
-        choices=[(None, "Все")] + [(material.id, material.name) for material in Material.objects.all()],
+        choices=[],
     )
 
     roof_types = forms.ChoiceField(
         widget=forms.Select(),
         required=False,
         label="Выберите тип кровли",
-        choices=[(None, "Все")] + [(roof_type.id, roof_type.name) for roof_type in RoofType.objects.all()],
+        choices=[],
     )
     price_min = forms.DecimalField(
         max_digits=10,
@@ -99,14 +102,10 @@ class CatalogFiltersForm(forms.Form):
     bedrooms_quantity = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 5)],
         required=False,
-        widget=forms.RadioSelect(attrs={
-            'class': ''
-        }),
+        widget=forms.RadioSelect(),
     )
     bathrooms_quantity = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 4)], 
         required=False,
-        widget=forms.RadioSelect(attrs={
-            'class': ''
-        }),
+        widget=forms.RadioSelect(),
     )
