@@ -3,7 +3,7 @@
     font-family: 'Involve 600';
     font-style: normal;
     font-weight: 600;
-    src: url('static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-family: 'Involve 500';
     font-style: normal;
     font-weight: 500;
-    src: url('static/fonts/Involve-Medium.otf') format('opentype');
+    src: url('/static/fonts/Involve-Medium.otf') format('opentype');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
     font-family: 'Involve';
     font-style: normal;
     font-weight: 400;
-    src: url('static/fonts/Involve-Regular.otf') format('opentype');
+    src: url('/static/fonts/Involve-Regular.otf') format('opentype');
 }
 
 .font__inter {

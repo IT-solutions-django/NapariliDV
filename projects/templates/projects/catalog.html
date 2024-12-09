@@ -92,7 +92,7 @@
                         {% for floor in form.floors_quantity %}
                             <div class="catalog__radio-button">
                                 {{ floor.tag }}
-                                {{ floor.label }}
+                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -103,7 +103,7 @@
                         {% for bedroom in form.bedrooms_quantity %}
                             <div class="catalog__radio-button">
                                 {{ bedroom.tag }}
-                                {{ bedroom.label }}
+                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -114,7 +114,7 @@
                         {% for bathroom in form.bathrooms_quantity %}
                             <div class="catalog__radio-button">
                                 {{ bathroom.tag }}
-                                {{ bathroom.label }}
+                                <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="best-projects__card-text-container">
                         <div class="best-projects__card-heading">
-                            <p>{{ project.name }}</p>
+                            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
                         </div>
                         <hr>
                         <div class="best-projects__card-content">
