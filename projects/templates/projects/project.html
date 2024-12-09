@@ -1,82 +1,260 @@
-<div class="project-card">
-    <h1 class="project-name">{{ project.name }}</h1>
-    <div>
-      <img class="project-image" src="{{ project.photos.all.0.image.url }}" alt="">
+{% extends 'base.html' %} 
+{% load static %} 
+{% load price_filters %}
+
+{% block title %}
+{{ project.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs container font__inter">
+        <div>
+            <a href="{% url 'home:home' %}">Главная</a>
+        </div>
+        <div>
+            <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+        </div>
+        <div>
+            <a href="{% url 'projects:catalog' %}">Каталог</a>
+        </div>
+        <div>
+            <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+        </div>
+        <div>
+            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+        </div>
     </div>
-    <div class="project-details">
-      <p class="project-description">{{ project.description }}</p>
-      <ul class="project-info">
-        <li><strong>Площадь:</strong> {{ project.square }} м²</li>
-        <li><strong>Цена:</strong> {{ project.price }} р</li>
-        <li><strong>Количество комнат:</strong> {{ project.rooms_quantity }}</li>
-        <li><strong>Категория:</strong> {{ project.category }}</li>
-        <li><strong>Материал:</strong> {{ project.material }}</li>
-        <li><strong>Тип кровли:</strong> {{ project.roof_type }}</li>
-      </ul>
+
+    <div class="project container">
+        <div class="project__slider">
+            <div class="project__current-slide">
+                {% for photo in project.photos.all %}
+                    <div>
+                        <img src="{{ photo.image.url }}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+           
+            <div class="project__slider-nav">
+                {% for photo in project.photos.all %}
+                    <div class="project__slide">
+                        <img src="{{ photo.image.url }}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="project__details">
+            <div class="project__buttons-group">
+                <div class="project__download-estimates">
+                    <button>Скачать смету</button>
+                </div>
+                <div class="project__discount">
+                    <button>Скидка 5%</button>
+                </div>
+            </div>
+            <div class="project__heading">
+                <h1>{{ project.name }}</h1>
+                <hr>
+            </div>
+            <div class="project__parameters">
+                <ul class="table-of-contents">
+                    <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
+                    <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                    <li><span>Количество санузлов</span><span>{{ bathrooms_quantity }}</span></li>
+                    <li><span>Материал</span><span>{{ project.material }}</span></li>
+                    <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+                    <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                </ul>
+            </div>
+            <div class="project__credit">
+                <button>Дом подходит под ипотеку, или кредит</button>
+            </div>
+            <div class="project__order-button">
+                <button>
+                    <img src="{% static 'images/order.svg' %}" alt="">
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <style>
-      body {
-          font-family: 'Arial', sans-serif;
-          line-height: 1.6;
-          background-color: #f9f9f9;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-      }
-  
-      .project-card {
-          background-color: #fff;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          max-width: 600px;
-          width: 100%;
-          margin: 20px;
-      }
-  
-      .project-name {
-          font-size: 24px;
-          margin-bottom: 10px;
-          color: #333;
-      }
-  
-      .project-image {
-          max-width: 100%;
-          height: auto; /* Сохраняет пропорции изображения */
-          border-radius: 8px; /* Закругляет углы изображения */
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляет тень к изображению */
-          margin-bottom: 20px; /* Отступ снизу для отделения от текста */
-      }
-  
-      .project-details {
-          margin-top: 10px;
-      }
-  
-      .project-description {
-          font-size: 16px;
-          color: #666;
-          margin-bottom: 20px;
-      }
-  
-      .project-info {
-          list-style: none;
-          padding: 0;
-      }
-  
-      .project-info li {
-          margin-bottom: 10px;
-          font-size: 14px;
-          color: #444;
-      }
-  
-      .project-info strong {
-          color: #000;
-      }
-  </style>
-  
+
+    <div class="info container">
+        <div class="info__heading">
+            <p>Каркасные дома</p>
+            <hr>
+        </div>
+        <div class="info__row">
+            <div class="info__small-left-column">
+            </div>
+            <div class="info__big-right-column">
+                <div class="info__paragraph">
+                    <p class="font__inter">Каркасные дома - одни из самых известных на рынке загородного жилья. Основное преимущество «карманников» - скорость и доступность строительства</p>
+                    <p class="font__inter">Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
+                    <p class="font__inter">Как и любая технология, каркас со временем пережил несколько трансформации. Сегодня более половины строящихся частных домов возводятся по каркасной технологии. Это могут быть и загородные дома, и коттеджи с современным интерьером, которые подходят для круглогодичного проживания</p>
+                    <p class="font__inter">Технология каркасного домостроения подходит для регионов с разным климатом. Эти дома подходят не только холодных регионов, но и для зон с повышенной сейсмической активностью</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="similar-projects container">
+        <div>
+            <h4 class="similar-projects__heading">Похожие проекты</h4>
+        </div>
+        <div class="similar-projects__cards">
+            {% for project in similar_projects %}
+                <div class="similar-projects__slider-item">
+                    <div class="photo-slider">
+                        {% for photo in project.photos.all %}
+                            <div class="similar-projects__card-image photo-slider-item">
+                                <img src="{{ photo.image.url }}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="similar-projects__card-text-container">
+                        <div class="similar-projects__card-heading">
+                            <p>{{ project.name }}</p>
+                        </div>
+                        <hr>
+                        <div class="similar-projects__card-content">
+                            <ul class="table-of-contents">
+                                <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="similar-projects__order-button">
+                        <button>Заказать строительство</button>
+                    </div>
+                    <div class="similar-projects__more-button">
+                        <button>Узнать подробнее</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="contacts container">
+        <div class="contacts__small-left-column">
+            <div class="contacts__heading">
+                <h4>Контакты</h4>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Главный офис:</p>
+                    </div>
+                    <div class="font__inter">
+                        <p>г. Владивосток, Волгоградская 7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Время работы:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>ПН-СБ с 10:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Телефон:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>+7 (908) 998-58-70</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts__big-right-column">
+            <div class="map" id="map">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    $('.project__current-slide').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      fade: true,
+      asNavFor: '.project__slider-nav'
+    });
+    $('.project__slider-nav').slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      asNavFor: '.project__current-slide',
+      dots: false,
+      arrows: false,
+      focusOnSelect: true, 
+    });
+    $(document).ready(function () {
+        $('.similar-projects__cards').slick({
+            arrows: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1
+        });
+    });
+    $(document).ready(function () {
+        $('.photo-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            adaptiveHeight: false,
+            autoplay: false,
+            arrows: false,
+        });
+    });
+    
+    var myMap;
+    ymaps.ready(function(){
+        myMap = new ymaps.Map("map", {
+            center: [43.157062, 131.926061], 
+            zoom: 16, 
+            controls: []
+        });
+        var o = new ymaps.control.ZoomControl({
+              options: {
+                  position: {
+                      right: 10,
+                      top: 50
+                  },
+                  size: "small"
+              }
+          });
+        myMap.controls.add(o);
+        myMap.behaviors.disable("scrollZoom");
+        var s = new ymaps.Placemark([43.157062, 131.926061], {
+                  hintContent: "Волгоградская улица, 7А",
+                  balloonContent: "Волгоградская улица, 7А"
+              }, {
+                  iconLayout: "default#image",
+                  iconImageHref: `/static/images/pin.svg`,
+                  iconImageSize: [30, 42],
+                  iconImageOffset: [-15, -42]
+              });
+        myMap.geoObjects.add(s);
+    }); 
+    </script>
+{% endblock %}

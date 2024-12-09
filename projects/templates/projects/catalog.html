@@ -1,93 +1,325 @@
+{% extends 'base.html' %}
 {% load static %}
-{% load markdown_tags %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог домов</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div class="catalog-container">
-        <div class="filters">
-            <h3>Фильтры</h3>
-            <form action="">
-                <div>
-                    <label class="filters__section-label">Категория</label>
-                    <div>
-                        {% for category in form.categories %}
-                            <div>
-                                <p>{{ category }}</p>
-                            </div>
-                        {% endfor %}
+{% block title %}Напарили ДВ{% endblock %}
+
+{% block content %}
+<div class="breadcrumbs container font__inter">
+    <div>
+        <a href="{% url 'home:home' %}">Главная</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+    </div>
+    <div>
+        <a href="{% url 'projects:catalog' %}">Каталог</a>
+    </div>
+</div>
+<div class="catalog container">
+    <div class="catalog__heading">
+        <h1>Каталог</h1>
+    </div>
+    <div class="catalog__filters">
+        <form action="">
+            <div class="catalog__filters-categories">
+                {% for category in form.categories %}
+                    <div  class="catalog__filters-category">
+                        <div class="catalog__checkbox-wrap">
+                            {{ category.tag }}
+                        </div>
+                        <div>
+                            <label for="consent">
+                                {{ category.choice_label }}
+                            </label>
+                        </div>
                     </div>
-                </div>
-
-                <div>
-                    <label class="filters__section-label">Цена, Р</label>
-                    <div>
-                        {{ form.price_min }}
-                        {{ form.price_max }}
-                    </div>
-                </div>
-
-                <div>
-                    <label class="filters__section-label">Площадь, м²</label>
-                    <div>
-                        {{ form.square_min }}
-                        {{ form.square_max }}
-                    </div>
-                </div>
-
-                <div>
-                    <label class="filters__section-label">Материал</label>
-                    <div>
-                        {% for material in form.materials %}
-                            <div>
-                                <p>{{ material }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div>
-                    <label class="filters__section-label">Тип кровли</label>
-                    <div>
-                        {% for roof_type in form.roof_types %}
-                            <div>
-                                <p>{{ roof_type }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <button type="submit">Применить фильтры</button>
-            </form>
-            <div class="filters__reset-button">
-                <a href="{% url 'projects:catalog' %}">Сбросить фильтры</a>
+                {% endfor %}
             </div>
-        </div>
-
-        <div class="house-list">
+            <hr>
+            <div class="catalog__filters-parameters">
+                <div>
+                    <div class="catalog__filters-label">
+                        <p>{{ form.materials.label }}</p>
+                    </div>
+                    <div class="catalog__select-filter">
+                        {{ form.materials }}
+                    </div>
+                </div>
+                <div>
+                    <div class="catalog__filters-label">
+                        <p>{{ form.roof_types.label }}</p>
+                    </div>
+                    <div class="catalog__select-filter">
+                        {{ form.roof_types }}
+                    </div>
+                </div>
+                <div>
+                    <div class="catalog__filters-label">
+                        <p>Выберите площадь (м2)</p>
+                    </div>
+                    <div class="catalog__range-filter">
+                        <div class="catalog__filters-number-square">
+                            <label for="min-price">От</label>
+                            {{ form.square_min }}
+                        </div>
+                        <div class="catalog__filters-number-square">
+                            <label for="max-price">До</label>
+                            {{ form.square_max }}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="catalog__filters-label">
+                        <p>Выберите стоимость</p>
+                    </div>
+                    <div class="catalog__range-filter">
+                        <div class="catalog__filters-number-price">
+                            <label for="min-price">От</label>
+                            {{ form.price_min }}
+                        </div>
+                        <div class="catalog__filters-number-price">
+                            <label for="max-price">До</label>
+                            {{ form.price_max }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="catalog__filters-living-info">
+                <div class="catalog__filters-radio-block">
+                    <label for="" class="best-projects__filters-label">Этажей</label>
+                    <div class="catalog__radio-group">
+                        {% for floor in form.floors_quantity %}
+                            <div class="catalog__radio-button">
+                                {{ floor.tag }}
+                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="catalog__filters-radio-block">
+                    <label for="" class="best-projects__filters-label">Количество спален</label>
+                    <div class="catalog__radio-group">
+                        {% for bedroom in form.bedrooms_quantity %}
+                            <div class="catalog__radio-button">
+                                {{ bedroom.tag }}
+                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="catalog__filters-radio-block">
+                    <label for="" class="best-projects__filters-label">Количество санузлов</label>
+                    <div class="catalog__radio-group">
+                        {% for bathroom in form.bathrooms_quantity %}
+                            <div class="catalog__radio-button">
+                                {{ bathroom.tag }}
+                                <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="catalog__filters-submit-buttons">
+                <div class="catalog__filters-submit-button">
+                    <button type="submit">Применить фильтры</button>
+                </div>
+                <div class="catalog__filters-submit-button">
+                    <button><a href="{% url 'projects:catalog' %}">Сбросить всё</a></button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <div class="catalog__projects">
+        <div class="catalog__cards">
             {% for project in projects %}
-                <div class="house-card">
-                    <img src="{{ project.photos.all.0.image.url }}">
-                    <div class="content">
-                        <h4><a class="house-card__heading" href="{{ project.get_absolute_url }}">{{ project.name }}</a></h4>
-                        <p>Описание: {{ project.description|truncatewords:20 }}</p>
-                        <p>Площадь: {{ project.square }} м²</p>
-                        <p>Количество комнат: {{ project.rooms_quantity }}</p>
-                        <p>Категория: {{ project.category }}</p>
-                        <p>Материал: {{ project.material }}</p>
-                        <p>Тип кровли: {{ project.roof_type }}</p>
-                        <p class="price">Цена: {{ project.price }} ₽</p>
+                <div class="catalog__card">
+                    <div class="photo-slider">
+                        {% for photo in project.photos.all %}
+                            <div class="best-projects__card-image photo-slider-item">
+                                <img src="{{ photo.image.url }}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="best-projects__card-text-container">
+                        <div class="best-projects__card-heading">
+                            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                        </div>
+                        <hr>
+                        <div class="best-projects__card-content">
+                            <ul class="table-of-contents">
+                                <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
+                                <li><span>Количество спален</span><span></span></li>
+                                <li><span>Количество санузлов</span><span>1</span></li>
+                                <li><span>Стоимость</span><span>от {{ project.price|floatformat:0 }} р</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="best-projects__order-button">
+                        <button>Заказать строительство</button>
+                    </div>
+                    <div class="best-projects__more-button">
+                        <button>Узнать подробнее</button>
                     </div>
                 </div>
             {% endfor %}
         </div>
+        <div class="catalog__pagination">
+            <div class="catalog__pagination-controls">
+                {% if projects.has_previous %}
+                    <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+                {% else %}
+                    <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+                {% endif %}
+                <div>
+                    <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
+                </div>
+                {% if projects.has_next %}
+                    <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+                {% else %}
+                    <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</body>
-</html>
-               
+</div>
+
+<div class="about">
+    <div class="info container">
+        <div class="info__heading">
+            <p>Текст для СЕО</p>
+            <hr>
+        </div>
+        <div class="info__row">
+            <div class="info__small-left-column">
+            </div>
+            <div class="info__big-right-column">
+                <div class="info__block">
+                    <div class="info__block-heading">
+                        <p>Органический трафик определил дальнейшее развитие</p>
+                    </div>
+                    <div>
+                        <p class="font__inter">Прежде всего, сплочённость команды профессионалов способствует подготовке и реализации системы обучения кадров, соответствующей насущным потребностям. Идейные соображения высшего порядка, а также высокотехнологичная концепция общественного уклада создаёт необходимость включения в производственный план целого ряда внеочередных мероприятий с учётом комплекса инновационных методов управления процессами. Равным образом, понимание сути ресурсосберегающих технологий требует от нас анализа анализа существующих паттернов поведения</p>
+                    </div>
+                </div>
+                <div class="info__block">
+                    <div class="info__block-heading">
+                        <p>В провинции никого не пугает песнь светлого будущего</p>
+                    </div>
+                    <div>
+                        <p class="font__inter">Следует отметить, что консультация с широким активом в значительной степени обусловливает важность поэтапного и последовательного развития общества. Повседневная практика показывает, что существующая теория однозначно фиксирует необходимость экономической целесообразности принимаемых решений. Сложно сказать, почему акционеры крупнейших компаний формируют глобальную экономическую сеть и при этом — разоблачены</p>
+                    </div>
+                </div>
+                <div class="info__block">
+                    <div class="info__block-heading">
+                        <p>Органический трафик определил дальнейшее развитие</p>
+                    </div>
+                    <div>
+                        <p class="font__inter">Наше дело не так однозначно, как может показаться: высококачественный прототип будущего проекта является качественно новой ступенью экономической целесообразности принимаемых решений. Идейные соображения высшего порядка, а также экономическая повестка сегодняшнего дня позволяет выполнить важные задания по разработке поставленных обществом задач. Приятно, граждане, наблюдать, как реплицированные с зарубежных источников, современные исследования набирают популярность среди определенных слоев населения, а значит, должны быть описаны максимально подробно</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contacts container">
+        <div class="contacts__small-left-column">
+            <div class="contacts__heading">
+                <h4>Контакты</h4>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Главный офис:</p>
+                    </div>
+                    <div class="font__inter">
+                        <p>г. Владивосток, Волгоградская 7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Время работы:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>ПН-СБ с 10:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Телефон:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>+7 (908) 998-58-70</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts__big-right-column">
+            <div class="map" id="map">
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+    $('.photo-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        adaptiveHeight: false,
+        autoplay: false,
+    });
+});
+
+var myMap;
+ymaps.ready(function(){
+    myMap = new ymaps.Map("map", {
+        center: [43.157062, 131.926061], 
+        zoom: 16, 
+        controls: []
+    });
+    var o = new ymaps.control.ZoomControl({
+          options: {
+              position: {
+                  right: 10,
+                  top: 50
+              },
+              size: "small"
+          }
+      });
+    myMap.controls.add(o);
+    myMap.behaviors.disable("scrollZoom");
+    var s = new ymaps.Placemark([43.157062, 131.926061], {
+              hintContent: "Волгоградская улица, 7А",
+              balloonContent: "Волгоградская улица, 7А"
+          }, {
+              iconLayout: "default#image",
+              iconImageHref: `/static/images/pin.svg`,
+              iconImageSize: [30, 42],
+              iconImageOffset: [-15, -42]
+          });
+    myMap.geoObjects.add(s);
+}); 
+</script>
+{% endblock %}
