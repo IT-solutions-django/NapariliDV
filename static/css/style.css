@@ -50,6 +50,10 @@ html{
     overflow-x: hidden;
 }
 
+main {
+    margin-top: 92px;
+}
+
 .container {
     padding-left: 20px;
     padding-right: 20px;
@@ -2080,10 +2084,11 @@ footer hr,
     .advantages__stats, 
     .advantages__details-row {
         flex-direction: column;
-        gap: 10px;
+        gap: 0px;
     }
     .advantages__details-row-with-images {
         flex-direction: column-reverse;
+        gap: 10px
     }
     .advantages__details-small-right-column, 
     .advantages__details-big-left-column {
@@ -2102,9 +2107,24 @@ footer hr,
         width: 100%;
         height: 420px;
     }
-
+    .advantages__choose-house,
+    .advantages__choose-house button img
+    {
+        height: 100px;
+    }
+    .advantages__textblock {
+        margin-bottom: 10px;
+    }
+    .best-projects {
+        margin-bottom: 40px;
+    }
+    .best-projects__header {
+        margin-bottom: 20px;
+    }
     .best-projects__to-catalog {
         transform: translateY(0);
+        padding-right: 20px;
+        background-size: 14px;
     }
     .best-projects__card, 
     .catalog__card {
@@ -2125,6 +2145,13 @@ footer hr,
     }
     .best-projects__select-filter select {
         width: 100%;
+    }
+    .best-projects__to-catalog {
+        font-size: 12px;
+    }
+
+    .about-company {
+        margin-bottom: 30px;
     }
 
     .slider-heading__want-the-house-button,
@@ -2295,6 +2322,12 @@ footer hr,
         margin-left: auto;
         margin-right: auto;
         font-size: 14px;
+    }
+    .best-projects__radio-button label, 
+    .catalog__radio-button label {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
     }
 }
     
