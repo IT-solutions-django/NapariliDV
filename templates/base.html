@@ -20,6 +20,69 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-feedback__close-button" id="closeModal">
+            <button>
+                <img src="{% static 'images/close-modal.svg' %}" alt="">
+            </button>
+        </div>
+        <div id="formSection">
+            <div class="modal-feedback__header">
+                <h5>Заполните обратную форму</h5>
+                <hr>
+                <p>И наш менеджер свяжется с Вами в ближайшее время</p>
+            </div>
+            <form id="feedbackForm" class="modal-feedback__form">
+                <div>
+                    <div class="modal-feedback__inputs">
+                        <div>
+                            <input type="text" placeholder="Ваше имя">
+                        </div>
+                        <div>
+                            <input type="tel" placeholder="+7">
+                        </div>
+                    </div>
+                    
+                    <div class="modal-feedback__agreement">
+                        <div class="modal-feedback__checkbox-wrap">
+                            <input type="checkbox" id="consent" name="consent" required>
+                        </div>
+                        <div>
+                            <label for="consent" class="modal-feedback__checkbox-label">
+                                Даю своё согласие на обработку моих
+                                <a id="userAgreementLink" target="_blank">персональных данных</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-feedback__send">
+                    <button type="submit">
+                        <img src="{% static 'images/send-modal.svg' %}" alt="">
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="successSection" style="display: none;">
+            <div class="modal-feedback__success-header">
+                <h5>Спасибо!</h5>
+                <hr>
+                <div class="modal-feedback__success-text">
+                    <p>В самое ближайшее время мы свяжемся с Вами!</p>
+                </div>
+            </div>
+            <div class="modal-feedback__back">
+                <a href="{% url 'home:home' %}">
+                    <button type="submit">
+                        <img src="{% static 'images/modal-back.svg' %}" alt="">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+
 <body>
     <header class="header">
         <div class="container">
@@ -144,6 +207,7 @@
 
 </body>
 
+<!-- Меню-бургер -->
 <script src="{% static 'js/header.js' %}"></script>
  <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -153,7 +217,46 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
- </script>
+</script>
+
+<!-- Модальное окно -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const modal = document.getElementById('modal');
+  const closeModalButton = document.getElementById('closeModal');
+  const feedbackForm = document.getElementById('feedbackForm');
+  const formSection = document.getElementById('formSection');
+  const successSection = document.getElementById('successSection');
+
+  const openModalButtons = document.querySelectorAll('.openModal');
+
+
+  openModalButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+  });
+
+  closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+
+  feedbackForm.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+    formSection.style.display = 'none'; 
+    successSection.style.display = 'block'; 
+  });
+});
+</script>
+
 {% block script %}
 {% endblock %}
 
