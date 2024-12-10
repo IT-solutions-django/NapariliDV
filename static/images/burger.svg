@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<svg width="27" height="20.999999999999996" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#595959" height="3" id="svg_1" rx="1.5" width="27"/>
+  <rect fill="#595959" height="3" id="svg_2" rx="1.5" transform="matrix(1 0 0 1 0 0)" width="27" y="9"/>
+  <rect fill="#595959" height="3" id="svg_3" rx="1.5" transform="matrix(1 0 0 1 0 0)" width="27" y="18"/>
+ </g>
+</svg>
