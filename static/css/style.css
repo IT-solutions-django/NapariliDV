@@ -145,8 +145,8 @@ main {
 }
 
 .container {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     max-width: 1200px; 
     margin: 0 auto; 
 }
@@ -285,6 +285,19 @@ main {
     white-space: nowrap;
 }
 
+.header__phone-adaptive {
+    display: none;
+    align-self: center;
+    font-family: 'Involve 500', sans-serif;
+    font-size: 14px;
+}
+@media (max-width: 990px) {
+    .header__phone-adaptive {
+        display: block;
+    }
+}
+
+
 /* Исходное состояние (хедер виден) */
 .header {
     transition: top 0.3s ease-in-out;
@@ -324,9 +337,14 @@ main {
     -ms-flex-pack: center;
     justify-content: center;
     text-align: center;
+    gap: 0px
 }
 .header__hamburger--close {
     display: none;
+}
+.header__hamburger-wrapper {
+    display: flex;
+    gap: 19px
 }
 .header__hamburger.active .header__hamburger--menu {
     display: none;
@@ -337,11 +355,13 @@ main {
 .header__nav.active .header__menu {
     flex-direction: column;
     justify-content: center;
-}
-.header__nav.active .header__right-part {
-    margin-bottom: 50px;
+    width: 100%;
+    background-color: #FF1A1A;
 }
 
+.header__hamburger-wrapper {
+    position: absolute;
+}
 .header__hamburger {
     background: 0 0;
     border: none;
@@ -350,8 +370,27 @@ main {
     display: none;
 }
 .header__hamburger img {
-    width: 27px;
-    height: 21px;
+    width: 26px;
+    height: 26px;
+}
+@media (max-width: 1400px) {
+    .header__right-part {
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+}
+@media (max-width: 1200px) {
+    .header__menu {
+        gap: 40px;
+    }
+     .header__right-part {
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
 }
 
 @media (max-width: 990px) {
@@ -379,17 +418,20 @@ main {
         gap: 20px;
         justify-content: space-between;
     }
-}
 
-@media (max-width: 1200px) {
-    .header__menu {
-        gap: 40px;
+    .header__menu-link a {
+        color: white;
     }
-     .header__right-part {
-        flex-direction: column;
-        gap: 4px;
-        padding-top: 4px;
-        padding-bottom: 4px;
+    .nav__link {
+        color: white
+    }
+    .header__right-part {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        gap: 15px;
+    }
+    .header__hamburger-wrapper {
+        position: relative;
     }
 }
 
@@ -403,7 +445,6 @@ main {
 .slider-heading hr {
     margin-top: 28px;
     margin-bottom: 20px;
-    
 }
 
 .slider-heading__promo {
@@ -416,6 +457,16 @@ main {
     position: absolute;
     bottom: 0px;
     right: 0px;
+}
+
+.slider-heading h2 {
+    word-wrap: break-word; 
+    word-break: break-word;
+
+}
+.slider-heading {
+    display: block;
+    white-space: normal !important;
 }
 
 .slick-dotted.slick-slider {
@@ -475,12 +526,16 @@ main {
     font-size: 20px;
     opacity: 1;
     color: white;
+    background-color: white;
+    border: solid 1px #B7B7B7;
+    border-radius: 50%;
 }
 
 .slider .slick-dots li.slick-active button::before {
-    font-size: 20px;
     opacity: 1;
     color: rgba(37, 37, 37, 1);
+    background-color: rgba(37, 37, 37, 1);
+    border-color: transparent
 }
 
 .slider-heading {
@@ -489,8 +544,10 @@ main {
     padding-bottom: 28px;
     font-family: 'Involve 500', sans-serif;
     font-weight: 500;
-    text-transform: uppercase;
     white-space: nowrap;
+}
+.slider-heading h2 {
+    text-transform: uppercase;
 }
 
 .table-of-contents li span:first-child {
@@ -552,7 +609,7 @@ main {
 }
 
 .advantages__details-heading {
-    font-family: 'Involve 600', sans-serif;
+    font-family: 'Involve 500', sans-serif;
     font-size: 20px;
     margin-bottom: 10px;
 }
@@ -725,6 +782,9 @@ main {
 .best-projects__number input {
     max-width: 80px;
 }
+.best-projects__to-catalog--adaptive {
+    display: none;
+}
 .catalog__filters-number-square label {
     color: rgba(135, 135, 135, 1);
 }
@@ -802,22 +862,21 @@ main {
 }
 .best-projects__order-button button, 
 .similar-projects__order-button button {
-    background-color: white;
-    color: #595959;
+    background-color: #FF1A1A;
+    color: white;
     padding-left: 33px;
     padding-top: 10.5px;
     padding-bottom: 10.5px;
     padding-right: 26px;
-    border: solid 1px #595959;
+    border: solid 1px transparent;
     border-radius: 20px;
     cursor: pointer;
 }
 .best-projects__order-button button:hover, 
 .similar-projects__order-button button:hover {
-    background-color: rgba(255, 26, 26, 1);
-    color: white;
-    border: transparent;
-    border: solid 1px transparent;
+    background-color: white;
+    color: #595959;
+    border-color: #595959;
 }
 
 .best-projects__more-button button,
@@ -921,6 +980,7 @@ main {
 .about-company__big-left-column {
     float: left;
     width: 66.66%;
+    position: relative;
 }
 
 .about-company__big-right-column {
@@ -930,6 +990,9 @@ main {
 
 .about-company__big-right-column img {
     width: 100%;
+    margin-top: 40px;
+    position: relative;
+    z-index: 100;
 }
 
 .about-company__heading {
@@ -1065,7 +1128,7 @@ main {
 .reviews__slider .slick-arrow,
 .gallery__slider .slick-arrow, 
 .similar-projects__cards .slick-arrow {
-    top: -70px;
+    top: -80px;
     background-color: white;
     width: 40px;
     height: 40px;
@@ -1086,27 +1149,18 @@ main {
 
 .team__cards .slick-prev,
 .reviews__slider .slick-prev, 
-.similar-projects__cards .slick-prev {
-    right: 60px;
-    left: auto;
-    background-image: url('/static/images/left-gray-arrow.svg');
-}
-
+.similar-projects__cards .slick-prev, 
 .gallery__slider .slick-prev {
-    right: 400px;
+    right: 60px;
     left: auto;
     background-image: url('/static/images/left-gray-arrow.svg');
 }
 
 .reviews__slider .slick-next,
 .team__cards .slick-next, 
-.similar-projects__cards .slick-next {
+.similar-projects__cards .slick-next, 
+.gallery__slider .slick-next  {
     right: 0px;
-    background-image: url('/static/images/right-gray-arrow.svg');
-}
-
-.gallery__slider .slick-next {
-    right: 340px; /* = padding-right в .container */
     background-image: url('/static/images/right-gray-arrow.svg');
 }
 
@@ -1152,6 +1206,17 @@ main {
     background-position: center center;
 }
 
+.team__cards .slick-arrow, 
+.gallery__slider .slick-arrow {
+    margin-right: calc((100vw - 1200px) / 2);
+}
+@media (max-width: 1200px) {
+    .team__cards .slick-arrow, 
+    .gallery__slider .slick-arrow {
+        margin-right: 10px;
+    } 
+}
+
 .team__name {
     font-family: 'Involve 600', sans-serif;
     font-size: 18px;
@@ -1165,6 +1230,8 @@ main {
 .feedback__background {
     background-image: url('/static/images/feedback-background.png');
     height: 600px;
+    background-position: center;
+    background-size: cover;
 }
 
 .feedback__row {
@@ -1184,6 +1251,7 @@ main {
     box-shadow: 31px -31px 31px rgba(194, 194, 194, 0.5), -31px 31px 31px rgba(194, 194, 194, 0.5);
     justify-content: center;
     border-radius: 20px;
+    border: solid 1px #B7B7B7;
 }
 
 .feedback__heading {
@@ -1206,13 +1274,15 @@ main {
     border-radius: 30px;
     justify-self: center;
 }
+.feedback__form input:focus {
+    color: #FF1A1A;
+}
 
 .feedback__form input::placeholder {
     color: #595959;
-    ;
 }
 
-.feedback__form input::placeholder:hover {
+.feedback__form input:focus::placeholder {
     color: #FF1A1A;
 }
 
@@ -1341,7 +1411,9 @@ main {
 .modal-feedback__agreement {
     display: flex;
 }
-
+.feedback {
+    margin-bottom: 100px;
+}
 .feedback__button {
     position: absolute;
     right: 10px;
@@ -1351,10 +1423,6 @@ main {
 .reviews {
     background-color: white;
     margin-bottom: 100px;
-}
-
-.reviews__heading {
-    margin-top: 100px;
 }
 
 .reviews__slider {
@@ -1375,6 +1443,12 @@ main {
     font-family: 'Involve 500';
     font-size: 18px;
     margin-bottom: 15px;
+}
+.reviews__card-header img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .reviews__card-header img {
@@ -1496,12 +1570,6 @@ main {
     color: #FF1A1A
 }
 
-.news__read-button {
-    position: absolute;
-    right: 0px;
-    top: 280px
-}
-
 .news__content {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -1520,7 +1588,7 @@ main {
 .news hr {
     border: none;
     height: 1px;
-    background-color: rgba(89, 89, 89, 1);
+    background-color: rgba(59, 59, 59, 1);
 }
 
 .news__small-left-column {
@@ -1550,6 +1618,15 @@ main {
     align-self: end;
 }
 
+.news__info {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.news__read-button-adaptive {
+    display: none;
+}
+
 .information {
     background-color: #F8F8F8;
 }
@@ -1572,9 +1649,8 @@ main {
 }
 
 .tab {
-    
     border-radius: 30px;
-    padding: 30px 40px;
+    padding: 25px 40px;
     position: relative;
     margin-bottom: 1px;
     width: 100%;
@@ -1706,6 +1782,42 @@ main {
 .work-stages__heading, 
 .team__heading {
     font-family: 'Involve 600', sans-serif;
+    display: block;
+    max-width: 100%;
+    white-space: normal;
+}
+.advantages__heading hr,
+.contacts__heading hr, 
+.answers__heading hr, 
+.best-projects__heading hr, 
+.reviews__heading hr, 
+.catalog__heading hr, 
+.info__heading hr, 
+.gallery__heading hr,
+.news__heading hr, 
+.similar-projects__heading hr, 
+.about-company__heading hr, 
+.work-stages__heading hr, 
+.team__heading hr {
+    display: block;
+}
+.advantages__heading hr,
+    .contacts__heading hr, 
+.answers__heading hr, 
+.best-projects__heading hr, 
+.reviews__heading hr, 
+.catalog__heading hr, 
+.info__heading hr, 
+.gallery__heading hr,
+.news__heading hr, 
+.similar-projects__heading hr, 
+.about-company__heading hr, 
+.work-stages__heading hr, 
+.team__heading hr {
+    display: block;
+    height: 1px;
+    background-color: #B7B7B7;
+    margin-top: 20px;
 }
 .advantages__heading,
 .contacts__heading, 
@@ -1743,8 +1855,10 @@ footer {
     padding-bottom: 32px;;
 }
 .footer-container {
-    padding-left: 540px;
-    padding-right: 540px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 845px; 
+    margin: 0 auto; 
 }
 .footer__label {
     margin-bottom: 10px;
@@ -1752,6 +1866,7 @@ footer {
     font-size: 120px;
     text-transform: uppercase;
     white-space: nowrap;
+    text-align: center;
 }
 .footer__row {
     display: flex;
@@ -2105,6 +2220,8 @@ footer hr,
 
 /* Остальной адаптив */
 @media (max-width: 1200px) {
+}
+@media (max-width: 1200px) {
     .slider-heading {
         font-size: 60px;
     }
@@ -2149,6 +2266,9 @@ footer hr,
     }
 }
 @media (max-width: 990px) {
+    main {
+        margin-top: 74px;
+    }
     .slider-heading {
         font-size: 50px;
     }
@@ -2166,6 +2286,33 @@ footer hr,
     .team__heading {
         font-size: 40px;
     }
+    .advantages__heading hr,
+    .contacts__heading hr, 
+    .answers__heading hr, 
+    .best-projects__heading hr, 
+    .reviews__heading hr, 
+    .catalog__heading hr, 
+    .info__heading hr, 
+    .gallery__heading hr,
+    .news hr, 
+    .similar-projects__heading hr, 
+    .about-company__heading hr, 
+    .work-stages__heading hr, 
+    .team__heading hr {
+        display: block;
+        height: 1px;
+        margin-top: 15px;
+    }
+    .advantages__heading {
+        padding-bottom: 20px;
+    }
+    .answers__heading {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .tab {
+        padding: 20px 15px;
+    }
     .info__heading, 
     .similar-projects__heading {
         font-size: 30px;
@@ -2178,15 +2325,16 @@ footer hr,
         position: absolute;
         right: 30px;
         bottom: 20px;
-        width: 240px;
-        height: 96px;
+        width: 300px;
+        height: 170px;
     }
-    .slider-content-inner {
-        padding: 8px;
+    .slider .slick-dots li button::before {
+        font-size: 14px;
     }
-    .slider-content ul li {
-        margin-bottom: 10px;
-        font-size: 10px;
+    .slick-dots li button:before {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
     }
     .slider-item {
         height: 678px;
@@ -2195,7 +2343,8 @@ footer hr,
         height: 500px;
     }
     .slick-dotted.slick-slider, 
-    .advantages {
+    .advantages, 
+    .news {
         margin-bottom: 40px;
     }
     .advantages__stats, 
@@ -2209,7 +2358,7 @@ footer hr,
         gap: 0px;
     }
     .advantages__details-row-with-images {
-        flex-direction: column-reverse;
+        flex-direction: column;
         gap: 10px
     }
     .advantages__details-small-right-column, 
@@ -2217,11 +2366,18 @@ footer hr,
         width: 100%;
     }
     .advantages__stats-column {
-        padding-top: 8px;
-        padding-bottom: 16px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        border-radius: 15px;
+
     }
     .advantages__stats-number {
-        font-size: 40px;
+        font-size: 60px;
+    }
+    .advantages__stats-label {
+        font-size: 16px;
+        padding-left: 6px;
+        transform: translateY(2px);
     }
     .advantages__details-big-left-column img, 
     .advantages__details-small-right-column img {
@@ -2234,10 +2390,16 @@ footer hr,
     {
         height: 100px;
     }
-    .advantages__textblock {
-        margin-bottom: 10px;
+    .advantages__details-heading {
+        font-size: 16px;
     }
-    .best-projects {
+    .advantages__textblock {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .best-projects, 
+    .feedback, 
+    .half {
         margin-bottom: 40px;
     }
     .best-projects__header {
@@ -2252,7 +2414,6 @@ footer hr,
     .catalog__card {
         max-width: calc((100% - 2* 20px) / 2);
     }
-
     .best-projects__filters-form {
         flex-direction: column;
         justify-content: space-between;
@@ -2269,7 +2430,23 @@ footer hr,
         width: 100%;
     }
     .best-projects__to-catalog {
-        font-size: 12px;
+        display: none;
+    }
+    .best-projects__filters {
+        display: none;
+    }
+    .best-projects__to-catalog--adaptive {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+    .best-projects__to-catalog--adaptive button {
+        font-family: 'Involve 500', sans-serif; 
+        padding-right: 36px;
+        background-image: url(/static/images/right-gray-arrow.svg);
+        background-repeat: no-repeat;
+        background-position: right center;  
     }
 
     .about-company {
@@ -2283,9 +2460,20 @@ footer hr,
     .about-company__watch-more,
     .about-company__watch-more button img,
     .feedback__button, 
-    .feedback__button img {
+    .feedback__button img, 
+    .footer__button, 
+    .footer__button img {
         width: 100px;
         height: 100px;
+    }
+    .team__cards .slick-arrow,
+    .reviews__slider .slick-arrow,
+    .gallery__slider .slick-arrow, 
+    .similar-projects__cards .slick-arrow {
+        display: none !important;
+    }
+    .slider-heading__want-the-house-button {
+        bottom: -75px
     }
     .slider-heading {
         padding-top: 20px;
@@ -2296,10 +2484,17 @@ footer hr,
         margin-bottom: 14px;
     }
     .advantages__choose-house {
-        right: 12px
+        right: 12px;
+        bottom: -50px
     }
     .about-company {
         flex-direction: column;
+    }
+    .work-stages__info-card {
+        font-size: 14px;
+    }
+    .work-stages__card-heading {
+        font-size: 16px;
     }
     .feedback__button {
         bottom: -70px
@@ -2307,21 +2502,35 @@ footer hr,
     .about-company__big-left-column {
         width: 100%;
     }
-
     .about-company__big-right-column {
         display: none;
+    }
+    .work-stages__cards {
+        gap: 15px;
     }
     .reviews__card {
         padding: 14px;
     }
+    .reviews__card-header img {
+        width: 40px;
+        height: 40px;
+    }
+    .reviews__card-author-name, 
+    .reviews__card-text, 
+    .news__date {
+        font-size: 14px;
+    }
     .reviews__card-text {
         font-size: 14px;
+    }
+    .reviews__card-date {
+        font-size: 12px;
     }
     .reviews__card-stars {
         width: 90px;
     }
     .reviews__platform img {
-        width: 50px;
+        width: 60px;
     }
     .reviews__platform-stats {
         font-size: 12px;
@@ -2329,21 +2538,68 @@ footer hr,
     .contacts {
         gap: 40px
     }
+    .gallery__slider, 
+    .reviews  {
+        margin-bottom: 40px;
+    }
+    .news__header-more {
+        display: none;
+    }
+    .news__header {
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+        margin-bottom: 0px;
+        padding-bottom: 15px;
+    }
+    .news__content {
+        gap: 0px;
+    }
+    .news__small-left-column {
+        display: none;
+    }
+    .news__big-right-column {
+        width: 100%;
+    }
+    .news__new-heading, 
+    .news__new-text {
+        max-width: 100%;
+    }
+    .news__content {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .news__new-heading {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .news__read-button-adaptive {
+        display: block
+    }
+    .news__read-button-adaptive p {
+        font-family: 'Involve 500', sans-serif; 
+        padding-right: 36px;
+        background-image: url(/static/images/right-gray-arrow.svg);
+        background-repeat: no-repeat;
+        background-position: right center; 
+        color: #FF1A1A; 
+    }
+    .footer__label {
+        font-size: 46px;
+        font-weight: 500;
+    }
+    .footer__button {
+        top: -30px
+    }
 }
 @media (max-width: 820px) {
-    .slider-heading {
-        font-size: 40px;
-    }
-    .work-stages__cards {
-        gap: 12px;
-    }
     .work-stages__info-card, 
     .work-stages__image-card {
         width: 100%;
         margin-bottom: 0px;
     }
     .work-stages__image-card img {
-        max-height: 340px;
+        max-height: 260px;
     }
     .contacts {
         flex-direction: column;
@@ -2352,7 +2608,7 @@ footer hr,
         width: 100%;
     }
     .contacts__info {
-        flex-direction: row;
+        flex-direction: column;
     }
     .contacts__block {
         width: calc((100% - 2 * 20px) / 3);
@@ -2364,6 +2620,33 @@ footer hr,
     #map,
     .contacts__big-right-column {
         width: 100%;
+    }
+    .slider-item {
+        height: 886px;
+    }
+    .slider-content {
+        width: 100%;
+        width: calc(100% - 2 * 10px);
+        height: 136px;
+        position:inherit;
+        right: auto;
+        bottom: auto;
+        margin-top: 76px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: solid 1px #B7B7B7;
+        box-shadow: none;
+        padding: 15px 20px;
+    }
+    .slider-content ul li {
+        font-size: 14px;
+    }
+    .slider-content-inner {
+        padding: 0;
+        border: none;
+    }
+    .slick-dotted.slick-slider {
+        margin-bottom: 20px;
     }
 }
 @media (max-width: 768px) {
@@ -2379,10 +2662,13 @@ footer hr,
     .about-company__heading, 
     .work-stages__heading, 
     .team__heading {
-        font-size: 28px;
+        font-size: 36px;
+        display: block;
+        max-width: 100%;
+        white-space: normal;
     }
     .slider-item {
-        height: 441px;
+        height: 660px;
     }
     .slider .slick-dots {
         bottom: 15px;
@@ -2390,12 +2676,10 @@ footer hr,
     .slider-image {
         height: 300px;
     }
-    .slider-heading {
-        font-size: 30px;
+    .slider-heading h2 {
+        font-size: 42px;
     }
-    .slider-heading__promo {
-        font-size: 12px;
-    }
+
     .advantages__details-big-left-column img, 
     .advantages__details-small-right-column img {
         height: 300px;
@@ -2436,7 +2720,7 @@ footer hr,
     }
     .feedback__form input {
         width: 100%;
-        padding: 14px 14px 15px 14px;
+        padding: 15px 20px;
     }
     .feedback__form input,
     .feedback__agreement {
@@ -2454,9 +2738,6 @@ footer hr,
 }
     
 @media (max-width: 576px) {
-    .slider-heading {
-        font-size: 24px;
-    }
     .best-projects__radio-group {
         gap: 10px
     }
@@ -2465,7 +2746,7 @@ footer hr,
         height: 250px;
     }
     .work-stages__image-card img {
-        max-height: 250px;
+        max-height: 200px;
     }
     .team__slider-item img,
     .team__slider-item hr {
@@ -2478,11 +2759,16 @@ footer hr,
         height: 200px;
     }
     .feedback__form {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 30px 15px;
     }
-    .contacts__info {
-        flex-direction: column;
+    .feedback__form {
+        margin-top: 30px;
+    }
+    .feedback__background {
+        height: 360px;
+    }
+    .feedback__agreement label {
+        font-size: 12px;
     }
     .contacts__block img {
         width: 40px !important;
@@ -2493,19 +2779,65 @@ footer hr,
     }
     #map,
     .contacts__big-right-column {
-        height: 300px;
+        height: 460px;
+    }
+    .about-company__big-right-column {
+        display: block;
+        width: 100%;
+    }
+    .about-company__big-right-column img {
+        object-fit:cover;
+        height: 200px;
+        border-radius: 20px;
+    }
+    .about-company__watch-more {
+        position: absolute;
+        bottom: -250px;
+        right: 0px;
+    }
+    .team__slider-item, 
+    .similar-projects__slider-item {
+        margin-right: 10px;
+    }
+    .gallery__photo {
+        width: 820px;
+        height: 222px;
+        margin-right: 10px;
+    }
+    
+    .gallery__photo img {
+        object-fit: cover;
+        border-radius: 15px;
+        width: 820px;
+        height: 222px;
     }
 }
 @media (max-width: 480px) {
-    .slider-heading__want-the-house-button {
-        width: 60px;
+    main {
+        margin-top: 47px;
     }
-}
-@media (max-width: 360px) {
-    .slider-heading {
-        font-size: 30px;
-    }
-    .slider-heading__promo {
+    .header__company-name {
+        margin-left: 8px;
         font-size: 12px;
+    }
+    .header__logo-link, 
+    .header__logo  {
+        height: 34px;
+        width: 34px;
+    }
+    .header__logo {
+        margin-top: 6px;
+        margin-bottom: 7px;
+    }
+    .slider-heading h2 {
+        font-size: 36px;
+    }
+    .slider-item {
+        height: 600px;
+    }
+    .slider-image,
+    .advantages__details-big-left-column img, 
+    .advantages__details-small-right-column img {
+        height: 200px;
     }
 }
