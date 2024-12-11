@@ -181,7 +181,7 @@ main {
     white-space: nowrap;
 }
 
-.header__company-name p {
+.header__company-name a {
     text-transform: uppercase;
     font-family: 'Involve 600', sans-serif;
     font-weight: 600;
