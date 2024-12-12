@@ -7,3 +7,10 @@ class ContactsView(View):
 
     def get(self, request): 
         return render(request, self.template_name)
+    
+
+class GalleryView(View): 
+    template_name = 'contacts/gallery.html'
+
+    def get(self, request): 
+        return render(request, self.template_name)
