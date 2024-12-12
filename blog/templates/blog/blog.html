@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новости - Напарили ДВ{% endblock %}
+
+{% block content %}
+<div class="breadcrumbs container font__inter">
+    <div>
+        <a href="{% url 'home:home' %}">Главная</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+    </div>
+    <div>
+        <a href="{% url 'projects:catalog' %}">Новости</a>
+    </div>
+</div>
+<div class="news container">
+    <div class="news-page__header">
+        <div class="news__heading">
+            <h1>Новости</h1>
+        </div>
+        <hr class="news-page__header-hr--adaptive">
+        <div class="news__header-right-buttons">
+            <div class="news__header-button">
+                <button>Блог</button>
+            </div>
+            <div class="news__header-button">
+                <button>Новости</button>
+            </div>
+        </div>
+    </div>
+    <hr class="news-page__header-hr">
+    <div class="news__cards">
+        <div class="news__card">
+            <div class="news__card-image">
+                <img src="{% static 'images/news1.png' %}" alt="">
+            </div>
+            <div class="news__card-text-container">
+                <div class="best-projects__card-heading">
+                    <a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nobis!</a>
+                </div>
+                <hr>
+                <div class="news__card-description">
+                    <p>Банальные, но неопровержимые выводы, а также явные признаки победы институционализации призывают нас к новым свершениям</p>
+                </div>
+                <div class="news__card-date">
+                    <i>30.11.2024</i>
+                </div>
+            </div>
+            <div class="news-page__read-button">
+                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
+            </div>
+        </div>
+        <div class="news__card">
+            <div class="news__card-image">
+                <img src="{% static 'images/news1.png' %}" alt="">
+            </div>
+            <div class="news__card-text-container">
+                <div class="best-projects__card-heading">
+                    <a href="">Заголовок</a>
+                </div>
+                <hr>
+                <div class="news__card-description">
+                    <p>Банальные, но неопровержимые выводы, 
+                        а также явные признаки победы 
+                        институционализации призывают нас 
+                        к новым свершениям</p>
+                </div>
+                <div class="news__card-date">
+                    <i>30.11.2024</i>
+                </div>
+            </div>
+            <div class="news-page__read-button">
+                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
+            </div>
+        </div>
+        <div class="news__card">
+            <div class="news__card-image">
+                <img src="{% static 'images/news1.png' %}" alt="">
+            </div>
+            <div class="news__card-text-container">
+                <div class="best-projects__card-heading">
+                    <a href="">Заголовок</a>
+                </div>
+                <hr>
+                <div class="news__card-description">
+                    <p>Банальные, но неопровержимые выводы, 
+                        а также явные признаки победы 
+                        институционализации призывают нас 
+                        к новым свершениям</p>
+                </div>
+                <div class="news__card-date">
+                    <i>30.11.2024</i>
+                </div>
+            </div>
+            <div class="news-page__read-button">
+                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
+            </div>
+        </div>
+        <div class="news__card">
+            <div class="news__card-image">
+                <img src="{% static 'images/news1.png' %}" alt="">
+            </div>
+            <div class="news__card-text-container">
+                <div class="news__card-heading  ">
+                    <a href="">Заголовок <br> ещё одна строка!</a>
+                </div>
+                <hr>
+                <div class="news__card-description">
+                    <p>Банальные, но неопровержимые выводы, 
+                        а также явные признаки победы 
+                        институционализации призывают нас 
+                        к новым свершениям</p>
+                </div>
+                <div class="news__card-date">
+                    <i>30.11.2024</i>
+                </div>
+            </div>
+            <div class="news-page__read-button">
+                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="catalog__pagination">
+        <div class="catalog__pagination-controls">
+            {% if projects.has_previous %}
+                <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+            {% else %}
+                <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+            {% endif %}
+            <div>
+                <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
+            </div>
+            {% if projects.has_next %}
+                <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+            {% else %}
+                <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="about">
+    <div class="contacts container">
+        <div class="contacts__small-left-column">
+            <div class="contacts__heading">
+                <h4>Контакты</h4>
+                <hr>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Главный офис:</p>
+                    </div>
+                    <div class="font__inter">
+                        <p>г. Владивосток, Волгоградская 7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Время работы:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>ПН-СБ с 10:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts__block">
+                <div>
+                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
+                </div>
+                <div>
+                    <div class="contacts__block-heading">
+                        <p>Телефон:</p>
+                    </div>
+                    <div  class="font__inter">
+                        <p>+7 (908) 998-58-70</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts__big-right-column">
+            <div class="map" id="map">
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+    $('.photo-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        adaptiveHeight: false,
+        autoplay: false,
+    });
+});
+
+var myMap;
+ymaps.ready(function(){
+    myMap = new ymaps.Map("map", {
+        center: [43.157062, 131.926061], 
+        zoom: 16, 
+        controls: []
+    });
+    var o = new ymaps.control.ZoomControl({
+          options: {
+              position: {
+                  right: 10,
+                  top: 50
+              },
+              size: "small"
+          }
+      });
+    myMap.controls.add(o);
+    myMap.behaviors.disable("scrollZoom");
+    var s = new ymaps.Placemark([43.157062, 131.926061], {
+              hintContent: "Волгоградская улица, 7А",
+              balloonContent: "Волгоградская улица, 7А"
+          }, {
+              iconLayout: "default#image",
+              iconImageHref: `/static/images/pin.svg`,
+              iconImageSize: [30, 42],
+              iconImageOffset: [-15, -42]
+          });
+    myMap.geoObjects.add(s);
+}); 
+</script>
+{% endblock %}

@@ -2,15 +2,15 @@ from django.shortcuts import render
 from django.views import View 
 
 
-class ContactsView(View): 
-    template_name = 'contacts/contacts.html'
+class BlogView(View): 
+    template_name = 'blog/blog.html'
 
     def get(self, request): 
         return render(request, self.template_name)
     
 
-class GalleryView(View): 
-    template_name = 'contacts/gallery.html'
+class ArticleView(View): 
+    template_name = 'blog/article.html'
 
     def get(self, request): 
         return render(request, self.template_name)

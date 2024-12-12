@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новости - Напарили ДВ{% endblock %}
+
+{% block content %}
+<div class="breadcrumbs container font__inter">
+    <div>
+        <a href="{% url 'home:home' %}">Главная</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+    </div>
+    <div>
+        <a href="{% url 'projects:catalog' %}">Контакты</a>
+    </div>
+</div>
+<div class="contacts-page container">
+    <div class="contacts__heading">
+        <h4>Контакты</h4>
+        <hr>
+    </div>
+    <div class="contacts-page__info">
+        <div class="contacts-page__big-left-column">
+            <div class="contacts-page__column">
+                <div class="contacts-page__info_block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                    </div>
+                    <div class="contacts-page__info-content">
+                        <div class="contacts-page__info_block-heading">
+                            <p>Главный офис:</p>
+                        </div>
+                        <div>
+                            <p class="font__inter">г. Владивосток, Волгоградская 7</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-page__info_block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                    </div>
+                    <div class="contacts-page__info-content">
+                        <div class="contacts-page__info_block-heading">
+                            <p>Время работы:</p>
+                        </div>
+                        <div>
+                            <p class="font__inter">ПН-СБ с 10:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts-page__column">
+                <div class="contacts-page__info_block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                    </div>
+                    <div class="contacts-page__info-content">
+                        <div class="contacts-page__info_block-heading">
+                            <p>Телефон:</p>
+                        </div>
+                        <div>
+                            <p class="font__inter">+7 (908) 998-58-70</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-page__info_block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                    </div>
+                    <div class="contacts-page__info-content">
+                        <div class="contacts-page__info_block-heading">
+                            <p>Почта:</p>
+                        </div>
+                        <div>
+                            <p>naparili.dv@mail.ru</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="contacts-page__info-hr--adaptive">
+
+        <div class="contacts-page__small-right-column">
+            <div class="contacts-page__juridical">
+                ООО АЛЬЯНССТРОЙСЕРВИС
+            </div>
+            <div class="contacts-page__juridical">
+                ИНН/КПП 2536327428
+            </div>
+            <div class="contacts-page__juridical">
+                ОГРН 1212500007961
+            </div>
+        </div>
+    </div>
+    <div class="bigMap" id="map">
+
+    </div>
+    
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+    $('.photo-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        adaptiveHeight: false,
+        autoplay: false,
+    });
+});
+
+var myMap;
+ymaps.ready(function(){
+    myMap = new ymaps.Map("map", {
+        center: [43.157062, 131.926061], 
+        zoom: 16, 
+        controls: []
+    });
+    var o = new ymaps.control.ZoomControl({
+          options: {
+              position: {
+                  right: 10,
+                  top: 50
+              },
+              size: "small"
+          }
+      });
+    myMap.controls.add(o);
+    myMap.behaviors.disable("scrollZoom");
+    var s = new ymaps.Placemark([43.157062, 131.926061], {
+              hintContent: "Волгоградская улица, 7А",
+              balloonContent: "Волгоградская улица, 7А"
+          }, {
+              iconLayout: "default#image",
+              iconImageHref: `/static/images/pin.svg`,
+              iconImageSize: [50, 50],
+              iconImageOffset: [-15, -42]
+          });
+    myMap.geoObjects.add(s);
+}); 
+</script>
+{% endblock %}
