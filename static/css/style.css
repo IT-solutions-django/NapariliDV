@@ -809,16 +809,23 @@ main {
 }
 
 .best-projects__cards, 
-.catalog__cards {
+.catalog__cards, 
+.news__cards {
     display: flex;
     justify-content: left;
     gap: 20px;
     flex-wrap: wrap;
 }
 
+.news__cards {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
 .best-projects__card, 
 .catalog__card, 
-.similar-projects__slider-item {
+.similar-projects__slider-item, 
+.news__card {
     box-sizing: border-box;
     padding-bottom: 20px;
     border: solid 1px #DDDDDD;
@@ -827,36 +834,51 @@ main {
 }
 
 .best-projects__card, 
-.catalog__card {
+.catalog__card, 
+.news__card {
     max-width: calc((100% - 2* 20px) / 3);
 }
 
 .best-projects__card-image img, 
-.similar-projects__card-iamge img {
+.similar-projects__card-iamge img, 
+.news__card-image img {
     object-fit: cover;
     border-radius: 15px;
-    height: 358px;
     width: 100%;
+}
+.best-projects__card-image img, 
+.similar-projects__card-iamge img {
+    height: 358px;
+}
+.news__card-image img {
+    height: 300px;
 }
 
 .best-projects__card-heading, 
-.similar-projects__card-heading {
+.similar-projects__card-heading, 
+.news__card-heading {
     font-family: 'Involve 500', sans-serif;
     font-size: 20px;
     margin-bottom: 11px;
 }
 
 .best-projects__card hr,
-.similar-projects__card-heading hr {
+.similar-projects__card-heading hr, 
+.news__card-heading hr {
     border: none;
     height: 1px;
     background-color: rgba(89, 89, 89, 1);
     margin-bottom: 21.5px;
 }
 .best-projects__card-text-container, 
-.similar-projects__card-text-container {
+.similar-projects__card-text-container, 
+.news__card-text-container {
     padding-left: 20px;
     padding-right: 20px;
+}
+.news__card-text-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .best-projects__card-content ul, 
 .similar-projects__card-content {
@@ -865,7 +887,8 @@ main {
 .best-projects__order-button, 
 .best-projects__more-button, 
 .similar-projects__order-button, 
-.similar-projects__more-button {
+.similar-projects__more-button, 
+.news-page__read-button {
     display: flex;
     justify-content: center;
 }
@@ -874,22 +897,24 @@ main {
     margin-bottom: 20px;
 }
 .best-projects__order-button button, 
-.similar-projects__order-button button {
-    background-color: #FF1A1A;
-    color: white;
+.similar-projects__order-button button, 
+.news-page__read-button button {
+    background-color: white;
+    color: #595959;
     padding-left: 33px;
     padding-top: 10.5px;
     padding-bottom: 10.5px;
     padding-right: 26px;
-    border: solid 1px transparent;
+    border: solid 1px #595959   ;
     border-radius: 20px;
     cursor: pointer;
 }
 .best-projects__order-button button:hover, 
-.similar-projects__order-button button:hover {
-    background-color: white;
-    color: #595959;
-    border-color: #595959;
+.similar-projects__order-button button:hover, 
+.news-page__read-button button:hover {
+    background-color: #FF1A1A;
+    color: white;
+    border-color: transparent;
 }
 
 .best-projects__more-button a,
@@ -1531,12 +1556,19 @@ main {
     justify-content: center;
 }
 
-.news__header {
+.news__header, 
+.news-page__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     margin-bottom: 40px;
+}
+.news-page__header-hr--adaptive {
+    display: none;
+}
+.news-page__header {
+    margin-bottom: 20px;
 }
 
 .news__header-left {
@@ -1650,6 +1682,13 @@ main {
 }
 .news__read-button-adaptive {
     display: none;
+}
+.news__card-description {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.news__card-date {
+    color: #595959;
 }
 
 .information {
@@ -1839,11 +1878,16 @@ main {
 .about-company__heading hr, 
 .work-stages__heading hr, 
 .team__heading hr, 
-.project__heading hr {
+.project__heading hr, 
+.news-page__header-hr--adaptive {
     display: block;
     height: 1px;
     background-color: #B7B7B7;
     margin-top: 20px;
+}
+.news-page__header-hr--adaptive {
+    width: 100%;
+    display: none;
 }
 .advantages__heading,
 .contacts__heading, 
@@ -2136,6 +2180,7 @@ footer hr,
     margin-bottom: 20px;
     width: 100%;
     border-radius: 20px;
+    height: 450px;
 }
 .project__current-slide .slick-slide {
     width: 100%;
@@ -2410,7 +2455,6 @@ footer hr,
     .catalog__heading hr, 
     .info__heading hr, 
     .gallery__heading hr,
-    .news hr, 
     .similar-projects__heading hr, 
     .about-company__heading hr, 
     .work-stages__heading hr, 
@@ -2418,6 +2462,9 @@ footer hr,
         display: block;
         height: 1px;
         margin-top: 15px;
+    }
+    .news-page__header-hr--adaptive {
+        display: none;
     }
     .advantages__heading {
         padding-bottom: 20px;
@@ -2536,8 +2583,9 @@ footer hr,
         background-size: 14px;
     }
     .best-projects__card, 
-    .catalog__card {
-        max-width: calc((100% - 2* 20px) / 2);
+    .catalog__card,
+    .news__card {
+        max-width: calc((100% - 20px) / 2);
     }
     
     .best-projects__to-catalog--adaptive, 
@@ -2837,6 +2885,7 @@ footer hr,
     .project__credit button {
         padding: 9px 30px;
     }
+    
 }
 @media (max-width: 820px) {
     .work-stages__info-card, 
@@ -2925,7 +2974,8 @@ footer hr,
         height: 18px;
     }
     .best-projects__card, 
-    .catalog__card {
+    .catalog__card, 
+    .news__card {
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
@@ -2963,6 +3013,37 @@ footer hr,
         margin-left: auto;
         margin-right: auto;
         font-size: 14px;
+    }
+    .news-page__header {
+        flex-direction: column;
+        align-items: start;
+    }
+    .news__cards {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .news__card-description {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    .news__card-date {
+        font-size: 12px;
+    }
+    .news-page__read-button button {
+        margin: 0px 15px;
+        width: 100%;
+        font-size: 14px;
+    }
+    .news__card-image img {
+        height: 208px;
+    }
+    .news-page__header-hr {
+        display: none !important;
+    }
+    .news-page__header-hr--adaptive {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 20px;
     }
     .best-projects__radio-button label, 
     .catalog__radio-button label {
