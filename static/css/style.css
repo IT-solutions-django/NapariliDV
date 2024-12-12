@@ -1557,7 +1557,8 @@ main {
 }
 
 .news__header, 
-.news-page__header {
+.news-page__header, 
+.article__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1567,7 +1568,8 @@ main {
 .news-page__header-hr--adaptive {
     display: none;
 }
-.news-page__header {
+.news-page__header, 
+.article__header {
     margin-bottom: 20px;
 }
 
@@ -1636,7 +1638,7 @@ main {
     width: 100%;
 }
 
-.news hr {
+.news__list hr {
     border: none;
     height: 1px;
     background-color: rgba(59, 59, 59, 1);
@@ -1844,7 +1846,8 @@ main {
 .similar-projects__heading, 
 .about-company__heading, 
 .work-stages__heading, 
-.team__heading {
+.team__heading, 
+.article__heading {
     font-family: 'Involve 600', sans-serif;
     display: block;
     max-width: 100%;
@@ -1879,13 +1882,18 @@ main {
 .work-stages__heading hr, 
 .team__heading hr, 
 .project__heading hr, 
-.news-page__header-hr--adaptive {
+.news-page__header-hr--adaptive,
+.news-page__header-hr, 
+.article__header-hr--adaptive, 
+.article__header-hr
+ {
     display: block;
     height: 1px;
     background-color: #B7B7B7;
     margin-top: 20px;
 }
-.news-page__header-hr--adaptive {
+.news-page__header-hr--adaptive, 
+.article__header-hr--adaptive {
     width: 100%;
     display: none;
 }
@@ -1900,7 +1908,8 @@ main {
 .news__heading, 
 .about-company__heading, 
 .work-stages__heading, 
-.team__heading {
+.team__heading, 
+.article__heading {
     font-size: 60px;
 }
 .info__heading, 
@@ -2297,8 +2306,46 @@ footer hr,
     border-radius: 15px;
     height: 300px;
 }
-
-
+.article__date {
+    align-self: end;
+}
+.article__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 40px 0;
+}
+.article__content-block {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.article__paragraph {
+    display: flex;
+    gap: 20px;
+}
+.article__paragraph-heading {
+    max-width: calc((100% - 20px) / 3);
+    font-size: 20px;
+    font-family: 'Involve 600', sans-serif;
+    font-weight: 600;
+}
+.article__paragraph-text, 
+.article__image img {
+    max-width: calc((100% - 20px) / 3 * 2);
+}
+.article__paragraph-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.article__image img {
+    border-radius: 20px;
+    object-fit: cover;
+    width: 820px;
+    height: 420px;
+    float: right;
+}
 
 /* Хедер */
 @media (max-width: 1300px) {
@@ -2444,7 +2491,8 @@ footer hr,
     .news__heading, 
     .about-company__heading, 
     .work-stages__heading, 
-    .team__heading {
+    .team__heading, 
+    .article__heading {
         font-size: 40px;
     }
     .advantages__heading hr,
@@ -2463,7 +2511,8 @@ footer hr,
         height: 1px;
         margin-top: 15px;
     }
-    .news-page__header-hr--adaptive {
+    .news-page__header-hr--adaptive, 
+    .article__header-hr--adaptive {
         display: none;
     }
     .advantages__heading {
@@ -2885,7 +2934,31 @@ footer hr,
     .project__credit button {
         padding: 9px 30px;
     }
-    
+    .article__content {
+        margin: 20px 0;
+    }
+    .article__content-block, 
+    .article__paragraph {
+        gap: 20px;
+    }
+    .article__paragraph {
+        flex-direction: column;
+    }
+    .article__paragraph-heading, 
+    .article__paragraph-text, 
+    .article__image img {
+        max-width: 100%;
+        /* width: 100%; */
+    }
+    .article__image img {
+        height: 400px;
+    }
+    .article__paragraph-heading {
+        font-size: 16px;
+    }
+    .article__paragraph-text {
+        font-size: 14px;
+    }
 }
 @media (max-width: 820px) {
     .work-stages__info-card, 
@@ -3014,7 +3087,8 @@ footer hr,
         margin-right: auto;
         font-size: 14px;
     }
-    .news-page__header {
+    .news-page__header, 
+    .article__header {
         flex-direction: column;
         align-items: start;
     }
@@ -3026,8 +3100,10 @@ footer hr,
         margin-top: 15px;
         font-size: 14px;
     }
-    .news__card-date {
+    .news__card-date, 
+    .article__date {
         font-size: 12px;
+        align-self: flex-start;
     }
     .news-page__read-button button {
         margin: 0px 15px;
@@ -3037,13 +3113,18 @@ footer hr,
     .news__card-image img {
         height: 208px;
     }
-    .news-page__header-hr {
+    .news-page__header-hr, 
+    .article__header-hr {
         display: none !important;
     }
-    .news-page__header-hr--adaptive {
+    .news-page__header-hr--adaptive, 
+    .article__header-hr--adaptive {
         display: block;
         margin-top: 15px;
         margin-bottom: 20px;
+    }
+    .article__image img {
+        height: 320px;
     }
     .best-projects__radio-button label, 
     .catalog__radio-button label {
@@ -3145,6 +3226,9 @@ footer hr,
         border-radius: 15px;
         width: 820px;
         height: 222px;
+    }
+    .article__image img {
+        height: 200px;
     }
 }
 @media (max-width: 480px) {
