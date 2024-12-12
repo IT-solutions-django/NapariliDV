@@ -52,11 +52,26 @@
                     <button>Скидка 5%</button>
                 </div>
             </div>
-            <div class="project__heading">
+            <div class="project__heading container">
                 <h1>{{ project.name }}</h1>
                 <hr>
             </div>
-            <div class="project__parameters">
+            <div class="project__buttons-group--adaptive container">
+                <div class="project__download-estimates--adaptive">
+                    <button>Скачать смету</button>
+                </div>
+                <div class="project__discount--adaptive">
+                    <button>Скидка 5%</button>
+                </div>
+            </div>
+            <div class="project__slider--adaptive">
+                {% for photo in project.photos.all %}
+                    <div class="project__slide--adaptive">
+                        <img src="{{ photo.image.url }}" alt="">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="project__parameters container">
                 <ul class="table-of-contents">
                     <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
                     <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
@@ -67,8 +82,8 @@
                     <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
                 </ul>
             </div>
-            <div class="project__credit">
-                <button>Дом подходит под ипотеку, или кредит</button>
+            <div class="project__credit container">
+                <button>Дом подходит под ипотеку,<br> или кредит</button>
             </div>
             <div class="project__order-button">
                 <button>
@@ -207,12 +222,68 @@
       arrows: false,
       focusOnSelect: true, 
     });
+    $('.project__slider--adaptive').slick({
+        centerMode: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: false,
+      arrows: false,
+      focusOnSelect: true, 
+      responsive: [
+            {
+                breakpoint: 1200, 
+                settings: {
+                    slidesToShow: 2, 
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 820, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1
+                }
+            }, 
+            {
+                breakpoint: 576, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1, 
+                }
+            }
+        ]
+    });
     $(document).ready(function () {
         $('.similar-projects__cards').slick({
             arrows: true,
             infinite: true,
             slidesToShow: 3,
-            slidesToScroll: 1
+            slidesToScroll: 1, 
+            responsive: [
+                {
+                    breakpoint: 1024, 
+                    settings: {
+                        slidesToShow: 3, 
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768, 
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 2, 
+                        slidesToScroll: 1
+                    }
+                }, 
+                {
+                    breakpoint: 576, 
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 1, 
+                        slidesToScroll: 1, 
+                    }
+                }
+            ]
         });
     });
     $(document).ready(function () {
