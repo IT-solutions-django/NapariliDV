@@ -263,7 +263,7 @@ main {
     align-items: center;
 }
 
-.header__call-button a {
+.header__call-button p {
     display: inline-block;
     white-space: nowrap;
     padding: 10px 23px;
@@ -272,8 +272,9 @@ main {
     font-family: 'Involve 500', sans-serif;
     font-weight: 500;
     font-size: 16px;
+    cursor: pointer;
 }
-.header__call-button a:hover {
+.header__call-button p:hover {
     color: white;
     border-color: transparent;
     background-color: #FF1A1A;
@@ -574,6 +575,16 @@ main {
     height: 1em;
     line-height: 1em;
     border-bottom: 2px dotted rgba(163, 163, 163, 1);
+}
+
+.slider-heading__want-the-house-button a,
+.advantages__choose-house a,
+.about-company__watch-more a,
+.about-company__watch-more a,
+.feedback__button a, 
+.footer__button a, 
+.project__order-button a {
+    display: block;
 }
 
 .advantages {
@@ -881,8 +892,8 @@ main {
     border-color: #595959;
 }
 
-.best-projects__more-button button,
-.similar-projects__more-button button {
+.best-projects__more-button a,
+.similar-projects__more-button a {
     font-family: 'Involve 500', sans-serif;
     padding-right: 36px;
     background-image: url('/static/images/right-gray-arrow.svg');
@@ -2536,8 +2547,8 @@ footer hr,
         text-align: center;
         font-size: 20px;
     }
-    .best-projects__to-catalog--adaptive button, 
-    .news__read-all--adaptive button {
+    .best-projects__to-catalog--adaptive a, 
+    .news__read-all--adaptive a {
         font-family: 'Involve 500', sans-serif; 
         padding-right: 36px;
         background-image: url(/static/images/right-gray-arrow.svg);
