@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('home.urls', namespace='home')),
     path('projects/', include('projects.urls', namespace='projects')),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('contacts/', include('contacts.urls', namespace='contacts')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

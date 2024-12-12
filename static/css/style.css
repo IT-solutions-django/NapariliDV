@@ -1806,13 +1806,19 @@ main {
 }
 
 .map {
-    width: 810px;
     width: 100%;
     height: 400px;
     background-color: #B7B7B7;
-    float: right;
     border-radius: 20px;
-    float: right;
+    clear: both; 
+}
+
+.bigMap {
+    width: 100%;
+    height: 568px;
+    background-color: #B7B7B7;
+    border-radius: 20px;
+    margin-bottom: 20px; 
 }
 
 .contacts {
@@ -1823,7 +1829,6 @@ main {
 .contacts__info {
     display: flex;
     flex-direction: column;
-    gap: 20px
 }
 .contacts__small-left-column {
     width: 28%;
@@ -1833,6 +1838,46 @@ main {
 }
 .contacts__heading {
     margin-bottom: 22px;
+}
+.contacts-page__info_block {
+    display: flex;
+    gap: 15px;
+}
+.contacts-page__info-content {
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+} 
+.contacts-page__column,
+.contacts-page__info {
+    display: flex;
+    gap: 20px;
+}
+.contacts-page__big-left-column {
+    display: flex;
+}
+.contacts-page__info {
+    justify-content: space-between;
+}
+.contacts-page__big-left-column, 
+.contacts-page__info {
+    gap: 60px;
+}
+.contacts-page__small-right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.contacts-page__juridical {
+    font-family: 'Involve 500', sans-serif;
+    font-weight: 500;
+    color: #595959;
+}
+.contacts-page__column {
+    flex-direction: column;
+}
+.contacts-page__info {
+    margin-bottom: 50px;
 }
 .advantages__heading,
 .contacts__heading, 
@@ -1922,12 +1967,15 @@ main {
     gap: 10px;
     margin-bottom: 22px;
 }
-.contacts__block-heading {
+.contacts__block-heading, 
+.contacts-page__info_block-heading {
     font-family: 'Involve 600';
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 10px;
     text-transform: uppercase;
+}
+.contacts__block-heading {
+    margin-bottom: 10px;
 }
 
 footer {
@@ -2442,6 +2490,26 @@ footer hr,
         margin-top: 10px;
         margin-bottom: 15px;
     }
+    .contacts-page__info {
+        gap: 20px;
+    }
+    .contacts-page__big-left-column {
+        gap: 20px;
+    }
+    .contacts-page__info, 
+    .contacts-page__big-left-column, 
+    .contacts-page__info-content {
+        flex-direction: column;   
+    }
+    .contacts-page__info-content {
+        align-items: start;
+    }
+    .contacts-page__small-right-column {
+        gap: 10px;
+    }
+    .bigMap {
+        height: 400px;
+    }
 }
 @media (max-width: 1100px) {
     .slider-heading {
@@ -2807,8 +2875,13 @@ footer hr,
         flex-direction: column;
     }
     .contacts__block, 
-    .contacts__block-heading {
+    .contacts__block-heading, 
+    .contacts-page__info_block-heading, 
+    .contacts-page__info-content {
         font-size: 14px;
+    }
+    .contacts-page__info-content {
+        gap: 6px;
     }
     .contacts__block-heading {
         margin-bottom: 6px;
@@ -2820,7 +2893,7 @@ footer hr,
         width: 31px;
         height: 31px;
     }
-    #map,
+    .map,
     .contacts__big-right-column {
         width: 100vw;
         transform: translateX(-5px);
@@ -2959,6 +3032,7 @@ footer hr,
     .article__paragraph-text {
         font-size: 14px;
     }
+
 }
 @media (max-width: 820px) {
     .work-stages__info-card, 
@@ -3151,6 +3225,9 @@ footer hr,
     .project__order-button button {
         transform: translateY(-58px);
     }
+    .bigMap {
+        height: 460px;
+    }
 }
     
 @media (max-width: 576px) {
@@ -3193,7 +3270,7 @@ footer hr,
     .contacts__block {
         width: 100%;
     }
-    #map,
+    .map,
     .contacts__big-right-column {
         height: 460px;
     }
