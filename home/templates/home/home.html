@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load price_filters %}
 
 {% block title %}Напарили ДВ{% endblock %}
 
@@ -165,7 +166,9 @@
                 </div>
                 <div class="advantages__choose-house">
                     <button>
-                        <img src="static/images/choose-house-button.svg" alt="">
+                        <a href="{% url 'projects:catalog' %}">
+                            <img src="static/images/choose-house-button.svg" alt="">
+                        </a>
                     </button>
                 </div>
             </div>
@@ -179,7 +182,7 @@
             <h4>Топ 12 проектов</h4>
         </div>
         <div class="best-projects__to-catalog">
-            В каталог
+            <a href="{% url 'projects:catalog' %}">В каталог</a>
         </div>
     </div>
     <div class="best-projects__filters-adaptive">
@@ -256,204 +259,45 @@
 
 
             </div>
-
-            
-
-            
         </form>
     </div>
     <div class="best-projects__cards">
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
+        {% for project in best_projects %}
+            <div class="best-projects__card">
+                <div class="photo-slider">
+                    {% for photo in project.photos.all %}
+                        <div class="best-projects__card-image photo-slider-item">
+                            <img src="{{ photo.image.url }}" alt="Фото проекта">
+                        </div>
+                    {% endfor %}
                 </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
-                </div>
-            </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
+                <div class="best-projects__card-text-container">
+                    <div class="best-projects__card-heading">
+                        <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
 
+                    </div>
+                    <hr>
+                    <div class="best-projects__card-content">
+                        <ul class="table-of-contents">
+                            <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                            <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                            <li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
+                            <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
+                <div class="best-projects__order-button">
+                    <button>Заказать строительство</button>
                 </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
-
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
-                </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
+                <div class="best-projects__more-button">
+                    <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
                 </div>
             </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
-
-                </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card2.png" alt="">
-                </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card2.png" alt="">
-                </div>
-            </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
-
-                </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card3.png" alt="">
-                </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card3.png" alt="">
-                </div>
-            </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
-
-                </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card4.png" alt="">
-                </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card4.png" alt="">
-                </div>
-            </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
-
-                </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
-        <div class="best-projects__card">
-            <div class="photo-slider">
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
-                </div>
-                <div class="best-projects__card-image photo-slider-item">
-                    <img src="static/images/card1.png" alt="">
-                </div>
-            </div>
-            <div class="best-projects__card-text-container">
-                <div class="best-projects__card-heading">
-                    <p>Каркасный дом БАРН</p>
-
-                </div>
-                <hr>
-                <div class="best-projects__card-content">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>84 м²</span></li>
-                        <li><span>Количество спален</span><span>1</span></li>
-                        <li><span>Количество санузлов</span><span>1</span></li>
-                        <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="best-projects__order-button">
-                <button>Заказать строительство</button>
-            </div>
-            <div class="best-projects__more-button">
-                <button>Узнать подробнее</button>
-            </div>
-        </div>
+        {% endfor %}
         <div class="best-projects__to-catalog--adaptive">
-            <button>
+            <a href="{% url 'projects:catalog' %}">
                 В каталог
-            </button> 
+            </a> 
         </div>
     </div>
 </div>
@@ -1011,7 +855,7 @@
     </div>
     <hr>
     <div class="news__read-all--adaptive">
-        <button>Смотреть всё</button>
+        <a href="">Смотреть всё</a>
     </div>
 </div>
 
