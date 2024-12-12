@@ -676,6 +676,9 @@ main {
     padding-right: 36px;
     background-position: right center;
 }
+.best-projects__filters-adaptive {
+    display: none;
+}
 
 .best-projects__filters-form {
     display: flex;
@@ -770,7 +773,6 @@ main {
     background-color: white;
     display: flex;
     gap: 4px;
-    /* max-width: 200px; */
 }
 
 .best-projects__number, 
@@ -968,7 +970,7 @@ main {
 
 .about {
     background-color: #F8F8F8;
-    /* padding-top: 60px; */
+    padding-top: 60px;
     /* padding-bottom: 150px; */
 }
 
@@ -992,7 +994,7 @@ main {
     width: 100%;
     margin-top: 40px;
     position: relative;
-    z-index: 100;
+    z-index: 99;
 }
 
 .about-company__heading {
@@ -1571,10 +1573,16 @@ main {
 }
 
 .news__content {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    position: relative;
+    padding: 30px 0px ;
     display: flex;
     gap: 30px;
+}
+.news__content:hover {
+    background-color: #F8F8F8;
+}
+.news__content:hover .news__read-button {
+    display: block;
 }
 
 .news__photo {
@@ -1622,6 +1630,12 @@ main {
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
+}
+.news__read-button {
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 130px
 }
 .news__read-button-adaptive {
     display: none;
@@ -1786,7 +1800,7 @@ main {
     max-width: 100%;
     white-space: normal;
 }
-.advantages__heading hr,
+/* .advantages__heading hr,
 .contacts__heading hr, 
 .answers__heading hr, 
 .best-projects__heading hr, 
@@ -1800,9 +1814,9 @@ main {
 .work-stages__heading hr, 
 .team__heading hr {
     display: block;
-}
+} */
 .advantages__heading hr,
-    .contacts__heading hr, 
+.contacts__heading hr, 
 .answers__heading hr, 
 .best-projects__heading hr, 
 .reviews__heading hr, 
@@ -1813,7 +1827,8 @@ main {
 .similar-projects__heading hr, 
 .about-company__heading hr, 
 .work-stages__heading hr, 
-.team__heading hr {
+.team__heading hr, 
+.project__heading hr {
     display: block;
     height: 1px;
     background-color: #B7B7B7;
@@ -1841,10 +1856,11 @@ main {
 .contacts__block {
     display: flex;
     gap: 10px;
-    /* margin-bottom: 22px; */
+    margin-bottom: 22px;
 }
 .contacts__block-heading {
     font-family: 'Involve 600';
+    font-weight: 600;
     font-size: 18px;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -1902,6 +1918,9 @@ footer hr {
     margin-top: 40px;
     margin-bottom: 20px;
 }
+.footer__label hr {
+    display: none;
+}
 .footer__juridical p, 
 .footer__juridical a {
     font-size: 12px;
@@ -1915,11 +1934,12 @@ footer hr {
 }
 
 .breadcrumbs {
-    margin-top: 40px;
-    margin-bottom: 60px;
+    padding-top: 40px;
+    padding-bottom: 60px;
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 .breadcrumbs a {
     cursor: pointer;
@@ -2025,17 +2045,17 @@ footer hr {
     padding-top: 60px;
     padding-bottom: 90px;
 }
-.info__heading hr {
-    margin-top: 20px;
+.info__heading {
     margin-bottom: 40px;
 }
-
-.info__heading hr, 
+.info__heading hr {
+    margin-top: 20px;
+}
+ 
 footer hr, 
 .tab hr, 
 .team__slider-item hr, 
 .about-company__heading hr, 
-.project__heading hr, 
 .slider-heading hr {
     border: none;
     height: 1px;
@@ -2054,7 +2074,8 @@ footer hr,
     gap: 40px;
 }
 .info__block-heading {
-    font-family: 'Involve 500', sans-serif;
+    font-family: 'Involve 600', sans-serif;
+    font-weight: 600;
     margin-bottom: 15px;
 }
 .info__paragraph {
@@ -2128,9 +2149,18 @@ footer hr,
     margin-bottom: 30px;
     align-items: center;
 }
+.project__buttons-group--adaptive, 
+.project__slider--adaptive {
+    display: none;
+}
 .project__heading {
     font-family: 'Involve 600', sans-serif;
     font-size: 40px;
+}
+.project__heading.container, 
+.project__parameters.container {
+    padding-left: 0;
+    padding-right: 0;
 }
 .project__heading hr {
     margin-top: 15px;
@@ -2184,10 +2214,14 @@ footer hr,
 .project__credit button:hover {
     color:#FF1A1A;
 }
+.project__credit br {
+    display: none;
+}
 .project__order-button {
+    position: absolute;
     position: relative;
 }
-.project__order-button button{
+.project__order-button button {
     position: absolute;
     right: 0px;
     top: -10px
@@ -2220,8 +2254,6 @@ footer hr,
 
 /* Остальной адаптив */
 @media (max-width: 1200px) {
-}
-@media (max-width: 1200px) {
     .slider-heading {
         font-size: 60px;
     }
@@ -2233,6 +2265,79 @@ footer hr,
         width: 100%;
         justify-content: space-between;
         gap: 8px;
+    }
+    .best-projects__filters, 
+    .best-projects__to-catalog, 
+    .catalog__filters {
+        display: none;
+    }
+    .best-projects__filters-adaptive {
+        font-family: 'Involve 500', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        align-items: center;
+    }
+    .best-projects__filters-adaptive img {
+        width: 30px;
+        height: 30px;
+    }
+    .project.container {
+        max-width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .project__slider {
+        display: none;
+    }
+    .project__details {
+        width: 100%;
+    }
+    .project__buttons-group {
+        display: none
+    }
+    .project__parameters {
+        margin-top: 40px;
+    }
+    .project__heading.container, 
+    .project__parameters.container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .project__buttons-group--adaptive {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    .project__download-estimates--adaptive button, 
+    .project__discount--adaptive button {
+        padding: 7.5px 14px;
+        border-radius: 20px;
+        border: solid 1px #595959;
+        white-space: nowrap;
+    }
+    .project__slider--adaptive {
+        display: block;
+    }
+    .project__slide--adaptive {
+        margin-right: 10px;
+    }
+    .project__slide--adaptive img {
+        object-fit: cover;
+        width: 100%;
+        border-radius: 15px;
+    }
+    .project__slide--adaptive, 
+    .project__slide--adaptive img {
+        height: 400px;
+    }
+    .project__heading hr {
+        margin-top: 10px;
+        margin-bottom: 15px;
     }
 }
 @media (max-width: 1100px) {
@@ -2310,6 +2415,9 @@ footer hr,
         padding-top: 20px;
         padding-bottom: 20px;
     }
+    .about {
+        padding-top: 20px;
+    }
     .tab {
         padding: 20px 15px;
     }
@@ -2344,7 +2452,8 @@ footer hr,
     }
     .slick-dotted.slick-slider, 
     .advantages, 
-    .news {
+    .news, 
+    .catalog__projects {
         margin-bottom: 40px;
     }
     .advantages__stats, 
@@ -2399,10 +2508,15 @@ footer hr,
     }
     .best-projects, 
     .feedback, 
-    .half {
+    .half, 
+    .similar-projects, 
+    .gallery__slider, 
+    .reviews, 
+    .contacts {
         margin-bottom: 40px;
     }
-    .best-projects__header {
+    .best-projects__header, 
+    .info__heading {
         margin-bottom: 20px;
     }
     .best-projects__to-catalog {
@@ -2414,43 +2528,31 @@ footer hr,
     .catalog__card {
         max-width: calc((100% - 2* 20px) / 2);
     }
-    .best-projects__filters-form {
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 8px;
-    }
-    .best-projects__filters-form > div {
-        flex-direction: column;
-        width: 100%;
-    }
-    .best-projects__number-filter {
-        justify-content: space-between;
-    }
-    .best-projects__select-filter select {
-        width: 100%;
-    }
-    .best-projects__to-catalog {
-        display: none;
-    }
-    .best-projects__filters {
-        display: none;
-    }
-    .best-projects__to-catalog--adaptive {
+    
+    .best-projects__to-catalog--adaptive, 
+    .news__read-all--adaptive {
         display: block;
         width: 100%;
         text-align: center;
         font-size: 20px;
     }
-    .best-projects__to-catalog--adaptive button {
+    .best-projects__to-catalog--adaptive button, 
+    .news__read-all--adaptive button {
         font-family: 'Involve 500', sans-serif; 
         padding-right: 36px;
         background-image: url(/static/images/right-gray-arrow.svg);
         background-repeat: no-repeat;
         background-position: right center;  
     }
+    .news__read-all--adaptive {
+        padding-top: 20px;
+    }
 
     .about-company {
         margin-bottom: 30px;
+    }
+    .about-company__heading hr {
+        width: 100%;
     }
 
     .slider-heading__want-the-house-button,
@@ -2462,7 +2564,9 @@ footer hr,
     .feedback__button, 
     .feedback__button img, 
     .footer__button, 
-    .footer__button img {
+    .footer__button img, 
+    .project__order-button,
+    .project__order-button img {
         width: 100px;
         height: 100px;
     }
@@ -2538,10 +2642,6 @@ footer hr,
     .contacts {
         gap: 40px
     }
-    .gallery__slider, 
-    .reviews  {
-        margin-bottom: 40px;
-    }
     .news__header-more {
         display: none;
     }
@@ -2566,8 +2666,7 @@ footer hr,
         max-width: 100%;
     }
     .news__content {
-        margin-top: 15px;
-        margin-bottom: 15px;
+        padding: 15px 0px;
     }
     .news__new-heading {
         font-size: 16px;
@@ -2576,6 +2675,12 @@ footer hr,
     .news__read-button-adaptive {
         display: block
     }
+    .news__content:hover {
+        background-color: white;
+    }
+    .news__content:hover .news__read-button {
+        display: none
+    }
     .news__read-button-adaptive p {
         font-family: 'Involve 500', sans-serif; 
         padding-right: 36px;
@@ -2583,23 +2688,6 @@ footer hr,
         background-repeat: no-repeat;
         background-position: right center; 
         color: #FF1A1A; 
-    }
-    .footer__label {
-        font-size: 46px;
-        font-weight: 500;
-    }
-    .footer__button {
-        top: -30px
-    }
-}
-@media (max-width: 820px) {
-    .work-stages__info-card, 
-    .work-stages__image-card {
-        width: 100%;
-        margin-bottom: 0px;
-    }
-    .work-stages__image-card img {
-        max-height: 260px;
     }
     .contacts {
         flex-direction: column;
@@ -2610,16 +2698,143 @@ footer hr,
     .contacts__info {
         flex-direction: column;
     }
-    .contacts__block {
-        width: calc((100% - 2 * 20px) / 3);
-        font-size: 12px;
-    }
+    .contacts__block, 
     .contacts__block-heading {
         font-size: 14px;
     }
+    .contacts__block-heading {
+        margin-bottom: 6px;
+    }
+    .contacts__block {
+        margin-bottom: 15px;
+    }
+    .contacts__block img {
+        width: 31px;
+        height: 31px;
+    }
     #map,
     .contacts__big-right-column {
+        width: 100vw;
+        transform: translateX(-5px);
+    }
+    .contacts {
+        padding-bottom: 0px;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+    footer {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .footer__label {
+        font-size: 46px;
+        font-weight: 500;
+    }
+    .footer__label p {
+        padding-bottom: 70px;
+    }
+    .footer__label hr {
+        display: block;
+    }
+    footer hr {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .footer__button {
+        top: -122px
+    }
+    .footer__phone-adaptive {
+        display: block;
+        margin-top: 20px;
+        font-size: 24px;
+        font-family: 'Involve', sans-serif;
+        font-weight: 600;
+    }
+    .footer__row,
+    .footer__phone-adaptive {
+        padding: 0px 20px;
+    }
+    .footer__row {
+        justify-content: space-between;
+    }
+    .footer-right-column {
+        display: none;
+    }
+    .footer__link {
+        font-size: 14px;
+    }
+    .footer__row.footer__juridical {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0px;
+    }
+    .footer__rights-reserved {
+        max-width: 100%;
+    }
+    .breadcrumbs {
+        padding-top: 20px;
+        padding-bottom: 30px;
+        font-size: 14px;
+    }
+    .catalog__cards {
+        margin-bottom: 20px;
+    }
+    .info__small-left-column {
+        display: none
+    }
+    .info__big-right-column {
         width: 100%;
+        gap: 20px;
+    }
+    .info__block-heading {
+        margin-bottom: 10px;
+    }
+    .info {
+        padding-top: 20px;
+    }
+    .info {
+        padding-bottom: 40px;
+    }
+    .catalog__pagination-arrow {
+        width: 30px;
+        height: 30px;
+    }
+    .catalog__pagination-arrow-left {
+        background-image: url('/static/images/small-gray-left-arrow.svg');
+    }
+    .catalog__pagination-arrow-right {
+        background-image: url('/static/images/small-gray-right-arrow.svg');
+    }
+    .catalog__pagination-arrow-right:hover {
+        background-image: url('/static/images/small-white-right-arrow.svg');
+    }
+    .catalog__pagination-arrow-left:hover {
+        background-image: url('/static/images/small-white-left-arrow.svg');
+    }
+    .project__parameters {
+        margin-top: 20px;
+    }
+    .project__order-button {
+        position: absolute;
+        right: 0px;
+    }
+    .project__order-button button {
+        position: absolute;
+        bottom: 50px;
+        transform: translateY(-5px);
+    }
+    .project__credit button {
+        padding: 9px 30px;
+    }
+}
+@media (max-width: 820px) {
+    .work-stages__info-card, 
+    .work-stages__image-card {
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .work-stages__image-card img {
+        max-height: 260px;
     }
     .slider-item {
         height: 886px;
@@ -2648,6 +2863,10 @@ footer hr,
     .slick-dotted.slick-slider {
         margin-bottom: 20px;
     }
+    .project__slide--adaptive, 
+    .project__slide--adaptive img {
+        height: 300px;
+    }
 }
 @media (max-width: 768px) {
     .advantages__heading,
@@ -2661,7 +2880,8 @@ footer hr,
     .news__heading, 
     .about-company__heading, 
     .work-stages__heading, 
-    .team__heading {
+    .team__heading, 
+    .project__heading {
         font-size: 36px;
         display: block;
         max-width: 100%;
@@ -2689,10 +2909,14 @@ footer hr,
     {
         height: 100px;
     }
+    .best-projects__filters-adaptive img {
+        width: 18px;
+        height: 18px;
+    }
     .best-projects__card, 
     .catalog__card {
         width: 100%;
-        max-width: 500px;
+        max-width: 100%;
         margin: 0 auto;
     }
     .best-projects__card-heading, 
@@ -2734,6 +2958,25 @@ footer hr,
         width: 30px;
         height: 30px;
         line-height: 30px;
+    }
+    .project__slide--adaptive, 
+    .project__slide--adaptive img {
+        height: 200px;
+    }
+    .project__credit button {
+        text-align: left;
+    }
+    .project__credit br {
+        display: block;
+    }
+    .project__credit button {
+        font-size: 12px;
+    }
+    .project__parameters li {
+        font-size: 14px;
+    }
+    .project__order-button button {
+        transform: translateY(-58px);
     }
 }
     
