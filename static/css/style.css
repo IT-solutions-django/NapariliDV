@@ -3294,6 +3294,11 @@ footer hr,
     }
     .bigMap {
         height: 460px;
+        transform: translateX(-10px);
+        width: 100vw;
+    }
+    .bigMap > ymaps {
+        border-radius: 0px;
     }
     .news__header-right-buttons {
         gap: 10px;
