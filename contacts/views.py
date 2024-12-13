@@ -14,3 +14,10 @@ class GalleryView(View):
 
     def get(self, request): 
         return render(request, self.template_name)
+    
+
+class AboutCompanyView(View): 
+    template_name = 'contacts/about-company.html'
+
+    def get(self, request): 
+        return render(request, self.template_name)

@@ -252,7 +252,8 @@ main {
     display: block;
 }
 
-.header__left-part {
+.header__left-part, 
+.about-company__heading-with-icon {
     display: flex;
 }
 
@@ -1072,6 +1073,64 @@ main {
     float: right
 }
 
+.about-company-page__heading-with-icon {
+    width: 100%;
+}
+.about-company-page__heading-with-icon div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.about-company__photos {
+    display: flex;
+    gap: 20px;
+}
+.about-company-page .article__content {
+    margin-bottom: 60px;
+}
+.about-company-page__small-left-column {
+    width: calc((100% - 20px) / 3);
+    color: #595959; 
+}
+.about-company-page__small-left-column img {
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+.about-company-page__big-right-column {
+    width: calc((100% - 20px) / 3 * 2);
+    max-height: 412px;
+}
+.about-company-page__big-right-column img, 
+.about-company-page__small-left-column img {
+    border-radius: 20px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.partners__card {
+    border: solid 1px #B7B7B7; 
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    height: 167px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex !important;
+}
+.partners__card img {
+    margin: auto auto;
+}
+
+.certificate__card {
+    border: solid 1px #B7B7B7; 
+    border-radius: 20px;
+    height: 432px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .work-stages {
     margin-bottom: 40px;
 }
@@ -1142,6 +1201,12 @@ main {
     position: relative;
     display: flex;
 }
+.about-company-page__team__cards {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
 .team__slider-item, 
 .similar-projects__slider-item {
@@ -1154,13 +1219,26 @@ main {
     width: 100%
 }
 
-.team__slider-item img {
+.team__slider-item img, 
+.team__card img {
     border-radius: 20px;
     height: 360px;
     object-fit: contain;
     background: linear-gradient(#F1F1F1, #CFCFCF);
     mix-blend-mode: multiply;
     margin-bottom: 15px;
+}
+.team__card img {
+    border-radius: 20px;
+    height: 328px;
+    width: 100%;
+    object-fit: contain;
+    background: linear-gradient(#F1F1F1, #CFCFCF);
+    mix-blend-mode: multiply;
+    margin-bottom: 15px;
+}
+.team__card {
+    width: calc((100% - 3 * 20px) / 4)
 }
 
 .gallery-page {
@@ -1171,7 +1249,9 @@ main {
 .reviews__slider .slick-arrow,
 .gallery__slider .slick-arrow, 
 .similar-projects__cards .slick-arrow, 
-.gallery-page__slider .slick-arrow {
+.gallery-page__slider .slick-arrow, 
+.partners__slider .slick-arrow, 
+.certificates__slider .slick-arrow {
     top: -80px;
     background-color: white;
     width: 40px;
@@ -1195,7 +1275,11 @@ main {
 .similar-projects__cards .slick-prev::before,
 .similar-projects__cards .slick-next::before, 
 .gallery-page__slider .slick-prev::before,
-.gallery-page__slider .slick-next::before {
+.gallery-page__slider .slick-next::before, 
+.partners__slider .slick-prev::before, 
+.partners__slider .slick-next::before, 
+.certificates__slider .slick-prev::before, 
+.certificates__slider .slick-next::before {
     content: "";
 }
 
@@ -1203,7 +1287,9 @@ main {
 .reviews__slider .slick-prev, 
 .similar-projects__cards .slick-prev, 
 .gallery__slider .slick-prev, 
-.gallery-page__slider .slick-prev {
+.gallery-page__slider .slick-prev, 
+.partners__slider .slick-prev, 
+.certificates__slider .slick-prev {
     right: 60px;
     left: auto;
     background-image: url('/static/images/left-gray-arrow.svg');
@@ -1213,7 +1299,9 @@ main {
 .team__cards .slick-next, 
 .similar-projects__cards .slick-next, 
 .gallery__slider .slick-next, 
-.gallery-page__slider .slick-next  {
+.gallery-page__slider .slick-next, 
+.partners__slider .slick-next, 
+.certificates__slider .slick-next {
     right: 0px;
     background-image: url('/static/images/right-gray-arrow.svg');
 }
@@ -1229,7 +1317,11 @@ main {
 .similar-projects__cards .slick-prev:hover, 
 .similar-projects__cards .slick-next:hover, 
 .gallery-page__slider .slick-prev:hover, 
-.gallery-page__slider .slick-next:hover {
+.gallery-page__slider .slick-next:hover, 
+.partners__slider .slick-prev:hover, 
+.partners__slider .slick-next:hover,  
+.certificates__slider .slick-prev:hover, 
+.certificates__slider .slick-next:hover {
     background-color: #FF1A1A;
     border: none;
 }
@@ -1239,7 +1331,9 @@ main {
 .gallery__slider .slick-prev:hover, 
 .project__current-slide .slick-prev:hover, 
 .similar-projects__cards .slick-prev:hover, 
-.gallery-page__slider .slick-prev:hover {
+.gallery-page__slider .slick-prev:hover, 
+.partners__slider .slick-prev:hover,
+.certificates__slider .slick-prev:hover {
     background-image: url('/static/images/left-white-arrow.svg');
 }
 
@@ -1248,7 +1342,9 @@ main {
 .gallery__slider .slick-next:hover, 
 .project__current-slide .slick-next:hover, 
 .similar-projects__cards .slick-next:hover, 
-.gallery-page__slider .slick-next:hover {
+.gallery-page__slider .slick-next:hover,
+.partners__slider .slick-next:hover, 
+.certificates__slider .slick-next:hover {
     background-image: url('/static/images/right-white-arrow.svg');
 }
 
@@ -1261,7 +1357,11 @@ main {
 .similar-projects__cards .slick-prev, 
 .similar-projects__cards .slick-next, 
 .gallery-page__slider .slick-prev, 
-.gallery-page__slider .slick-next {
+.gallery-page__slider .slick-next, 
+.partners__slider .slick-prev, 
+.partners__slider .slick-next, 
+.certificates__slider .slick-prev, 
+.certificates__slider .slick-next {
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -1279,14 +1379,24 @@ main {
     } 
 }
 
-.team__name {
+.team__name, 
+.team-card__name {
     font-family: 'Involve 600', sans-serif;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-.team__slider-item hr {
+.team__slider-item hr, 
+.team__card hr {
     margin-bottom: 10px;
+}
+.team__description-wrapper {
+    display: flex;
+    justify-content: end;
+}
+.team__description {
+    width: calc((100% - 20px) / 3 * 2);
+    float: right;
 }
 
 .feedback__background {
@@ -1850,6 +1960,11 @@ main {
     border-radius: 20px;
     clear: both; 
 }
+.map > ymaps, 
+.bigMap > ymaps {
+    border-radius: 20px;
+    overflow: hidden;
+}
 
 .bigMap {
     width: 100%;
@@ -2194,7 +2309,11 @@ footer hr {
     background-color:#F1F1F1;
     pointer-events: none;
 }
-.catalog__projects {
+.catalog__projects, 
+.about-company__photos, 
+.about-company-page__team__cards, 
+.partners__slider, 
+.certificates__slider  {
     margin-bottom: 90px;
 }
 .info {
@@ -2212,7 +2331,8 @@ footer hr,
 .tab hr, 
 .team__slider-item hr, 
 .about-company__heading hr, 
-.slider-heading hr {
+.slider-heading hr, 
+.team__card hr {
     border: none;
     height: 1px;
     background-color: #595959;
@@ -2558,6 +2678,9 @@ footer hr,
         position: inherit;
         display: block;
     }
+    .team__card {
+        width: calc((100% - 2 * 20px) / 3);
+    }
 }
 @media (max-width: 1100px) {
     .slider-heading {
@@ -2592,6 +2715,9 @@ footer hr,
 @media (max-width: 990px) {
     main {
         margin-top: 74px;
+    }
+    .map > ymaps {
+        border-radius: 0px;
     }
     .slider-heading {
         font-size: 50px;
@@ -2676,7 +2802,11 @@ footer hr,
     .slick-dotted.slick-slider, 
     .advantages, 
     .news, 
-    .catalog__projects {
+    .catalog__projects, 
+    .about-company__photos, 
+    .about-company-page__team__cards, 
+    .partners__slider, 
+    .certificates__slider  {
         margin-bottom: 40px;
     }
     .advantages__stats, 
@@ -2694,7 +2824,8 @@ footer hr,
         gap: 10px
     }
     .advantages__details-small-right-column, 
-    .advantages__details-big-left-column {
+    .advantages__details-big-left-column, 
+    .team__description  {
         width: 100%;
     }
     .advantages__stats-column {
@@ -2712,10 +2843,13 @@ footer hr,
         transform: translateY(2px);
     }
     .advantages__details-big-left-column img, 
-    .advantages__details-small-right-column img {
+    .advantages__details-small-right-column img, 
+    .about-company-page__big-right-column img, 
+    .about-company-page__small-left-column img {
         border-radius: 15px;
         width: 100%;
         height: 420px;
+        max-height: 420px;
     }
     .advantages__choose-house,
     .advantages__choose-house button img
@@ -2987,7 +3121,8 @@ footer hr,
     .footer__row {
         justify-content: space-between;
     }
-    .footer-right-column {
+    .footer-right-column, 
+    .about-company-page__big-right-column {
         display: none;
     }
     .footer__link {
@@ -2997,6 +3132,14 @@ footer hr,
         flex-direction: column;
         gap: 10px;
         padding: 0px;
+    }
+    .about-company__photos {
+        flex: 1
+    }
+    .about-company__photos, 
+    .about-company-page__small-left-column {
+        display: block;
+        width: 100%;
     }
     .footer__rights-reserved {
         max-width: 100%;
@@ -3042,7 +3185,8 @@ footer hr,
     .catalog__pagination-arrow-left:hover {
         background-image: url('/static/images/small-white-left-arrow.svg');
     }
-    .project__parameters {
+    .project__parameters, 
+    .about-company-page__team__cards {
         margin-top: 20px;
     }
     .project__order-button {
@@ -3057,12 +3201,20 @@ footer hr,
     .project__credit button {
         padding: 9px 30px;
     }
-    .article__content {
+    .article__content, 
+    .about-company-page .article__content {
         margin: 20px 0;
     }
     .article__content-block, 
-    .article__paragraph {
+    .article__paragraph, 
+    .article__content {
         gap: 20px;
+    }
+    .about-company-page .article__content-block, 
+    .about-company-page .article__paragraph, 
+    .about-company-page .article__paragraph-text, 
+    .about-company-page .article__content {
+        gap: 10px;
     }
     .article__paragraph {
         flex-direction: column;
@@ -3091,6 +3243,10 @@ footer hr,
     }
     .gallery-page__slider {
         margin-top: 0px;
+    }
+    .about-company-page__heading-with-icon img {
+        height: 40px;
+        width: 40px;
     }
 }
 @media (max-width: 820px) {
@@ -3133,6 +3289,9 @@ footer hr,
     .project__slide--adaptive img {
         height: 300px;
     }
+    .team__card {
+        width: calc((100% - 20px) / 2);
+    }
 }
 @media (max-width: 768px) {
     .advantages__heading,
@@ -3167,7 +3326,9 @@ footer hr,
     }
 
     .advantages__details-big-left-column img, 
-    .advantages__details-small-right-column img {
+    .advantages__details-small-right-column img, 
+    .about-company-page__big-right-column img, 
+    .about-company-page__small-left-column img {
         height: 300px;
     }
     .advantages__choose-house,
@@ -3286,6 +3447,11 @@ footer hr,
     }
     .bigMap {
         height: 460px;
+        transform: translateX(-10px);
+        width: 100vw;
+    }
+    .bigMap > ymaps {
+        border-radius: 0px;
     }
     .news__header-right-buttons {
         gap: 10px;
@@ -3293,6 +3459,9 @@ footer hr,
     .news__header-button button {
         font-size: 14px;
         padding: 7.5px 25px;
+    }
+    .partners__card {
+        height: 92px;
     }
 }
     
@@ -3373,6 +3542,9 @@ footer hr,
     .article__image img {
         height: 200px;
     }
+    .team__card {
+        width: 100%;
+    }
 }
 @media (max-width: 480px) {
     main {
@@ -3399,7 +3571,9 @@ footer hr,
     }
     .slider-image,
     .advantages__details-big-left-column img, 
-    .advantages__details-small-right-column img {
+    .advantages__details-small-right-column img, 
+    .about-company-page__big-right-column img, 
+    .about-company-page__small-left-column img {
         height: 200px;
     }
 }
