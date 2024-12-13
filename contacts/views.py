@@ -16,8 +16,8 @@ class GalleryView(View):
         return render(request, self.template_name)
     
 
-class AboutView(View): 
-    template_name = 'contacts/about.html'
+class AboutCompanyView(View): 
+    template_name = 'contacts/about-company.html'
 
     def get(self, request): 
         return render(request, self.template_name)
