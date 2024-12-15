@@ -1713,7 +1713,9 @@ main {
     margin-bottom: 40px;
 }
 .news-page__header-hr--adaptive, 
-.contacts-page__info-hr--adaptive {
+.contacts-page__info-hr--adaptive, 
+.footer__phone-adaptive, 
+.news__read-all--adaptive {
     display: none;
 }
 .news-page__header, 

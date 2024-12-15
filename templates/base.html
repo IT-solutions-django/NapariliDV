@@ -154,24 +154,24 @@
             <div class="footer__links">
                 <div class="footer__column">
                     <div class="footer__link">
-                        <p>Каталог</p>
+                        <a href="{% url 'projects:catalog' %}">Каталог</a>
                     </div>
                     <div class="footer__link">
-                        <p>Новости</p>
+                        <a href="{% url 'blog:blog' %}">Новости</a>
                     </div>
                     <div class="footer__link">
-                        <p>Портфолио</p>
+                        <a href="{% url 'contacts:gallery' %}">Галерея</a>
                     </div>
                 </div>
                 <div class="footer__column">
                     <div class="footer__link">
-                        <p>Контакты</p>
+                        <a href="{% url 'contacts:contacts' %}">Контакты</a>
                     </div>
                     <div class="footer__link">
-                        <p>О компании</p>
+                        <a href="{% url 'contacts:about_company' %}">О компании</a>
                     </div>
                     <div class="footer__link">
-                        <p>Наша команда</p>
+                        <a href="{% url 'contacts:about_company' %}">Наша команда</a>
                     </div>
                 </div>
             </div>
@@ -180,24 +180,24 @@
                     <p>Партнёры и сертификаты</p>
                 </div>
                 <div class="footer__phone">
-                    <p>+7 (904) 626-02-49</p>
+                    <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
                 </div>
             </div>
 
-            <div class="footer__button">
+            <div class="footer__button openModal">
                 <button>
                     <img src="{% static 'images/leave-request.svg' %}" alt="">
                 </button>
             </div>
         </div>
         <div class="footer__phone-adaptive">
-            <a>7 953 223-49-73</a>
+            <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
         </div>
         <hr>
         <div class="footer__row footer__juridical footer-container">
             <div class="footer__column">
-                <p>ООО АЛЬЯНССТРОЙСЕРВИС</p>
-                <p>ИНН 2536327428</p>
+                <p>{{ company_info.full_name }}</p>
+                <p>ИНН {{ company_info.inn }}</p>
                 <p>ОГРН 1212500007961</p>
             </div>
             <div class="footer__column footer__rights-reserved">

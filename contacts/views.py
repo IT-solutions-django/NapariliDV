@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views import View 
+from .models import (
+    GalleryPhoto,
+)
 
 
 class ContactsView(View): 
@@ -13,7 +16,10 @@ class GalleryView(View):
     template_name = 'contacts/gallery.html'
 
     def get(self, request): 
-        return render(request, self.template_name)
+        context = {
+            'gallery_photos': GalleryPhoto.objects.all(),
+        }
+        return render(request, self.template_name, context)
     
 
 class AboutCompanyView(View): 

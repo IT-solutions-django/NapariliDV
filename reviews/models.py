@@ -29,5 +29,5 @@ class Review(models.Model):
         ordering = ['-created_at']
 
     def __str__(self) -> str: 
-        return self.content[:20]
+        return f'{self.created_at}, {self.platform}, {self.username}'
     

@@ -17,14 +17,17 @@ class Slide(models.Model):
 
 
 class CompanyInfo(models.Model): 
-    description = models.TextField('Описание')
-    history = models.TextField('История компании')
-    mission = models.TextField('Миссия компании')
-    address = models.CharField('Адрес', max_length=120)
-    working_mode = models.TextField('Режим работы')
-    phone = models.CharField('Номер телефона', max_length=20)
-    email = models.CharField('Email', max_length=50)
-    whatsapp = models.CharField('Ссылка на Whatsapp', max_length=200)
+    description = models.TextField('Описание', null=True, blank=True)
+    history = models.TextField('История компании', null=True, blank=True)
+    mission = models.TextField('Миссия компании', null=True, blank=True)
+    address = models.CharField('Адрес', max_length=120, null=True, blank=True)
+    working_mode = models.TextField('Режим работы', null=True, blank=True)
+    phone = models.CharField('Номер телефона', max_length=20, null=True, blank=True)
+    email = models.CharField('Email', max_length=50, null=True, blank=True)
+    whatsapp = models.CharField('Ссылка на Whatsapp', max_length=200, null=True, blank=True)
+    full_name = models.CharField('Полное название организации', max_length=120, null=True, blank=True)
+    ogrn = models.CharField('ОГРН', max_length=13, null=True, blank=True)
+    inn = models.CharField('ИНН', max_length=10, null=True, blank=True)
 
     admin_panel_title = models.CharField(
         'Название вкладки в админке', 
