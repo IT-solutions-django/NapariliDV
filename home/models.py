@@ -1,11 +1,15 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Slide(models.Model): 
     title = models.CharField('Заголовок', max_length=80)
     description = models.TextField('Описание') 
     photo = models.ImageField('Фото', upload_to='home/slides')
-    button_text = models.CharField('Надпись на кнопке', max_length=50)
+    square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
+    bedrooms_quantity = models.SmallIntegerField('Количество спален', default=1)
+    bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)
+    price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
 
     class Meta: 
         verbose_name = 'Слайд'

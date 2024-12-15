@@ -60,3 +60,9 @@ class PopularQuestionAdmin(admin.ModelAdmin):
 class PrivacyPolicyAdmin(admin.ModelAdmin): 
     list_display = ['admin_panel_title']
     exclude = ['admin_panel_title']
+
+
+@admin.register(Slide)
+class SlideAdmin(admin.ModelAdmin): 
+    list_display = ['title', 'price', 'photo']
+    search_fields = ['title', 'description']

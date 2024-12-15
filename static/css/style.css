@@ -1540,8 +1540,10 @@ main {
     display: flex;
     gap: 30px;
     justify-content: left;
+    align-items: center;
 }
-.catalog__filters-submit-button button {
+.catalog__filters-submit-button button, 
+.catalog__filters-submit-button a {
     background-color: white;
     color: #595959;
     padding-left: 33px;
@@ -1552,13 +1554,11 @@ main {
     border-radius: 20px;
     cursor: pointer;
 }
-.catalog__filters-submit-button button:hover {
+.catalog__filters-submit-button button:hover, 
+.catalog__filters-submit-button a:hover {
     color: white;
     background-color: #FF1A1A;
     border-color: transparent;
-}
-.catalog__filters-submit-button button:hover a {
-    color: white;
 }
 .feedback__checkbox-wrap {
     &::before {

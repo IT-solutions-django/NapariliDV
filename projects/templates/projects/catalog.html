@@ -135,12 +135,14 @@
                 <div class="catalog__filters-submit-button">
                     <button type="submit">Применить фильтры</button>
                 </div>
+            </form>
                 <div class="catalog__filters-submit-button">
-                    <button><a href="{% url 'projects:catalog' %}">Сбросить всё</a></button>
+                    <a href="{{ request.path }}">
+                        Сбросить всё
+                    </a>
                 </div>
             </div>
-            
-        </form>
+        
     </div>
     <div class="catalog__projects">
         <div class="catalog__cards">
@@ -291,7 +293,7 @@
 
 {% block script %}
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
     $('.photo-slider').slick({
         dots: true,
         infinite: true,

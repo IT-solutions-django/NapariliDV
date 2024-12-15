@@ -6,31 +6,34 @@
 
 {% block content %}
 <div class="slider">
-    <div class="slider-item">
-        <div class="slider-heading container">
-            <h2>Каркасный дом Солея</h2>
-            <hr>
-            <div class="slider-heading__promo">
-                <p>Закажите строительство дома до 30 ноября<br> и получите скидку 10 000</p>
-                <div class="slider-heading__want-the-house-button">
-                    <button class="openModal">
-                        <img src="{% static 'images/want-the-house.svg' %}" alt="">
-                    </button>
+    {% for slide in slides %}
+        <div class="slider-item">
+            <div class="slider-heading container">
+                <h2>{{ slide.title }}</h2>
+                <hr>
+                <div class="slider-heading__promo">
+                    {{ slide.description }}
+                    <!-- <p>Закажите строительство дома до 30 ноября<br> и получите скидку 10 000</p> -->
+                    <div class="slider-heading__want-the-house-button">
+                        <button class="openModal">
+                            <img src="{% static 'images/want-the-house.svg' %}" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <img class="slider-image" src="{{ slide.photo.url }}" alt="{{ slide.title }}">
+            <div class="slider-content">
+                <div class="slider-content-inner">
+                    <ul class="table-of-contents">
+                        <li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
+                        <li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
+                        <li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
+                        <li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <img class="slider-image" src="static/images/house.png" alt="Дом Солея">
-        <div class="slider-content">
-            <div class="slider-content-inner">
-                <ul class="table-of-contents">
-                    <li><span>Площадь</span><span>84 м²</span></li>
-                    <li><span>Количество спален</span><span>1</span></li>
-                    <li><span>Количество санузлов</span><span>1</span></li>
-                    <li><span>Стоимость</span><span>от 1 170 000 р</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
     <div class="slider-item">
         <div class="slider-heading container">
             <h2>Каркасный дом Солея</h2>
