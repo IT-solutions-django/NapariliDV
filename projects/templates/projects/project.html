@@ -206,6 +206,78 @@
 {% endblock %}
 
 {% block script %}
+<!-- Открытие фотографий на весь экран при нажатии -->
+<script type=module src="{% static 'js/luminous-lightbox/luminous-lightbox.js' %}"></script>
+<style type="text/css" class="lum-base-styles">
+    @keyframes lum-noop {
+      0% {
+        zoom:1
+      }
+    }
+    .lum-lightbox {
+      position: fixed;
+      display: none;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  
+    .lum-lightbox.lum-open {
+      display: block;
+      z-index: 1000000
+    }
+  
+    .lum-lightbox.lum-closing,
+    .lum-lightbox.lum-opening {
+      animation: lum-noop 1ms
+    }
+  
+    .lum-lightbox-inner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: hidden
+    }
+  
+    .lum-lightbox-loader {
+      display: none
+    }
+  
+    .lum-lightbox-inner img {
+      max-width: 100%;
+      max-height: 100%
+    }
+  
+    .lum-lightbox-image-wrapper {
+      vertical-align: middle;
+      display: table-cell;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
+    #sectionContact {
+      height: 1080px;
+    }
+    #sectionContact #map {
+      height: 1080px;
+    } 
+    </style>
+<script type=module>
+import { L as LuminousGallery } from "/static/js/luminous-lightbox/luminous-lightbox.js";
+
+
+function initGallery() {
+  var galleryItems = document.querySelectorAll(".project__current-slide")
+  console.log(galleryItems)
+    if (galleryItems.length > 0) {
+        new LuminousGallery(galleryItems);
+    }
+}
+</script>
+<!-- Слайдеры -->
 <script>
     $('.project__current-slide').slick({
       slidesToShow: 1,
