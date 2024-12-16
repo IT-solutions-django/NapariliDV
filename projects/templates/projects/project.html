@@ -27,10 +27,12 @@
 
     <div class="project container">
         <div class="project__slider">
-            <div class="project__current-slide">
+            <div class="project__current-slide" href="">
                 {% for photo in project.photos.all %}
                     <div>
-                        <img src="{{ photo.image.url }}" alt="">
+                        <a href="{{ photo.image.url }}">
+                            <img src="{{ photo.image.url }}" alt="">
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -128,7 +130,7 @@
                     </div>
                     <div class="similar-projects__card-text-container">
                         <div class="similar-projects__card-heading">
-                            <p>{{ project.name }}</p>
+                            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
                         </div>
                         <hr>
                         <div class="similar-projects__card-content">
@@ -140,11 +142,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="similar-projects__order-button">
+                    <div class="similar-projects__order-button openModal">
                         <button>Заказать строительство</button>
                     </div>
                     <div class="similar-projects__more-button">
-                        <button>Узнать подробнее</button>
+                        <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
                     </div>
                 </div>
             {% endfor %}
@@ -206,6 +208,77 @@
 {% endblock %}
 
 {% block script %}
+<!-- Открытие фотографий на весь экран при нажатии -->
+<script type=module src="{% static 'js/luminous-lightbox/luminous-lightbox.js' %}"></script>
+<style type="text/css" class="lum-base-styles">
+    @keyframes lum-noop {
+      0% {
+        zoom:1
+      }
+    }
+    .lum-lightbox {
+      position: fixed;
+      display: none;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  
+    .lum-lightbox.lum-open {
+      display: block;
+      z-index: 1000000
+    }
+  
+    .lum-lightbox.lum-closing,
+    .lum-lightbox.lum-opening {
+      animation: lum-noop 1ms
+    }
+  
+    .lum-lightbox-inner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: hidden
+    }
+  
+    .lum-lightbox-loader {
+      display: none
+    }
+  
+    .lum-lightbox-inner img {
+      max-width: 100%;
+      max-height: 100%
+    }
+  
+    .lum-lightbox-image-wrapper {
+      vertical-align: middle;
+      display: table-cell;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .lum-img {
+        object-fit: cover !important;
+        width: 85vw;;
+    }
+    </style>
+<script type=module>
+import { L as LuminousGallery } from "/static/js/luminous-lightbox/luminous-lightbox.js";
+
+
+function initGallery() {
+  var galleryItems = document.querySelectorAll(".project__current-slide a")
+  console.log(galleryItems)
+    if (galleryItems.length > 0) {
+        new LuminousGallery(galleryItems);
+    }
+}
+initGallery();
+</script>
+<!-- Слайдеры -->
 <script>
     $('.project__current-slide').slick({
       slidesToShow: 1,

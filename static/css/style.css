@@ -358,7 +358,8 @@ main {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    background-color: #FF1A1A;
+    /* background-color: #FF1A1A; */
+    background-color: white;
 }
 
 .header__hamburger-wrapper, 
@@ -423,7 +424,7 @@ main {
     }
 
     .header__menu-link a {
-        color: white;
+        /* color: white; */
     }
     .nav__link {
         color: white
@@ -692,6 +693,9 @@ main {
 .best-projects__filters-adaptive {
     display: none;
 }
+#bestProjectsForm {
+    margin-bottom: 40px;
+}
 
 .best-projects__filters-form {
     display: flex;
@@ -702,7 +706,7 @@ main {
     padding: 19px 30px;
     align-items: center;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 .best-projects__filters-form > div {
     display: flex;
@@ -1628,7 +1632,19 @@ main {
 }
 
 .reviews__card-text {
-    margin-bottom: 15px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 10;
+    margin-bottom: 8px;
+}
+.reviews__card-text.expanded {
+    -webkit-line-clamp: inherit;
+}
+.review-card__toggle {
+    margin-bottom: 8px;
+    color: #666;
 }
 
 .reviews__card-details {
@@ -1739,6 +1755,7 @@ main {
     gap: 20px;
 }
 
+.news__header-button a, 
 .news__header-button button, 
 .project__download-estimates button, 
 .project__discount button {
@@ -1748,6 +1765,7 @@ main {
     white-space: nowrap;
 }
 
+.news__header-button a:hover, 
 .news__header-button button:hover, 
 .project__download-estimates button:hover, 
 .project__discount button:hover {
@@ -2982,11 +3000,12 @@ footer hr,
     }
     .reviews__card-author-name, 
     .reviews__card-text, 
-    .news__date {
+    .news__date,
+    .review-card__toggle {
         font-size: 14px;
     }
     .reviews__card-text {
-        font-size: 14px;
+        -webkit-line-clamp: 6;
     }
     .reviews__card-date {
         font-size: 12px;

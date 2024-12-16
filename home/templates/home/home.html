@@ -130,7 +130,7 @@
 </div>
 
 <div class="best-projects container">
-    <div class="best-projects__header">
+    <div id="bestProjects" class="best-projects__header">
         <div class="best-projects__heading">
             <h4>Топ 12 проектов</h4>
         </div>
@@ -149,68 +149,58 @@
         </div>
     </div>
     <div class="best-projects__filters">
-        <form action="" class="best-projects__filters-form">
-            <div>
-                <div class="best-projects__radio-filter">
-                    <label for="" class="best-projects__filters-label">Количество спален</label>
-                    <div class="best-projects__radio-group">
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="bedrooms-1" name="bedrooms" value="1">
-                            <label for="bedrooms-1">1</label>
+        <form id="bestProjectsForm" action="/#bestProjects" >
+            <div class="best-projects__filters-form">
+                <div>
+                    <div class="best-projects__radio-filter">
+                        <label for="" class="best-projects__filters-label">Количество спален</label>
+                        <div class="best-projects__radio-group">
+                            {% for bedroom in filter_form.bedrooms_quantity %}
+                                <div class="best-projects__radio-button">
+                                    {{ bedroom.tag }}
+                                    <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                </div>
+                            {% endfor %}
                         </div>
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="bedrooms-2" name="bedrooms" value="2">
-                            <label for="bedrooms-2">2</label>
-                        </div>
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="bedrooms-3" name="bedrooms" value="3">
-                            <label for="bedrooms-3">3</label>
-                        </div>
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="bedrooms-4" name="bedrooms" value="4">
-                            <label for="bedrooms-4">4</label>
+                    </div>
+                    <div class="best-projects__radio-filter">
+                        <label for="" class="best-projects__filters-label">Этажей</label>
+                        <div class="best-projects__radio-group">
+                            {% for floor in filter_form.floors_quantity %}
+                                <div class="best-projects__radio-button">
+                                    {{ floor.tag }}
+                                    <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-
-                <div class="best-projects__radio-filter">
-                    <label for="" class="best-projects__filters-label">Этажей</label>
-                    <div class="best-projects__radio-group">
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="floors-1" name="floors" value="1">
-                            <label for="floors-1">1</label>
+                <div>
+                    <div class="best-projects__select-filter">
+                        {{ filter_form.materials }}
+                    </div>
+        
+                    <div class="best-projects__number-filter">
+                        <div class="best-projects__number">
+                            <label for="min-price">От</label>
+                            {{ filter_form.price_min }}
                         </div>
-                        <div class="best-projects__radio-button">
-                            <input type="radio" id="floors-2" name="floors" value="2">
-                            <label for="floors-2">2</label>
+                        <div class="best-projects__number">
+                            <label for="max-price">До</label>
+                            {{ filter_form.price_max }}
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-
-
-                <div class="best-projects__select-filter">
-                    <select>
-                        <option>Дом из газоблока</option>
-                        <option>Дом из газоблока</option>
-                        <option>Дом из газоблока</option>
-                        <option>Дом из газоблока</option>
-                    </select>
+            <div class="catalog__filters-submit-buttons">
+                <div class="catalog__filters-submit-button">
+                    <button type="submit">Применить фильтры</button>
                 </div>
-    
-                <div class="best-projects__number-filter">
-                    <div class="best-projects__number">
-                        <label for="min-price">От</label>
-                        <input type="number" id="min-price" placeholder="1 500 000">
-                    </div>
-                    <div class="best-projects__number">
-                        <label for="max-price">До</label>
-                        <input type="number" id="max-price" placeholder="15 000 000">
-                    </div>
+                <div class="catalog__filters-submit-button">
+                    <a href="/#bestProjects">
+                        Сбросить всё
+                    </a>
                 </div>
-
-
             </div>
         </form>
     </div>
@@ -446,11 +436,14 @@
                     <p>Евгений Пастухов</p>
                 </div>
             </div>
-            <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
+            <div class="reviews__card-text font__inter">
+                Противоположная точка зрения подразумевает, что непосредственные участники технического
                     прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
                     должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям...далее</p>
+                    также независимые государства призывают нас к новым свершениям. Противоположная точка зрения подразумевает, что непосредственные участники технического
+                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
+                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
+                    также независимые государства призывают нас к новым свершениям
             </div>
             <div>
                 <i class="reviews__card-date">30.11.2024</i>
@@ -491,11 +484,11 @@
                     <p class="reviews__card-author-name">Евгений Пастухов</p>
                 </div>
             </div>
-            <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
+            <div class="reviews__card-text font__inter">
+                Противоположная точка зрения подразумевает, что непосредственные участники технического
                     прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
                     должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям...далее</p>
+                    также независимые государства призывают нас к новым свершениям
             </div>
             <div>
                 <i>30.11.2024</i>
@@ -535,7 +528,7 @@
                 <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
                     прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
                     должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям...далее</p>
+                    также независимые государства призывают нас к новым свершениям свершен</p>
             </div>
             <div>
                 <i>30.11.2024</i>
@@ -575,9 +568,7 @@
             </div>
             <div class="reviews__card-text">
                 <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
-                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям...далее</p>
+                    прогресса представляют собой не собой не собой не собой не собой не собой не</p>
             </div>
             <div>
                 <i>30.11.2024</i>
@@ -637,14 +628,14 @@
         <div class="news__header-right">
             <div class="news__header-right-buttons">
                 <div class="news__header-button">
-                    <button>Блог</button>
+                    <a href="{% url 'blog:blog' %}">Блог</a>
                 </div>
                 <div class="news__header-button">
-                    <button>Новости</button>
+                    <a href="{% url 'blog:blog' %}">Новости</a>
                 </div>
             </div>
             <div class="news__header-more">
-                <a href="">Смотреть всё</a>
+                <a href="{% url 'blog:blog' %}">Смотреть всё</a>
             </div>
         </div>
     </div>
@@ -659,7 +650,7 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
                     <div class="news__new-text  class="font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -676,9 +667,11 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -692,7 +685,7 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
                     <div class="news__new-text  class="font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -709,9 +702,11 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -725,9 +720,9 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
-                    <div class="news__new-text  class="font__inter"">
+                    <div class="news__new-text font__inter">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
                         над эмоциями. Следует отметить, что перспективное планирование не оставляет шанса для
                         первоочередных требований
@@ -742,16 +737,18 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
         <hr>
     </div>
     <div class="news__read-all--adaptive">
-        <a href="">Смотреть всё</a>
+        <a href="{% url 'blog:blog' %}">Смотреть всё</a>
     </div>
 </div>
 
@@ -862,6 +859,7 @@
 {% endblock %}
 
 {% block script %}
+<script type=module src="{% static 'js/home.js' %}"></script>
 <script>
     $(document).ready(function () {
         $('.slider').slick({
@@ -1037,7 +1035,7 @@
         });
     });
 
-    var phoneInput = document.getElementById("feedbackForm").querySelector("#id_phone");
+    var phoneInput = document.getElementById("feedbackForm").querySelector('input[type="tel"]');
     var phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" });
     function validatePhoneNumber() {
         let t = phoneInput.value.replace(/\D/g, "");
@@ -1046,6 +1044,5 @@
     phoneInput.addEventListener("input", function () {
         validatePhoneNumber()
     });
-
 </script>
 {% endblock %}

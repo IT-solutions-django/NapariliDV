@@ -181,7 +181,7 @@
         <div class="catalog__pagination">
             <div class="catalog__pagination-controls">
                 {% if projects.has_previous %}
-                    <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+                    <a href="?page={{ projects.previous_page_number }}&{{ current_filters }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
                 {% else %}
                     <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
                 {% endif %}
@@ -189,7 +189,7 @@
                     <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
                 </div>
                 {% if projects.has_next %}
-                    <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+                    <a href="?page={{ projects.next_page_number }}&{{ current_filters }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
                 {% else %}
                     <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
                 {% endif %}
@@ -333,5 +333,26 @@ ymaps.ready(function(){
           });
     myMap.geoObjects.add(s);
 }); 
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.catalog__pagination-controls a').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+
+            const url = new URL(link.href);
+            const currentParams = new URLSearchParams(window.location.search);
+
+            currentParams.forEach((value, key) => {
+                if (!url.searchParams.has(key)) {
+                    url.searchParams.set(key, value);
+                }
+            });
+
+            window.location.href = url.toString();
+        });
+    });
+});
 </script>
 {% endblock %}
