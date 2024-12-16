@@ -692,6 +692,9 @@ main {
 .best-projects__filters-adaptive {
     display: none;
 }
+#bestProjectsForm {
+    margin-bottom: 40px;
+}
 
 .best-projects__filters-form {
     display: flex;
@@ -702,7 +705,7 @@ main {
     padding: 19px 30px;
     align-items: center;
     border-radius: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 .best-projects__filters-form > div {
     display: flex;

@@ -17,8 +17,6 @@ class CatalogView(View):
 
         if form.is_valid():
             cd = form.cleaned_data
-
-            print(cd)
             
             selected_categories = cd.get('categories')
             if selected_categories:
@@ -60,11 +58,11 @@ class CatalogView(View):
             if bathrooms_quantity:
                 projects = projects.filter(bathrooms_quantity=bathrooms_quantity)
             
-        projects = get_paginated_collection(request, projects, 12)
+        projects = get_paginated_collection(request, projects, 2)
 
         context = {
             'form': form,
-            'projects': projects
+            'projects': projects,
         }
 
         return render(request, self.template_name, context)
