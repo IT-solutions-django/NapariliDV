@@ -358,7 +358,8 @@ main {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    background-color: #FF1A1A;
+    /* background-color: #FF1A1A; */
+    background-color: white;
 }
 
 .header__hamburger-wrapper, 
@@ -423,7 +424,7 @@ main {
     }
 
     .header__menu-link a {
-        color: white;
+        /* color: white; */
     }
     .nav__link {
         color: white
