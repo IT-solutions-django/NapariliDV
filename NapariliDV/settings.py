@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'http://*.109.68.215.19',
+    'https://*.naparilidv.com/',
 ]
 
 
