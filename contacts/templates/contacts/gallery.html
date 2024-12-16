@@ -50,18 +50,11 @@
         </div>
     </div>
     <div class="gallery-page__slider">
-        <div class="gallery-page__photo">
-            <img src="{% static 'images/gallery1.png' %}" alt="">
-        </div>
-        <div class="gallery-page__photo">
-            <img src="{% static 'images/gallery1.png' %}" alt="">
-        </div>
-        <div class="gallery-page__photo">
-            <img src="{% static 'images/gallery1.png' %}" alt="">
-        </div>
-        <div class="gallery-page__photo">
-            <img src="{% static 'images/gallery1.png' %}" alt="">
-        </div>
+        {% for gallery_photo in gallery_photos %}
+            <div class="gallery-page__photo">
+                <img src="{{ gallery_photo.photo.url }}" alt="">
+            </div>
+        {% endfor %}
     </div>
     
 </div>
