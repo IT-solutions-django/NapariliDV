@@ -1037,7 +1037,7 @@
         });
     });
 
-    var phoneInput = document.getElementById("feedbackForm").querySelector("#id_phone");
+    var phoneInput = document.getElementById("feedbackForm").querySelector('input[type="tel"]');
     var phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" });
     function validatePhoneNumber() {
         let t = phoneInput.value.replace(/\D/g, "");
@@ -1046,6 +1046,5 @@
     phoneInput.addEventListener("input", function () {
         validatePhoneNumber()
     });
-
 </script>
 {% endblock %}
