@@ -627,14 +627,14 @@
         <div class="news__header-right">
             <div class="news__header-right-buttons">
                 <div class="news__header-button">
-                    <button>Блог</button>
+                    <a href="{% url 'blog:blog' %}">Блог</a>
                 </div>
                 <div class="news__header-button">
-                    <button>Новости</button>
+                    <a href="{% url 'blog:blog' %}">Новости</a>
                 </div>
             </div>
             <div class="news__header-more">
-                <a href="">Смотреть всё</a>
+                <a href="{% url 'blog:blog' %}">Смотреть всё</a>
             </div>
         </div>
     </div>
@@ -649,7 +649,7 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
                     <div class="news__new-text  class="font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -666,9 +666,11 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -682,7 +684,7 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
                     <div class="news__new-text  class="font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -699,9 +701,11 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -715,7 +719,7 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <p>Британские «ученые» заявили, что цены на бензин начинают падать</p>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
                     </div>
                     <div class="news__new-text  class="font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -732,16 +736,18 @@
                     </div>
                 </div>
                 <div class="news__read-button">
-                    <button>
-                        <img src="{% static 'images/read-news.svg' %}" alt="">
-                    </button>
+                    <a href="{% url 'blog:article' %}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="">
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
         <hr>
     </div>
     <div class="news__read-all--adaptive">
-        <a href="">Смотреть всё</a>
+        <a href="{% url 'blog:blog' %}">Смотреть всё</a>
     </div>
 </div>
 

@@ -130,7 +130,7 @@
                     </div>
                     <div class="similar-projects__card-text-container">
                         <div class="similar-projects__card-heading">
-                            <p>{{ project.name }}</p>
+                            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
                         </div>
                         <hr>
                         <div class="similar-projects__card-content">
@@ -142,11 +142,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="similar-projects__order-button">
+                    <div class="similar-projects__order-button openModal">
                         <button>Заказать строительство</button>
                     </div>
                     <div class="similar-projects__more-button">
-                        <button>Узнать подробнее</button>
+                        <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
                     </div>
                 </div>
             {% endfor %}

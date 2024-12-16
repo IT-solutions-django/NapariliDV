@@ -1742,6 +1742,7 @@ main {
     gap: 20px;
 }
 
+.news__header-button a, 
 .news__header-button button, 
 .project__download-estimates button, 
 .project__discount button {
@@ -1751,6 +1752,7 @@ main {
     white-space: nowrap;
 }
 
+.news__header-button a:hover, 
 .news__header-button button:hover, 
 .project__download-estimates button:hover, 
 .project__discount button:hover {
