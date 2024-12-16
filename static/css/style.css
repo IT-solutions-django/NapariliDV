@@ -1632,7 +1632,19 @@ main {
 }
 
 .reviews__card-text {
-    margin-bottom: 15px;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 10;
+    margin-bottom: 8px;
+}
+.reviews__card-text.expanded {
+    -webkit-line-clamp: inherit;
+}
+.review-card__toggle {
+    margin-bottom: 8px;
+    color: #666;
 }
 
 .reviews__card-details {
@@ -2988,11 +3000,12 @@ footer hr,
     }
     .reviews__card-author-name, 
     .reviews__card-text, 
-    .news__date {
+    .news__date,
+    .review-card__toggle {
         font-size: 14px;
     }
     .reviews__card-text {
-        font-size: 14px;
+        -webkit-line-clamp: 6;
     }
     .reviews__card-date {
         font-size: 12px;
