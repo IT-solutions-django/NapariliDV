@@ -264,10 +264,10 @@
         var modalPhoneInput = document.getElementById("modalFeedbackForm").querySelector('input[type="tel"]');
         var modalPhoneMask = IMask(modalPhoneInput, { mask: "+{7} (000) 000 00 00" });
         function validatePhoneNumber() {
-            let t = phoneInput.value.replace(/\D/g, "");
-            return t.length < 11 ? (phoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (phoneInput.setCustomValidity(""), !0)
+            let t = modalPhoneInput.value.replace(/\D/g, "");
+            return t.length < 11 ? (modalPhoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (modalPhoneInput.setCustomValidity(""), !0)
         }
-        modalPhoneMask.addEventListener("input", function () {
+        modalPhoneInput.addEventListener("input", function () {
             validatePhoneNumber()
         });
     });
