@@ -2817,6 +2817,19 @@ footer hr,
     .team__card {
         width: calc((100% - 2 * 20px) / 3);
     }
+    .best-projects__to-catalog--adaptive {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+    .best-projects__to-catalog--adaptive a {
+        font-family: 'Involve 500', sans-serif;
+        padding-right: 36px;
+        background-image: url(/static/images/right-gray-arrow.svg);
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
 }
 @media (max-width: 1100px) {
     .slider-heading {
@@ -3022,15 +3035,12 @@ footer hr,
     .news__card {
         max-width: calc((100% - 20px) / 2);
     }
-    
-    .best-projects__to-catalog--adaptive, 
     .news__read-all--adaptive {
         display: block;
         width: 100%;
         text-align: center;
         font-size: 20px;
     }
-    .best-projects__to-catalog--adaptive a, 
     .news__read-all--adaptive a {
         font-family: 'Involve 500', sans-serif; 
         padding-right: 36px;
