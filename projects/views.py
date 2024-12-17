@@ -58,7 +58,7 @@ class CatalogView(View):
             if bathrooms_quantity:
                 projects = projects.filter(bathrooms_quantity=bathrooms_quantity)
             
-        projects = get_paginated_collection(request, projects, 2)
+        projects = get_paginated_collection(request, projects, 12)
 
         context = {
             'form': form,

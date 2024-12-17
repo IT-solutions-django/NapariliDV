@@ -84,7 +84,7 @@ main {
     padding: 60px 30px;
 }
 .modalSuccess {
-    display: flex;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
