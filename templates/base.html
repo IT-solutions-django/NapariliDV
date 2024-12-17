@@ -43,13 +43,14 @@
                 <p>И наш менеджер свяжется с Вами<br> в ближайшее время!</p>
             </div>
             <form id="modalFeedbackForm" class="modal-feedback__form">
+                {% csrf_token %}
                 <div>
                     <div class="modal-feedback__inputs">
                         <div>
-                            <input type="text" placeholder="Ваше имя">
+                            {{ modal_feedback_form.name }}
                         </div>
                         <div>
-                            <input type="tel" placeholder="+7">
+                            {{ modal_feedback_form.phone }}
                         </div>
                     </div>
 
@@ -86,11 +87,9 @@
                 </div>
             </div>
             <div class="modal-feedback__back">
-                <a href="{% url 'home:home' %}">
-                    <button type="submit">
-                        <img src="{% static 'images/modal-back.svg' %}" alt="">
-                    </button>
-                </a>
+                <button id="closeSuccessModal" type="submit">
+                    <img src="{% static 'images/modal-back.svg' %}" alt="">
+                </button>
             </div>
         </div>
     </div>
@@ -242,7 +241,9 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         const modal = document.getElementById('modal');
+        const modalSuccess = document.getElementById('modalSuccess');
         const closeModalButton = document.getElementById('closeModal');
+        const closeSuccessModalButton = document.getElementById('closeSuccessModal');
         const feedbackForm = document.getElementById('modalFeedbackForm');
         const formSection = document.getElementById('modal');
         const successSection = document.getElementById('modalSuccess');
@@ -259,6 +260,9 @@
         closeModalButton.addEventListener('click', () => {
             modal.style.display = 'none';
         });
+        closeSuccessModalButton.addEventListener('click', () => {
+            modalSuccess.style.display = 'none';
+        });
 
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
@@ -266,10 +270,27 @@
             }
         });
 
-        feedbackForm.addEventListener('submit', (e) => {
+        feedbackForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             formSection.style.display = 'none';
             successSection.style.display = 'flex';
+
+            let q = new FormData(feedbackForm),
+            o = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+            feedbackForm.reset();
+
+            try {
+                let s = await fetch(`${window.location.origin}/contacts/api/save-request/`, {
+                    method: "POST",
+                    body: q,
+                    headers: {
+                        "X-CSRFToken": o
+                    }
+                });
+                s.status
+            } catch (n) {
+                console.error("Ошибка запроса:", n)
+            }
         });
 
         var modalPhoneInput = document.getElementById("modalFeedbackForm").querySelector('input[type="tel"]');
@@ -282,6 +303,7 @@
             validatePhoneNumber()
         });
     });
+    
 </script>
 
 {% block script %}

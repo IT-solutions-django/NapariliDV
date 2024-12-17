@@ -24,8 +24,8 @@ class GalleryPhoto(models.Model):
 
 
 class Request(models.Model): 
-    name = models.CharField('Имя', max_length=50)
-    phone = models.CharField('Телефон', max_length=20)
+    name = models.CharField('Имя', max_length=25)
+    phone = models.CharField('Телефон', max_length=18)
     created_at = models.DateTimeField('Дата и время публикации', auto_now_add=True)
     is_closed = models.BooleanField('Обработано', default=False)
 

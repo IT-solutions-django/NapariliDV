@@ -9,4 +9,6 @@ urlpatterns = [
     path('', ContactsView.as_view(), name='contacts'), 
     path('gallery/', GalleryView.as_view(), name='gallery'), 
     path('about/', AboutCompanyView.as_view(), name='about_company'),
+
+    path('api/save-request/', SaveRequestView.as_view(), name='save_request')
 ]

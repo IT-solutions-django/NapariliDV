@@ -7,32 +7,32 @@
 {% block content %}
 <div class="slider">
     {% for slide in slides %}
-        <div class="slider-item">
-            <div class="slider-heading container">
-                <h2>{{ slide.title }}</h2>
-                <hr>
-                <div class="slider-heading__promo">
-                    {{ slide.description }}
-                    <!-- <p>Закажите строительство дома до 30 ноября<br> и получите скидку 10 000</p> -->
-                    <div class="slider-heading__want-the-house-button">
-                        <button class="openModal">
-                            <img src="{% static 'images/want-the-house.svg' %}" alt="">
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <img class="slider-image" src="{{ slide.photo.url }}" alt="{{ slide.title }}">
-            <div class="slider-content">
-                <div class="slider-content-inner">
-                    <ul class="table-of-contents">
-                        <li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
-                        <li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
-                        <li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
-                        <li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
-                    </ul>
+    <div class="slider-item">
+        <div class="slider-heading container">
+            <h2>{{ slide.title }}</h2>
+            <hr>
+            <div class="slider-heading__promo">
+                {{ slide.description }}
+                <!-- <p>Закажите строительство дома до 30 ноября<br> и получите скидку 10 000</p> -->
+                <div class="slider-heading__want-the-house-button">
+                    <button class="openModal">
+                        <img src="{% static 'images/want-the-house.svg' %}" alt="">
+                    </button>
                 </div>
             </div>
         </div>
+        <img class="slider-image" src="{{ slide.photo.url }}" alt="{{ slide.title }}">
+        <div class="slider-content">
+            <div class="slider-content-inner">
+                <ul class="table-of-contents">
+                    <li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
+                    <li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
+                    <li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
+                    <li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 </div>
 
@@ -149,17 +149,17 @@
         </div>
     </div>
     <div class="best-projects__filters">
-        <form id="bestProjectsForm" action="/#bestProjects" >
+        <form id="bestProjectsForm" action="/#bestProjects">
             <div class="best-projects__filters-form">
                 <div>
                     <div class="best-projects__radio-filter">
                         <label for="" class="best-projects__filters-label">Количество спален</label>
                         <div class="best-projects__radio-group">
                             {% for bedroom in filter_form.bedrooms_quantity %}
-                                <div class="best-projects__radio-button">
-                                    {{ bedroom.tag }}
-                                    <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
-                                </div>
+                            <div class="best-projects__radio-button">
+                                {{ bedroom.tag }}
+                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                            </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -167,10 +167,10 @@
                         <label for="" class="best-projects__filters-label">Этажей</label>
                         <div class="best-projects__radio-group">
                             {% for floor in filter_form.floors_quantity %}
-                                <div class="best-projects__radio-button">
-                                    {{ floor.tag }}
-                                    <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
-                                </div>
+                            <div class="best-projects__radio-button">
+                                {{ floor.tag }}
+                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                            </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                     <div class="best-projects__select-filter">
                         {{ filter_form.materials }}
                     </div>
-        
+
                     <div class="best-projects__number-filter">
                         <div class="best-projects__number">
                             <label for="min-price">От</label>
@@ -206,41 +206,41 @@
     </div>
     <div class="best-projects__cards">
         {% for project in best_projects %}
-            <div class="best-projects__card">
-                <div class="photo-slider">
-                    {% for photo in project.photos.all %}
-                        <div class="best-projects__card-image photo-slider-item">
-                            <img src="{{ photo.image.url }}" alt="Фото проекта">
-                        </div>
-                    {% endfor %}
+        <div class="best-projects__card">
+            <div class="photo-slider">
+                {% for photo in project.photos.all %}
+                <div class="best-projects__card-image photo-slider-item">
+                    <img src="{{ photo.image.url }}" alt="Фото проекта">
                 </div>
-                <div class="best-projects__card-text-container">
-                    <div class="best-projects__card-heading">
-                        <a target="_blank" href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="best-projects__card-text-container">
+                <div class="best-projects__card-heading">
+                    <a target="_blank" href="{{ project.get_absolute_url }}">{{ project.name }}</a>
 
-                    </div>
-                    <hr>
-                    <div class="best-projects__card-content">
-                        <ul class="table-of-contents">
-                            <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-                            <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                            <li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
-                            <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
-                        </ul>
-                    </div>
                 </div>
-                <div class="best-projects__order-button openModal">
-                    <button>Заказать строительство</button>
-                </div>
-                <div class="best-projects__more-button">
-                    <a target="_blank" href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+                <hr>
+                <div class="best-projects__card-content">
+                    <ul class="table-of-contents">
+                        <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                        <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                        <li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
+                        <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                    </ul>
                 </div>
             </div>
+            <div class="best-projects__order-button openModal">
+                <button>Заказать строительство</button>
+            </div>
+            <div class="best-projects__more-button">
+                <a target="_blank" href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+            </div>
+        </div>
         {% endfor %}
         <div class="best-projects__to-catalog--adaptive">
             <a target="_blank" href="{% url 'projects:catalog' %}">
                 В каталог
-            </a> 
+            </a>
         </div>
     </div>
 </div>
@@ -299,8 +299,8 @@
                         <p class="work-stages__card-heading">Консультация</p>
                     </div>
                 </div>
-                <p>Вы приезжаете на встречу к нам в офис выберете понравившийся проект 
-                    дома или предоставите свой. Узнаете точную стоимость строительства 
+                <p>Вы приезжаете на встречу к нам в офис выберете понравившийся проект
+                    дома или предоставите свой. Узнаете точную стоимость строительства
                     вашего дома, сможете выбрать земельный участок, если у вас его еще нет.</p>
             </div>
             <div class="work-stages__info-card">
@@ -312,9 +312,9 @@
                         <p class="work-stages__card-heading">Подготовка документации</p>
                     </div>
                 </div>
-                <p>Производятся расчеты конструкций, формирование рабочих чертежей 
-                    с точными размерами, калькуляция всех объемов материалов по выбранному 
-                    проекту. На сайте представлены типовые проекты домов, вы можете внести 
+                <p>Производятся расчеты конструкций, формирование рабочих чертежей
+                    с точными размерами, калькуляция всех объемов материалов по выбранному
+                    проекту. На сайте представлены типовые проекты домов, вы можете внести
                     свои пожелания в любой понравившийся, чтобы дом был максимально идеальным для вас</p>
             </div>
             <div class="work-stages__image-card">
@@ -330,7 +330,7 @@
                     </div>
                 </div>
                 <p>Начинаем строительство. Все работы по данному виду услуг ведутся квалифицированными специалистами.
-                    Все вопросы и проблемы, возникающие в ходе проведения работ, могут 
+                    Все вопросы и проблемы, возникающие в ходе проведения работ, могут
                     решаться без вашего участия, с предварительным согласованием
                 </p>
             </div>
@@ -346,10 +346,10 @@
                         <p class="work-stages__card-heading">Сдача дома</p>
                     </div>
                 </div>
-                <p>Любая недвижимость, прежде чем на ее территории будут проживать люди, 
-                    должна получить официальное разрешение на ее использование по назначению. 
-                    Наш юрист самостоятельно готовит документацию и проходит все инстанции. 
-                    Вам остается только приехать, получить весь пакет зарегистрированных 
+                <p>Любая недвижимость, прежде чем на ее территории будут проживать люди,
+                    должна получить официальное разрешение на ее использование по назначению.
+                    Наш юрист самостоятельно готовит документацию и проходит все инстанции.
+                    Вам остается только приехать, получить весь пакет зарегистрированных
                     документов и получить ключи от вашего дома</p>
             </div>
         </div>
@@ -364,18 +364,18 @@
         </div>
         <div class="team__cards">
             {% for worker in workers %}
-                <div class="team__slider-item">
-                    <div>
-                        <img src="{{ worker.photo.url }}" alt="">
-                    </div>
-                    <div class="team__name">
-                        <p>{{ worker.first_name }} {{ worker.last_name }}</p>
-                    </div>
-                    <hr>
-                    <div class="team__role">
-                        <p>{{ worker.role }}</p>
-                    </div>
+            <div class="team__slider-item">
+                <div>
+                    <img src="{{ worker.photo.url }}" alt="">
                 </div>
+                <div class="team__name">
+                    <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+                </div>
+                <hr>
+                <div class="team__role">
+                    <p>{{ worker.role }}</p>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -391,11 +391,12 @@
                         <p>прямо сейчас!</p>
                     </div>
                     <form action="" id="feedbackForm">
+                        {% csrf_token %}
                         <div class="feedback__input feedback__name-input">
-                            <input type="text" placeholder="Ваше имя">
+                            {{ feedback_form.name }}
                         </div>
                         <div class="feedback__input">
-                            <input type="tel" name="" id="id_phone" placeholder="+7 ">
+                            {{ feedback_form.phone }}
                         </div>
                         <div class="feedback__agreement">
                             <div class="feedback__checkbox-wrap">
@@ -438,12 +439,13 @@
             </div>
             <div class="reviews__card-text font__inter">
                 Противоположная точка зрения подразумевает, что непосредственные участники технического
-                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям. Противоположная точка зрения подразумевает, что непосредственные участники технического
-                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям
+                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
+                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
+                также независимые государства призывают нас к новым свершениям. Противоположная точка зрения
+                подразумевает, что непосредственные участники технического
+                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
+                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
+                также независимые государства призывают нас к новым свершениям
             </div>
             <div>
                 <i class="reviews__card-date">30.11.2024</i>
@@ -486,9 +488,9 @@
             </div>
             <div class="reviews__card-text font__inter">
                 Противоположная точка зрения подразумевает, что непосредственные участники технического
-                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям
+                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
+                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
+                также независимые государства призывают нас к новым свершениям
             </div>
             <div>
                 <i>30.11.2024</i>
@@ -525,7 +527,8 @@
                 </div>
             </div>
             <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
+                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники
+                    технического
                     прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
                     должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
                     также независимые государства призывают нас к новым свершениям свершен</p>
@@ -567,7 +570,8 @@
                 </div>
             </div>
             <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники технического
+                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники
+                    технического
                     прогресса представляют собой не собой не собой не собой не собой не собой не</p>
             </div>
             <div>
@@ -608,12 +612,12 @@
             <h4>Фотогалерея</h4>
         </div>
     </div>
-    
+
     <div class="gallery__slider">
         {% for gallery_photo in gallery_photos %}
-            <div class="gallery__photo">
-                <img src="{{ gallery_photo.photo.url }}" alt="">
-            </div>
+        <div class="gallery__photo">
+            <img src="{{ gallery_photo.photo.url }}" alt="">
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -650,9 +654,10 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают
+                            падать</a>
                     </div>
-                    <div class="news__new-text  class="font__inter"">
+                    <div class="news__new-text  class=" font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
                         над эмоциями. Следует отметить, что перспективное планирование не оставляет шанса для
                         первоочередных требований
@@ -685,9 +690,10 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают
+                            падать</a>
                     </div>
-                    <div class="news__new-text  class="font__inter"">
+                    <div class="news__new-text  class=" font__inter"">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
                         над эмоциями. Следует отметить, что перспективное планирование не оставляет шанса для
                         первоочередных требований
@@ -720,7 +726,8 @@
                 </div>
                 <div class="news__big-right-column">
                     <div class="news__new-heading">
-                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают падать</a>
+                        <a href="{% url 'blog:article' %}">Британские «ученые» заявили, что цены на бензин начинают
+                            падать</a>
                     </div>
                     <div class="news__new-text font__inter">
                         Безусловно, современная методология разработки требует от нас анализа приоретизации разума
@@ -762,7 +769,7 @@
             <div class="tab">
                 <input id="tab-1" type="checkbox" name="tabs">
                 <div class="tab-label">
-                        <label for="tab-1">Вы знаете свой веб-сайт</label>
+                    <label for="tab-1">Вы знаете свой веб-сайт</label>
                 </div>
                 <hr>
                 <div class="tab-content">
@@ -788,7 +795,7 @@
             <div class="tab">
                 <input id="tab-3" type="checkbox" name="tabs">
                 <div class="tab-label">
-                        <label for="tab-3">Вы знаете свой веб-сайт</label>
+                    <label for="tab-3">Вы знаете свой веб-сайт</label>
                 </div>
                 <hr>
                 <div class="tab-content">
@@ -886,33 +893,33 @@
             arrows: true,
             infinite: true,
             slidesToShow: 4,
-            slidesToScroll: 1, 
+            slidesToScroll: 1,
             centerMode: true,
             responsive: [
-            {
-                breakpoint: 1024, 
-                settings: {
-                    slidesToShow: 3, 
-                    slidesToScroll: 1
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
                 }
-            },
-            {
-                breakpoint: 768, 
-                settings: {
-                    centerMode: true,
-                    slidesToShow: 2, 
-                    slidesToScroll: 1
-                }
-            }, 
-            {
-                breakpoint: 576, 
-                settings: {
-                    centerMode: true,
-                    slidesToShow: 1, 
-                    slidesToScroll: 1, 
-                }
-            }
-        ]
+            ]
         });
     });
     $(document).ready(function () {
@@ -920,27 +927,27 @@
             arrows: true,
             infinite: true,
             slidesToShow: 3,
-            slidesToScroll: 1, 
+            slidesToScroll: 1,
             responsive: [
                 {
-                    breakpoint: 1024, 
+                    breakpoint: 1024,
                     settings: {
-                        slidesToShow: 3, 
+                        slidesToShow: 3,
                         slidesToScroll: 1
                     }
                 },
                 {
-                    breakpoint: 768, 
+                    breakpoint: 768,
                     settings: {
-                        slidesToShow: 2, 
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
-                }, 
+                },
                 {
-                    breakpoint: 576, 
+                    breakpoint: 576,
                     settings: {
                         centerMode: true,
-                        slidesToShow: 1, 
+                        slidesToShow: 1,
                         slidesToScroll: 1
                     }
                 }
@@ -953,34 +960,34 @@
             arrows: true,
             infinite: true,
             slidesToShow: 3,
-            slidesToScroll: 1, 
-            responsive: [, 
+            slidesToScroll: 1,
+            responsive: [,
                 {
-                    breakpoint: 1200, 
+                    breakpoint: 1200,
                     settings: {
-                        slidesToShow: 2, 
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 },
                 {
-                    breakpoint: 1024, 
+                    breakpoint: 1024,
                     settings: {
-                        slidesToShow: 1, 
+                        slidesToShow: 1,
                         slidesToScroll: 1
                     }
                 },
                 {
-                    breakpoint: 768, 
+                    breakpoint: 768,
                     settings: {
-                        slidesToShow: 1, 
+                        slidesToShow: 1,
                         slidesToScroll: 1
                     }
-                }, 
+                },
                 {
-                    breakpoint: 576, 
+                    breakpoint: 576,
                     settings: {
                         centerMode: true,
-                        slidesToShow: 1, 
+                        slidesToShow: 1,
                         slidesToScroll: 1
                     }
                 }
@@ -1022,7 +1029,6 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         let checkboxes = document.querySelectorAll('.tab input');
-        console.log(checkboxes)
 
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('click', function () {
@@ -1035,14 +1041,38 @@
         });
     });
 
-    var phoneInput = document.getElementById("feedbackForm").querySelector('input[type="tel"]');
+    // Форма обратной связи
+    var feedbackForm = document.getElementById("feedbackForm");
+    var phoneInput = feedbackForm.querySelector('input[type="tel"]');
     var phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" });
+    const successSection = document.getElementById('modalSuccess');
     function validatePhoneNumber() {
         let t = phoneInput.value.replace(/\D/g, "");
         return t.length < 11 ? (phoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (phoneInput.setCustomValidity(""), !0)
     }
     phoneInput.addEventListener("input", function () {
         validatePhoneNumber()
+    });
+
+    feedbackForm.addEventListener("submit", async function (t) {
+        t.preventDefault();
+        let e = new FormData(feedbackForm),
+            o = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        feedbackForm.reset();
+        
+        successSection.style.display = 'flex';
+        try {
+            let s = await fetch(`${window.location.origin}/contacts/api/save-request/`, {
+                method: "POST",
+                body: e,
+                headers: {
+                    "X-CSRFToken": o
+                }
+            });
+            s.status
+        } catch (n) {
+            console.error("Ошибка запроса:", n)
+        }
     });
 </script>
 {% endblock %}
