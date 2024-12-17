@@ -3142,7 +3142,9 @@ footer hr,
     .reviews__slider .slick-arrow,
     .gallery__slider .slick-arrow, 
     .similar-projects__cards .slick-arrow, 
-    .gallery-page__slider .slick-arrow {
+    .gallery-page__slider .slick-arrow, 
+    .partners__slider .slick-arrow, 
+    .certificates__slider .slick-arrow {
         display: none !important;
     }
     .slider-heading__want-the-house-button {
