@@ -130,10 +130,8 @@ class BestProjectsFilterAPIView(View):
             if bathrooms_quantity:
                 best_projects = best_projects.filter(bathrooms_quantity=bathrooms_quantity)
 
-        # Пагинация
         best_projects = get_paginated_collection(request, best_projects, 12)
 
-        # Рендерим HTML блок с карточками
         rendered_html = render_to_string('home/includes/best_projects_cards.html', {'best_projects': best_projects})
 
         return JsonResponse({'html': rendered_html})

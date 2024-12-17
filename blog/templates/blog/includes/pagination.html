@@ -1,0 +1,15 @@
+<div class="catalog__pagination-controls">
+    {% if articles.has_previous %}
+        <a href="?page={{ articles.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left pagination-link"></a>
+    {% else %}
+        <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+    {% endif %}
+    <div>
+        <p>{{ articles.number }} из {{ articles.paginator.num_pages }}</p>
+    </div>
+    {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right pagination-link"></a>
+    {% else %}
+        <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+    {% endif %}
+</div>

@@ -18,16 +18,26 @@
 <div class="news container">
     <div class="news-page__header">
         <div class="news__heading">
-            <h1>Новости</h1>
+            <h1>{{ page_title }}</h1>
         </div>
-        <hr class="news-page__header-hr--adaptive">
         <div class="news__header-right-buttons">
-            <div class="news__header-button">
-                <button>Блог</button>
-            </div>
-            <div class="news__header-button">
-                <button>Новости</button>
-            </div>
+            <form id="blogForm" action="{% url 'blog:blog' %}">
+                <div class="news__header-button">
+                    {% for article_type in form.article_type %}
+                            {{ choice.tag }}
+                            <input 
+                                type="radio"
+                                name="{{ article_type.data.name }}" 
+                                value="{{ article_type.data.value }}"
+                                class="radio-toggle"
+                                id="{{ article_type.id_for_label }}" 
+                                {% if article_type.data.selected %}checked data-was-checked="true"{% endif %}
+                            >
+                            <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
+                    {% endfor %}
+                </div>
+                <button type="submit" style="display: none;"></button>
+            </form>
         </div>
     </div>
     <hr class="news-page__header-hr">
@@ -54,20 +64,19 @@
                 </div>
             </div>
         {% endfor %}
-       
     </div>
     <div class="catalog__pagination">
         <div class="catalog__pagination-controls">
-            {% if projects.has_previous %}
-                <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+            {% if articles.has_previous %}
+                <a href="?page={{ query_params }}&page={{ articles.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left pagination-link"></a>
             {% else %}
                 <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
             {% endif %}
             <div>
-                <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
+                <p>{{ articles.number }} из {{ articles.paginator.num_pages }}</p>
             </div>
-            {% if projects.has_next %}
-                <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right pagination-link"></a>
             {% else %}
                 <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
             {% endif %}
@@ -174,5 +183,103 @@ ymaps.ready(function(){
           });
     myMap.geoObjects.add(s);
 }); 
+</script>
+
+<script>
+    // Сохранение фильтров при пагинации
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.catalog__pagination a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                let formData = $('#blogForm').serialize(); 
+                const url = new URL(link.href + "&" + formData);
+                window.location.href = url.toString();
+            });
+        });
+    });
+    </script>
+
+<script>
+    // Сброс input radio
+    document.addEventListener("DOMContentLoaded", function () {
+    const radioButtons = document.querySelectorAll('.radio-toggle');
+
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            if (this.dataset.wasChecked === "true") {
+                this.checked = false;
+                this.dataset.wasChecked = "false";
+            } else {
+                this.dataset.wasChecked = "true";
+            }
+
+            radioButtons.forEach(function (otherRadio) {
+                if (otherRadio !== radio && otherRadio.name == radio.name) {
+                    otherRadio.dataset.wasChecked = "false";
+                }
+            });
+
+            // Применение новых фильтров
+            let formData = $('#blogForm').serialize();
+            let cardsContainer = $('.news__cards');
+            let paginationContainer = $('.catalog__pagination');
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'blog:filter_blog_api' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        cardsContainer.html(response.html);
+                        paginationContainer.html(response.pagination)
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200);
+        });
+    });
+});
+</script>
+
+<script>
+// Фильтрация новостей/статей
+$(document).ready(function() {
+    $('#blogForm input').on('change input', function(event) {
+        let formData = $('#blogForm').serialize();
+
+        let cardsContainer = $('.news__cards');
+
+        timeout = setTimeout(function () {
+            $.ajax({
+                url: "{% url 'blog:filter_blog_api' %}",  
+                type: "GET",
+                data: formData,
+                success: function(response) {
+                    cardsContainer.html(response.html);
+                    console.log(response.html)
+
+                    // Добавление к новым ссылкам обработчиков для сохранения текущих фильтров
+                    document.querySelectorAll('.catalog__pagination a').forEach(link => {
+                        link.addEventListener('click', event => {
+                            event.preventDefault();
+
+                            let formData = $('#blogForm').serialize(); 
+                
+                            const url = new URL(link.href + "&" + formData);
+                            console.log(url.toString())
+                            window.location.href = url.toString();
+                    });
+                });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Ошибка при фильтрации:", error);
+                }
+            });
+        }, 200);  
+
+    });
+});
 </script>
 {% endblock %}

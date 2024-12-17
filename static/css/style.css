@@ -860,8 +860,19 @@ main {
     display: inline-block;
 }
 
+.news__header-button input[type=radio] {
+    display: none;
+}
+.news__header-button label {
+    padding: 10.5px 33px 10.5px 33px;
+    border-radius: 20px;
+    border: solid 1px #595959;
+    white-space: nowrap;
+}
+
 .best-projects__radio-button input[type=radio], 
-.catalog__radio-button input[type=radio]{
+.catalog__radio-button input[type=radio], 
+.news__header-button input[type=radio] {
     display: none;
 }
 
@@ -884,6 +895,10 @@ main {
 .catalog__radio-button input[type=radio]:checked+label {
     background: rgba(255, 26, 26, 1);
     color: white
+}
+.news__header-button input[type=radio]:checked+label {
+    border-color: #FF1A1A;
+    color: #FF1A1A;
 }
 
 .best-projects__radio-button input[type=radio]:disabled+label, 
@@ -1890,6 +1905,7 @@ main {
 .news__header-right-buttons {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .news__header-button a, 
@@ -1900,6 +1916,10 @@ main {
     border-radius: 20px;
     border: solid 1px #595959;
     white-space: nowrap;
+}
+.news__header-button.active a {
+    border: solid 1px #FF1A1A;
+    color: #FF1A1A;
 }
 .project__download-estimates {
     border: solid 1px #FF1A1A;
@@ -3655,6 +3675,7 @@ footer hr,
     .news__header-right-buttons {
         gap: 10px;
     }
+    .news__header-button a,
     .news__header-button button {
         font-size: 14px;
         padding: 7.5px 25px;
