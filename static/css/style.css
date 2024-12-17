@@ -1894,18 +1894,29 @@ main {
 
 .news__header-button a, 
 .news__header-button button, 
-.project__download-estimates button, 
+.project__download-estimates, 
 .project__discount button {
-    padding: 10.5px 33px;
+    padding: 10.5px 33px 10.5px 33px;
     border-radius: 20px;
     border: solid 1px #595959;
     white-space: nowrap;
 }
+.project__download-estimates {
+    border: solid 1px #FF1A1A;
+    color:#FF1A1A;
+}
+.project__download-estimates button {
+    white-space: nowrap;
+    background-image: url('/static/images/download-estimates.svg');
+    background-repeat: no-repeat;
+    padding-right: 33px;
+    background-position: right center;
+    color:#FF1A1A;
+}
 
 .news__header-button a:hover, 
 .news__header-button button:hover, 
-.project__download-estimates button:hover, 
-.project__discount button:hover {
+.project__download-estimates:hover {
     border: solid 1px #FF1A1A;
     color: #FF1A1A;
 }
@@ -2783,12 +2794,23 @@ footer hr,
         margin-top: 15px;
         margin-bottom: 20px;
     }
-    .project__download-estimates--adaptive button, 
+    .project__download-estimates--adaptive, 
     .project__discount--adaptive button {
         padding: 7.5px 14px;
         border-radius: 20px;
         border: solid 1px #595959;
         white-space: nowrap;
+    }
+    .project__download-estimates--adaptive {
+        border: solid 1px #FF1A1A;
+        color:#FF1A1A;
+    }
+    .project__download-estimates--adaptive button {
+        white-space: nowrap;
+        background-image: url('/static/images/download-estimates.svg');
+        background-repeat: no-repeat;
+        padding-right: 33px;
+        background-position: right center;
     }
     .project__slider--adaptive {
         display: block;

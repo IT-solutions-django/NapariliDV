@@ -47,9 +47,9 @@
         </div>
         <div class="project__details">
             <div class="project__buttons-group">
-                <div class="project__download-estimates">
+                <a href="{{ project.estimates.url }}" class="project__download-estimates">
                     <button>Скачать смету</button>
-                </div>
+                </a>
                 <div class="project__discount">
                     <button>Скидка 5%</button>
                 </div>
@@ -59,9 +59,9 @@
                 <hr>
             </div>
             <div class="project__buttons-group--adaptive container">
-                <div class="project__download-estimates--adaptive">
+                <a href="{{ project.estimates.url }}" class="project__download-estimates--adaptive">
                     <button>Скачать смету</button>
-                </div>
+                </a>
                 <div class="project__discount--adaptive">
                     <button>Скидка 5%</button>
                 </div>

@@ -45,6 +45,7 @@ class Project(models.Model):
     rooms_quantity = models.SmallIntegerField('Количество комнат', validators=[MinValueValidator(0.0)], default=1)
     floors_quantity = models.SmallIntegerField('Количество этажей', validators=[MinValueValidator(0.0)], default=1)
     bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)
+    estimates = models.FileField('Смета', upload_to='projects/estimates', null=True, blank=True)
     category = models.ForeignKey(
         verbose_name='Категория', 
         to=Category, 
