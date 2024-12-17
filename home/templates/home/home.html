@@ -156,7 +156,14 @@
                         <div class="best-projects__radio-group">
                             {% for bedroom in filter_form.bedrooms_quantity %}
                             <div class="best-projects__radio-button">
-                                {{ bedroom.tag }}
+                                <input 
+                                    type="radio" 
+                                    name="{{ bedroom.data.name }}" 
+                                    value="{{ bedroom.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ bedroom.id_for_label }}" 
+                                    {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
                                 <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
                             </div>
                             {% endfor %}
@@ -167,7 +174,14 @@
                         <div class="best-projects__radio-group">
                             {% for floor in filter_form.floors_quantity %}
                             <div class="best-projects__radio-button">
-                                {{ floor.tag }}
+                                <input 
+                                    type="radio" 
+                                    name="{{ floor.data.name }}" 
+                                    value="{{ floor.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ floor.id_for_label }}" 
+                                    {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
                                 <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
                             </div>
                             {% endfor %}
@@ -1068,9 +1082,7 @@
     // Фильтрация лучших проектов
     $(document).ready(function() {
         $('#bestProjectsForm input, #bestProjectsForm select').on('change input', function(event) {
-            event.preventDefault();
-
-            let formData = $(this).serialize(); 
+            let formData = $('#bestProjectsForm').serialize();
 
             let cardsContainer = $('.best-projects__cards');
             cardsContainer.addClass('fade-out');
@@ -1108,5 +1120,65 @@
             
         });
     });
+</script>
+
+<script>
+    // Сброс input radio
+    document.addEventListener("DOMContentLoaded", function () {
+    const radioButtons = document.querySelectorAll('.radio-toggle');
+
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            if (this.dataset.wasChecked === "true") {
+                this.checked = false;
+                this.dataset.wasChecked = "false";
+            } else {
+                this.dataset.wasChecked = "true";
+            }
+
+            radioButtons.forEach(function (otherRadio) {
+                if (otherRadio !== radio && otherRadio.name == radio.name) {
+                    otherRadio.dataset.wasChecked = "false";
+                }
+            });
+
+            // Перерисовка карточек после отмены фильтра
+            let formData = $('#bestProjectsForm').serialize();
+
+            let cardsContainer = $('.best-projects__cards');
+            cardsContainer.addClass('fade-out');
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'home:best_projects_filter' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        cardsContainer.html(response.html);
+
+                        cardsContainer.removeClass('fade-out').addClass('fade-in');
+
+                        $(document).ready(function () {
+                            $('.photo-slider').slick({
+                                dots: true,
+                                infinite: true,
+                                speed: 500,
+                                slidesToShow: 1,
+                                adaptiveHeight: false,
+                                autoplay: false,
+                            });
+                        });
+                        setTimeout(() => {
+                            cardsContainer.removeClass('fade-in');
+                        }, 500);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200); 
+        });
+    });
+});
 </script>
 {% endblock %}
