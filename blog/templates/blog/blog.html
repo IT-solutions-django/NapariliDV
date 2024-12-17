@@ -23,8 +23,8 @@
         <hr class="news-page__header-hr--adaptive">
         <div class="news__header-right-buttons">
             <form id="blogForm" action="{% url 'blog:blog' %}">
-                <div class="news__header-button">
                     {% for article_type in form.article_type %}
+                    <div class="news__header-button">
                             {{ choice.tag }}
                             <input 
                                 type="radio"
@@ -35,8 +35,8 @@
                                 {% if article_type.data.selected %}checked data-was-checked="true"{% endif %}
                             >
                             <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
+                        </div>
                     {% endfor %}
-                </div>
                 <button type="submit" style="display: none;"></button>
             </form>
         </div>

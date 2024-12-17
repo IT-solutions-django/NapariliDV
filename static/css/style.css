@@ -1899,7 +1899,8 @@ main {
     align-items: center;
 }
 
-.news__header-right-buttons {
+.news__header-right-buttons, 
+#blogForm {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -3672,7 +3673,8 @@ footer hr,
     .bigMap > ymaps {
         border-radius: 0px;
     }
-    .news__header-right-buttons {
+    .news__header-right-buttons, 
+    #blogForm {
         gap: 10px;
     }
     .news__header-button label {

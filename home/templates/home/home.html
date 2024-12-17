@@ -9,7 +9,11 @@
     {% for slide in slides %}
     <div class="slider-item">
         <div class="slider-heading container">
-            <h2>{{ slide.title }}</h2>
+            {% if forloop.first %}
+                <h1>{{ slide.title }}</h1>
+            {% else %}
+                <h2>{{ slide.title }}</h2>
+            {% endif %}
             <hr>
             <div class="slider-heading__promo">
                 {{ slide.description|linebreaks }}
