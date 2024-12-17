@@ -111,7 +111,7 @@
                 </div>
                 <div class="header__hamburger-wrapper">
                     <div class="header__phone-adaptive">
-                        <p>+7 953 223-49-73</p>
+                        <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
                     </div>
                     <button class="header__hamburger" aria-label="Toggle menu">
                         <img class="header__hamburger--menu" src="{% static 'images/burger.svg' %}" alt="Меню">
@@ -139,7 +139,8 @@
                     </div>
                     <div class="header__right-part">
                         <div class="header__phone">
-                            <p>+7 953 223-49-73</p>
+                            <!-- <p>+7 953 223-49-73</p> -->
+                            <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
                         </div>
                         <div class="header__call-button">
                             <p href="" class="openModal">Позвоните мне</p>
