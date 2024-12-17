@@ -66,36 +66,71 @@ main {
     align-items: center;
     z-index: 1000;
 }
-
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    max-width: 680px;
-    justify-content: center;
+.modal-content, 
+.modal-success-content {
     text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: white;
+    border-radius: 20px;
+}
+.modal-content {
+    width: 900px;
     display: flex;
-
+}
+.modal-success-content {
+    width: 680px;
+    height: 320px;
+    padding: 60px 30px;
+}
+.modalSuccess {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-feedback__image,
+.modal-feedback__image img, 
+.modal-feedback__image--adaptive, 
+.modal-feedback__image--adaptive img {
+    border-radius: 20px 0px 0px 20px;
+}
+.modal-content .modal-feedback__form-section {
+    padding: 60px 40px 30px 30px;
 }
 .modal-feedback__header h5 {
-    font-family: 'Involve 500', sans-serif;
+    font-family: 'Involve 600', sans-serif;
+    font-weight: 600;
     font-size: 30px;
 }
-.modal-feedback__success-header h5 {
+.modal-feedback__header p {
     font-family: 'Involve 500', sans-serif;
-    font-size: 60px;
-    margin-bottom: 30px;
+    font-weight: 500;
 }
-.modal-content hr {
+.modal-feedback__success-header h5 {
+    font-family: 'Involve 600', sans-serif;
+    font-weight: 600;
+    font-size: 60px;
+} 
+.modal-feedback__success-header hr, 
+.modal-feedback__header hr {
     height: 1px;
     background-color: #595959;
+    width: 100%;
+}
+.modal-content hr {
     margin-top: 15px;
     margin-bottom: 15px;
-    width: 100%;
+}
+.modal-feedback__success-header hr {
+    margin-top: 25px;
+    margin-bottom: 50px;
 }
 .modal-feedback__form {
     margin-top: 30px;
@@ -111,7 +146,7 @@ main {
 }
 .modal-feedback__form input {
     border: solid 1px #595959;
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 20px 20px 21px 20px;
     width: 100%;
 }
@@ -136,12 +171,92 @@ main {
     bottom: -78px;
     right: 20px
 }
-
-
+.modal-feedback__image--adaptive {
+    display: none;
+}
+.modal-feedback__image--adaptive img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 250px;
+}
 .modal-feedback__success-text {
     font-family: 'Involve 600', sans-serif;
     font-size: 18px;
     margin-bottom: 40px;
+}
+.modal-feedback__success-text br {
+    display: none;
+}
+@media (max-width: 990px) {
+    .modal-feedback__image {
+        display: none;
+    }
+    .modal-feedback__image--adaptive {
+        display: block;
+    }
+    .modal-content {
+        flex-direction: column;
+        width: 90%;
+        max-width: 500px;
+        transform: translateY(-10px);
+    }
+    .modal-feedback__header, 
+    .modal-feedback__success-text {
+        font-size: 14px;
+    }
+    .modal-feedback__success-text {
+        margin: 0px;
+    }
+    .modal-feedback__header h5 {
+        font-size: 20px;
+    }
+    .modal-content .modal-feedback__form-section  {
+        padding-top: 20px;
+    }
+    .modal-feedback__form input {
+        padding: 15px 20px;
+        font-size: 14px;
+        max-width: 500px;
+    }
+    .modal-feedback__inputs {
+        gap: 15px;
+    }
+    .modal-feedback__form {
+        margin-top: 15px;
+    }
+    .modal-feedback__checkbox-label {
+        font-size: 12px;
+    }
+    .modal-feedback__close-button {
+        width: 32px;
+        height: 32px;
+        top: -12px;
+        right: -12px;
+    }
+    .modal-feedback__form {
+        max-width: 100%;
+    }
+    .modal-success-content {
+        padding: 25px 26px 42px 14px;
+        height: auto;
+        width: 90%;
+        max-width: 500px;
+    }
+    .modal-feedback__success-header h5 {
+        font-size: 40px;
+    }
+    .modal-feedback__success-header hr {
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+    .modal-feedback__success-text br {
+        display: block;
+    }
+    .modal-feedback__send, 
+    .modal-feedback__back {
+        bottom: -50px;
+        right: 0px
+    }
 }
 
 .container {
@@ -1586,6 +1701,7 @@ main {
 }
 .modal-feedback__agreement {
     display: flex;
+    text-align: left;
 }
 .feedback {
     margin-bottom: 100px;
@@ -2944,7 +3060,11 @@ footer hr,
     .footer__button, 
     .footer__button img, 
     .project__order-button,
-    .project__order-button img {
+    .project__order-button img, 
+    .modal-feedback__send, 
+    .modal-feedback__send img, 
+    .modal-feedback__back, 
+    .modal-feedback__back img {
         width: 100px;
         height: 100px;
     }

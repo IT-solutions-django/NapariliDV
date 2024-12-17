@@ -29,11 +29,18 @@
                 <img src="{% static 'images/close-modal.svg' %}" alt="">
             </button>
         </div>
-        <div id="formSection">
+        <div class="modal-feedback__image">
+            <img src="{% static 'images/modal-feedback-image.png' %}" alt="">
+            
+        </div>
+        <div class="modal-feedback__image--adaptive">
+            <img src="{% static 'images/modal-feedback-adaptive.png' %}" alt="">
+        </div>
+        <div class="modal-feedback__form-section">
             <div class="modal-feedback__header">
                 <h5>Заполните обратную форму</h5>
                 <hr>
-                <p>И наш менеджер свяжется с Вами в ближайшее время</p>
+                <p>И наш менеджер свяжется с Вами<br> в ближайшее время!</p>
             </div>
             <form id="modalFeedbackForm" class="modal-feedback__form">
                 <div>
@@ -65,13 +72,17 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
 
-        <div id="successSection" style="display: none;">
+<div id="modalSuccess" class="modalSuccess">
+    <div class="modal-success-content">
+        <div>
             <div class="modal-feedback__success-header">
                 <h5>Спасибо!</h5>
                 <hr>
                 <div class="modal-feedback__success-text">
-                    <p>В самое ближайшее время мы свяжемся с Вами!</p>
+                    <p>В самое ближайшее время мы<br> свяжемся с Вами!</p>
                 </div>
             </div>
             <div class="modal-feedback__back">
@@ -233,8 +244,8 @@
         const modal = document.getElementById('modal');
         const closeModalButton = document.getElementById('closeModal');
         const feedbackForm = document.getElementById('modalFeedbackForm');
-        const formSection = document.getElementById('formSection');
-        const successSection = document.getElementById('successSection');
+        const formSection = document.getElementById('modal');
+        const successSection = document.getElementById('modalSuccess');
 
         const openModalButtons = document.querySelectorAll('.openModal');
 
@@ -258,7 +269,7 @@
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
             formSection.style.display = 'none';
-            successSection.style.display = 'block';
+            successSection.style.display = 'flex';
         });
 
         var modalPhoneInput = document.getElementById("modalFeedbackForm").querySelector('input[type="tel"]');
