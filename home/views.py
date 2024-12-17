@@ -8,6 +8,7 @@ from contacts.models import Worker, GalleryPhoto
 from projects.forms import CatalogFiltersForm
 from projects.services import get_paginated_collection
 from contacts.forms import FeedbackForm
+from blog.models import Article
 
 
 class HomeView(View): 
@@ -21,6 +22,7 @@ class HomeView(View):
         popular_questions = PopularQuestion.objects.all()
         filter_form = CatalogFiltersForm(request.GET)
         feedback_form = FeedbackForm()
+        articles = Article.objects.all()
 
         if filter_form.is_valid():
             cd = filter_form.cleaned_data
@@ -75,6 +77,7 @@ class HomeView(View):
             'popular_questions': popular_questions,
             'filter_form': filter_form,
             'feedback_form': feedback_form,
+            'articles': articles,
         }
         return render(request, self.template_name, context)
 
