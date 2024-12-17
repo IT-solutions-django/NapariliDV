@@ -114,30 +114,3 @@ class PopularQuestion(models.Model):
     class Meta: 
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Часто задаваемые вопросы'
-
-
-class PrivacyPolicy(models.Model): 
-    text = models.TextField('Текст')
-
-    admin_panel_title = models.CharField(
-        'Название вкладки в админке', 
-        max_length=40, 
-        default='Политика конфиденциальности'
-    )
-
-    class Meta: 
-        verbose_name = 'Политика конфиденциальности'
-        verbose_name_plural = 'Политика конфиденциальности'
-
-    def save(self, *args, **kwargs):
-        if self.__class__.objects.count():
-            self.pk = self.__class__.objects.first().pk
-        super().save(*args, **kwargs)
-
-    @classmethod
-    def get_instance(cls) -> "PrivacyPolicy":
-        instance, created = cls.objects.get_or_create(id=1)
-        return instance
-    
-    def __str__(self) -> str: 
-        return 'Политика конфиденциальности'

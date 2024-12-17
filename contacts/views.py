@@ -3,6 +3,7 @@ from django.views import View
 from django.http import JsonResponse
 from .models import (
     GalleryPhoto,
+    PrivacyPolicy
 )
 from .forms import FeedbackForm
 
@@ -29,6 +30,17 @@ class AboutCompanyView(View):
 
     def get(self, request): 
         return render(request, self.template_name)
+    
+
+class PrivacyPolicyView(View): 
+    template_name = 'contacts/privacy_policy.html'
+
+    def get(self, request): 
+        privacy_policy = PrivacyPolicy.get_instance()
+        context = {
+            'privacy_policy': privacy_policy,
+        }
+        return render(request, self.template_name, context)
     
 
 class SaveRequestView(View): 

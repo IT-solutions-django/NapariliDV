@@ -197,8 +197,13 @@
                         <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
                     </div>
                 </div>
+            {% empty %}
+            <div style="text-align: center; width: 100%;">
+                <p>Ничего не найдено</p>
+            </div>
             {% endfor %}
         </div>
+        {% if projects %}
         <div class="catalog__pagination">
             <div class="catalog__pagination-controls">
                 {% if projects.has_previous %}
@@ -216,6 +221,7 @@
                 {% endif %}
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 
