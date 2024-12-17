@@ -69,7 +69,9 @@
             <div class="project__slider--adaptive">
                 {% for photo in project.photos.all %}
                     <div class="project__slide--adaptive">
-                        <img src="{{ photo.image.url }}" alt="">
+                        <a href="{{ photo.image.url }}">
+                            <img src="{{ photo.image.url }}" alt="">
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -85,7 +87,7 @@
                 </ul>
             </div>
             <div class="project__credit container">
-                <button>Дом подходит под ипотеку,<br> или кредит</button>
+                <div>Дом подходит под ипотеку,<br> или кредит</div>
             </div>
             <div class="project__order-button">
                 <button>
@@ -262,17 +264,28 @@
 
     .lum-img {
         object-fit: cover !important;
-        width: 85vw;;
+        width: 85vw;
     }
-    </style>
+
+    @media (max-width: 990px) {
+        .lum-img {
+            width: 100vw;
+        }
+    }
+</style>
 <script type=module>
 import { L as LuminousGallery } from "/static/js/luminous-lightbox/luminous-lightbox.js";
-
 
 function initGallery() {
   var galleryItems = document.querySelectorAll(".project__current-slide a")
     if (galleryItems.length > 0) {
         new LuminousGallery(galleryItems);
+    }
+
+    var mobileGalleryItems = document.querySelectorAll(".project__slide--adaptive a");
+    console.log(mobileGalleryItems)
+    if (galleryItems.length > 0) {
+        new LuminousGallery(mobileGalleryItems );
     }
 }
 initGallery();
@@ -370,6 +383,7 @@ initGallery();
         });
     });
     
+    // Яндекс карты
     var myMap;
     ymaps.ready(function(){
         myMap = new ymaps.Map("map", {
