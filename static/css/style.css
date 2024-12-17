@@ -1058,10 +1058,7 @@ main {
 .news-page__read-button button {
     background-color: white;
     color: #595959;
-    padding-left: 33px;
-    padding-top: 10.5px;
-    padding-bottom: 10.5px;
-    padding-right: 26px;
+    padding: 10.5px 33px;
     border: solid 1px #595959   ;
     border-radius: 20px;
     cursor: pointer;
