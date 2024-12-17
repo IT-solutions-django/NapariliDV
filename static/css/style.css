@@ -1006,7 +1006,7 @@ main {
 
 .best-projects__card hr,
 .similar-projects__card-heading hr, 
-.news__card-heading hr {
+.news__card-text-container hr {
     border: none;
     height: 1px;
     background-color: rgba(89, 89, 89, 1);
@@ -3440,6 +3440,12 @@ footer hr,
     .about-company-page__heading-with-icon img {
         height: 40px;
         width: 40px;
+    }
+    .best-projects__card-heading {
+        margin-bottom: 10px;
+    }
+    .news__card-text-container hr {
+        margin-bottom: 15px;
     }
 }
 @media (max-width: 820px) {

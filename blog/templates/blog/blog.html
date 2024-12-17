@@ -43,7 +43,7 @@
                     </div>
                     <hr>
                     <div class="news__card-description">
-                        <p>{{ article.paragraphs.all.0.content }}</p>
+                        <p>{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
                     </div>
                     <div class="news__card-date">
                         <i>{{ article.created_at|date:"d.m.Y" }}</i>
