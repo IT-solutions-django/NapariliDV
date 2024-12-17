@@ -10,5 +10,5 @@ urlpatterns = [
     path('gallery/', GalleryView.as_view(), name='gallery'), 
     path('about/', AboutCompanyView.as_view(), name='about_company'),
 
-    path('api/save-request/', SaveRequestView.as_view(), name='save_request')
+    path('api/save-request/', SaveRequestView.as_view(), name='save_request'),
 ]

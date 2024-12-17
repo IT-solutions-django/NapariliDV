@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views import View 
+from django.template.loader import render_to_string 
+from django.http import JsonResponse
 from projects.models import Project
 from home.models import Slide, PopularQuestion
 from contacts.models import Worker, GalleryPhoto
@@ -76,3 +78,59 @@ class HomeView(View):
         }
         return render(request, self.template_name, context)
 
+
+class BestProjectsFilterAPIView(View):
+    def get(self, request):
+        best_projects = Project.objects.all()
+        filter_form = CatalogFiltersForm(request.GET)
+
+        if filter_form.is_valid():
+            cd = filter_form.cleaned_data
+
+            selected_categories = cd.get('categories')
+            if selected_categories:
+                best_projects = best_projects.filter(category__id__in=selected_categories)
+
+            selected_materials = cd.get('materials')
+            if selected_materials:
+                best_projects = best_projects.filter(material__id=selected_materials)
+
+            selected_roof_types = cd.get('roof_types')
+            if selected_roof_types:
+                best_projects = best_projects.filter(roof_type__id=selected_roof_types)
+
+            price_min = cd.get('price_min')
+            if price_min is not None:
+                best_projects = best_projects.filter(price__gte=price_min)
+
+            price_max = cd.get('price_max')
+            if price_max is not None:
+                best_projects = best_projects.filter(price__lte=price_max)
+
+            square_min = cd.get('square_min')
+            if square_min is not None:
+                best_projects = best_projects.filter(square__gte=square_min)
+
+            square_max = cd.get('square_max')
+            if square_max is not None:
+                best_projects = best_projects.filter(square__lte=square_max)
+
+            floors_quantity = cd.get('floors_quantity')
+            if floors_quantity:
+                best_projects = best_projects.filter(floors_quantity=floors_quantity)
+
+            bedrooms_quantity = cd.get('bedrooms_quantity')
+            if bedrooms_quantity:
+                best_projects = best_projects.filter(bedrooms_quantity=bedrooms_quantity)
+
+            bathrooms_quantity = cd.get('bathrooms_quantity')
+            if bathrooms_quantity:
+                best_projects = best_projects.filter(bathrooms_quantity=bathrooms_quantity)
+
+        # Пагинация
+        best_projects = get_paginated_collection(request, best_projects, 12)
+
+        # Рендерим HTML блок с карточками
+        rendered_html = render_to_string('home/includes/best_projects_cards.html', {'best_projects': best_projects})
+
+        return JsonResponse({'html': rendered_html})

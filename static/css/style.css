@@ -27,7 +27,7 @@
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
 body {
     font-family: 'Involve', sans-serif;
@@ -52,6 +52,28 @@ html{
 
 main {
     margin-top: 92px;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modal {
@@ -821,7 +843,6 @@ main {
     padding: 19px 30px;
     align-items: center;
     border-radius: 20px;
-    margin-bottom: 10px;
 }
 .best-projects__filters-form > div {
     display: flex;

@@ -12,8 +12,7 @@
             <h2>{{ slide.title }}</h2>
             <hr>
             <div class="slider-heading__promo">
-                {{ slide.description }}
-                <!-- <p>Закажите строительство дома до 30 ноября<br> и получите скидку 10 000</p> -->
+                {{ slide.description|linebreaks }}
                 <div class="slider-heading__want-the-house-button">
                     <button class="openModal">
                         <img src="{% static 'images/want-the-house.svg' %}" alt="">
@@ -190,16 +189,6 @@
                             {{ filter_form.price_max }}
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="catalog__filters-submit-buttons">
-                <div class="catalog__filters-submit-button">
-                    <button type="submit">Применить фильтры</button>
-                </div>
-                <div class="catalog__filters-submit-button">
-                    <a href="/#bestProjects">
-                        Сбросить всё
-                    </a>
                 </div>
             </div>
         </form>
@@ -995,7 +984,7 @@
         });
     });
 
-
+    // Яндекс Карты
     var myMap;
     ymaps.ready(function () {
         myMap = new ymaps.Map("map", {
@@ -1073,6 +1062,51 @@
         } catch (n) {
             console.error("Ошибка запроса:", n)
         }
+    });
+</script>
+<script>
+    // Фильтрация лучших проектов
+    $(document).ready(function() {
+        $('#bestProjectsForm input, #bestProjectsForm select').on('change input', function(event) {
+            event.preventDefault();
+
+            let formData = $(this).serialize(); 
+
+            let cardsContainer = $('.best-projects__cards');
+            cardsContainer.addClass('fade-out');
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'home:best_projects_filter' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        cardsContainer.html(response.html);
+
+                        cardsContainer.removeClass('fade-out').addClass('fade-in');
+
+                        $(document).ready(function () {
+                            $('.photo-slider').slick({
+                                dots: true,
+                                infinite: true,
+                                speed: 500,
+                                slidesToShow: 1,
+                                adaptiveHeight: false,
+                                autoplay: false,
+                            });
+                        });
+                        setTimeout(() => {
+                            cardsContainer.removeClass('fade-in');
+                        }, 500);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200); 
+
+            
+        });
     });
 </script>
 {% endblock %}
