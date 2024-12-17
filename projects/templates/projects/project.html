@@ -47,9 +47,11 @@
         </div>
         <div class="project__details">
             <div class="project__buttons-group">
-                <div class="project__download-estimates">
-                    <button>Скачать смету</button>
-                </div>
+                {% if project.estimates %}
+                    <a href="{{ project.estimates.url }}" class="project__download-estimates">
+                        <button>Скачать смету</button>
+                    </a>
+                {% endif %}
                 <div class="project__discount">
                     <button>Скидка 5%</button>
                 </div>
@@ -59,9 +61,11 @@
                 <hr>
             </div>
             <div class="project__buttons-group--adaptive container">
-                <div class="project__download-estimates--adaptive">
-                    <button>Скачать смету</button>
-                </div>
+                {% if project.estimates %}
+                    <a href="{{ project.estimates.url }}" class="project__download-estimates--adaptive">
+                        <button>Скачать смету</button>
+                    </a>
+                {% endif %}
                 <div class="project__discount--adaptive">
                     <button>Скидка 5%</button>
                 </div>
@@ -69,7 +73,9 @@
             <div class="project__slider--adaptive">
                 {% for photo in project.photos.all %}
                     <div class="project__slide--adaptive">
-                        <img src="{{ photo.image.url }}" alt="">
+                        <a href="{{ photo.image.url }}">
+                            <img src="{{ photo.image.url }}" alt="">
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -78,14 +84,14 @@
                     <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
                     <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
                     <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                    <li><span>Количество санузлов</span><span>{{ bathrooms_quantity }}</span></li>
+                    <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
                     <li><span>Материал</span><span>{{ project.material }}</span></li>
                     <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
                     <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
                 </ul>
             </div>
             <div class="project__credit container">
-                <button>Дом подходит под ипотеку,<br> или кредит</button>
+                <div>Дом подходит под ипотеку,<br> или кредит</div>
             </div>
             <div class="project__order-button">
                 <button>
@@ -150,6 +156,41 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="similar-projects--adaptive">
+            <!-- <div class="catalog__cards"> -->
+                {% for project in similar_projects %}
+                    <div class="catalog__card">
+                        <div class="photo-slider">
+                            {% for photo in project.photos.all %}
+                                <div class="best-projects__card-image photo-slider-item">
+                                    <img src="{{ photo.image.url }}" alt="">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="best-projects__card-text-container">
+                            <div class="best-projects__card-heading">
+                                <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                            </div>
+                            <hr>
+                            <div class="best-projects__card-content">
+                                <ul class="table-of-contents">
+                                    <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
+                                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                                    <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                                    <li><span>Стоимость</span><span>от {{ project.price|floatformat:0 }} р</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="best-projects__order-button">
+                            <button>Заказать строительство</button>
+                        </div>
+                        <div class="best-projects__more-button">
+                            <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            <!-- </div> -->
         </div>
     </div>
 
@@ -262,18 +303,28 @@
 
     .lum-img {
         object-fit: cover !important;
-        width: 85vw;;
+        width: 85vw;
     }
-    </style>
+
+    @media (max-width: 990px) {
+        .lum-img {
+            width: 100vw;
+        }
+    }
+</style>
 <script type=module>
 import { L as LuminousGallery } from "/static/js/luminous-lightbox/luminous-lightbox.js";
 
-
 function initGallery() {
   var galleryItems = document.querySelectorAll(".project__current-slide a")
-  console.log(galleryItems)
     if (galleryItems.length > 0) {
         new LuminousGallery(galleryItems);
+    }
+
+    var mobileGalleryItems = document.querySelectorAll(".project__slide--adaptive a");
+    console.log(mobileGalleryItems)
+    if (galleryItems.length > 0) {
+        new LuminousGallery(mobileGalleryItems );
     }
 }
 initGallery();
@@ -371,6 +422,7 @@ initGallery();
         });
     });
     
+    // Яндекс карты
     var myMap;
     ymaps.ready(function(){
         myMap = new ymaps.Map("map", {

@@ -1,0 +1,35 @@
+{% load price_filters %}
+
+{% for project in best_projects %}
+<div class="best-projects__card">
+    <div class="photo-slider">
+        {% for photo in project.photos.all %}
+        <div class="best-projects__card-image photo-slider-item">
+            <img src="{{ photo.image.url }}" alt="Фото проекта">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="best-projects__card-text-container">
+        <div class="best-projects__card-heading">
+            <a target="_blank" href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+        </div>
+        <hr>
+        <div class="best-projects__card-content">
+            <ul class="table-of-contents">
+                <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="best-projects__order-button openModal">
+        <button>Заказать строительство</button>
+    </div>
+    <div class="best-projects__more-button">
+        <a target="_blank" href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+    </div>
+</div>
+{% empty %}
+<p>Проекты не найдены.</p>
+{% endfor %}

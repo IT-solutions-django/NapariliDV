@@ -29,10 +29,10 @@
                     </div>
                     <div class="contacts-page__info-content">
                         <div class="contacts-page__info_block-heading">
-                            <p>Главный офис:</p>
+                            <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
                         </div>
                         <div>
-                            <p class="font__inter">г. Владивосток, Волгоградская 7</p>
+                            <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <p>Время работы:</p>
                         </div>
                         <div>
-                            <p class="font__inter">ПН-СБ с 10:00 - 18:00</p>
+                            <p class="font__inter">{{ company_info.working_mode }}</p>
                         </div>
                     </div>
                 </div>
@@ -57,10 +57,10 @@
                     </div>
                     <div class="contacts-page__info-content">
                         <div class="contacts-page__info_block-heading">
-                            <p>Телефон:</p>
+                            <a href="tel:{{ company_info.phone }}">Телефон:</a>
                         </div>
                         <div>
-                            <p class="font__inter">+7 (908) 998-58-70</p>
+                            <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
                         </div>
                     </div>
                 </div>
@@ -70,10 +70,10 @@
                     </div>
                     <div class="contacts-page__info-content">
                         <div class="contacts-page__info_block-heading">
-                            <p>Почта:</p>
+                            <a href="mailto:{{ company_info.email }}">Почта:</a>
                         </div>
                         <div>
-                            <p>naparili.dv@mail.ru</p>
+                            <a href="mailto:{{ company_info.email }}">naparili.dv@mail.ru</a>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Новости - Напарили ДВ{% endblock %}
+{% block title %}Политика конфиденциальности - Напарили ДВ{% endblock %}
 
 {% block content %}
 <div class="breadcrumbs container font__inter">
@@ -12,42 +12,28 @@
         <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
     </div>
     <div>
-        <a href="{% url 'blog:blog' %}">Новости</a>
-    </div>
-    <div>
-        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
-    </div>
-    <div>
-        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        <a href="{% url 'contacts:privacy_policy' %}">Политика конфиденциальности</a>
     </div>
 </div>
 <div class="article container">
     <div class="article__header">
         <div class="article__heading">
-            <h1>{{ article.title }}</h1>
+            <h1>Политика конфиденциальности</h1>
         </div>
         <hr class="article__header-hr--adaptive">
-        <div class="article__date">
-            <i>{{ article.created_at|date:"d.m.Y" }}</i>
-        </div>
     </div>
     <hr class="article__header-hr">
     <div class="article__content">
-        {% for paragraph in article.paragraphs.all %}
+        {% for paragraph in privacy_policy.paragraphs.all %}
             <div class="article__content-block">
                 <div class="article__paragraph">
                     <div class="article__paragraph-heading">
                         {{ paragraph.title|linebreaks }}
                     </div>
-                    <div class="article__paragraph-text">
+                    <div class="article__paragraph-text font__inter">
                         {{ paragraph.content|linebreaks }}
                     </div>
                 </div>
-                {% if paragraph.image %}
-                    <div class="article__image">
-                        <img src="{{ paragraph.image.url }}" alt="">
-                    </div>
-                {% endif %}
             </div>
         {% endfor %}
     </div>

@@ -23,9 +23,36 @@ class GalleryPhoto(models.Model):
         verbose_name_plural = 'Галерея'
 
 
+class PrivacyPolicy(models.Model): 
+    title = models.CharField('Политика конфиденциальности', default='Политика конфиденциальности', max_length=80)
+
+    class Meta: 
+        verbose_name = 'Политика конфиденциальности'
+        verbose_name_plural = 'Политика конфиденциальности'
+
+    def save(self, *args, **kwargs):
+        if self.__class__.objects.count():
+            self.pk = self.__class__.objects.first().pk
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def get_instance(cls) -> "PrivacyPolicy":
+        instance, created = cls.objects.get_or_create(id=1)
+        return instance
+    
+    def __str__(self) -> str: 
+        return 'Политика конфиденциальности'
+
+
+class PrivacyPolicyParagraph(models.Model): 
+    title = models.TextField('Заголовок') 
+    content = models.TextField('Содержание')
+    privacy_policy = models.ForeignKey(verbose_name='Политика конфиденциальности', to=PrivacyPolicy, on_delete=models.CASCADE, related_name='paragraphs')
+
+
 class Request(models.Model): 
-    name = models.CharField('Имя', max_length=50)
-    phone = models.CharField('Телефон', max_length=20)
+    name = models.CharField('Имя', max_length=25)
+    phone = models.CharField('Телефон', max_length=18)
     created_at = models.DateTimeField('Дата и время публикации', auto_now_add=True)
     is_closed = models.BooleanField('Обработано', default=False)
 

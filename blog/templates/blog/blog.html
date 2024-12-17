@@ -18,122 +18,66 @@
 <div class="news container">
     <div class="news-page__header">
         <div class="news__heading">
-            <h1>Новости</h1>
+            <h1>{{ page_title }}</h1>
         </div>
         <hr class="news-page__header-hr--adaptive">
         <div class="news__header-right-buttons">
-            <div class="news__header-button">
-                <button>Блог</button>
-            </div>
-            <div class="news__header-button">
-                <button>Новости</button>
-            </div>
+            <form id="blogForm" action="{% url 'blog:blog' %}">
+                    {% for article_type in form.article_type %}
+                    <div class="news__header-button">
+                            {{ choice.tag }}
+                            <input 
+                                type="radio"
+                                name="{{ article_type.data.name }}" 
+                                value="{{ article_type.data.value }}"
+                                class="radio-toggle"
+                                id="{{ article_type.id_for_label }}" 
+                                {% if article_type.data.selected %}checked data-was-checked="true"{% endif %}
+                            >
+                            <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
+                        </div>
+                    {% endfor %}
+                <button type="submit" style="display: none;"></button>
+            </form>
         </div>
     </div>
     <hr class="news-page__header-hr">
     <div class="news__cards">
-        <div class="news__card">
-            <div class="news__card-image">
-                <img src="{% static 'images/news1.png' %}" alt="">
-            </div>
-            <div class="news__card-text-container">
-                <div class="best-projects__card-heading">
-                    <a href="{% url 'blog:article' %}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, nobis!</a>
+        {% for article in articles %}
+            <div class="news__card">
+                <div class="news__card-image">
+                    <img src="{{ article.image.url }}" alt="">
                 </div>
-                <hr>
-                <div class="news__card-description">
-                    <p>Банальные, но неопровержимые выводы, а также явные признаки победы институционализации призывают нас к новым свершениям</p>
+                <div class="news__card-text-container">
+                    <div class="best-projects__card-heading">
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </div>
+                    <hr>
+                    <div class="news__card-description">
+                        <p>{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
+                    </div>
+                    <div class="news__card-date">
+                        <i>{{ article.created_at|date:"d.m.Y" }}</i>
+                    </div>
                 </div>
-                <div class="news__card-date">
-                    <i>30.11.2024</i>
-                </div>
-            </div>
-            <div class="news-page__read-button">
-                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
-            </div>
-        </div>
-        <div class="news__card">
-            <div class="news__card-image">
-                <img src="{% static 'images/news1.png' %}" alt="">
-            </div>
-            <div class="news__card-text-container">
-                <div class="best-projects__card-heading">
-                    <a href="{% url 'blog:article' %}">Заголовок</a>
-                </div>
-                <hr>
-                <div class="news__card-description">
-                    <p>Банальные, но неопровержимые выводы, 
-                        а также явные признаки победы 
-                        институционализации призывают нас 
-                        к новым свершениям</p>
-                </div>
-                <div class="news__card-date">
-                    <i>30.11.2024</i>
+                <div class="news-page__read-button">
+                    <a href="{{ article.get_absolute_url }}"><button>Читать</button></a>
                 </div>
             </div>
-            <div class="news-page__read-button">
-                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
-            </div>
-        </div>
-        <div class="news__card">
-            <div class="news__card-image">
-                <img src="{% static 'images/news1.png' %}" alt="">
-            </div>
-            <div class="news__card-text-container">
-                <div class="best-projects__card-heading">
-                    <a href="{% url 'blog:article' %}">Заголовок</a>
-                </div>
-                <hr>
-                <div class="news__card-description">
-                    <p>Банальные, но неопровержимые выводы, 
-                        а также явные признаки победы 
-                        институционализации призывают нас 
-                        к новым свершениям</p>
-                </div>
-                <div class="news__card-date">
-                    <i>30.11.2024</i>
-                </div>
-            </div>
-            <div class="news-page__read-button">
-                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
-            </div>
-        </div>
-        <div class="news__card">
-            <div class="news__card-image">
-                <img src="{% static 'images/news1.png' %}" alt="">
-            </div>
-            <div class="news__card-text-container">
-                <div class="news__card-heading  ">
-                    <a href="{% url 'blog:article' %}">Заголовок <br> ещё одна строка!</a>
-                </div>
-                <hr>
-                <div class="news__card-description">
-                    <p>Банальные, но неопровержимые выводы, 
-                        а также явные признаки победы 
-                        институционализации призывают нас 
-                        к новым свершениям</p>
-                </div>
-                <div class="news__card-date">
-                    <i>30.11.2024</i>
-                </div>
-            </div>
-            <div class="news-page__read-button">
-                <a href="{% url 'blog:article' %}"><button>Читать</button></a>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div class="catalog__pagination">
         <div class="catalog__pagination-controls">
-            {% if projects.has_previous %}
-                <a href="?page={{ projects.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left"></a>
+            {% if articles.has_previous %}
+                <a href="?page={{ query_params }}&page={{ articles.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left pagination-link"></a>
             {% else %}
                 <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
             {% endif %}
             <div>
-                <p>{{ projects.number }} из {{ projects.paginator.num_pages }}</p>
+                <p>{{ articles.number }} из {{ articles.paginator.num_pages }}</p>
             </div>
-            {% if projects.has_next %}
-                <a href="?page={{ projects.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right"></a>
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right pagination-link"></a>
             {% else %}
                 <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
             {% endif %}
@@ -143,56 +87,58 @@
 
 <div class="about">
     <div class="contacts container">
-        <div class="contacts__small-left-column">
-            <div class="contacts__heading">
-                <h4>Контакты</h4>
-                <hr>
+        <div class="contacts container">
+            <div class="contacts__small-left-column">
+                <div class="contacts__heading">
+                    <h4>Контакты</h4>
+                </div>
+                <div class="contacts__info">
+                    <div class="contacts__block">
+                        <div>
+                            <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
+                        </div>
+                        <div>
+                            <div class="contacts__block-heading">
+                                <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
+                            </div>
+                            <div class="font__inter">
+                                <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contacts__block">
+                        <div>
+                            <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
+                        </div>
+                        <div>
+                            <div class="contacts__block-heading">
+                                <p>Время работы:</p>
+                            </div>
+                            <div class="font__inter">
+                                <p>{{ company_info.working_mode }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contacts__block">
+                        <div>
+                            <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
+                        </div>
+                        <div>
+                            <div class="contacts__block-heading">
+                                <a href="tel:{{ company_info.phone }}">Телефон:</a>
+                            </div>
+                            <div class="font__inter">
+                                <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Главный офис:</p>
-                    </div>
-                    <div class="font__inter">
-                        <p>г. Владивосток, Волгоградская 7</p>
-                    </div>
+            <div class="contacts__big-right-column">
+                <div class="map" id="map">
+    
                 </div>
             </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Время работы:</p>
-                    </div>
-                    <div  class="font__inter">
-                        <p>ПН-СБ с 10:00 - 18:00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Телефон:</p>
-                    </div>
-                    <div  class="font__inter">
-                        <p>+7 (908) 998-58-70</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contacts__big-right-column">
-            <div class="map" id="map">
-
-            </div>
-        </div>
         
     </div>
 </div>
@@ -240,5 +186,103 @@ ymaps.ready(function(){
           });
     myMap.geoObjects.add(s);
 }); 
+</script>
+
+<script>
+    // Сохранение фильтров при пагинации
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.catalog__pagination a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                let formData = $('#blogForm').serialize(); 
+                const url = new URL(link.href + "&" + formData);
+                window.location.href = url.toString();
+            });
+        });
+    });
+    </script>
+
+<script>
+    // Сброс input radio
+    document.addEventListener("DOMContentLoaded", function () {
+    const radioButtons = document.querySelectorAll('.radio-toggle');
+
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            if (this.dataset.wasChecked === "true") {
+                this.checked = false;
+                this.dataset.wasChecked = "false";
+            } else {
+                this.dataset.wasChecked = "true";
+            }
+
+            radioButtons.forEach(function (otherRadio) {
+                if (otherRadio !== radio && otherRadio.name == radio.name) {
+                    otherRadio.dataset.wasChecked = "false";
+                }
+            });
+
+            // Применение новых фильтров
+            let formData = $('#blogForm').serialize();
+            let cardsContainer = $('.news__cards');
+            let paginationContainer = $('.catalog__pagination');
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'blog:filter_blog_api' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        cardsContainer.html(response.html);
+                        paginationContainer.html(response.pagination)
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200);
+        });
+    });
+});
+</script>
+
+<script>
+// Фильтрация новостей/статей
+$(document).ready(function() {
+    $('#blogForm input').on('change input', function(event) {
+        let formData = $('#blogForm').serialize();
+
+        let cardsContainer = $('.news__cards');
+
+        timeout = setTimeout(function () {
+            $.ajax({
+                url: "{% url 'blog:filter_blog_api' %}",  
+                type: "GET",
+                data: formData,
+                success: function(response) {
+                    cardsContainer.html(response.html);
+                    console.log(response.html)
+
+                    // Добавление к новым ссылкам обработчиков для сохранения текущих фильтров
+                    document.querySelectorAll('.catalog__pagination a').forEach(link => {
+                        link.addEventListener('click', event => {
+                            event.preventDefault();
+
+                            let formData = $('#blogForm').serialize(); 
+                
+                            const url = new URL(link.href + "&" + formData);
+                            console.log(url.toString())
+                            window.location.href = url.toString();
+                    });
+                });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Ошибка при фильтрации:", error);
+                }
+            });
+        }, 200);  
+
+    });
+});
 </script>
 {% endblock %}
