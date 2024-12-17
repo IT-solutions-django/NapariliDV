@@ -58,44 +58,45 @@
         <div class="contacts__small-left-column">
             <div class="contacts__heading">
                 <h4>Контакты</h4>
-                <hr>
             </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Главный офис:</p>
+            <div class="contacts__info">
+                <div class="contacts__block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
                     </div>
-                    <div class="font__inter">
-                        <p>г. Владивосток, Волгоградская 7</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Время работы:</p>
-                    </div>
-                    <div  class="font__inter">
-                        <p>ПН-СБ с 10:00 - 18:00</p>
+                    <div>
+                        <div class="contacts__block-heading">
+                            <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
+                        </div>
+                        <div class="font__inter">
+                            <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Телефон:</p>
+                <div class="contacts__block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
                     </div>
-                    <div  class="font__inter">
-                        <p>+7 (908) 998-58-70</p>
+                    <div>
+                        <div class="contacts__block-heading">
+                            <p>Время работы:</p>
+                        </div>
+                        <div class="font__inter">
+                            <p>{{ company_info.working_mode }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts__block">
+                    <div>
+                        <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
+                    </div>
+                    <div>
+                        <div class="contacts__block-heading">
+                            <a href="tel:{{ company_info.phone }}">Телефон:</a>
+                        </div>
+                        <div class="font__inter">
+                            <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
+                        </div>
                     </div>
                 </div>
             </div>

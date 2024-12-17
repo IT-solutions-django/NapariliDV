@@ -752,20 +752,20 @@
             <div class="contacts__info">
                 <div class="contacts__block">
                     <div>
-                        <img src="static/images/contacts-icon-1.svg" alt="">
+                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
                     </div>
                     <div>
                         <div class="contacts__block-heading">
-                            <p>Главный офис:</p>
+                            <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
                         </div>
                         <div class="font__inter">
-                            <p>{{ company_info.address }}</p>
+                            <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="contacts__block">
                     <div>
-                        <img src="static/images/contacts-icon-2.svg" alt="">
+                        <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
                     </div>
                     <div>
                         <div class="contacts__block-heading">
@@ -778,14 +778,14 @@
                 </div>
                 <div class="contacts__block">
                     <div>
-                        <img src="static/images/contacts-icon-3.svg" alt="">
+                        <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
                     </div>
                     <div>
                         <div class="contacts__block-heading">
-                            <p>Телефон:</p>
+                            <a href="tel:{{ company_info.phone }}">Телефон:</a>
                         </div>
                         <div class="font__inter">
-                            <p>+7 (908) 998-58-70</p>
+                            <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
                         </div>
                     </div>
                 </div>

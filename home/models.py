@@ -28,6 +28,7 @@ class CompanyInfo(models.Model):
     full_name = models.CharField('Полное название организации', max_length=120, null=True, blank=True)
     ogrn = models.CharField('ОГРН', max_length=13, null=True, blank=True)
     inn = models.CharField('ИНН', max_length=10, null=True, blank=True)
+    two_gis_profile = models.URLField('Ссылка на профиль в 2GIS', max_length=200, default='https://2gis.ru/vladivostok/firm/70000001059056448/tab/reviews')
 
     admin_panel_title = models.CharField(
         'Название вкладки в админке', 

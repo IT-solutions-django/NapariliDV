@@ -157,6 +157,41 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="similar-projects--adaptive">
+            <!-- <div class="catalog__cards"> -->
+                {% for project in similar_projects %}
+                    <div class="catalog__card">
+                        <div class="photo-slider">
+                            {% for photo in project.photos.all %}
+                                <div class="best-projects__card-image photo-slider-item">
+                                    <img src="{{ photo.image.url }}" alt="">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="best-projects__card-text-container">
+                            <div class="best-projects__card-heading">
+                                <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                            </div>
+                            <hr>
+                            <div class="best-projects__card-content">
+                                <ul class="table-of-contents">
+                                    <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
+                                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                                    <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                                    <li><span>Стоимость</span><span>от {{ project.price|floatformat:0 }} р</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="best-projects__order-button">
+                            <button>Заказать строительство</button>
+                        </div>
+                        <div class="best-projects__more-button">
+                            <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            <!-- </div> -->
+        </div>
     </div>
 
     <div class="contacts container">
