@@ -101,7 +101,14 @@
                     <div class="catalog__radio-group">
                         {% for floor in form.floors_quantity %}
                             <div class="catalog__radio-button">
-                                {{ floor.tag }}
+                                <input 
+                                    type="radio" 
+                                    name="{{ floor.data.name }}" 
+                                    value="{{ floor.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ floor.id_for_label }}" 
+                                    {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
                                 <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
                             </div>
                         {% endfor %}
@@ -112,7 +119,14 @@
                     <div class="catalog__radio-group">
                         {% for bedroom in form.bedrooms_quantity %}
                             <div class="catalog__radio-button">
-                                {{ bedroom.tag }}
+                                <input 
+                                    type="radio" 
+                                    name="{{ bedroom.data.name }}" 
+                                    value="{{ bedroom.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ bedroom.id_for_label }}" 
+                                    {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
                                 <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
                             </div>
                         {% endfor %}
@@ -123,7 +137,14 @@
                     <div class="catalog__radio-group">
                         {% for bathroom in form.bathrooms_quantity %}
                             <div class="catalog__radio-button">
-                                {{ bathroom.tag }}
+                                <input 
+                                    type="radio" 
+                                    name="{{ bathroom.data.name }}" 
+                                    value="{{ bathroom.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ bathroom.id_for_label }}" 
+                                    {% if bathroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
                                 <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
                             </div>
                         {% endfor %}
@@ -293,6 +314,7 @@
 
 {% block script %}
 <script>
+// Слайдер
 $(document).ready(function () {
     $('.photo-slider').slick({
         dots: true,
@@ -304,6 +326,7 @@ $(document).ready(function () {
     });
 });
 
+// Яндекс Карты
 var myMap;
 ymaps.ready(function(){
     myMap = new ymaps.Map("map", {
@@ -336,6 +359,7 @@ ymaps.ready(function(){
 </script>
 
 <script>
+// Сохранение фильтров при пагинации
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.catalog__pagination-controls a').forEach(link => {
         link.addEventListener('click', event => {
@@ -351,6 +375,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             window.location.href = url.toString();
+        });
+    });
+});
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const radioButtons = document.querySelectorAll('.radio-toggle');
+    console.log(radioButtons)
+
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            console.log('да')
+            if (this.dataset.wasChecked === "true") {
+                this.checked = false;
+                this.dataset.wasChecked = "false";
+            } else {
+                this.dataset.wasChecked = "true";
+            }
+
+            radioButtons.forEach(function (otherRadio) {
+                if (otherRadio !== radio) {
+                    otherRadio.dataset.wasChecked = "false";
+                }
+            });
         });
     });
 });

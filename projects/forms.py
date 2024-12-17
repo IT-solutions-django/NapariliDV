@@ -25,7 +25,10 @@ class CatalogFiltersForm(forms.Form):
 
         self.min_product_price = round(get_min_project_price(), 0)
         self.fields['price_min'].widget.attrs['min'] = self.min_product_price
+        self.fields['price_max'].widget.attrs['max'] = self.max_product_price
         self.fields['price_min'].widget.attrs['placeholder'] = f'{price_format(self.min_product_price)} ₽'
+
+        self.fields['price_min'].widget.attrs['min'] = self.min_product_price
 
         self.fields['categories'].choices = [(category.id, category.name) for category in Category.objects.all()]
         self.fields['materials'].choices = [(None, "Все")] + [(material.id, material.name) for material in Material.objects.all()]
@@ -78,6 +81,7 @@ class CatalogFiltersForm(forms.Form):
             attrs={ 
                 'placeholder': '80', 
                 'min': 80,
+                'max': 120,
                 'step': 5,
             }
         ), 
@@ -90,6 +94,7 @@ class CatalogFiltersForm(forms.Form):
             attrs={ 
                 'placeholder': '120', 
                 'min': 0,
+                'max': 120,
                 'step': 5,
             }
         ), 
@@ -97,15 +102,21 @@ class CatalogFiltersForm(forms.Form):
     floors_quantity = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 3)],  
         required=False,
-        widget=forms.RadioSelect(),
+        widget=forms.RadioSelect(attrs={
+            'class': 'radio-toggle'
+        }),
     )
     bedrooms_quantity = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 5)],
         required=False,
-        widget=forms.RadioSelect(),
+        widget=forms.RadioSelect(attrs={
+            'class': 'radio-toggle'
+        }),
     )
     bathrooms_quantity = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 4)], 
         required=False,
-        widget=forms.RadioSelect(),
+        widget=forms.RadioSelect(attrs={
+            'class': 'radio-toggle'
+        }),
     )
