@@ -315,6 +315,12 @@ main {
     overflow-y: auto;
     overflow-x: hidden;
 }
+#mobileFiltersForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
 .mobile-catalog__close-button {
     position: absolute;
     right: 15px;
@@ -337,6 +343,10 @@ main {
 
 .mobile-catalog__material-filters {
     margin-top: 30px;
+}
+.catalog__not-found {
+    text-align: center; 
+    width: 100%;
 }
 .container {
     padding-left: 10px;
