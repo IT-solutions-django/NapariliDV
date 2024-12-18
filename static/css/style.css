@@ -39,6 +39,11 @@ body {
     overflow-x: hidden; 
 }
 
+body.scroll-disabled {
+    height: 100vh; 
+    overflow-y: hidden;
+}
+
 a {
     text-decoration: none;
     color: #595959
@@ -284,7 +289,8 @@ main {
 
 #mobileCatalogFilterOverlay {
     display: none;
-    /* position: fixed; */
+    /* display: flex; */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -292,7 +298,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000000;
 }
 #mobileCatalogFilter {
     display: none;
@@ -306,6 +312,8 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: white;
     padding: 20px 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .mobile-catalog__close-button {
     position: absolute;
