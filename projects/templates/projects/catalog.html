@@ -249,10 +249,10 @@
                                     name="{{ floor.data.name }}" 
                                     value="{{ floor.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ floor.id_for_label }}" 
+                                    id="{{ floor.id_for_label }}_" 
                                     {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                <label for="{{ floor.id_for_label }}_">{{ floor.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -267,10 +267,10 @@
                                     name="{{ bedroom.data.name }}" 
                                     value="{{ bedroom.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ bedroom.id_for_label }}" 
+                                    id="{{ bedroom.id_for_label }}_" 
                                     {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                <label for="{{ bedroom.id_for_label }}_">{{ bedroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -285,10 +285,10 @@
                                     name="{{ bathroom.data.name }}" 
                                     value="{{ bathroom.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ bathroom.id_for_label }}" 
+                                    id="{{ bathroom.id_for_label }}_" 
                                     {% if bathroom.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
+                                <label for="{{ bathroom.id_for_label }}_">{{ bathroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>

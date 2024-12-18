@@ -316,6 +316,9 @@ main {
     overflow-x: hidden;
 }
 #mobileFiltersForm {
+    
+}
+#mobileFiltersForm {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -3108,7 +3111,7 @@ footer hr,
     .news-page__header-hr--adaptive, 
     .article__header-hr--adaptive, 
     .slider .slick-arrow {
-        display: none;
+        display: none !important;
     }
     .advantages__heading {
         padding-bottom: 20px;
