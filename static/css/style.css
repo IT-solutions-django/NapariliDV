@@ -666,6 +666,21 @@ main {
     bottom: 0px;
     right: 0px;
 }
+.slider-heading__want-the-house-button,
+.advantages__choose-house,
+.about-company__watch-more,
+.feedback__button, 
+.footer__button button, 
+.project__order-button,
+.modal-feedback__send, 
+.modal-feedback__back, 
+.news__read-button {
+    transition: transform 0.3s ease; 
+}
+
+.clicked {
+    transform: scale(0.85);
+}
 
 .slider-heading h2 {
     word-wrap: break-word; 

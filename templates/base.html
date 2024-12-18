@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-feedback__send">
+                <div class="modal-feedback__send animated">
                     <button type="submit">
                         <img src="{% static 'images/send-modal.svg' %}" alt="">
                     </button>
@@ -86,7 +86,7 @@
                     <p>В самое ближайшее время мы<br> свяжемся с Вами!</p>
                 </div>
             </div>
-            <div class="modal-feedback__back">
+            <div class="modal-feedback__back animated">
                 <button id="closeSuccessModal" type="submit">
                     <img src="{% static 'images/modal-back.svg' %}" alt="">
                 </button>
@@ -197,7 +197,7 @@
             </div>
 
             <div class="footer__button openModal">
-                <button>
+                <button class="animated">
                     <img src="{% static 'images/leave-request.svg' %}" alt="">
                 </button>
             </div>
@@ -305,6 +305,27 @@
         });
     });
     
+</script>
+
+<script>
+    // Анимация кнопок
+document.querySelectorAll('.animated').forEach(function(button) {
+    button.addEventListener('mousedown', function() {
+        this.classList.add('clicked');
+
+        setTimeout(() => {
+            this.classList.remove('clicked');
+        }, 300); 
+    });
+
+    // Убираем класс при отпускании кнопки
+    button.addEventListener('mouseup', function() {
+    });
+
+    button.addEventListener('blur', function() {
+        this.classList.remove('clicked');
+    });
+});
 </script>
 
 {% block script %}

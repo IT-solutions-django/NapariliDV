@@ -109,7 +109,8 @@
             <hr>
             <div class="slider-heading__promo">
                 {{ slide.description|linebreaks }}
-                <div class="slider-heading__want-the-house-button">
+                <div class="slider-heading__want-the-house-button animated">
+                    <span class="circle"></span>
                     <button class="openModal">
                         <img src="{% static 'images/want-the-house.svg' %}" alt="">
                     </button>
@@ -212,7 +213,7 @@
                 <div>
                     <img src="static/images/advantages1.png" alt="">
                 </div>
-                <div class="advantages__choose-house">
+                <div class="advantages__choose-house animated">
                     <button>
                         <a target="_blank" href="{% url 'projects:catalog' %}">
                             <img src="static/images/choose-house-button.svg" alt="">
@@ -371,7 +372,7 @@
                                 пример современных тенденций — семантический разбор внешних противодействий
                                 обеспечивает актуальность форм воздействия. </p>
                         </div>
-                        <div class="about-company__watch-more">
+                        <div class="about-company__watch-more animated">
                             <a href="{% url 'contacts:about_company' %}">
                                 <img src="static/images/watch-more.svg" alt="">
                             </a>
@@ -512,7 +513,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="feedback__button">
+                        <div class="feedback__button animated">
                             <button>
                                 <img src="static/images/send.svg" alt="">
                             </button>
@@ -772,7 +773,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="news__read-button">
+                    <div class="news__read-button animated">
                         <a href="{{ article.get_absolute_url }}">
                             <button>
                                 <img src="{% static 'images/read-news.svg' %}" alt="">
@@ -898,7 +899,7 @@
 {% endblock %}
 
 {% block script %}
-<script type=module src="{% static 'js/home.js' %}"></script>
+<script src="{% static 'js/home.js' %}" defer></script>
 <script>
     $(document).ready(function () {
         $('.slider').slick({
@@ -1058,8 +1059,8 @@
         myMap.geoObjects.add(s);
     });
 
+    // Ответы на вопросы
     document.addEventListener('DOMContentLoaded', () => {
-
         let checkboxes = document.querySelectorAll('.tab input');
 
         checkboxes.forEach(checkbox => {
@@ -1173,7 +1174,6 @@
 
             // Перерисовка карточек после отмены фильтра
             let formData = $('#bestProjectsForm').serialize();
-
             let cardsContainer = $('.best-projects__cards');
             cardsContainer.addClass('fade-out');
 
@@ -1236,7 +1236,6 @@
     // Обработчики событий
     openFiltersBtn.addEventListener("click", openFilters);
     closeFiltersBtn.addEventListener("click", closeFilters);
-    // filterOverlay.addEventListener("click", closeFilters);
 });
 </script>
 {% endblock %}
