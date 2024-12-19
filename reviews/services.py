@@ -4,6 +4,7 @@ from requests.adapters import Retry, HTTPAdapter
 from .models import Review 
 from .exceptions import UpdateReviewError, EmptyReviewList
 from bs4 import BeautifulSoup
+from datetime import datetime, timezone
 
 
 def get_2gis_reviews_data(api_key_2gis: str, organization_id: str, reviews_limit: int = 10) -> dict[str, Any]:
@@ -157,22 +158,114 @@ def get_vl_reviews_data():
             else:
                 continue
 
+            time_tag = review.find('span', class_='time')
+            time_text = time_tag.text 
+            created_at = convert_to_datetime(time_text)
+            print(created_at)
+
             if star_rating >= 4:
                 reviews.append({
                     'author': user_name,
                     'text': review_text,
                     'author_avatar': user_avatar,
-                    'stars': star_rating
+                    'stars': star_rating, 
+                    'created_at': created_at,
                 })
 
-        for data_review in reviews:
-            # review, _ = Review.objects.get_or_create(
-            #     author=data_review['user_name'],
-            #     grade=data_review['star_rating'],
-            #     review=data_review['review_text'],
-            #     icon_user=data_review['user_avatar']
-            # )
-            print(data_review)
         return reviews
     else:
         print(f"Ошибка: {response.status_code}")
+
+
+def get_yandex_reviews_data():
+    url = 'https://yandex.ru/maps/org/naparili_dv/68956168702/reviews/?ll=131.926107%2C43.156871&z=17'
+    
+    headers = {
+        'Host': 'yandex.ru',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8',
+        'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Referer': 'https://www.google.com/',
+        'Connection': 'keep-alive',
+        'Cookie': 'maps_los=0; spravka=dD0xNzI2ODEwMTY3O2k9ODYuMTAyLjEzLjc0O0Q9RUY3MDRCMEVFNzU0MTg1N0YzNTZENDg2RjlGMjNFNDMzNTY2NDdDRUQxQzlFQzE3NTFEQThDREFGMjA4MTNFNENFMUFFNkQyRTNCOTBGRTc3NENEOEJFQTExNUVFNjQwRUQwOEIwNDQ2QjI0NUYyRkVBQkEwMzNEMzQxM0JFNzA1MEQ0MzMyOTlGRkY1M0I4MUJERDt1PTE3MjY4MTAxNjc2NTgyNzE1ODA7aD01YmYzMGNlNTBmYTY4ODljZWI0ZmM5NjcyOTI4MGJmOQ==; _yasc=r3AyN1rNx3P7SuIwvwYQHGPC7jhpypevF0XoRv0aqOsiu8Q5dsPbKyhN0qIj9ZEhnAHqypxgYP8=; i=USTWwFikzzttv4Ewt+JjX6guEjI7ryOi3U8d1d0obMvWdQLf6l3nC4o08OxIR2X5+xwqxB4bIfVflox4XzmFHzUvDKI=; yandexuid=1948173161726810137; yashr=8704804031726810137; receive-cookie-deprecation=1; yuidss=1948173161726810137; ymex=2042170139.yrts.1726810139; _ym_uid=1726810140413132111; _ym_d=1726810140; is_gdpr=0; is_gdpr_b=CLmcHRCIlAIoAg==; yp=2042170169.pcs.1#1729488569.hdrc.0#1727414969.szm.0_8:2400x1350:2400x1194; bh=YNvqsLgGahfcyuH/CJLYobEDn8/14QyChPKOA4vBAg==; yabs-vdrf=A0; gdpr=0',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'cross-site',
+        'Sec-Fetch-User': '?1',
+        'Priority': 'u=0, i',
+    }
+    response = requests.get(url, headers=headers).text
+
+    soup = BeautifulSoup(response, "html.parser")
+
+    review_blocks = soup.findAll('div', class_='business-reviews-card-view__review')
+
+    reviews = []
+    for review_block in review_blocks: 
+        author = review_block.find('div', class_='business-review-view__author-name').find('span').text 
+        text = review_block.find('span', class_='business-review-view__body-text').text
+        stars = len(review_block.find('div', class_='business-rating-badge-view__stars').findAll('span'))
+        if stars < 4: 
+            continue
+
+        created_at_str = review_block.find('span', class_='business-review-view__date').find('span').text 
+        created_at = convert_to_datetime(created_at_str)
+
+        author_avatar = review_block.find('div', class_='user-icon-view__icon').get('style')
+        if author_avatar: 
+            author_avatar = author_avatar.split('url(')[1][:-1]
+
+        photos_blocks = review_block.findAll('img', class_='business-review-media__item-img')
+        photos = [photo_block.get('src') for photo_block in photos_blocks]
+
+        reviews.append({
+            'author': author,
+            'text': text,
+            'author_avatar': author_avatar,
+            'stars': stars, 
+            'created_at': created_at,
+            'photos': photos,
+        })
+    return reviews
+
+
+def convert_to_datetime(datetime_str: str) -> datetime: 
+    months_mapper = {
+        'января': 1,
+        'февраля': 2,
+        'марта': 3,
+        'апреля': 4,
+        'мая': 5,
+        'июня': 6,
+        'июля': 7,
+        'августа': 8,
+        'сентября': 9,
+        'октября': 10,
+        'ноября': 11,
+        'декабря': 12
+    }
+
+    if len(datetime_str.split()) == 2: 
+        datetime_parts = datetime_str.split()
+        day = datetime_parts[0] 
+        year = datetime.now().year
+    else: 
+        datetime_parts = datetime_str.split()
+        year = datetime_parts[2]
+        day = datetime_parts[0]
+        month_text = datetime_parts[1]
+
+    month_text = datetime_parts[1]
+    month = months_mapper.get(datetime_parts[1])
+
+    if not month: 
+        raise KeyError(f'Месяца "{month_text}" не существует')
+        
+    datetime_obj = datetime(
+        year=int(year), 
+        month=int(month), 
+        day=int(day)
+    ).replace(tzinfo=timezone.utc) 
+    return datetime_obj

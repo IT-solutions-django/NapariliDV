@@ -15,7 +15,7 @@ class ReviewPhotoInline(admin.TabularInline):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin): 
-    list_display = ['id', 'author', 'content', 'created_at']
+    list_display = ['id', 'author', 'content', 'created_at', 'platform', 'rate']
     inlines = [ReviewPhotoInline]
 
 
