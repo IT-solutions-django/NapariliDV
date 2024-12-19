@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View 
 from django.template.loader import render_to_string 
-from django.utils.http import urlencode
 from projects.services import get_paginated_collection
 from .models import (
     ArticleType, 

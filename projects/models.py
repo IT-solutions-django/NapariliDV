@@ -46,6 +46,9 @@ class Project(models.Model):
     floors_quantity = models.SmallIntegerField('Количество этажей', validators=[MinValueValidator(0.0)], default=1)
     bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)
     estimates = models.FileField('Смета', upload_to='projects/estimates', null=True, blank=True)
+    is_the_best = models.BooleanField('Входит в топ', default=False)
+    is_in_gallery = models.BooleanField('Отображается в галерее', default=False)
+    gallery_photo = models.ImageField('Фото в галерее', upload_to='gallery', blank=True, null=True)
     category = models.ForeignKey(
         verbose_name='Категория', 
         to=Category, 

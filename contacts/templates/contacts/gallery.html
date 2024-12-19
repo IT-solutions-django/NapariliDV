@@ -22,15 +22,22 @@
         </div>
         <hr class="news-page__header-hr--adaptive">
         <div class="news__header-right-buttons">
-            <div class="news__header-button">
-                <button>Дома</button>
-            </div>
-            <div class="news__header-button">
-                <button>Коттеджи</button>
-            </div>
-            <div class="news__header-button">
-                <button>Бани</button>
-            </div>
+            <form id="galleryForm" action="{% url 'blog:blog' %}">
+                {% for category in filter_form.category %}
+                    <div class="news__header-button">
+                        {{ choice.tag }}
+                        <input 
+                            type="radio"
+                            name="{{ category.data.name }}" 
+                            value="{{ category.data.value }}"
+                            class="radio-toggle"
+                            id="{{ category.id_for_label }}" 
+                            {% if category.data.selected %}checked data-was-checked="true"{% endif %}
+                        >
+                        <label for="{{ category.id_for_label }}">{{ category.choice_label }}</label>
+                    </div>
+                {% endfor %}
+            </form>
         </div>
     </div>
     <hr class="news-page__header-hr container">
@@ -50,9 +57,9 @@
         </div>
     </div>
     <div class="gallery-page__slider">
-        {% for gallery_photo in gallery_photos %}
+        {% for project in gallery_photos %}
             <div class="gallery-page__photo">
-                <img src="{{ gallery_photo.photo.url }}" alt="">
+                <img src="{{ project.gallery_photo.url }}" alt="">
             </div>
         {% endfor %}
     </div>
@@ -120,16 +127,6 @@
 {% block script %}
 <script>
 $(document).ready(function () {
-    $('.photo-slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        adaptiveHeight: false,
-        autoplay: false,
-    });
-});
-$(document).ready(function () {
         $('.gallery-page__slider').slick({
             centerMode: true,
             arrows: true,
@@ -152,21 +149,6 @@ $(document).ready(function () {
                         slidesToScroll: 1
                     }
                 },
-                {
-                    breakpoint: 768, 
-                    settings: {
-                        slidesToShow: 1, 
-                        slidesToScroll: 1
-                    }
-                }, 
-                {
-                    breakpoint: 576, 
-                    settings: {
-                        centerMode: true,
-                        slidesToShow: 1, 
-                        slidesToScroll: 1
-                    }
-                }
             ]
         });
     });
@@ -200,5 +182,127 @@ ymaps.ready(function(){
           });
     myMap.geoObjects.add(s);
 }); 
+</script>
+
+<script>
+    // Фильтрация фотографий в галерее
+    $(document).ready(function() {
+        $('#galleryForm input').on('change input', function(event) {
+            let formData = $('#galleryForm').serialize();
+            let gallerySliderContainer = $('.gallery-page__slider');
+            console.log(gallerySliderContainer)
+    
+            let timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'contacts:gallery_filters' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        $('.gallery-page__slider').replaceWith(response.html);
+                        console.log(response.html)
+
+                        // Инициализация слайдера
+                        $(document).ready(function () {
+                            $('.gallery-page__slider').slick({
+                                centerMode: true,
+                                arrows: true,
+                                infinite: true,
+                                slidesToShow: 1.7,
+                                slidesToScroll: 1,
+                                responsive: [, 
+                                    {
+                                        breakpoint: 1600, 
+                                        settings: {
+                                            slidesToShow: 1.6, 
+                                            slidesToScroll: 1
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 1024, 
+                                        settings: {
+                                            slidesToShow: 1, 
+                                            slidesToScroll: 1
+                                        }
+                                    },
+                                ]
+                            });
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200);      
+        });
+    });
+    </script> 
+<script>
+    // Сброс input radio
+    document.addEventListener("DOMContentLoaded", function () {
+    const radioButtons = document.querySelectorAll('.radio-toggle');
+
+    radioButtons.forEach(function (radio) {
+        radio.addEventListener('click', function () {
+            if (this.dataset.wasChecked === "true") {
+                this.checked = false;
+                this.dataset.wasChecked = "false";
+            } else {
+                this.dataset.wasChecked = "true";
+            }
+
+            radioButtons.forEach(function (otherRadio) {
+                if (otherRadio !== radio && otherRadio.name == radio.name) {
+                    otherRadio.dataset.wasChecked = "false";
+                }
+            });
+
+            // Применение новых фильтров
+            let formData = $('#galleryForm').serialize();
+            let gallerySliderContainer = $('.gallery-page__slider');
+
+            timeout = setTimeout(function () {
+                $.ajax({
+                    url: "{% url 'contacts:gallery_filters' %}",  
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        gallerySliderContainer.replaceWith(response.html);
+
+                        // Инициализация слайдера
+                        $(document).ready(function () {
+                            $('.gallery-page__slider').slick({
+                                centerMode: true,
+                                arrows: true,
+                                infinite: true,
+                                slidesToShow: 1.7,
+                                slidesToScroll: 1,
+                                responsive: [, 
+                                    {
+                                        breakpoint: 1600, 
+                                        settings: {
+                                            slidesToShow: 1.6, 
+                                            slidesToScroll: 1
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 1024, 
+                                        settings: {
+                                            slidesToShow: 1, 
+                                            slidesToScroll: 1
+                                        }
+                                    },
+                                ]
+                            });
+                        });
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Ошибка при фильтрации:", error);
+                    }
+                });
+            }, 200);
+        });
+    });
+});
 </script>
 {% endblock %}

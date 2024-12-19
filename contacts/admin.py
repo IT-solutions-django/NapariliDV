@@ -24,7 +24,7 @@ class RequestAdmin(admin.ModelAdmin):
 
 @admin.register(GalleryPhoto)
 class GalleryPhotoAdmin(admin.ModelAdmin): 
-    list_display = ['pk', 'photo']
+    list_display = ['pk', 'photo', 'category']
 
 
 class PrivacyPolicyParagraphInline(admin.TabularInline):

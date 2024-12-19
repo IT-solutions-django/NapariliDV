@@ -1,4 +1,5 @@
 from django.db import models
+from projects.models import Category
 
 
 class Worker(models.Model): 
@@ -17,9 +18,10 @@ class Worker(models.Model):
 
 class GalleryPhoto(models.Model): 
     photo = models.ImageField('Фото', upload_to='contacts/gallery')
+    category = models.ForeignKey(verbose_name='Категория', to=Category, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta: 
-        verbose_name = 'Фото'
+        verbose_name = 'Фото в галерее'
         verbose_name_plural = 'Галерея'
 
 

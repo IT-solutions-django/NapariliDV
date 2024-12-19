@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views import View 
 from django.http import JsonResponse
+from django.template.loader import render_to_string 
 from .models import (
     GalleryPhoto,
     PrivacyPolicy
 )
-from .forms import FeedbackForm
+from .forms import FeedbackForm, GalleryFilterForm
+from projects.models import Project
 
 
 class ContactsView(View): 
@@ -19,8 +21,10 @@ class GalleryView(View):
     template_name = 'contacts/gallery.html'
 
     def get(self, request): 
+        filter_form = GalleryFilterForm(request.GET)
         context = {
-            'gallery_photos': GalleryPhoto.objects.all(),
+            'gallery_photos': Project.objects.filter(is_in_gallery=True),
+            'filter_form': filter_form,
         }
         return render(request, self.template_name, context)
     
@@ -50,3 +54,25 @@ class SaveRequestView(View):
             new_request = form.save() 
             return JsonResponse({'status': 'ok'}, status=200)
         return JsonResponse({'status': 'error'}, status=400)
+    
+
+class GalleryPhotosAPIView(View): 
+    def get(self, request): 
+        # gallery_photos = GalleryPhoto.objects.all()
+        projects = Project.objects.filter(is_in_gallery=True)
+        filter_form = GalleryFilterForm(request.GET)
+
+        if filter_form.is_valid():
+            cd = filter_form.cleaned_data 
+
+            category = cd.get('category') 
+            if category: 
+                projects = projects.filter(category__id=category)
+
+                print(category)
+
+        rendered_gallery_projects = render_to_string('contacts/includes/gallery_slider.html', {
+            'gallery_photos': projects,
+        }) 
+
+        return JsonResponse({'html': rendered_gallery_projects})
