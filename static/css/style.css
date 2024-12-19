@@ -28,6 +28,9 @@
     font-weight: 400;
     font-style: normal;
 }
+.color__red {
+    color:#FF1A1A;
+}
 
 body {
     font-family: 'Involve', sans-serif;
@@ -3168,7 +3171,9 @@ footer hr,
         display: none;
     }
     .slider .slick-arrow {
-        display: none !important;
+        width: 30px;
+        height: 30px;
+        margin-top: 60px;
     }
     .advantages__heading {
         padding-bottom: 20px;
@@ -3195,7 +3200,7 @@ footer hr,
     .slider-content {
         position: absolute;
         right: 30px;
-        bottom: 20px;
+        bottom: -10px;
         width: 300px;
         height: 170px;
     }
@@ -3594,16 +3599,20 @@ footer hr,
         width: 30px;
         height: 30px;
     }
-    .catalog__pagination-arrow-left {
+    .catalog__pagination-arrow-left, 
+    .slider .slick-prev {
         background-image: url('/static/images/small-gray-left-arrow.svg');
     }
-    .catalog__pagination-arrow-right {
+    .catalog__pagination-arrow-right, 
+    .slider .slick-next {
         background-image: url('/static/images/small-gray-right-arrow.svg');
     }
-    .catalog__pagination-arrow-right:hover {
+    .catalog__pagination-arrow-right:hover,
+    .slider .slick-prev:hover {
         background-image: url('/static/images/small-white-right-arrow.svg');
     }
-    .catalog__pagination-arrow-left:hover {
+    .catalog__pagination-arrow-left:hover, 
+    .slider .slick-next:hover {
         background-image: url('/static/images/small-white-left-arrow.svg');
     }
     .project__parameters, 
@@ -3726,6 +3735,13 @@ footer hr,
     .team__card {
         width: calc((100% - 20px) / 2);
     }
+    .slider .slick-arrow {
+        /* margin-top: -10px; */
+        display: none !important;
+    }
+    .slider .slick-dots {
+        display: none !important;
+    }
 }
 @media (max-width: 768px) {
     .advantages__heading,
@@ -3750,7 +3766,8 @@ footer hr,
         height: 660px;
     }
     .slider .slick-dots {
-        bottom: 15px;
+        /* bottom: 15px; */
+        display: none !important;
     }
     .slider-image {
         height: 300px;
