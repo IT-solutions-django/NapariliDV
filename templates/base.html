@@ -228,13 +228,28 @@
 <script src="{% static 'js/header.js' %}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        let scrollPosition = 0; 
+
         document.querySelector(".header__hamburger").addEventListener("click", function () {
             this.classList.toggle("active");
-            document.querySelector(".header__nav").classList.toggle("active");
-            document.querySelector("body").classList.toggle("scroll-disabled");
+            const nav = document.querySelector(".header__nav");
+            const body = document.querySelector("body");
+
+            nav.classList.toggle("active");
+
+            if (nav.classList.contains("active")) {
+                // Сохраняем текущую позицию и отключаем прокрутку
+                scrollPosition = window.scrollY;
+                body.classList.add("scroll-disabled");
+                body.style.top = `-${scrollPosition}px`;
+            } else {
+                // Убираем блокировку и восстанавливаем позицию
+                body.classList.remove("scroll-disabled");
+                body.style.top = "";
+                window.scrollTo(0, scrollPosition);
+            }
         });
     });
-
 </script>
 
 <!-- Модальное окно -->

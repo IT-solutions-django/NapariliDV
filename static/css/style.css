@@ -41,7 +41,8 @@ body {
 
 body.scroll-disabled {
     height: 100vh; 
-    overflow-y: hidden;
+    position: fixed;
+    overflow: hidden;
 }
 
 a {
@@ -199,7 +200,8 @@ main {
     right: 20px
 }
 .modal-feedback__image--adaptive, 
-.similar-projects--adaptive {
+.similar-projects--adaptive, 
+.about-company__big-right-column--adaptive {
     display: none;
 }
 .modal-feedback__image--adaptive img {
@@ -290,7 +292,6 @@ main {
 #mobileCatalogFilterOverlay, 
 #mobileGalleryOverlay {
     display: none;
-    /* display: flex; */
     position: fixed;
     top: 0;
     left: 0;
@@ -304,18 +305,18 @@ main {
 #mobileCatalogFilter, 
 #mobileGalleryProject {
     display: none;
-    /* display: flex; */
     flex-direction: column;
     justify-content: start;
     width: 100%;
     max-width: 500px;
-    height: 100%;
+    height: calc(100vh - 80px);
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: white;
     padding: 20px 15px;
     overflow-y: auto;
     overflow-x: hidden;
+    border-radius: 10px;
 }
 #mobileGalleryProject {
     padding: 0;
@@ -326,9 +327,12 @@ main {
 #mobileGalleryProject .best-projects__card-content {
     padding: 0px 10px;
 }
-#mobileGalleryOverlay, 
-#mobileGalleryProject {
-    /* display: flex */
+@media (max-width: 500px) {
+    #mobileCatalogFilter, 
+    #mobileGalleryProject {
+        height: 100%;
+        border-radius: 0px
+    }
 }
 #mobileFiltersForm {
     display: flex;
@@ -694,7 +698,6 @@ main {
 }
 .slider-heading__want-the-house-button,
 .advantages__choose-house,
-.about-company__watch-more,
 .feedback__button, 
 .footer__button button, 
 .project__order-button,
@@ -827,8 +830,6 @@ main {
 
 .slider-heading__want-the-house-button a,
 .advantages__choose-house a,
-.about-company__watch-more a,
-.about-company__watch-more a,
 .feedback__button a, 
 .footer__button a, 
 .project__order-button a {
@@ -1308,7 +1309,15 @@ main {
     border-radius: 20px;
     width: 100%;
     min-width: 239px;
-    height: 270px;
+    height: 281px;
+}
+
+.about-company__more-detailed a {
+    background-color: #595959;
+    border: solid 1px #E1E1E1; 
+    color: white;
+    padding: 9px 45px;
+    border-radius: 20px;
 }
 
 .about-company__row {
@@ -1327,11 +1336,11 @@ main {
 }
 
 .about-company__textblock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding-right: 58px;
-}
-
-.about-company__watch-more {
-    float: right
+    gap: 20px;
 }
 
 .about-company-page__heading-with-icon {
@@ -3319,8 +3328,6 @@ footer hr,
     .slider-heading__want-the-house-button button img ,  
     .advantages__choose-house,
     .advantages__choose-house button img
-    .about-company__watch-more,
-    .about-company__watch-more button img,
     .feedback__button, 
     .feedback__button img, 
     .footer__button, 
@@ -3827,16 +3834,24 @@ footer hr,
         font-size: 12px;
         align-self: flex-start;
     }
-    .news-page__read-button button {
-        /* margin: 0px 15px; */
-        width: 100%;
+    .news-page__read-button button, 
+    .about-company__more-detailed a {
         font-size: 14px;
+    }
+    .news-page__read-button button, 
+    .about-company__more-detailed a {
+        width: 100%;
+    }
+    .about-company__more-detailed a {
+        display: block;
+        text-align: center;
     }
     .news__card-image img {
         height: 208px;
     }
     .news-page__header-hr, 
-    .article__header-hr {
+    .article__header-hr, 
+    .gallery-page .article__content {
         display: none !important;
     }
     .news-page__header-hr--adaptive, 
@@ -3897,6 +3912,14 @@ footer hr,
     .partners__card {
         height: 92px;
     }
+    .about-company__big-right-column--adaptive,
+    .about-company__big-right-column--adaptive img {
+        border-radius: 15px;
+        object-fit: cover;
+        display: block; 
+        width: 100%;
+        max-height: 281px;
+    }
 }
     
 @media (max-width: 576px) {
@@ -3917,7 +3940,9 @@ footer hr,
     .team__slider-item img {
         height: 360px;
     }
-    .about-company__photo img {
+    .about-company__photo img, 
+    .about-company__big-right-column--adaptive,
+    .about-company__big-right-column--adaptive img {
         height: 200px;
     }
     .feedback__form {
@@ -3943,19 +3968,10 @@ footer hr,
     .contacts__big-right-column {
         height: 460px;
     }
-    .about-company__big-right-column {
-        display: block;
-        width: 100%;
-    }
     .about-company__big-right-column img {
         object-fit:cover;
         height: 200px;
         border-radius: 20px;
-    }
-    .about-company__watch-more {
-        position: absolute;
-        bottom: -250px;
-        right: 0px;
     }
     .team__slider-item, 
     .similar-projects__slider-item {

@@ -362,20 +362,23 @@
                         <img src="static/images/about-company.png" alt="">
                     </div>
                     <div class="about-company__textblock">
-                        <div class="about-company__details-heading">
-                            <h5>Воистину радостный звук:<br> старческий скрип Амстердама</h5>
+                        <div>
+                            <div class="about-company__details-heading">
+                                <h5>Воистину радостный звук:<br> старческий скрип Амстердама</h5>
+                            </div>
+                            <div class="about-company__details-text">
+                                <p class="font__inter">Противоположная точка зрения подразумевает, что
+                                    реплицированные с зарубежных источников, современные исследования и по сей день
+                                    остаются уделом либералов, которые жаждут быть обнародованы. Вот вам яркий
+                                    пример современных тенденций — семантический разбор внешних противодействий
+                                    обеспечивает актуальность форм воздействия. </p>
+                            </div>
                         </div>
-                        <div class="about-company__details-text">
-                            <p class="font__inter">Противоположная точка зрения подразумевает, что
-                                реплицированные с зарубежных источников, современные исследования и по сей день
-                                остаются уделом либералов, которые жаждут быть обнародованы. Вот вам яркий
-                                пример современных тенденций — семантический разбор внешних противодействий
-                                обеспечивает актуальность форм воздействия. </p>
+                        <div class="about-company__big-right-column--adaptive">
+                            <img src="static/images/about-company2.png" alt="">
                         </div>
-                        <div class="about-company__watch-more animated">
-                            <a href="{% url 'contacts:about_company' %}">
-                                <img src="static/images/watch-more.svg" alt="">
-                            </a>
+                        <div class="about-company__more-detailed">
+                            <a>Подробнее</a>
                         </div>
                     </div>
                 </div>
@@ -1215,28 +1218,41 @@
 <script>
     // Мобильная форма с фильтрами
     document.addEventListener("DOMContentLoaded", function () {
-    const openFiltersBtn = document.getElementById("openMobileFilters");
-    const closeFiltersBtn = document.getElementById("closeMobileFilter");
-    const filterFormContainer = document.getElementById("mobileCatalogFilter");
-    const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
+        const openFiltersBtn = document.getElementById("openMobileFilters");
+        const closeFiltersBtn = document.getElementById("closeMobileFilter");
+        const filterFormContainer = document.getElementById("mobileCatalogFilter");
+        const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
 
-    // Функция для открытия формы
-    function openFilters() {
-        filterFormContainer.style.display = "flex";
-        filterOverlay.style.display = "flex";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
+        let scrollPosition = 0; 
+        function isMobile() {
+            return window.innerWidth <= 500;
+        }
 
-    // Функция для закрытия формы
-    function closeFilters() {
-        filterFormContainer.style.display = "none";
-        filterOverlay.style.display = "none";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
+        // Функция для открытия формы
+        function openFilters() {
+            // Сохранение позиции вертикального скролла
+            if (isMobile()) {
+                scrollPosition = window.scrollY; 
+                document.body.style.top = `-${scrollPosition}px`; 
+                document.body.classList.add("scroll-disabled");
+            }
+            filterFormContainer.style.display = "flex";
+            filterOverlay.style.display = "flex";
+        }
 
-    // Обработчики событий
-    openFiltersBtn.addEventListener("click", openFilters);
-    closeFiltersBtn.addEventListener("click", closeFilters);
-});
+        // Функция для закрытия формы
+        function closeFilters() {
+            filterFormContainer.style.display = "none";
+            filterOverlay.style.display = "none";
+            if (isMobile()) {
+                document.body.classList.remove("scroll-disabled");
+                document.body.style.top = ""; 
+                window.scrollTo(0, scrollPosition); 
+            }
+        }
+
+        openFiltersBtn.addEventListener("click", openFilters);
+        closeFiltersBtn.addEventListener("click", closeFilters);
+    });
 </script>
 {% endblock %}
