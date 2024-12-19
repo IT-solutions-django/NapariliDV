@@ -91,7 +91,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5); 
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000000;
 }
 .modal-content, 
 .modal-success-content {
@@ -299,7 +299,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000000;
+    z-index: 1000;
 }
 #mobileCatalogFilter, 
 #mobileGalleryProject {
@@ -1505,6 +1505,22 @@ main {
 .gallery-page {
     padding-bottom: 162px;
 }
+.gallery-page__slide-label {
+    position: absolute;
+    height: 42px;
+    font-size: 14px;
+    border: solid 1px #B7B7B7;
+    color: white;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    border-radius: 0 0 15px 15px;
+    backdrop-filter: blur(60px); /* Эффект блюра */
+    -webkit-backdrop-filter: blur(60px); 
+    display: none;
+}
 
 .team__cards .slick-arrow,
 .reviews__slider .slick-arrow,
@@ -1971,6 +1987,10 @@ main {
     width: 820px;
     height: 480px;
 }
+#mobileGalleryProject .gallery__photo, 
+#mobileGalleryProject .gallery__photo img {
+    height: 200px !important;
+}
 .gallery__photo {
     margin-right: 20px;
 }
@@ -1986,6 +2006,7 @@ main {
 }
 .gallery-page__photo {
     margin-right: 20px;
+    position: relative;
 }
 .gallery-page__photo img {
     object-fit: cover;
@@ -3134,9 +3155,11 @@ footer hr,
         margin-top: 15px;
     }
     .news-page__header-hr--adaptive, 
-    .article__header-hr--adaptive, 
-    .slider .slick-arrow {
+    .article__header-hr--adaptive {
         display: none;
+    }
+    .slider .slick-arrow {
+        display: none !important;
     }
     .advantages__heading {
         padding-bottom: 20px;
@@ -3322,6 +3345,10 @@ footer hr,
     }
     .slider-heading__want-the-house-button {
         bottom: -75px
+    }
+    #mobileGalleryProject .slider-heading__want-the-house-button {
+        right: 15px;
+        bottom: 20px;
     }
     .slider-heading {
         padding-top: 20px;
@@ -3641,7 +3668,8 @@ footer hr,
     .news__card-text-container hr {
         margin-bottom: 15px;
     }
-    .similar-projects--adaptive {
+    .similar-projects--adaptive, 
+    .gallery-page__slide-label {
         display: flex;
         justify-content: left;
         gap: 20px;
@@ -3933,13 +3961,14 @@ footer hr,
     .similar-projects__slider-item {
         margin-right: 10px;
     }
-    .gallery__photo {
+    .gallery__photo,
+    .gallery-page__photo {
         width: 820px;
         height: 222px;
         margin-right: 10px;
     }
-    
-    .gallery__photo img {
+    .gallery__photo img, 
+    .gallery-page__photo img {
         object-fit: cover;
         border-radius: 15px;
         width: 820px;
@@ -3981,6 +4010,9 @@ footer hr,
     .about-company-page__big-right-column img, 
     .about-company-page__small-left-column img {
         height: 200px;
+    }
+    .gallery-page__slide-label {
+        height: 36px;
     }
 }
 @media (max-width: 340px) {

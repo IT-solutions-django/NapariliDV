@@ -2,6 +2,9 @@
     {% for project in gallery_photos %}
         <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
             <img src="{{ project.gallery_photo.url }}" alt="">
+            <div class="gallery-page__slide-label">
+                <p>{{ project.name }}</p>
+            </div>
         </div>
     {% endfor %}
 </div>

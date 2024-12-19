@@ -27,7 +27,7 @@
         </ul>
     </div>
 </div>
-<div>
+<div style="position: relative;">
     <div class="gallery">
         <div class="gallery__slider">
             {% for photo in project.photos.all %}
@@ -36,5 +36,11 @@
                 </div>
             {% endfor %}
         </div>
+    </div>
+    <div class="slider-heading__want-the-house-button animated">
+        <span class="circle"></span>
+        <button class="openModal" tabindex="0">
+            <img src="/static/images/want-the-house.svg" alt="">
+        </button>
     </div>
 </div>
