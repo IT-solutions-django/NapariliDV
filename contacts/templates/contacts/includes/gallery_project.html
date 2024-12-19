@@ -1,0 +1,40 @@
+{% load price_filters %}
+{% load static %}
+<div class="mobile-catalog__close-button" id="closeMobileProject">
+    <button>
+        <img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
+    </button>
+</div>
+<div class="mobile-gallery__heading mobile-container">
+    <h4>{{ project.name }}</h4>
+    <hr>
+</div>
+<div class="mobile-container">
+    <div class="article__paragraph-text">
+        <p>{{ project.description }}</p>
+    </div>
+</div>
+<div>
+    <div class="best-projects__card-content">
+        <ul class="table-of-contents">
+            <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
+            <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
+            <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+            <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+            <li><span>Материал</span><span>{{ project.material }}</span></li>
+            <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+            <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+        </ul>
+    </div>
+</div>
+<div>
+    <div class="gallery">
+        <div class="gallery__slider">
+            {% for photo in project.photos.all %}
+                <div class="gallery__photo">
+                    <img src="{{ photo.image.url }}" alt="Фото проекта">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

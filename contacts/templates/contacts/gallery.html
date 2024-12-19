@@ -4,95 +4,48 @@
 {% block title %}Галерея - Напарили ДВ{% endblock %}
 
 {% block content %}
-<div id="mobileCatalogFilterOverlay">
-    <div id="mobileCatalogFilter">
-        <div class="mobile-catalog__close-button" id="closeMobileFilter">
+<div id="mobileGalleryOverlay">
+    <div id="mobileGalleryProject">
+        <div class="mobile-catalog__close-button" id="closeMobileProject">
             <button>
                 <img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
             </button>
         </div>
-        <div class="mobile-catalog__heading">
-            <h4>Выбрать дом по параметрам</h4>
+        <div class="mobile-gallery__heading mobile-container">
+            <h4>Каркасный дом БАРН</h4>
             <hr>
         </div>
-        <form id="mobileFiltersForm" method="get" action="/#bestProjects">
-            <div>
-                <div class="catalog__filters-parameters">
-                    <div>
-                        <div class="catalog__filters-label">
-                            <p>{{ filter_form.materials.label }}</p>
-                        </div>
-                        <div class="catalog__select-filter">
-                            {{ filter_form.materials }}
-                        </div>
+        <div class="mobile-container">
+            <div class="article__paragraph-text">
+                <p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций</p>
+                <p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>    
+            </div>
+        </div>
+        <div>
+            <div class="best-projects__card-content">
+                <ul class="table-of-contents">
+                    <li><span>Этажи</span><span>1</span></li>
+                    <li><span>Площадь</span><span>204,0 м2</span></li>
+                    <li><span>Количество спален</span><span>3</span></li>
+                    <li><span>Количество санузлов</span><span>2</span></li>
+                    <li><span>Материал</span><span>Каркас</span></li>
+                    <li><span>Кровля</span><span>Металлочерепица</span></li>
+                    <li><span>Стоимость</span><span>от 5 300 000 р</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <div class="gallery">            
+                <div class="gallery__slider">
+                    {% for project in gallery_photos %}
+                    <div class="gallery__photo">
+                        <img src="{{ project.gallery_photo.url }}" alt="">
                     </div>
-        
-                    <div>
-                        <div class="catalog__filters-label">
-                            <p>Выберите стоимость</p>
-                        </div>
-                        <div class="catalog__range-filter">
-                            <div class="catalog__filters-number-price">
-                                <label for="min-price">От</label>
-                                {{ filter_form.price_min }}
-                            </div>
-                            <div class="catalog__filters-number-price">
-                                <label for="max-price">До</label>
-                                {{ filter_form.price_max }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="catalog__filters-living-info">
-                    <div class="catalog__filters-radio-block">
-                        <div class="catalog__filters-label">
-                            <p>Этажей</p>
-                        </div>
-                        <div class="catalog__radio-group">
-                            {% for floor in filter_form.floors_quantity %}
-                                <div class="catalog__radio-button">
-                                    <input 
-                                        type="radio" 
-                                        name="{{ floor.data.name }}" 
-                                        value="{{ floor.data.value }}"
-                                        class="radio-toggle"
-                                        id="{{ floor.id_for_label }}" 
-                                        {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
-                                    >
-                                    <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="catalog__filters-radio-block">
-                        <div class="catalog__filters-label">
-                            <p>Количество спален</p>
-                        </div>
-                        <div class="catalog__radio-group">
-                            {% for bedroom in filter_form.bedrooms_quantity %}
-                                <div class="catalog__radio-button">
-                                    <input 
-                                        type="radio" 
-                                        name="{{ bedroom.data.name }}" 
-                                        value="{{ bedroom.data.value }}"
-                                        class="radio-toggle"
-                                        id="{{ bedroom.id_for_label }}" 
-                                        {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
-                                    >
-                                    <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div>
-                <div class="mobile-catalog__submit-button">
-                    <button>Применить</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -150,7 +103,7 @@
     </div>
     <div class="gallery-page__slider">
         {% for project in gallery_photos %}
-            <div class="gallery-page__photo">
+            <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
                 <img src="{{ project.gallery_photo.url }}" alt="">
             </div>
         {% endfor %}
@@ -218,14 +171,16 @@
 
 {% block script %}
 <script>
-$(document).ready(function () {
-        $('.gallery-page__slider').slick({
+// Функции
+function initGallerySlider(selector) {
+    const slider = $(selector);
+    if (slider.length) {
+        slider.slick({
             centerMode: true,
             arrows: true,
             infinite: true,
             slidesToShow: 1.7,
             slidesToScroll: 1,
-
             responsive: [, 
                 {
                     breakpoint: 1600, 
@@ -243,7 +198,115 @@ $(document).ready(function () {
                 },
             ]
         });
+    } else {
+        console.warn(`Элемента ${selector} не существует!`);
+    }
+}
+function initMobileSlider(selector) {
+    const slider = $(selector);
+    if (slider.length) {
+        slider.slick({
+            centerMode: true,
+            arrows: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        centerMode: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    } else {
+        console.warn(`Элемента ${selector} не существует!`);
+    }
+}
+function initMobileProject() {
+    const openButtons = document.querySelectorAll(".openMobileProject");
+    const filterFormContainer = document.getElementById("mobileGalleryProject");
+    const filterOverlay = document.getElementById("mobileGalleryOverlay");
+    const closeFiltersBtn = document.getElementById("closeMobileProject");
+
+    // Функция для открытия формы
+    function openFilters() {
+        filterFormContainer.style.display = "flex";
+        filterOverlay.style.display = "flex";
+        document.body.classList.add("scroll-disabled");
+        
+        const projectId = event.target.closest(".openMobileProject").dataset.projectId;
+        console.log(projectId)
+
+        $.ajax({
+            url: `${window.origin}/contacts/api/gallery-details/${projectId}/`, 
+            method: "GET",
+            dataType: "json",
+            success: function (response) {
+                filterFormContainer.innerHTML = response.html;
+
+                // Инициализируем слайдер после вставки данных
+                initMobileSlider(".gallery__slider");
+
+                // Переназначаем кнопку закрытия после обновления HTML
+                const newCloseFiltersBtn = document.getElementById("closeMobileProject");
+                if (newCloseFiltersBtn) {
+                    newCloseFiltersBtn.addEventListener("click", closeFilters);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Ошибка загрузки данных:", error);
+            }
+        });
+
+        $(document).ready(function () {
+            initMobileSlider(".gallery__slider");
+        });
+    }
+
+    // Функция для закрытия формы
+    function closeFilters() {
+        filterFormContainer.style.display = "none";
+        filterOverlay.style.display = "none";
+        document.body.classList.remove("scroll-disabled");
+    }
+
+    openButtons.forEach(function (button) {
+        button.addEventListener("click", openFilters);
     });
+
+    if (closeFiltersBtn) {
+        closeFiltersBtn.addEventListener("click", closeFilters);
+    }
+}
+
+$(document).ready(function () {
+    initGallerySlider('.gallery-page__slider')
+});
 
 var myMap;
 ymaps.ready(function(){
@@ -274,9 +337,6 @@ ymaps.ready(function(){
           });
     myMap.geoObjects.add(s);
 }); 
-</script>
-
-<script>
     // Фильтрация фотографий в галерее
     $(document).ready(function() {
         $('#galleryForm input').on('change input', function(event) {
@@ -295,29 +355,8 @@ ymaps.ready(function(){
 
                         // Инициализация слайдера
                         $(document).ready(function () {
-                            $('.gallery-page__slider').slick({
-                                centerMode: true,
-                                arrows: true,
-                                infinite: true,
-                                slidesToShow: 1.7,
-                                slidesToScroll: 1,
-                                responsive: [, 
-                                    {
-                                        breakpoint: 1600, 
-                                        settings: {
-                                            slidesToShow: 1.6, 
-                                            slidesToScroll: 1
-                                        }
-                                    },
-                                    {
-                                        breakpoint: 1024, 
-                                        settings: {
-                                            slidesToShow: 1, 
-                                            slidesToScroll: 1
-                                        }
-                                    },
-                                ]
-                            });
+                            initGallerySlider(".gallery-page__slider");
+                            initMobileProject();
                         });
                     },
                     error: function(xhr, status, error) {
@@ -327,8 +366,7 @@ ymaps.ready(function(){
             }, 200);      
         });
     });
-    </script> 
-<script>
+
     // Сброс input radio
     document.addEventListener("DOMContentLoaded", function () {
     const radioButtons = document.querySelectorAll('.radio-toggle');
@@ -360,32 +398,11 @@ ymaps.ready(function(){
                     success: function(response) {
                         gallerySliderContainer.replaceWith(response.html);
 
-                        // Инициализация слайдера
+                        // Инициализация слайдера и мобильной формы
                         $(document).ready(function () {
-                            $('.gallery-page__slider').slick({
-                                centerMode: true,
-                                arrows: true,
-                                infinite: true,
-                                slidesToShow: 1.7,
-                                slidesToScroll: 1,
-                                responsive: [, 
-                                    {
-                                        breakpoint: 1600, 
-                                        settings: {
-                                            slidesToShow: 1.6, 
-                                            slidesToScroll: 1
-                                        }
-                                    },
-                                    {
-                                        breakpoint: 1024, 
-                                        settings: {
-                                            slidesToShow: 1, 
-                                            slidesToScroll: 1
-                                        }
-                                    },
-                                ]
-                            });
-                        });
+                            initGallerySlider(".gallery-page__slider")
+                            initMobileProject();
+                        });                        
                         
                     },
                     error: function(xhr, status, error) {
@@ -396,32 +413,9 @@ ymaps.ready(function(){
         });
     });
 });
-</script>
-<script>
-    // Мобильная форма с фильтрами
-    document.addEventListener("DOMContentLoaded", function () {
-    const openFiltersBtn = document.getElementById("openMobileFilters");
-    const closeFiltersBtn = document.getElementById("closeMobileFilter");
-    const filterFormContainer = document.getElementById("mobileCatalogFilter");
-    const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
 
-    // Функция для открытия формы
-    function openFilters() {
-        filterFormContainer.style.display = "flex";
-        filterOverlay.style.display = "flex";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
-
-    // Функция для закрытия формы
-    function closeFilters() {
-        filterFormContainer.style.display = "none";
-        filterOverlay.style.display = "none";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
-
-    // Обработчики событий
-    openFiltersBtn.addEventListener("click", openFilters);
-    closeFiltersBtn.addEventListener("click", closeFilters);
+document.addEventListener("DOMContentLoaded", function () {
+    initMobileProject();
 });
 </script>
 {% endblock %}

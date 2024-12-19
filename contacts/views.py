@@ -67,10 +67,19 @@ class GalleryPhotosAPIView(View):
             if category: 
                 projects = projects.filter(category__id=category)
 
-                print(category)
-
         rendered_gallery_projects = render_to_string('contacts/includes/gallery_slider.html', {
             'gallery_photos': projects,
         }) 
 
         return JsonResponse({'html': rendered_gallery_projects})
+    
+
+class GalleryDetailsAPIView(View): 
+    def get(self, request, project_id: int): 
+        project = Project.objects.get(pk=project_id)
+
+        rendered_project_details = render_to_string('contacts/includes/gallery_project.html', {
+            'project': project,
+        }) 
+
+        return JsonResponse({'html': rendered_project_details})
