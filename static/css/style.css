@@ -2010,7 +2010,8 @@ main {
 }
 
 .news__header-right-buttons, 
-#blogForm {
+#blogForm, 
+#galleryForm {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -3830,8 +3831,12 @@ footer hr,
     .bigMap > ymaps {
         border-radius: 0px;
     }
+    .news__header-right-buttons {
+        margin-top: 15px;
+    }
     .news__header-right-buttons, 
-    #blogForm {
+    #blogForm, 
+    #galleryForm {
         gap: 10px;
     }
     .news__header-button label, 

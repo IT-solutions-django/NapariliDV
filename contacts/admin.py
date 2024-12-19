@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import (
     Worker,
     Request, 
-    GalleryPhoto,
     PrivacyPolicy, 
     PrivacyPolicyParagraph
 )
@@ -20,11 +19,6 @@ class RequestAdmin(admin.ModelAdmin):
     list_filter = [
         IsClosed
     ]
-
-
-@admin.register(GalleryPhoto)
-class GalleryPhotoAdmin(admin.ModelAdmin): 
-    list_display = ['pk', 'photo']
 
 
 class PrivacyPolicyParagraphInline(admin.TabularInline):

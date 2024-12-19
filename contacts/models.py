@@ -1,4 +1,5 @@
 from django.db import models
+from projects.models import Category
 
 
 class Worker(models.Model): 
@@ -13,14 +14,6 @@ class Worker(models.Model):
 
     def __str__(self): 
         return f'{self.last_name} {self.first_name}, {self.role}'
-
-
-class GalleryPhoto(models.Model): 
-    photo = models.ImageField('Фото', upload_to='contacts/gallery')
-
-    class Meta: 
-        verbose_name = 'Фото'
-        verbose_name_plural = 'Галерея'
 
 
 class PrivacyPolicy(models.Model): 
