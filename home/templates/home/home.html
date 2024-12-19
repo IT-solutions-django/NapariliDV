@@ -5,6 +5,98 @@
 {% block title %}Напарили ДВ{% endblock %}
 
 {% block content %}
+<div id="mobileCatalogFilterOverlay">
+    <div id="mobileCatalogFilter">
+        <div class="mobile-catalog__close-button" id="closeMobileFilter">
+            <button>
+                <img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
+            </button>
+        </div>
+        <div class="mobile-catalog__heading">
+            <h4>Выбрать дом по параметрам</h4>
+            <hr>
+        </div>
+        <form id="mobileFiltersForm" method="get" action="/#bestProjects">
+            <div>
+                <div class="catalog__filters-parameters">
+                    <div>
+                        <div class="catalog__filters-label">
+                            <p>{{ filter_form.materials.label }}</p>
+                        </div>
+                        <div class="catalog__select-filter">
+                            {{ filter_form.materials }}
+                        </div>
+                    </div>
+        
+                    <div>
+                        <div class="catalog__filters-label">
+                            <p>Выберите стоимость</p>
+                        </div>
+                        <div class="catalog__range-filter">
+                            <div class="catalog__filters-number-price">
+                                <label for="min-price">От</label>
+                                {{ filter_form.price_min }}
+                            </div>
+                            <div class="catalog__filters-number-price">
+                                <label for="max-price">До</label>
+                                {{ filter_form.price_max }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="catalog__filters-living-info">
+                    <div class="catalog__filters-radio-block">
+                        <div class="catalog__filters-label">
+                            <p>Этажей</p>
+                        </div>
+                        <div class="catalog__radio-group">
+                            {% for floor in filter_form.floors_quantity %}
+                                <div class="catalog__radio-button">
+                                    <input 
+                                        type="radio" 
+                                        name="{{ floor.data.name }}" 
+                                        value="{{ floor.data.value }}"
+                                        class="radio-toggle"
+                                        id="{{ floor.id_for_label }}" 
+                                        {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
+                                    >
+                                    <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="catalog__filters-radio-block">
+                        <div class="catalog__filters-label">
+                            <p>Количество спален</p>
+                        </div>
+                        <div class="catalog__radio-group">
+                            {% for bedroom in filter_form.bedrooms_quantity %}
+                                <div class="catalog__radio-button">
+                                    <input 
+                                        type="radio" 
+                                        name="{{ bedroom.data.name }}" 
+                                        value="{{ bedroom.data.value }}"
+                                        class="radio-toggle"
+                                        id="{{ bedroom.id_for_label }}" 
+                                        {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                    >
+                                    <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mobile-catalog__submit-button">
+                    <button>Применить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="slider">
     {% for slide in slides %}
     <div class="slider-item">
@@ -17,7 +109,8 @@
             <hr>
             <div class="slider-heading__promo">
                 {{ slide.description|linebreaks }}
-                <div class="slider-heading__want-the-house-button">
+                <div class="slider-heading__want-the-house-button animated">
+                    <span class="circle"></span>
                     <button class="openModal">
                         <img src="{% static 'images/want-the-house.svg' %}" alt="">
                     </button>
@@ -120,7 +213,7 @@
                 <div>
                     <img src="static/images/advantages1.png" alt="">
                 </div>
-                <div class="advantages__choose-house">
+                <div class="advantages__choose-house animated">
                     <button>
                         <a target="_blank" href="{% url 'projects:catalog' %}">
                             <img src="static/images/choose-house-button.svg" alt="">
@@ -146,7 +239,7 @@
             <p>Выбрать дом по параметрам</p>
         </div>
         <div>
-            <button>
+            <button id="openMobileFilters">
                 <img src="{% static 'images/filters-icon.svg' %}" alt="">
             </button>
         </div>
@@ -165,10 +258,10 @@
                                     name="{{ bedroom.data.name }}" 
                                     value="{{ bedroom.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ bedroom.id_for_label }}" 
+                                    id="{{ bedroom.id_for_label }}_" 
                                     {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                <label for="{{ bedroom.id_for_label }}_">{{ bedroom.choice_label }}</label>
                             </div>
                             {% endfor %}
                         </div>
@@ -183,10 +276,10 @@
                                     name="{{ floor.data.name }}" 
                                     value="{{ floor.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ floor.id_for_label }}" 
+                                    id="{{ floor.id_for_label }}_" 
                                     {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                <label for="{{ floor.id_for_label }}_">{{ floor.choice_label }}</label>
                             </div>
                             {% endfor %}
                         </div>
@@ -243,6 +336,10 @@
                 <a target="_blank" href="{{ project.get_absolute_url }}">Узнать подробнее</a>
             </div>
         </div>
+        {% empty %}
+        <div class="catalog__not-found">
+            <p>Ничего не найдено...</p>
+        </div>
         {% endfor %}
         <div class="best-projects__to-catalog--adaptive">
             <a target="_blank" href="{% url 'projects:catalog' %}">
@@ -275,7 +372,7 @@
                                 пример современных тенденций — семантический разбор внешних противодействий
                                 обеспечивает актуальность форм воздействия. </p>
                         </div>
-                        <div class="about-company__watch-more">
+                        <div class="about-company__watch-more animated">
                             <a href="{% url 'contacts:about_company' %}">
                                 <img src="static/images/watch-more.svg" alt="">
                             </a>
@@ -416,7 +513,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="feedback__button">
+                        <div class="feedback__button animated">
                             <button>
                                 <img src="static/images/send.svg" alt="">
                             </button>
@@ -676,7 +773,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="news__read-button">
+                    <div class="news__read-button animated">
                         <a href="{{ article.get_absolute_url }}">
                             <button>
                                 <img src="{% static 'images/read-news.svg' %}" alt="">
@@ -802,13 +899,14 @@
 {% endblock %}
 
 {% block script %}
-<script type=module src="{% static 'js/home.js' %}"></script>
+<script src="{% static 'js/home.js' %}" defer></script>
 <script>
     $(document).ready(function () {
         $('.slider').slick({
             dots: true,
             infinite: true,
             speed: 500,
+            arrows: true,
             slidesToShow: 1,
             adaptiveHeight: false,
             autoplay: false,
@@ -962,8 +1060,8 @@
         myMap.geoObjects.add(s);
     });
 
+    // Ответы на вопросы
     document.addEventListener('DOMContentLoaded', () => {
-
         let checkboxes = document.querySelectorAll('.tab input');
 
         checkboxes.forEach(checkbox => {
@@ -1077,7 +1175,6 @@
 
             // Перерисовка карточек после отмены фильтра
             let formData = $('#bestProjectsForm').serialize();
-
             let cardsContainer = $('.best-projects__cards');
             cardsContainer.addClass('fade-out');
 
@@ -1112,6 +1209,38 @@
             }, 200); 
         });
     });
+});
+</script>
+
+<script>
+    // Мобильная форма с фильтрами
+    document.addEventListener("DOMContentLoaded", function () {
+    const openFiltersBtn = document.getElementById("openMobileFilters");
+    const closeFiltersBtn = document.getElementById("closeMobileFilter");
+    const filterFormContainer = document.getElementById("mobileCatalogFilter");
+    const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
+
+    // const mobileForm = document.getElementById("mobileFiltersForm");
+    const desctopForm = document.getElementById("bestProjectsForm");
+
+
+    // Функция для открытия формы
+    function openFilters() {
+        filterFormContainer.style.display = "flex";
+        filterOverlay.style.display = "flex";
+        document.querySelector("body").classList.toggle("scroll-disabled");
+    }
+
+    // Функция для закрытия формы
+    function closeFilters() {
+        filterFormContainer.style.display = "none";
+        filterOverlay.style.display = "none";
+        document.querySelector("body").classList.toggle("scroll-disabled");
+    }
+
+    // Обработчики событий
+    openFiltersBtn.addEventListener("click", openFilters);
+    closeFiltersBtn.addEventListener("click", closeFilters);
 });
 </script>
 {% endblock %}

@@ -5,171 +5,145 @@
 
 {% block content %}
 <div id="mobileCatalogFilterOverlay">
-
-<div id="mobileCatalogFilter">
-    <div class="mobile-catalog__close-button" id="closeMobileFilter">
-        <button>
-            <img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
-        </button>
-    </div>
-    <div class="mobile-catalog__heading">
-        <h4>Выбрать дом по параметрам</h4>
-        <hr>
-    </div>
-    <form id="mobileFiltersForm" method="get" action="">
-        <div class="catalog__filters-categories">     
-            <div class="catalog__filters-category">
-                <div class="catalog__checkbox-wrap">
-                    <input type="checkbox" name="categories" value="1" id="id_categories_0">
+    <div id="mobileCatalogFilter">
+        <div class="mobile-catalog__close-button" id="closeMobileFilter">
+            <button>
+                <img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
+            </button>
+        </div>
+        <div class="mobile-catalog__heading">
+            <h4>Выбрать дом по параметрам</h4>
+            <hr>
+        </div>
+        <form id="mobileFiltersForm" method="get" action="">
+            <div>
+                <div class="catalog__filters-categories">     
+                    {% for category in form.categories %}
+                        <div  class="catalog__filters-category">
+                            <div class="catalog__checkbox-wrap">
+                                {{ category.tag }}
+                            </div>
+                            <div>
+                                <label for="consent">
+                                    {{ category.choice_label }}
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-                <div>
-                    <label for="consent">
-                        Дома
-                    </label>
-                </div>
-            </div>
+                <div class="catalog__filters-parameters">
+                    <div>
+                        <div class="catalog__filters-label">
+                            <p>{{ form.materials.label }}</p>
+                        </div>
+                        <div class="catalog__select-filter">
+                            {{ form.materials }}
+                        </div>
+                    </div>
         
-            <div class="catalog__filters-category">
-                <div class="catalog__checkbox-wrap">
-                    <input type="checkbox" name="categories" value="2" id="id_categories_1">
-                </div>
-                <div>
-                    <label for="consent">
-                        Бани
-                    </label>
-                </div>
-            </div>
+                    <div>
+                        <div class="catalog__filters-label">
+                            <p>Выберите площадь (м2)</p>
+                        </div>
+                        <div class="catalog__range-filter">
+                            <div class="catalog__filters-number-square">
+                                <label for="min-price">От</label>
+                                {{ form.square_min }}
+                            </div>
+                            <div class="catalog__filters-number-square">
+                                <label for="max-price">До</label>
+                                {{ form.square_max }}
+                            </div>
+                        </div>
+                    </div>
         
-            <div class="catalog__filters-category">
-                <div class="catalog__checkbox-wrap">
-                    <input type="checkbox" name="categories" value="3" id="id_categories_2">
+                    <div>
+                        <div class="catalog__filters-label">
+                            <p>Выберите стоимость</p>
+                        </div>
+                        <div class="catalog__range-filter">
+                            <div class="catalog__filters-number-price">
+                                <label for="min-price">От</label>
+                                {{ form.price_min }}
+                            </div>
+                            <div class="catalog__filters-number-price">
+                                <label for="max-price">До</label>
+                                {{ form.price_max }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="consent">
-                        Коттеджи
-                    </label>
+                <hr>
+                <div class="catalog__filters-living-info">
+                    <div class="catalog__filters-radio-block">
+                        <div class="catalog__filters-label">
+                            <p>Этажей</p>
+                        </div>
+                        <div class="catalog__radio-group">
+                            {% for floor in form.floors_quantity %}
+                                <div class="catalog__radio-button">
+                                    <input 
+                                        type="radio" 
+                                        name="{{ floor.data.name }}" 
+                                        value="{{ floor.data.value }}"
+                                        class="radio-toggle"
+                                        id="{{ floor.id_for_label }}" 
+                                        {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
+                                    >
+                                    <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="catalog__filters-radio-block">
+                        <div class="catalog__filters-label">
+                            <p>Количество спален</p>
+                        </div>
+                        <div class="catalog__radio-group">
+                            {% for bedroom in form.bedrooms_quantity %}
+                                <div class="catalog__radio-button">
+                                    <input 
+                                        type="radio" 
+                                        name="{{ bedroom.data.name }}" 
+                                        value="{{ bedroom.data.value }}"
+                                        class="radio-toggle"
+                                        id="{{ bedroom.id_for_label }}" 
+                                        {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                    >
+                                    <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="catalog__filters-radio-block">
+                        <div class="catalog__filters-label">
+                            <p>Количество санузлов</p>
+                        </div>
+                        <div class="catalog__radio-group">
+                            {% for bathroom in form.bathrooms_quantity %}
+                                <div class="catalog__radio-button">
+                                    <input 
+                                        type="radio" 
+                                        name="{{ bathroom.data.name }}" 
+                                        value="{{ bathroom.data.value }}"
+                                        class="radio-toggle"
+                                        id="{{ bathroom.id_for_label }}" 
+                                        {% if bathroom.data.selected %}checked data-was-checked="true"{% endif %}
+                                    >
+                                    <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="catalog__filters-parameters">
             <div>
-                <div class="catalog__filters-label">
-                    <p>Выберите материал</p>
-                </div>
-                <div class="catalog__select-filter">
-                    <select name="materials" id="id_materials">
-                        <option value="" selected="">Все</option>
-                        <option value="1">Сосна</option>
-                        <option value="2">Лиственница</option>
-                    </select>
+                <div class="mobile-catalog__submit-button">
+                    <button>Применить</button>
                 </div>
             </div>
-
-            <div>
-                <div class="catalog__filters-label">
-                    <p>Выберите площадь (м2)</p>
-                </div>
-                <div class="catalog__range-filter">
-                    <div class="catalog__filters-number-square">
-                        <label for="min-price">От</label>
-                        <input type="number" name="square_min" placeholder="80" min="80" max="120" step="5" id="id_square_min">
-                    </div>
-                    <div class="catalog__filters-number-square">
-                        <label for="max-price">До</label>
-                        <input type="number" name="square_max" placeholder="120" min="0" max="120" step="5" id="id_square_max">
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <div class="catalog__filters-label">
-                    <p>Выберите стоимость</p>
-                </div>
-                <div class="catalog__range-filter">
-                    <div class="catalog__filters-number-price">
-                        <label for="min-price">От</label>
-                        <input type="number" name="price_min" step="0.01" min="5170000" placeholder="5 170 000 ₽" id="id_price_min">
-                    </div>
-                    <div class="catalog__filters-number-price">
-                        <label for="max-price">До</label>
-                        <input type="number" name="price_max" step="0.01" max="8600000" placeholder="8 600 000 ₽" id="id_price_max">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="catalog__filters-living-info">
-            <div class="catalog__filters-radio-block">
-                <div class="catalog__filters-label">
-                    <p>Этажей</p>
-                </div>
-                <div class="catalog__radio-group">
-                    
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="floors_quantity" value="1" class="radio-toggle" id="id_floors_quantity_0">
-                            <label for="id_floors_quantity_0">1</label>
-                        </div>
-                    
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="floors_quantity" value="2" class="radio-toggle" id="id_floors_quantity_1">
-                            <label for="id_floors_quantity_1">2</label>
-                        </div>
-                    
-                </div>
-            </div>
-            <div class="catalog__filters-radio-block">
-                <div class="catalog__filters-label">
-                    <p>Количество спален</p>
-                </div>
-                <div class="catalog__radio-group">
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="bedrooms_quantity" value="1" class="radio-toggle" id="id_bedrooms_quantity_0">
-                            <label for="id_bedrooms_quantity_0">1</label>
-                        </div>
-                    
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="bedrooms_quantity" value="2" class="radio-toggle" id="id_bedrooms_quantity_1">
-                            <label for="id_bedrooms_quantity_1">2</label>
-                        </div>
-                    
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="bedrooms_quantity" value="3" class="radio-toggle" id="id_bedrooms_quantity_2">
-                            <label for="id_bedrooms_quantity_2">3</label>
-                        </div>
-                    
-                        <div class="catalog__radio-button">
-                            <input type="radio" name="bedrooms_quantity" value="4" class="radio-toggle" id="id_bedrooms_quantity_3">
-                            <label for="id_bedrooms_quantity_3">4</label>
-                        </div>
-                </div>
-            </div>
-            <div class="catalog__filters-radio-block">
-                <div class="catalog__filters-label">
-                    <p>Количество санузлов</p>
-                </div>
-                <div class="catalog__radio-group">
-                    <div class="catalog__radio-button">
-                        <input type="radio" name="bathrooms_quantity" value="1" class="radio-toggle" id="id_bathrooms_quantity_0">
-                        <label for="id_bathrooms_quantity_0">1</label>
-                    </div>
-                
-                    <div class="catalog__radio-button">
-                        <input type="radio" name="bathrooms_quantity" value="2" class="radio-toggle" id="id_bathrooms_quantity_1">
-                        <label for="id_bathrooms_quantity_1">2</label>
-                    </div>
-                
-                    <div class="catalog__radio-button">
-                        <input type="radio" name="bathrooms_quantity" value="3" class="radio-toggle" id="id_bathrooms_quantity_2">
-                        <label for="id_bathrooms_quantity_2">3</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mobile-catalog__submit-button">
-            <button>Применить</button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 
 
@@ -275,10 +249,10 @@
                                     name="{{ floor.data.name }}" 
                                     value="{{ floor.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ floor.id_for_label }}" 
+                                    id="{{ floor.id_for_label }}_" 
                                     {% if floor.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                                <label for="{{ floor.id_for_label }}_">{{ floor.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -293,10 +267,10 @@
                                     name="{{ bedroom.data.name }}" 
                                     value="{{ bedroom.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ bedroom.id_for_label }}" 
+                                    id="{{ bedroom.id_for_label }}_" 
                                     {% if bedroom.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                                <label for="{{ bedroom.id_for_label }}_">{{ bedroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -311,10 +285,10 @@
                                     name="{{ bathroom.data.name }}" 
                                     value="{{ bathroom.data.value }}"
                                     class="radio-toggle"
-                                    id="{{ bathroom.id_for_label }}" 
+                                    id="{{ bathroom.id_for_label }}_" 
                                     {% if bathroom.data.selected %}checked data-was-checked="true"{% endif %}
                                 >
-                                <label for="{{ bathroom.id_for_label }}">{{ bathroom.choice_label }}</label>
+                                <label for="{{ bathroom.id_for_label }}_">{{ bathroom.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
@@ -359,7 +333,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="best-projects__order-button">
+                    <div class="best-projects__order-button openModal">
                         <button>Заказать строительство</button>
                     </div>
                     <div class="best-projects__more-button">
@@ -367,7 +341,7 @@
                     </div>
                 </div>
             {% empty %}
-            <div style="text-align: center; width: 100%;">
+            <div class="catalog__not-found">
                 <p>Ничего не найдено</p>
             </div>
             {% endfor %}
@@ -595,12 +569,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function openFilters() {
         filterFormContainer.style.display = "flex";
         filterOverlay.style.display = "flex";
+        document.querySelector("body").classList.toggle("scroll-disabled");
     }
 
     // Функция для закрытия формы
     function closeFilters() {
         filterFormContainer.style.display = "none";
         filterOverlay.style.display = "none";
+        document.querySelector("body").classList.toggle("scroll-disabled");
     }
 
     // Обработчики событий

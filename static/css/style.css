@@ -39,6 +39,11 @@ body {
     overflow-x: hidden; 
 }
 
+body.scroll-disabled {
+    height: 100vh; 
+    overflow-y: hidden;
+}
+
 a {
     text-decoration: none;
     color: #595959
@@ -284,7 +289,8 @@ main {
 
 #mobileCatalogFilterOverlay {
     display: none;
-    /* position: fixed; */
+    /* display: flex; */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -292,7 +298,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000000;
 }
 #mobileCatalogFilter {
     display: none;
@@ -306,6 +312,17 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: white;
     padding: 20px 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#mobileFiltersForm {
+    
+}
+#mobileFiltersForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 .mobile-catalog__close-button {
     position: absolute;
@@ -329,6 +346,10 @@ main {
 
 .mobile-catalog__material-filters {
     margin-top: 30px;
+}
+.catalog__not-found {
+    text-align: center; 
+    width: 100%;
 }
 .container {
     padding-left: 10px;
@@ -648,6 +669,21 @@ main {
     bottom: 0px;
     right: 0px;
 }
+.slider-heading__want-the-house-button,
+.advantages__choose-house,
+.about-company__watch-more,
+.feedback__button, 
+.footer__button button, 
+.project__order-button,
+.modal-feedback__send, 
+.modal-feedback__back, 
+.news__read-button {
+    transition: transform 0.3s ease; 
+}
+
+.clicked {
+    transform: scale(0.85);
+}
 
 .slider-heading h2 {
     word-wrap: break-word; 
@@ -677,8 +713,8 @@ main {
 
 .slider-content {
     position: absolute;
-    bottom: 30px;
-    right: 15vw;
+    bottom: -20px;
+    right: 17vw;
     transform: translateY(-50%);
     color: rgba(89, 89, 89, 1);
     background: white;
@@ -1460,6 +1496,15 @@ main {
     border: solid 1px #B7B7B7;
     border-radius: 50%;
 }
+.slider .slick-arrow {
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    border: solid 1px #B7B7B7;
+    border-radius: 50%;
+    z-index: 10;
+    margin-top: 120px;
+}
 .gallery-page__slider .slick-arrow {
     top: -60px;
 }
@@ -1480,7 +1525,9 @@ main {
 .partners__slider .slick-prev::before, 
 .partners__slider .slick-next::before, 
 .certificates__slider .slick-prev::before, 
-.certificates__slider .slick-next::before {
+.certificates__slider .slick-next::before, 
+.slider .slick-prev::before, 
+.slider .slick-next::before {
     content: "";
 }
 
@@ -1495,6 +1542,10 @@ main {
     left: auto;
     background-image: url('/static/images/left-gray-arrow.svg');
 }
+.slider .slick-prev {
+    left: 15vw;
+    background-image: url('/static/images/left-gray-arrow.svg');
+}
 
 .reviews__slider .slick-next,
 .team__cards .slick-next, 
@@ -1504,6 +1555,10 @@ main {
 .partners__slider .slick-next, 
 .certificates__slider .slick-next {
     right: 0px;
+    background-image: url('/static/images/right-gray-arrow.svg');
+}
+.slider .slick-next {
+    right: 15vw;
     background-image: url('/static/images/right-gray-arrow.svg');
 }
 
@@ -1522,7 +1577,9 @@ main {
 .partners__slider .slick-prev:hover, 
 .partners__slider .slick-next:hover,  
 .certificates__slider .slick-prev:hover, 
-.certificates__slider .slick-next:hover {
+.certificates__slider .slick-next:hover, 
+.slider .slick-prev:hover, 
+.slider .slick-next:hover {
     background-color: #FF1A1A;
     border: none;
 }
@@ -1534,7 +1591,8 @@ main {
 .similar-projects__cards .slick-prev:hover, 
 .gallery-page__slider .slick-prev:hover, 
 .partners__slider .slick-prev:hover,
-.certificates__slider .slick-prev:hover {
+.certificates__slider .slick-prev:hover, 
+.slider .slick-prev:hover {
     background-image: url('/static/images/left-white-arrow.svg');
 }
 
@@ -1545,7 +1603,8 @@ main {
 .similar-projects__cards .slick-next:hover, 
 .gallery-page__slider .slick-next:hover,
 .partners__slider .slick-next:hover, 
-.certificates__slider .slick-next:hover {
+.certificates__slider .slick-next:hover, 
+.slider .slick-next:hover {
     background-image: url('/static/images/right-white-arrow.svg');
 }
 
@@ -1562,7 +1621,9 @@ main {
 .partners__slider .slick-prev, 
 .partners__slider .slick-next, 
 .certificates__slider .slick-prev, 
-.certificates__slider .slick-next {
+.certificates__slider .slick-next, 
+.slider .slick-prev, 
+.slider .slick-next {
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -3048,8 +3109,9 @@ footer hr,
         margin-top: 15px;
     }
     .news-page__header-hr--adaptive, 
-    .article__header-hr--adaptive {
-        display: none;
+    .article__header-hr--adaptive, 
+    .slider .slick-arrow {
+        display: none !important;
     }
     .advantages__heading {
         padding-bottom: 20px;

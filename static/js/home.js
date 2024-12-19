@@ -4,7 +4,7 @@ function addReviewsSpoiler() {
         let windowWidth = window.innerWidth;
 
         if (windowWidth > 990) {
-            if (t.scrollHeight > 280) {
+            if (t.scrollHeight > 190) {
                 let l = document.createElement("button");
                 l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function() {
                     t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
