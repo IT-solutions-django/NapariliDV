@@ -61,7 +61,7 @@
                         <div>
                             <label for="consent" class="modal-feedback__checkbox-label">
                                 Даю своё согласие на обработку моих
-                                <a id="userAgreementLink" target="_blank">персональных данных</a>
+                                <a id="userAgreementLink" target="_blank" href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
                             </label>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
             </div>
             <div class="footer-right-column">
                 <div>
-                    <p>Партнёры и сертификаты</p>
+                    <a href="{% url 'contacts:about_company' %}">Партнёры и сертификаты</a>
                 </div>
                 <div class="footer__phone">
                     <a href="tel:{{ company_info.phone }}">{{ company_info.phone }}</a>
@@ -210,7 +210,7 @@
             <div class="footer__column">
                 <p>{{ company_info.full_name }}</p>
                 <p>ИНН {{ company_info.inn }}</p>
-                <p>ОГРН 1212500007961</p>
+                <p>ОГРН {{ company_info.ogrn }}</p>
             </div>
             <div class="footer__column footer__rights-reserved">
                 <p>© 2004. Все права защищены. Копирование и использование информации с сайта без согласия владельца

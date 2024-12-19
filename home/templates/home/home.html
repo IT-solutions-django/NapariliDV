@@ -378,7 +378,7 @@
                             <img src="static/images/about-company2.png" alt="">
                         </div>
                         <div class="about-company__more-detailed">
-                            <a>Подробнее</a>
+                            <a href="{% url 'contacts:about_company' %}">Подробнее</a>
                         </div>
                     </div>
                 </div>
@@ -494,8 +494,7 @@
             <div class="feedback__column">
                 <div class="feedback__form">
                     <div class="feedback__heading">
-                        <p>Закажите строительство дома</p>
-                        <p>прямо сейчас!</p>
+                        <p>Остались вопросы?</p>
                     </div>
                     <form action="" id="feedbackForm">
                         {% csrf_token %}
@@ -512,7 +511,7 @@
                             <div>
                                 <label for="consent" class="feedback__checkbox-label">
                                     Даю своё согласие на обработку моих
-                                    <a id="userAgreementLink" target="_blank">персональных данных</a>
+                                    <a id="userAgreementLink" target="_blank"  href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
                                 </label>
                             </div>
                         </div>

@@ -1745,7 +1745,8 @@ main {
     color: white;
     text-transform: uppercase;
     margin-bottom: 20px;
-
+    font-size: 40px;
+    text-wrap: nowrap;
 }
 
 .feedback__heading p {
@@ -3538,6 +3539,9 @@ footer hr,
         font-size: 24px;
         font-family: 'Involve', sans-serif;
         font-weight: 600;
+    }
+    .feedback__heading {
+        font-size: 24px;
     }
     .footer__row,
     .footer__phone-adaptive {
