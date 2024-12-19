@@ -3,7 +3,6 @@ from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string 
 from .models import (
-    GalleryPhoto,
     PrivacyPolicy
 )
 from .forms import FeedbackForm, GalleryFilterForm
@@ -58,7 +57,6 @@ class SaveRequestView(View):
 
 class GalleryPhotosAPIView(View): 
     def get(self, request): 
-        # gallery_photos = GalleryPhoto.objects.all()
         projects = Project.objects.filter(is_in_gallery=True)
         filter_form = GalleryFilterForm(request.GET)
 

@@ -718,9 +718,9 @@
     </div>
 
     <div class="gallery__slider">
-        {% for gallery_photo in gallery_photos %}
+        {% for project in gallery_photos %}
         <div class="gallery__photo">
-            <img src="{{ gallery_photo.photo.url }}" alt="">
+            <img src="{{ project.gallery_photo.url }}" alt="">
         </div>
         {% endfor %}
     </div>

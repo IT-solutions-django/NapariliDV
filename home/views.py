@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from projects.models import Project
 from home.models import Slide, PopularQuestion
-from contacts.models import Worker, GalleryPhoto
+from contacts.models import Worker
 from projects.forms import CatalogFiltersForm
 from projects.services import get_paginated_collection
 from contacts.forms import FeedbackForm
@@ -18,7 +18,7 @@ class HomeView(View):
         best_projects = Project.objects.all()
         slides = Slide.objects.all()
         workers = Worker.objects.all()
-        gallery_photos = GalleryPhoto.objects.all()
+        gallery_photos = Project.objects.filter(is_in_gallery=True)
         popular_questions = PopularQuestion.objects.all()
         filter_form = CatalogFiltersForm(request.GET)
         feedback_form = FeedbackForm()

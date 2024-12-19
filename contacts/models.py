@@ -16,15 +16,6 @@ class Worker(models.Model):
         return f'{self.last_name} {self.first_name}, {self.role}'
 
 
-class GalleryPhoto(models.Model): 
-    photo = models.ImageField('Фото', upload_to='contacts/gallery')
-    category = models.ForeignKey(verbose_name='Категория', to=Category, on_delete=models.CASCADE, null=True, blank=True)
-
-    class Meta: 
-        verbose_name = 'Фото в галерее'
-        verbose_name_plural = 'Галерея'
-
-
 class PrivacyPolicy(models.Model): 
     title = models.CharField('Политика конфиденциальности', default='Политика конфиденциальности', max_length=80)
 
