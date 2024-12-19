@@ -1,13 +1,22 @@
 from django.contrib import admin
 from .models import (
     Review,
-    Platform
+    Platform, 
+    ReviewPhoto,
 )
+
+
+class ReviewPhotoInline(admin.TabularInline):
+    model = ReviewPhoto
+    extra = 1  
+    verbose_name = "Фото"
+    verbose_name_plural = "Фото"
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin): 
-    list_display = ['id', 'username', 'content', 'created_at']
+    list_display = ['id', 'author', 'content', 'created_at', 'platform', 'rate']
+    inlines = [ReviewPhotoInline]
 
 
 @admin.register(Platform)

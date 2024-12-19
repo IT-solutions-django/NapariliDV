@@ -147,7 +147,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-REDIS_HOST = 'redis' 
+REDIS_HOST = 'localhost' 
+# REDIS_HOST = 'redis' 
 
 REDIS_PORT = '6379' 
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')

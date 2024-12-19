@@ -362,20 +362,19 @@
                         <img src="static/images/about-company.png" alt="">
                     </div>
                     <div class="about-company__textblock">
-                        <div class="about-company__details-heading">
-                            <h5>Воистину радостный звук:<br> старческий скрип Амстердама</h5>
+                        <div>
+                            <div class="about-company__details-heading">
+                                <h5>{{ company_info.subheader|linebreaks }}</h5>
+                            </div>
+                            <div class="about-company__details-text">
+                                <p class="font__inter">{{ company_info.description|linebreaks }}</p>
+                            </div>
                         </div>
-                        <div class="about-company__details-text">
-                            <p class="font__inter">Противоположная точка зрения подразумевает, что
-                                реплицированные с зарубежных источников, современные исследования и по сей день
-                                остаются уделом либералов, которые жаждут быть обнародованы. Вот вам яркий
-                                пример современных тенденций — семантический разбор внешних противодействий
-                                обеспечивает актуальность форм воздействия. </p>
+                        <div class="about-company__big-right-column--adaptive">
+                            <img src="static/images/about-company2.png" alt="">
                         </div>
-                        <div class="about-company__watch-more animated">
-                            <a href="{% url 'contacts:about_company' %}">
-                                <img src="static/images/watch-more.svg" alt="">
-                            </a>
+                        <div class="about-company__more-detailed">
+                            <a href="{% url 'contacts:about_company' %}">Подробнее</a>
                         </div>
                     </div>
                 </div>
@@ -394,68 +393,25 @@
             <hr>
         </div>
         <div class="work-stages__cards">
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        01
+            {% for stage in cooperation_stages %}
+                {% if stage.icon %}
+                    <div class="work-stages__image-card">
+                        <img src="{{ stage.icon.url }}" alt="">
                     </div>
-                    <div>
-                        <p class="work-stages__card-heading">Консультация</p>
+                {% else %}
+                    <div class="work-stages__info-card">
+                        <div class="work-stages__card-header">
+                            <div class="work-stages__card-number">
+                                {{ stage.number }}
+                            </div>
+                            <div>
+                                <p class="work-stages__card-heading">{{ stage.name }}</p>
+                            </div>
+                        </div>
+                        <p>{{ stage.description }}</p>
                     </div>
-                </div>
-                <p>Вы приезжаете на встречу к нам в офис выберете понравившийся проект
-                    дома или предоставите свой. Узнаете точную стоимость строительства
-                    вашего дома, сможете выбрать земельный участок, если у вас его еще нет.</p>
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        02
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Подготовка документации</p>
-                    </div>
-                </div>
-                <p>Производятся расчеты конструкций, формирование рабочих чертежей
-                    с точными размерами, калькуляция всех объемов материалов по выбранному
-                    проекту. На сайте представлены типовые проекты домов, вы можете внести
-                    свои пожелания в любой понравившийся, чтобы дом был максимально идеальным для вас</p>
-            </div>
-            <div class="work-stages__image-card">
-                <img src="static/images/work-stages-1.png" alt="">
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        03
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Строительство</p>
-                    </div>
-                </div>
-                <p>Начинаем строительство. Все работы по данному виду услуг ведутся квалифицированными специалистами.
-                    Все вопросы и проблемы, возникающие в ходе проведения работ, могут
-                    решаться без вашего участия, с предварительным согласованием
-                </p>
-            </div>
-            <div class="work-stages__image-card">
-                <img src="static/images/work-stages-0.png" alt="">
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        01
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Сдача дома</p>
-                    </div>
-                </div>
-                <p>Любая недвижимость, прежде чем на ее территории будут проживать люди,
-                    должна получить официальное разрешение на ее использование по назначению.
-                    Наш юрист самостоятельно готовит документацию и проходит все инстанции.
-                    Вам остается только приехать, получить весь пакет зарегистрированных
-                    документов и получить ключи от вашего дома</p>
-            </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
@@ -491,8 +447,7 @@
             <div class="feedback__column">
                 <div class="feedback__form">
                     <div class="feedback__heading">
-                        <p>Закажите строительство дома</p>
-                        <p>прямо сейчас!</p>
+                        <p>Остались вопросы?</p>
                     </div>
                     <form action="" id="feedbackForm">
                         {% csrf_token %}
@@ -509,7 +464,7 @@
                             <div>
                                 <label for="consent" class="feedback__checkbox-label">
                                     Даю своё согласие на обработку моих
-                                    <a id="userAgreementLink" target="_blank">персональных данных</a>
+                                    <a id="userAgreementLink" target="_blank"  href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
                                 </label>
                             </div>
                         </div>
@@ -799,45 +754,18 @@
         </div>
 
         <div class="half">
-            <div class="tab">
-                <input id="tab-1" type="checkbox" name="tabs">
-                <div class="tab-label">
-                    <label for="tab-1">Вы знаете свой веб-сайт</label>
+            {% for question in popular_questions %}
+                <div class="tab">
+                    <input id="tab-{{ question.pk }}" type="checkbox" name="tabs">
+                    <div class="tab-label">
+                        <label for="tab-{{ question.pk }}">{{ question.question }}</label>
+                    </div>
+                    <hr>
+                    <div class="tab-content">
+                        <p>{{ question.answer }}</p>
+                    </div>
                 </div>
-                <hr>
-                <div class="tab-content">
-                    <p>Ваша идеальная тема также зависит от типа контента, который публикует ваш сайт. По сути,
-                        вы хотите смотреть на такие вещи, как скорость загрузки, хотите ли вы современный дизайн
-                        или что-то действительно простое, такие функции, как магазин электронной коммерции, блог
-                        или видеоблог, а также количество изображений и текст в теме.</p>
-                </div>
-            </div>
-            <div class="tab">
-                <input id="tab-2" type="checkbox" name="tabs">
-                <div class="tab-label">
-                    <label for="tab-2">Вы знаете свой веб-сайт</label>
-                </div>
-                <hr>
-                <div class="tab-content">
-                    <p>Ваша идеальная тема также зависит от типа контента, который публикует ваш сайт. По сути,
-                        вы хотите смотреть на такие вещи, как скорость загрузки, хотите ли вы современный дизайн
-                        или что-то действительно простое, такие функции, как магазин электронной коммерции, блог
-                        или видеоблог, а также количество изображений и текст в теме.</p>
-                </div>
-            </div>
-            <div class="tab">
-                <input id="tab-3" type="checkbox" name="tabs">
-                <div class="tab-label">
-                    <label for="tab-3">Вы знаете свой веб-сайт</label>
-                </div>
-                <hr>
-                <div class="tab-content">
-                    <p>Ваша идеальная тема также зависит от типа контента, который публикует ваш сайт. По сути,
-                        вы хотите смотреть на такие вещи, как скорость загрузки, хотите ли вы современный дизайн
-                        или что-то действительно простое, такие функции, как магазин электронной коммерции, блог
-                        или видеоблог, а также количество изображений и текст в теме.</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -1215,32 +1143,41 @@
 <script>
     // Мобильная форма с фильтрами
     document.addEventListener("DOMContentLoaded", function () {
-    const openFiltersBtn = document.getElementById("openMobileFilters");
-    const closeFiltersBtn = document.getElementById("closeMobileFilter");
-    const filterFormContainer = document.getElementById("mobileCatalogFilter");
-    const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
+        const openFiltersBtn = document.getElementById("openMobileFilters");
+        const closeFiltersBtn = document.getElementById("closeMobileFilter");
+        const filterFormContainer = document.getElementById("mobileCatalogFilter");
+        const filterOverlay = document.getElementById("mobileCatalogFilterOverlay");
 
-    // const mobileForm = document.getElementById("mobileFiltersForm");
-    const desctopForm = document.getElementById("bestProjectsForm");
+        let scrollPosition = 0; 
+        function isMobile() {
+            return window.innerWidth <= 500;
+        }
 
+        // Функция для открытия формы
+        function openFilters() {
+            // Сохранение позиции вертикального скролла
+            if (isMobile()) {
+                scrollPosition = window.scrollY; 
+                document.body.style.top = `-${scrollPosition}px`; 
+                document.body.classList.add("scroll-disabled");
+            }
+            filterFormContainer.style.display = "flex";
+            filterOverlay.style.display = "flex";
+        }
 
-    // Функция для открытия формы
-    function openFilters() {
-        filterFormContainer.style.display = "flex";
-        filterOverlay.style.display = "flex";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
+        // Функция для закрытия формы
+        function closeFilters() {
+            filterFormContainer.style.display = "none";
+            filterOverlay.style.display = "none";
+            if (isMobile()) {
+                document.body.classList.remove("scroll-disabled");
+                document.body.style.top = ""; 
+                window.scrollTo(0, scrollPosition); 
+            }
+        }
 
-    // Функция для закрытия формы
-    function closeFilters() {
-        filterFormContainer.style.display = "none";
-        filterOverlay.style.display = "none";
-        document.querySelector("body").classList.toggle("scroll-disabled");
-    }
-
-    // Обработчики событий
-    openFiltersBtn.addEventListener("click", openFilters);
-    closeFiltersBtn.addEventListener("click", closeFilters);
-});
+        openFiltersBtn.addEventListener("click", openFilters);
+        closeFiltersBtn.addEventListener("click", closeFilters);
+    });
 </script>
 {% endblock %}

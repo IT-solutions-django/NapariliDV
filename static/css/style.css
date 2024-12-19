@@ -28,6 +28,9 @@
     font-weight: 400;
     font-style: normal;
 }
+.color__red {
+    color:#FF1A1A;
+}
 
 body {
     font-family: 'Involve', sans-serif;
@@ -41,7 +44,8 @@ body {
 
 body.scroll-disabled {
     height: 100vh; 
-    overflow-y: hidden;
+    position: fixed;
+    overflow: hidden;
 }
 
 a {
@@ -91,7 +95,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5); 
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000000;
 }
 .modal-content, 
 .modal-success-content {
@@ -199,7 +203,8 @@ main {
     right: 20px
 }
 .modal-feedback__image--adaptive, 
-.similar-projects--adaptive {
+.similar-projects--adaptive, 
+.about-company__big-right-column--adaptive {
     display: none;
 }
 .modal-feedback__image--adaptive img {
@@ -287,9 +292,9 @@ main {
     }
 }
 
-#mobileCatalogFilterOverlay {
+#mobileCatalogFilterOverlay, 
+#mobileGalleryOverlay {
     display: none;
-    /* display: flex; */
     position: fixed;
     top: 0;
     left: 0;
@@ -298,25 +303,39 @@ main {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000000;
+    z-index: 1000;
 }
-#mobileCatalogFilter {
+#mobileCatalogFilter, 
+#mobileGalleryProject {
     display: none;
-    /* display: flex; */
     flex-direction: column;
     justify-content: start;
     width: 100%;
     max-width: 500px;
-    height: 100%;
+    height: calc(100vh - 80px);
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: white;
     padding: 20px 15px;
     overflow-y: auto;
     overflow-x: hidden;
+    border-radius: 10px;
 }
-#mobileFiltersForm {
-    
+#mobileGalleryProject {
+    padding: 0;
+}
+#mobileGalleryProject .mobile-container {
+    padding: 0px 15px;
+}
+#mobileGalleryProject .best-projects__card-content {
+    padding: 0px 10px;
+}
+@media (max-width: 500px) {
+    #mobileCatalogFilter, 
+    #mobileGalleryProject {
+        height: 100%;
+        border-radius: 0px
+    }
 }
 #mobileFiltersForm {
     display: flex;
@@ -329,20 +348,31 @@ main {
     right: 15px;
     top: 15px;
 }
-.mobile-catalog__heading {
+.mobile-catalog__heading, 
+.mobile-gallery__heading {
     font-family: 'Involve 500', sans-serif;
     font-weight: 500;
 }
+.mobile-gallery__heading {
+    font-size: 36px;
+    margin-top: 50px;
+}
 .mobile-catalog__heading hr,
-#mobileFiltersForm hr {
+#mobileFiltersForm hr, 
+.mobile-gallery__heading hr {
     height: 1px;
     background-color: #B7B7B7;
     width: 100%;
 }
-.mobile-catalog__heading hr {
+.mobile-catalog__heading hr, 
+.mobile-gallery__heading hr {
     margin-top: 15px;
     margin-bottom: 20px;
 }
+#mobileGalleryProject .best-projects__card-content {
+    margin-top: 20px;
+}
+
 
 .mobile-catalog__material-filters {
     margin-top: 30px;
@@ -671,7 +701,6 @@ main {
 }
 .slider-heading__want-the-house-button,
 .advantages__choose-house,
-.about-company__watch-more,
 .feedback__button, 
 .footer__button button, 
 .project__order-button,
@@ -804,8 +833,6 @@ main {
 
 .slider-heading__want-the-house-button a,
 .advantages__choose-house a,
-.about-company__watch-more a,
-.about-company__watch-more a,
 .feedback__button a, 
 .footer__button a, 
 .project__order-button a {
@@ -1105,6 +1132,7 @@ main {
 }
 
 .best-projects__card hr,
+.best-projects__card-text-container hr,
 .similar-projects__card-heading hr, 
 .news__card-text-container hr {
     border: none;
@@ -1284,7 +1312,15 @@ main {
     border-radius: 20px;
     width: 100%;
     min-width: 239px;
-    height: 270px;
+    height: 281px;
+}
+
+.about-company__more-detailed a {
+    background-color: #595959;
+    border: solid 1px #E1E1E1; 
+    color: white;
+    padding: 9px 45px;
+    border-radius: 20px;
 }
 
 .about-company__row {
@@ -1303,11 +1339,11 @@ main {
 }
 
 .about-company__textblock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding-right: 58px;
-}
-
-.about-company__watch-more {
-    float: right
+    gap: 20px;
 }
 
 .about-company-page__heading-with-icon {
@@ -1480,6 +1516,22 @@ main {
 
 .gallery-page {
     padding-bottom: 162px;
+}
+.gallery-page__slide-label {
+    position: absolute;
+    height: 42px;
+    font-size: 14px;
+    border: solid 1px #B7B7B7;
+    color: white;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    border-radius: 0 0 15px 15px;
+    backdrop-filter: blur(60px); /* Эффект блюра */
+    -webkit-backdrop-filter: blur(60px); 
+    display: none;
 }
 
 .team__cards .slick-arrow,
@@ -1693,7 +1745,8 @@ main {
     color: white;
     text-transform: uppercase;
     margin-bottom: 20px;
-
+    font-size: 40px;
+    text-wrap: nowrap;
 }
 
 .feedback__heading p {
@@ -1947,6 +2000,10 @@ main {
     width: 820px;
     height: 480px;
 }
+#mobileGalleryProject .gallery__photo, 
+#mobileGalleryProject .gallery__photo img {
+    height: 200px !important;
+}
 .gallery__photo {
     margin-right: 20px;
 }
@@ -1962,6 +2019,7 @@ main {
 }
 .gallery-page__photo {
     margin-right: 20px;
+    position: relative;
 }
 .gallery-page__photo img {
     object-fit: cover;
@@ -3110,9 +3168,13 @@ footer hr,
         margin-top: 15px;
     }
     .news-page__header-hr--adaptive, 
-    .article__header-hr--adaptive, 
+    .article__header-hr--adaptive {
+        display: none;
+    }
     .slider .slick-arrow {
-        display: none !important;
+        width: 30px;
+        height: 30px;
+        margin-top: 60px;
     }
     .advantages__heading {
         padding-bottom: 20px;
@@ -3139,7 +3201,7 @@ footer hr,
     .slider-content {
         position: absolute;
         right: 30px;
-        bottom: 20px;
+        bottom: -10px;
         width: 300px;
         height: 170px;
     }
@@ -3272,8 +3334,6 @@ footer hr,
     .slider-heading__want-the-house-button button img ,  
     .advantages__choose-house,
     .advantages__choose-house button img
-    .about-company__watch-more,
-    .about-company__watch-more button img,
     .feedback__button, 
     .feedback__button img, 
     .footer__button, 
@@ -3298,6 +3358,10 @@ footer hr,
     }
     .slider-heading__want-the-house-button {
         bottom: -75px
+    }
+    #mobileGalleryProject .slider-heading__want-the-house-button {
+        right: 15px;
+        bottom: 20px;
     }
     .slider-heading {
         padding-top: 20px;
@@ -3476,6 +3540,9 @@ footer hr,
         font-family: 'Involve', sans-serif;
         font-weight: 600;
     }
+    .feedback__heading {
+        font-size: 24px;
+    }
     .footer__row,
     .footer__phone-adaptive {
         padding: 0px 20px;
@@ -3536,16 +3603,20 @@ footer hr,
         width: 30px;
         height: 30px;
     }
-    .catalog__pagination-arrow-left {
+    .catalog__pagination-arrow-left, 
+    .slider .slick-prev {
         background-image: url('/static/images/small-gray-left-arrow.svg');
     }
-    .catalog__pagination-arrow-right {
+    .catalog__pagination-arrow-right, 
+    .slider .slick-next {
         background-image: url('/static/images/small-gray-right-arrow.svg');
     }
-    .catalog__pagination-arrow-right:hover {
+    .catalog__pagination-arrow-right:hover,
+    .slider .slick-prev:hover {
         background-image: url('/static/images/small-white-right-arrow.svg');
     }
-    .catalog__pagination-arrow-left:hover {
+    .catalog__pagination-arrow-left:hover, 
+    .slider .slick-next:hover {
         background-image: url('/static/images/small-white-left-arrow.svg');
     }
     .project__parameters, 
@@ -3617,7 +3688,8 @@ footer hr,
     .news__card-text-container hr {
         margin-bottom: 15px;
     }
-    .similar-projects--adaptive {
+    .similar-projects--adaptive, 
+    .gallery-page__slide-label {
         display: flex;
         justify-content: left;
         gap: 20px;
@@ -3667,6 +3739,13 @@ footer hr,
     .team__card {
         width: calc((100% - 20px) / 2);
     }
+    .slider .slick-arrow {
+        /* margin-top: -10px; */
+        display: none !important;
+    }
+    .slider .slick-dots {
+        display: none !important;
+    }
 }
 @media (max-width: 768px) {
     .advantages__heading,
@@ -3691,7 +3770,8 @@ footer hr,
         height: 660px;
     }
     .slider .slick-dots {
-        bottom: 15px;
+        /* bottom: 15px; */
+        display: none !important;
     }
     .slider-image {
         height: 300px;
@@ -3760,6 +3840,7 @@ footer hr,
     .article__header {
         flex-direction: column;
         align-items: start;
+        margin-bottom: 30px;
     }
     .news__cards {
         margin-top: 20px;
@@ -3774,16 +3855,24 @@ footer hr,
         font-size: 12px;
         align-self: flex-start;
     }
-    .news-page__read-button button {
-        /* margin: 0px 15px; */
-        width: 100%;
+    .news-page__read-button button, 
+    .about-company__more-detailed a {
         font-size: 14px;
+    }
+    .news-page__read-button button, 
+    .about-company__more-detailed a {
+        width: 100%;
+    }
+    .about-company__more-detailed a {
+        display: block;
+        text-align: center;
     }
     .news__card-image img {
         height: 208px;
     }
     .news-page__header-hr, 
-    .article__header-hr {
+    .article__header-hr, 
+    .gallery-page .article__content {
         display: none !important;
     }
     .news-page__header-hr--adaptive, 
@@ -3831,9 +3920,6 @@ footer hr,
     .bigMap > ymaps {
         border-radius: 0px;
     }
-    .news__header-right-buttons {
-        margin-top: 15px;
-    }
     .news__header-right-buttons, 
     #blogForm, 
     #galleryForm {
@@ -3846,6 +3932,14 @@ footer hr,
     }
     .partners__card {
         height: 92px;
+    }
+    .about-company__big-right-column--adaptive,
+    .about-company__big-right-column--adaptive img {
+        border-radius: 15px;
+        object-fit: cover;
+        display: block; 
+        width: 100%;
+        max-height: 281px;
     }
 }
     
@@ -3867,7 +3961,9 @@ footer hr,
     .team__slider-item img {
         height: 360px;
     }
-    .about-company__photo img {
+    .about-company__photo img, 
+    .about-company__big-right-column--adaptive,
+    .about-company__big-right-column--adaptive img {
         height: 200px;
     }
     .feedback__form {
@@ -3893,31 +3989,23 @@ footer hr,
     .contacts__big-right-column {
         height: 460px;
     }
-    .about-company__big-right-column {
-        display: block;
-        width: 100%;
-    }
     .about-company__big-right-column img {
         object-fit:cover;
         height: 200px;
         border-radius: 20px;
     }
-    .about-company__watch-more {
-        position: absolute;
-        bottom: -250px;
-        right: 0px;
-    }
     .team__slider-item, 
     .similar-projects__slider-item {
         margin-right: 10px;
     }
-    .gallery__photo {
+    .gallery__photo,
+    .gallery-page__photo {
         width: 820px;
         height: 222px;
         margin-right: 10px;
     }
-    
-    .gallery__photo img {
+    .gallery__photo img, 
+    .gallery-page__photo img {
         object-fit: cover;
         border-radius: 15px;
         width: 820px;
@@ -3959,6 +4047,9 @@ footer hr,
     .about-company-page__big-right-column img, 
     .about-company-page__small-left-column img {
         height: 200px;
+    }
+    .gallery-page__slide-label {
+        height: 36px;
     }
 }
 @media (max-width: 340px) {

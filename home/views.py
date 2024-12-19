@@ -3,7 +3,7 @@ from django.views import View
 from django.template.loader import render_to_string 
 from django.http import JsonResponse
 from projects.models import Project
-from home.models import Slide, PopularQuestion
+from home.models import Slide, PopularQuestion, CooperationStage
 from contacts.models import Worker
 from projects.forms import CatalogFiltersForm
 from projects.services import get_paginated_collection
@@ -23,6 +23,7 @@ class HomeView(View):
         filter_form = CatalogFiltersForm(request.GET)
         feedback_form = FeedbackForm()
         articles = Article.objects.all()
+        cooperation_stages = CooperationStage.objects.all()
 
         if filter_form.is_valid():
             cd = filter_form.cleaned_data
@@ -78,6 +79,7 @@ class HomeView(View):
             'filter_form': filter_form,
             'feedback_form': feedback_form,
             'articles': articles,
+            'cooperation_stages': cooperation_stages,
         }
         return render(request, self.template_name, context)
 

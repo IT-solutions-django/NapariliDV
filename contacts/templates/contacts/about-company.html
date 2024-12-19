@@ -12,7 +12,7 @@
         <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
     </div>
     <div>
-        <a href="{% url 'contacts:about_company' %}">О компании</a>
+        <a class="color__red" href="{% url 'contacts:about_company' %}">О компании</a>
     </div>
 </div>
 <div class="about-company-page container">
@@ -34,9 +34,7 @@
                     </div>
                 </div>
                 <div class="article__paragraph-text">
-                    <p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
-                        Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
-                    <p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>    
+                    {{ company_info.history }}
                 </div>
             </div>
         </div>
@@ -53,9 +51,7 @@
                     </div>
                 </div>
                 <div class="article__paragraph-text">
-                    <p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
-                        Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
-                    <p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>    
+                    {{ company_info.mission }}
                 </div>
             </div>
         </div>
@@ -111,102 +107,20 @@
         </div>
     </div>
     <div class="about-company-page__team__cards">
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
+        {% for worker in workers %}
+            <div class="team__card">
+                <div>
+                    <img src="{{ worker.photo.url }}" alt="">
+                </div>
+                <div class="team-card__name">
+                    <p>{{ worker.name }}</p>
+                </div>
+                <hr>
+                <div class="team__role">
+                    <p>{{ worker.role }}</p>
+                </div>
             </div>
-            <div class="team-card__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div class="team__role">
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
-        <div class="team__card">
-            <div>
-                <img src="{% static 'images/team2.png' %}" alt="">
-            </div>
-            <div class="team__name">
-                <p>Анастасия Жукова</p>
-            </div>
-            <hr>
-            <div>
-                <p>Генеральный директор</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div class="contacts__heading">
         <h4>Партнеры</h4>
@@ -234,15 +148,11 @@
         <hr>
     </div> 
     <div class="certificates__slider">
-        <div class="certificate__card">
-            <img src="{% static 'images/certificate1.png' %}" alt="">
-        </div>
-        <div class="certificate__card">
-            <img src="{% static 'images/certificate2.png' %}" alt="">
-        </div>
-        <div class="certificate__card">
-            <img src="{% static 'images/certificate3.png' %}" alt="">
-        </div>
+        {% for certificate in certificates %}
+            <div class="certificate__card">
+                <img src="{{ certificate.photo.url }}" alt="">
+            </div>
+        {% endfor %}
     </div>
 </div>
 

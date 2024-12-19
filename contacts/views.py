@@ -3,7 +3,9 @@ from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string 
 from .models import (
-    PrivacyPolicy
+    PrivacyPolicy, 
+    Worker,
+    CertificatePhoto,
 )
 from .forms import FeedbackForm, GalleryFilterForm
 from projects.models import Project
@@ -32,7 +34,13 @@ class AboutCompanyView(View):
     template_name = 'contacts/about-company.html'
 
     def get(self, request): 
-        return render(request, self.template_name)
+        workers = Worker.objects.all()
+        certificates = CertificatePhoto.objects.all()
+        context = {
+            'workers': workers,
+            'certificates': certificates,
+        }
+        return render(request, self.template_name, context)
     
 
 class PrivacyPolicyView(View): 
@@ -67,10 +75,19 @@ class GalleryPhotosAPIView(View):
             if category: 
                 projects = projects.filter(category__id=category)
 
-                print(category)
-
         rendered_gallery_projects = render_to_string('contacts/includes/gallery_slider.html', {
             'gallery_photos': projects,
         }) 
 
         return JsonResponse({'html': rendered_gallery_projects})
+    
+
+class GalleryDetailsAPIView(View): 
+    def get(self, request, project_id: int): 
+        project = Project.objects.get(pk=project_id)
+
+        rendered_project_details = render_to_string('contacts/includes/gallery_project.html', {
+            'project': project,
+        }) 
+
+        return JsonResponse({'html': rendered_project_details})
