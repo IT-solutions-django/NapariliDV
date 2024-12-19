@@ -54,6 +54,8 @@ def _get_needed_data_format(
 
     MIN_RATING = 4
 
+    print(fetched_data)
+
     if len(fetched_data["reviews"]) == 0:
         raise EmptyReviewList("Список отзывов пуст")
     
