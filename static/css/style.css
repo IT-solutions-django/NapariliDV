@@ -1983,6 +1983,13 @@ main {
     justify-content: space-between;
     align-items: center;
 }
+.reviews__platform img {
+    width: auto;
+    height: auto;
+    max-height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
 .reviews__platform-stats {
     color: #595959;
 }
@@ -3415,11 +3422,12 @@ footer hr,
     .reviews__card-date {
         font-size: 12px;
     }
-    .reviews__card-stars {
-        width: 90px;
+    .reviews__card-stars img {
+        width: 70px;
     }
     .reviews__platform img {
-        width: 60px;
+        /* width: 60px; */
+        height: 20px;
     }
     .reviews__platform-stats {
         font-size: 12px;
