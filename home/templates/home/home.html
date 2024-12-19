@@ -487,181 +487,51 @@
         <hr>
     </div>
     <div class="reviews__slider">
-        <div class="reviews__card">
-            <div class="reviews__card-header">
-                <div>
-                    <img src="static/images/avatar.png" alt="">
-                </div>
-                <div class="reviews__card-author-name">
-                    <p>Евгений Пастухов</p>
-                </div>
-            </div>
-            <div class="reviews__card-text font__inter">
-                Противоположная точка зрения подразумевает, что непосредственные участники технического
-                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                также независимые государства призывают нас к новым свершениям. Противоположная точка зрения
-                подразумевает, что непосредственные участники технического
-                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                также независимые государства призывают нас к новым свершениям
-            </div>
-            <div>
-                <i class="reviews__card-date">30.11.2024</i>
-            </div>
-            <div class="reviews__card-images">
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-            </div>
-
-            <div class="reviews__card-details">
-                <div class="reviews__card-stars">
-                    <img src="static/images/five-stars — копия.svg" alt="">
-                </div>
-                <div class="reviews__platform">
+        {% for review in reviews %}
+            <div class="reviews__card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>     
+                    <div class="reviews__card-header">
+                        <div>
+                            <img src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.png' %}{% endif %}" alt="">
+                        </div>
+                        <div class="reviews__card-author-name">
+                            <p>{{ review.author }}</p>
+                        </div>
+                    </div>
+                    <div class="reviews__card-text font__inter">
+                        {{ review.content }}
+                    </div>
                     <div>
-                        <img src="static/images/yandex.svg" alt="">
-                    </div>
-                    <div class="reviews__platform-stats font__inter">
-                        <p>5.0 (230)</p>
+                        <i class="reviews__card-date">{{ review.created_at|date:"d.m.Y" }}</i>
                     </div>
                 </div>
-            </div>
-        </div>
+                {% if review.photos.all %}
+                    <div class="reviews__card-images">
+                        {% for photo in review.photos.all %}
+                            <div class="reviews__card-image">
+                                <img src="{{ photo.url }}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div>
 
-        <div class="reviews__card">
-            <div class="reviews__card-header">
-                <div>
-                    <img src="static/images/avatar.png" alt="">
-                </div>
-                <div>
-                    <p class="reviews__card-author-name">Евгений Пастухов</p>
-                </div>
-            </div>
-            <div class="reviews__card-text font__inter">
-                Противоположная точка зрения подразумевает, что непосредственные участники технического
-                прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                также независимые государства призывают нас к новым свершениям
-            </div>
-            <div>
-                <i>30.11.2024</i>
-            </div>
-            <div class="reviews__card-images">
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-
-            </div>
-
-            <div class="reviews__card-details">
-                <div>
-                    <img src="static/images/five-stars — копия.svg" alt="">
-                </div>
-                <div class="reviews__platform">
-                    <div>
-                        <img src="static/images/yandex.svg" alt="">
-                    </div>
-                    <div class="reviews__platform-stats font__inter">
-                        <p>5.0 (230)</p>
+                    <div class="reviews__card-details">
+                        <div class="reviews__card-stars">
+                            <img src="static/images/five-stars — копия.svg" alt="">
+                        </div>
+                        <div class="reviews__platform">
+                            <div>
+                                <img src="{{ review.platform.icon.url }}" alt="">
+                            </div>
+                            <div class="reviews__platform-stats font__inter">
+                                <p>5.0 (230)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="reviews__card">
-            <div class="reviews__card-header">
-                <div>
-                    <img src="static/images/avatar.png" alt="">
-                </div>
-                <div>
-                    <p class="reviews__card-author-name">Евгений Пастухов</p>
-                </div>
-            </div>
-            <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники
-                    технического
-                    прогресса представляют собой не что иное, как квинтэссенцию победы маркетинга над разумом и
-                    должны быть в равной степени предоставлены сами себе. Банальные, но неопровержимые выводы, а
-                    также независимые государства призывают нас к новым свершениям свершен</p>
-            </div>
-            <div>
-                <i>30.11.2024</i>
-            </div>
-            <div class="reviews__card-images">
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-                <div class="reviews__card-image">
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-            </div>
-
-            <div class="reviews__card-details">
-                <div>
-                    <img src="static/images/five-stars — копия.svg" alt="">
-                </div>
-                <div class="reviews__platform">
-                    <div>
-                        <img src="static/images/yandex.svg" alt="">
-                    </div>
-                    <div class="reviews__platform-stats font__inter">
-                        <p>5.0 (230)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="reviews__card">
-            <div class="reviews__card-header">
-                <div>
-                    <img src="static/images/avatar.png" alt="">
-                </div>
-                <div>
-                    <p class="reviews__card-author-name">Евгений Пастухов</p>
-                </div>
-            </div>
-            <div class="reviews__card-text">
-                <p class="font__inter">Противоположная точка зрения подразумевает, что непосредственные участники
-                    технического
-                    прогресса представляют собой не собой не собой не собой не собой не собой не</p>
-            </div>
-            <div>
-                <i>30.11.2024</i>
-            </div>
-            <div class="reviews__card-images">
-                <div>
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-                <div>
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-                <div>
-                    <img src="static/images/gallery1.png" alt="">
-                </div>
-            </div>
-
-            <div class="reviews__card-details">
-                <div>
-                    <img src="static/images/five-stars — копия.svg" alt="">
-                </div>
-                <div class="reviews__platform">
-                    <div>
-                        <img src="static/images/yandex.svg" alt="">
-                    </div>
-                    <div class="reviews__platform-stats font__inter">
-                        <p>5.0 (230)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 

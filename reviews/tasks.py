@@ -66,7 +66,7 @@ def update_yandex_reviews_task(self) -> None:
         )
         new_review.save()
         if review_data.get('photos'): 
-            for photo_url in review_data['photos']: 
+            for photo_url in review_data['photos'][:3]: 
                 new_photo = ReviewPhoto(
                     url=photo_url, 
                     review=new_review,
@@ -105,7 +105,7 @@ def update_2gis_reviews_task(self) -> None:
         )
         new_review.save()
         if review_data.get('photos'): 
-            for photo_url in review_data['photos']: 
+            for photo_url in review_data['photos'][:3]: 
                 new_photo = ReviewPhoto(
                     url=photo_url, 
                     review=new_review,

@@ -5,6 +5,7 @@ import uuid
 
 class Platform(models.Model): 
     name = models.CharField('Название платформы', max_length=100)
+    icon = models.FileField('Иконка', upload_to='reviews/platforms', null=True)
 
     def __str__(self) -> str: 
         return self.name
@@ -37,4 +38,4 @@ class Review(models.Model):
 
 class ReviewPhoto(models.Model): 
     url = models.URLField('Фото отзыва')
-    review = models.ForeignKey(verbose_name='Отзыв', to=Review, on_delete=models.CASCADE)
+    review = models.ForeignKey(verbose_name='Отзыв', to=Review, on_delete=models.CASCADE, related_name='photos')
