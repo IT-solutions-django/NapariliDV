@@ -3112,7 +3112,7 @@ footer hr,
     .news-page__header-hr--adaptive, 
     .article__header-hr--adaptive, 
     .slider .slick-arrow {
-        display: none !important;
+        display: none;
     }
     .advantages__heading {
         padding-bottom: 20px;
@@ -3760,6 +3760,7 @@ footer hr,
     .article__header {
         flex-direction: column;
         align-items: start;
+        margin-bottom: 30px;
     }
     .news__cards {
         margin-top: 20px;
@@ -3830,9 +3831,6 @@ footer hr,
     }
     .bigMap > ymaps {
         border-radius: 0px;
-    }
-    .news__header-right-buttons {
-        margin-top: 15px;
     }
     .news__header-right-buttons, 
     #blogForm, 
