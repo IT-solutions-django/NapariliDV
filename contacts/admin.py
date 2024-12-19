@@ -3,7 +3,8 @@ from .models import (
     Worker,
     Request, 
     PrivacyPolicy, 
-    PrivacyPolicyParagraph
+    PrivacyPolicyParagraph, 
+    CertificatePhoto
 )
 from .filters import IsClosed
 
@@ -33,3 +34,8 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title']
     search_fields = ['title']
     inlines = [PrivacyPolicyParagraphInline]
+
+
+@admin.register(CertificatePhoto)
+class CertificatePhotoAdmin(admin.ModelAdmin): 
+    list_display = ['pk', 'photo']

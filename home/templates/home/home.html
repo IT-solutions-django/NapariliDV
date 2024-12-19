@@ -364,14 +364,10 @@
                     <div class="about-company__textblock">
                         <div>
                             <div class="about-company__details-heading">
-                                <h5>Воистину радостный звук:<br> старческий скрип Амстердама</h5>
+                                <h5>{{ company_info.subheader|linebreaks }}</h5>
                             </div>
                             <div class="about-company__details-text">
-                                <p class="font__inter">Противоположная точка зрения подразумевает, что
-                                    реплицированные с зарубежных источников, современные исследования и по сей день
-                                    остаются уделом либералов, которые жаждут быть обнародованы. Вот вам яркий
-                                    пример современных тенденций — семантический разбор внешних противодействий
-                                    обеспечивает актуальность форм воздействия. </p>
+                                <p class="font__inter">{{ company_info.description|linebreaks }}</p>
                             </div>
                         </div>
                         <div class="about-company__big-right-column--adaptive">
@@ -397,68 +393,25 @@
             <hr>
         </div>
         <div class="work-stages__cards">
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        01
+            {% for stage in cooperation_stages %}
+                {% if stage.icon %}
+                    <div class="work-stages__image-card">
+                        <img src="{{ stage.icon.url }}" alt="">
                     </div>
-                    <div>
-                        <p class="work-stages__card-heading">Консультация</p>
+                {% else %}
+                    <div class="work-stages__info-card">
+                        <div class="work-stages__card-header">
+                            <div class="work-stages__card-number">
+                                {{ stage.number }}
+                            </div>
+                            <div>
+                                <p class="work-stages__card-heading">{{ stage.name }}</p>
+                            </div>
+                        </div>
+                        <p>{{ stage.description }}</p>
                     </div>
-                </div>
-                <p>Вы приезжаете на встречу к нам в офис выберете понравившийся проект
-                    дома или предоставите свой. Узнаете точную стоимость строительства
-                    вашего дома, сможете выбрать земельный участок, если у вас его еще нет.</p>
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        02
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Подготовка документации</p>
-                    </div>
-                </div>
-                <p>Производятся расчеты конструкций, формирование рабочих чертежей
-                    с точными размерами, калькуляция всех объемов материалов по выбранному
-                    проекту. На сайте представлены типовые проекты домов, вы можете внести
-                    свои пожелания в любой понравившийся, чтобы дом был максимально идеальным для вас</p>
-            </div>
-            <div class="work-stages__image-card">
-                <img src="static/images/work-stages-1.png" alt="">
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        03
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Строительство</p>
-                    </div>
-                </div>
-                <p>Начинаем строительство. Все работы по данному виду услуг ведутся квалифицированными специалистами.
-                    Все вопросы и проблемы, возникающие в ходе проведения работ, могут
-                    решаться без вашего участия, с предварительным согласованием
-                </p>
-            </div>
-            <div class="work-stages__image-card">
-                <img src="static/images/work-stages-0.png" alt="">
-            </div>
-            <div class="work-stages__info-card">
-                <div class="work-stages__card-header">
-                    <div class="work-stages__card-number">
-                        01
-                    </div>
-                    <div>
-                        <p class="work-stages__card-heading">Сдача дома</p>
-                    </div>
-                </div>
-                <p>Любая недвижимость, прежде чем на ее территории будут проживать люди,
-                    должна получить официальное разрешение на ее использование по назначению.
-                    Наш юрист самостоятельно готовит документацию и проходит все инстанции.
-                    Вам остается только приехать, получить весь пакет зарегистрированных
-                    документов и получить ключи от вашего дома</p>
-            </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 

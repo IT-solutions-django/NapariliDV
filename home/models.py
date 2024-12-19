@@ -17,6 +17,7 @@ class Slide(models.Model):
 
 
 class CompanyInfo(models.Model): 
+    subheader = models.TextField('Подзаголовок', default='', max_length=200)
     description = models.TextField('Описание', null=True, blank=True)
     history = models.TextField('История компании', null=True, blank=True)
     mission = models.TextField('Миссия компании', null=True, blank=True)
@@ -54,53 +55,11 @@ class CompanyInfo(models.Model):
         return 'Информация о компании'
     
 
-class CompanyFact(models.Model): 
-    name = models.CharField('Название', max_length=100)
-    company_info = models.ForeignKey(
-        verbose_name='Информация о компании', 
-        to=CompanyInfo,
-        on_delete=models.CASCADE, 
-        related_name='facts', 
-    )
-
-    class Meta: 
-        verbose_name = 'Факт'
-        verbose_name_plural = 'Факты о компании'
-
-
-class CompanyService(models.Model): 
-    name = models.CharField('Название', max_length=50)
-    company_info = models.ForeignKey(
-        verbose_name='Услуги компании', 
-        to=CompanyInfo,
-        on_delete=models.CASCADE, 
-        related_name='services', 
-    )
-
-    class Meta: 
-        verbose_name = 'Услуга'
-        verbose_name_plural = 'Услуги компании'
-
-
-class CompanyAdvantage(models.Model): 
-    name = models.CharField('Название', max_length=100)
-    description = models.TextField('Описание')
-    photo = models.ImageField('Фото', upload_to='home/company_advantages')
-    company_info = models.ForeignKey(
-        verbose_name='Преимущества компании', 
-        to=CompanyInfo,
-        on_delete=models.CASCADE, 
-        related_name='advantages', 
-    )
-
-    class Meta: 
-        verbose_name = 'Преимущество'
-        verbose_name_plural = 'Преимущества компании'
-    
-
 class CooperationStage(models.Model): 
-    name = models.CharField('Название', max_length=80)
-    icon = models.FileField('Иконка')
+    number = models.CharField('Порядковый номер', max_length=2, blank=True, null=True)
+    name = models.CharField('Название', max_length=80, blank=True, null=True)
+    description = models.TextField('Описание', blank=True, null=True)
+    icon = models.FileField('Картинка', null=True, blank=True)
 
     class Meta: 
         verbose_name = 'Этап сотрудничества'

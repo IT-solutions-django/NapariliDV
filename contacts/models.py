@@ -55,3 +55,11 @@ class Request(models.Model):
     
     def __str__(self) -> str: 
         return f'{"Обработано" if self.is_closed else "Не обработано"}, {self.created_at}, {self.phone}'
+    
+
+class CertificatePhoto(models.Model): 
+    photo = models.ImageField('Фото', upload_to='contacts/certificates') 
+
+    class Meta: 
+        verbose_name = 'Фото сертификата'
+        verbose_name_plural = 'Сертификаты'
