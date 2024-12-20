@@ -2551,6 +2551,12 @@ footer {
 footer hr {
     margin-top: 40px;
     margin-bottom: 20px;
+    transform: translateX(-50vw);
+    width: 200vw;
+}
+.not-found--hr {
+    transform: translateX(-50vw);
+    width: 200vw;
 }
 .footer__label hr {
     display: none;
@@ -2731,9 +2737,10 @@ footer hr,
 .team__slider-item hr, 
 .about-company__heading hr, 
 .slider-heading hr, 
-.team__card hr {
+.team__card hr, 
+.not-found--hr {
     border: none;
-    height: 1px;
+    height: 0.5px;
     background-color: #595959;
 }
 .info__row {
@@ -2954,6 +2961,64 @@ footer hr,
     width: 820px;
     height: 420px;
     float: right;
+}
+.not-found__background {
+    top: 180px;
+    position: absolute;
+    z-index: -10;
+}
+.not-found__background img {
+    height: 418px;
+    object-fit: cover;
+    width: 100%;
+}
+.not-found, 
+.not-found__label, 
+.not-found__label-bold, 
+.not-found__to-home-button, 
+.not-found__status-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not-found__status-code, 
+.not-found__status-code img {
+    width: 414px; 
+}
+.not-found__status-code {
+    margin-bottom: 20px;
+}
+.not-found__label {
+    margin-bottom: 15px;
+}
+.not-found__label p {
+    font-size: 18px;
+    font-weight: 500;
+}
+.not-found__label-bold {
+    margin-bottom: 30px;
+}
+.not-found__label-bold p {
+    font-size: 20px;
+    font-weight: 600;
+}
+.not-found__form {
+    margin: 100px 0 90px 0;
+    padding: 25px 162px 40px 162px;
+    max-width: 748px; 
+    border: solid 1px #B7B7B7; 
+    border-radius: 20px;    
+    background-color: white;
+}
+.not-found__to-home-button a {
+    padding: 14.5px 58.5px;
+    background-color: #FF1A1A;
+    color: white; 
+    border-radius: 20px;
+    text-wrap: nowrap;
+}
+.not-found hr {
+
 }
 
 /* Хедер */
@@ -3202,8 +3267,15 @@ footer hr,
         line-height: 60px;
         margin-bottom: 20px;
     }
-    .slider-heading__promo {
+    .slider-heading__promo, 
+    .not-found__label-bold p {
         font-size: 16px;
+    }
+    .not-found__label {
+        margin-bottom: 10px;
+    }
+    .not-found__label-bold {
+        margin-bottom: 20px;
     }
     .slider-content {
         position: absolute;
@@ -3212,7 +3284,8 @@ footer hr,
         width: 300px;
         height: 170px;
     }
-    .slider .slick-dots li button::before {
+    .slider .slick-dots li button::before, 
+    .not-found__label p {
         font-size: 14px;
     }
     .slick-dots li button:before {
@@ -3233,7 +3306,8 @@ footer hr,
     .about-company__photos, 
     .about-company-page__team__cards, 
     .partners__slider, 
-    .certificates__slider  {
+    .certificates__slider, 
+    .not-found__form  {
         margin-bottom: 40px;
     }
     .advantages__stats, 
@@ -3534,6 +3608,11 @@ footer hr,
     .footer__label hr {
         display: block;
     }
+    footer hr, 
+    .not-found--hr {
+        transform: none;
+        width: auto;
+    }
     footer hr {
         margin-top: 15px;
         margin-bottom: 15px;
@@ -3667,6 +3746,24 @@ footer hr,
         max-width: 100%;
         width: 100%;
     }
+    .not-found__status-code {
+        max-width: 100%;
+        width: 100%;
+    }
+    .not-found__status-code img {
+        /* max-width: 100%; */
+        width: 100%;
+    }
+    .not-found__form {
+        width: 100%;
+        max-width: 740px;
+    }
+    .not-found__status-code img {
+        max-width: 414px;
+    }
+    .not-found__status-code img {
+        padding: 0 15px;
+    }
     .article__image img {
         height: 400px;
     }
@@ -3702,6 +3799,9 @@ footer hr,
         justify-content: left;
         gap: 20px;
         flex-wrap: wrap;
+    }
+    .not-found__background {
+        top: 120px
     }
 }
 @media (max-width: 820px) {
@@ -3949,6 +4049,11 @@ footer hr,
         width: 100%;
         max-height: 281px;
     }
+    .not-found__form {
+        padding: 15px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
     
 @media (max-width: 576px) {
@@ -4024,6 +4129,15 @@ footer hr,
     }
     .team__card {
         width: 100%;
+    }
+    .not-found__background {
+        top: 90px;
+    }
+    .not-found__to-home-button a {
+        width: 100%;
+        padding: 11.5px 0;
+        font-size: 14px;
+        text-align: center;
     }
 }
 @media (max-width: 480px) {

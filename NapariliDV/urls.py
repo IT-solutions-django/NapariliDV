@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf.urls.static import static 
 from django.conf import settings
 
+from home.views import handler404
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +29,10 @@ urlpatterns = [
     path('projects/', include('projects.urls', namespace='projects')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('contacts/', include('contacts.urls', namespace='contacts')),
+
+    path('not-found/', handler404, name='not-found'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'home.views.handler404'

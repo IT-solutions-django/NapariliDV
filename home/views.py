@@ -140,3 +140,10 @@ class BestProjectsFilterAPIView(View):
         rendered_html = render_to_string('home/includes/best_projects_cards.html', {'best_projects': best_projects})
 
         return JsonResponse({'html': rendered_html})
+
+
+def handler404(request, *args, **argv):
+    context = {
+        'is_not_found_page': True,
+    }
+    return render(request, '404.html', context, status=404)

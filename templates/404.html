@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Страница не найдена - Напарили ДВ{% endblock %}
+
+{% block content %}
+<div class="not-found__background">
+    <img src="{% static 'images/not-found-background.svg' %}" alt="">
+</div>
+
+</div>
+<div class="not-found container">
+    <div class="not-found__form">
+        <div class="not-found__status-code">
+            <img src="{% static 'images/not-found-404.svg' %}" alt="">
+        </div>
+        <div class="not-found__label">
+            <p class="font__inter">Такой страницы больше нет</p>
+        </div>
+        <div class="not-found__label-bold">
+            <p class="font__inter">Но есть много других!</p>
+        </div>
+        <div class="not-found__to-home-button">
+            <a href="">На главную</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

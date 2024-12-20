@@ -158,6 +158,9 @@
 
 
     <footer class="footer-container">
+        {% if is_not_found_page %}
+            <hr class="not-found--hr">
+        {% endif %}
         <div class="footer__label">
             <p>Нужен дом?</p>
             <hr>
