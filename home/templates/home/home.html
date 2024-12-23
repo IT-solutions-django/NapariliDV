@@ -868,6 +868,31 @@
 <script>
     // Фильтрация лучших проектов
     $(document).ready(function() {
+        // Валидация
+        const debounce = (func, delay) => {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
+        const validateMaxInput = (element) => {
+            const maxAttr = element.attr('max');
+            const value = parseFloat(element.val());
+
+            if (value < 0) {
+                element.val(0); 
+            } else if (maxAttr !== undefined && value > parseFloat(maxAttr)) {
+                element.val(maxAttr); 
+            }
+        };
+
+        $('#bestProjectsForm input[type="number"]').on('input', debounce(function(event) {
+            validateMaxInput($(this)); 
+        }, 150));
+
+        // Применение фильтров
         $('#bestProjectsForm input, #bestProjectsForm select').on('change input', function(event) {
             let formData = $('#bestProjectsForm').serialize();
 
@@ -903,8 +928,6 @@
                     }
                 });
             }, 200); 
-
-            
         });
     });
 </script>
