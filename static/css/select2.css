@@ -18,7 +18,7 @@
     background-color: transparent !important;
 }
 .select2-container--default .select2-results>.select2-results__options {
-    max-height: 200px;
+    max-height: none !important;
     overflow-y: auto;
     border-radius: 12px !important;
 }
