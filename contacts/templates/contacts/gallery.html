@@ -16,7 +16,7 @@
             <hr>
         </div>
         <div class="mobile-container">
-            <div class="article__paragraph-text">
+            <div class="article__paragraph-text font__inter">
                 <p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций</p>
                 <p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>    
             </div>
@@ -86,21 +86,23 @@
         </div>
     </div>
     <hr class="news-page__header-hr container">
-    <div class="container">
-        <div class="article__content">
-            <div class="article__content-block">
-                <div class="article__paragraph">
-                    <div class="article__paragraph-heading">
-                        Внезапно, герцог графства коронован
-                    </div>
-                    <div class="article__paragraph-text font__inter">
-                        Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
-        Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро
+    <div class="gallery-page__text-slider container">
+        {% for project in gallery_photos %}
+            <div class="article__content">
+                <div class="article__content-block">
+                    <div class="article__paragraph">
+                        <div class="article__paragraph-heading">
+                            {{ project.name }}
+                        </div>
+                        <div class="article__paragraph-text font__inter">
+                            {{ project.description|linebreaks }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
+    
     <div class="gallery-page__slider">
         {% for project in gallery_photos %}
             <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
@@ -115,95 +117,49 @@
 </div>
 
 <div class="about">
-    <div class="contacts container">
-        <div class="contacts__small-left-column">
-            <div class="contacts__heading">
-                <h4>Контакты</h4>
-            </div>
-            <div class="contacts__info">
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
-                        </div>
-                        <div class="font__inter">
-                            <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <p>Время работы:</p>
-                        </div>
-                        <div class="font__inter">
-                            <p>{{ company_info.working_mode }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <a href="tel:{{ company_info.phone }}">Телефон:</a>
-                        </div>
-                        <div class="font__inter">
-                            <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contacts__big-right-column">
-            <div class="map" id="map">
-
-            </div>
-        </div>
-        
-    </div>
+    {% include 'contacts/includes/contacts_block.html' %}
 </div>
 {% endblock %}
 
 {% block script %}
 <script>
 // Функции
-function initGallerySlider(selector) {
-    const slider = $(selector);
-    if (slider.length) {
-        slider.slick({
-            centerMode: true,
-            arrows: true,
-            infinite: true,
-            slidesToShow: 1.7,
-            slidesToScroll: 1,
-            responsive: [, 
-                {
-                    breakpoint: 1600, 
-                    settings: {
-                        slidesToShow: 1.6, 
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 1024, 
-                    settings: {
-                        slidesToShow: 1, 
-                        slidesToScroll: 1
-                    }
-                },
-            ]
-        });
-    } else {
-        console.warn(`Элемента ${selector} не существует!`);
-    }
+function initGallerySlider() {
+    const slider = $(".gallery-page__slider");
+    const textSlider = $(".gallery-page__text-slider"); 
+
+    slider.slick({
+        centerMode: true,
+        arrows: true,
+        infinite: true,
+        slidesToShow: 1.7,
+        slidesToScroll: 1,
+        asNavFor: '.gallery-page__text-slider',
+        responsive: [, 
+            {
+                breakpoint: 1600, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1024, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1
+                }
+            },
+        ]
+    });
+    textSlider.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.gallery-page__slider',
+        adaptiveHeight: true,  
+    });
 }
 function initMobileSlider(selector) {
     const slider = $(selector);
@@ -338,7 +294,7 @@ function initMobileProject() {
 }
 
 $(document).ready(function () {
-    initGallerySlider('.gallery-page__slider')
+    initGallerySlider()
 });
 
 var myMap;
@@ -375,7 +331,7 @@ ymaps.ready(function(){
         $('#galleryForm input').on('change input', function(event) {
             let formData = $('#galleryForm').serialize();
             let gallerySliderContainer = $('.gallery-page__slider');
-            console.log(gallerySliderContainer)
+            let galleryTextSliderContainer = $('.gallery-page__text-slider');
     
             let timeout = setTimeout(function () {
                 $.ajax({
@@ -383,12 +339,12 @@ ymaps.ready(function(){
                     type: "GET",
                     data: formData,
                     success: function(response) {
-                        $('.gallery-page__slider').replaceWith(response.html);
-                        console.log(response.html)
+                        $('.gallery-page__slider').replaceWith(response.gallery_html);
+                        $('.gallery-page__text-slider').replaceWith(response.gallery_text);
 
                         // Инициализация слайдера
                         $(document).ready(function () {
-                            initGallerySlider(".gallery-page__slider");
+                            initGallerySlider();
                             initMobileProject();
                         });
                     },
@@ -423,26 +379,26 @@ ymaps.ready(function(){
             let formData = $('#galleryForm').serialize();
             let gallerySliderContainer = $('.gallery-page__slider');
 
-            timeout = setTimeout(function () {
+            let timeout = setTimeout(function () {
                 $.ajax({
                     url: "{% url 'contacts:gallery_filters' %}",  
                     type: "GET",
                     data: formData,
                     success: function(response) {
-                        gallerySliderContainer.replaceWith(response.html);
+                        $('.gallery-page__slider').replaceWith(response.gallery_html);
+                        $('.gallery-page__text-slider').replaceWith(response.gallery_text);
 
-                        // Инициализация слайдера и мобильной формы
+                        // Инициализация слайдера
                         $(document).ready(function () {
-                            initGallerySlider(".gallery-page__slider")
+                            initGallerySlider();
                             initMobileProject();
-                        });                        
-                        
+                        });
                     },
                     error: function(xhr, status, error) {
                         console.error("Ошибка при фильтрации:", error);
                     }
                 });
-            }, 200);
+            }, 200);    
         });
     });
 });

@@ -19,16 +19,23 @@ class CatalogFiltersForm(forms.Form):
     def __init__(self, *args, **kwargs): 
         super().__init__(*args, **kwargs)
 
+        self.max_project_square = int(get_max_project_square())
+        self.min_project_square = int(get_min_project_square())
+        self.fields['square_max'].widget.attrs['max'] = self.max_project_square
+        self.fields['square_max'].widget.attrs['placeholder'] = f'{price_format(self.max_project_square)} м²'
+        self.fields['square_min'].widget.attrs['max'] = self.max_project_square
+        self.fields['square_min'].widget.attrs['placeholder'] = f'{price_format(self.min_project_square)} м²'
+
         self.max_product_price = round(get_max_project_price(), 0)
         self.fields['price_max'].widget.attrs['max'] = self.max_product_price
         self.fields['price_max'].widget.attrs['placeholder'] = f'{price_format(self.max_product_price)} ₽'
 
         self.min_product_price = round(get_min_project_price(), 0)
-        self.fields['price_min'].widget.attrs['min'] = self.min_product_price
+        self.fields['price_max'].widget.attrs['min'] = self.min_product_price
         self.fields['price_max'].widget.attrs['max'] = self.max_product_price
         self.fields['price_min'].widget.attrs['placeholder'] = f'{price_format(self.min_product_price)} ₽'
 
-        self.fields['price_min'].widget.attrs['min'] = self.min_product_price
+        self.fields['price_min'].widget.attrs['max'] = self.max_product_price
 
         self.fields['categories'].choices = [(category.id, category.name) for category in Category.objects.all()]
         self.fields['materials'].choices = [(None, "Все")] + [(material.id, material.name) for material in Material.objects.all()]
@@ -79,10 +86,7 @@ class CatalogFiltersForm(forms.Form):
         required=False,
         widget=forms.NumberInput(
             attrs={ 
-                'placeholder': '80', 
-                'min': 80,
-                'max': 120,
-                'step': 5,
+                # 'step': 5,
             }
         ), 
     )
@@ -92,10 +96,7 @@ class CatalogFiltersForm(forms.Form):
         required=False,
         widget=forms.NumberInput(
             attrs={ 
-                'placeholder': '120', 
-                'min': 0,
-                'max': 120,
-                'step': 5,
+                # 'step': 5,
             }
         ), 
     )

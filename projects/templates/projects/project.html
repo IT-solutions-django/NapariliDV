@@ -107,15 +107,11 @@
             <hr>
         </div>
         <div class="info__row">
-            <div class="info__small-left-column">
-            </div>
-            <div class="info__big-right-column">
-                <div class="info__paragraph">
-                    <p class="font__inter">Каркасные дома - одни из самых известных на рынке загородного жилья. Основное преимущество «карманников» - скорость и доступность строительства</p>
-                    <p class="font__inter">Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
-                    <p class="font__inter">Как и любая технология, каркас со временем пережил несколько трансформации. Сегодня более половины строящихся частных домов возводятся по каркасной технологии. Это могут быть и загородные дома, и коттеджи с современным интерьером, которые подходят для круглогодичного проживания</p>
-                    <p class="font__inter">Технология каркасного домостроения подходит для регионов с разным климатом. Эти дома подходят не только холодных регионов, но и для зон с повышенной сейсмической активностью</p>
-                </div>
+            <div class="info__paragraph">
+                <p class="font__inter">Каркасные дома - одни из самых известных на рынке загородного жилья. Основное преимущество «карманников» - скорость и доступность строительства</p>
+                <p class="font__inter">Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
+                <p class="font__inter">Как и любая технология, каркас со временем пережил несколько трансформации. Сегодня более половины строящихся частных домов возводятся по каркасной технологии. Это могут быть и загородные дома, и коттеджи с современным интерьером, которые подходят для круглогодичного проживания</p>
+                <p class="font__inter">Технология каркасного домостроения подходит для регионов с разным климатом. Эти дома подходят не только холодных регионов, но и для зон с повышенной сейсмической активностью</p>
             </div>
         </div>
     </div>
@@ -157,95 +153,8 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="similar-projects--adaptive">
-            <!-- <div class="catalog__cards"> -->
-                {% for project in similar_projects %}
-                    <div class="catalog__card">
-                        <div class="photo-slider">
-                            {% for photo in project.photos.all %}
-                                <div class="best-projects__card-image photo-slider-item">
-                                    <img src="{{ photo.image.url }}" alt="">
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <div class="best-projects__card-text-container">
-                            <div class="best-projects__card-heading">
-                                <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
-                            </div>
-                            <hr>
-                            <div class="best-projects__card-content">
-                                <ul class="table-of-contents">
-                                    <li><span>Площадь</span><span>{{ project.square }} м2</span></li>
-                                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                                    <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-                                    <li><span>Стоимость</span><span>от {{ project.price|floatformat:0 }} р</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="best-projects__order-button">
-                            <button>Заказать строительство</button>
-                        </div>
-                        <div class="best-projects__more-button">
-                            <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
-                        </div>
-                    </div>
-                {% endfor %}
-            <!-- </div> -->
-        </div>
     </div>
-
-    <div class="contacts container">
-        <div class="contacts__small-left-column">
-            <div class="contacts__heading">
-                <h4>Контакты</h4>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Главный офис:</p>
-                    </div>
-                    <div class="font__inter">
-                        <p>г. Владивосток, Волгоградская 7</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Время работы:</p>
-                    </div>
-                    <div  class="font__inter">
-                        <p>ПН-СБ с 10:00 - 18:00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contacts__block">
-                <div>
-                    <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
-                </div>
-                <div>
-                    <div class="contacts__block-heading">
-                        <p>Телефон:</p>
-                    </div>
-                    <div  class="font__inter">
-                        <p>+7 (908) 998-58-70</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contacts__big-right-column">
-            <div class="map" id="map">
-
-            </div>
-        </div>
-    </div>
-
+    {% include 'contacts/includes/contacts_block.html' %}
 {% endblock %}
 
 {% block script %}
@@ -317,14 +226,17 @@ import { L as LuminousGallery } from "/static/js/luminous-lightbox/luminous-ligh
 
 function initGallery() {
   var galleryItems = document.querySelectorAll(".project__current-slide a")
+    const options = {
+        showCloseButton: true
+    }
     if (galleryItems.length > 0) {
-        new LuminousGallery(galleryItems);
+        new LuminousGallery(galleryItems, options);
     }
 
     var mobileGalleryItems = document.querySelectorAll(".project__slide--adaptive a");
     console.log(mobileGalleryItems)
     if (galleryItems.length > 0) {
-        new LuminousGallery(mobileGalleryItems );
+        new LuminousGallery(mobileGalleryItems);
     }
 }
 initGallery();
@@ -382,35 +294,43 @@ initGallery();
             arrows: true,
             infinite: true,
             slidesToShow: 3,
-            slidesToScroll: 1, 
+            slidesToScroll: 1,
+            focusOnSelect: true,
             responsive: [
                 {
-                    breakpoint: 1024, 
+                    breakpoint: 1024,
                     settings: {
-                        slidesToShow: 3, 
+                        slidesToShow: 2,
                         slidesToScroll: 1
                     }
                 },
                 {
-                    breakpoint: 768, 
+                    breakpoint: 768,
                     settings: {
                         centerMode: true,
-                        slidesToShow: 2, 
+                        slidesToShow: 1,
                         slidesToScroll: 1
                     }
-                }, 
+                },
                 {
-                    breakpoint: 576, 
+                    breakpoint: 576,
                     settings: {
                         centerMode: true,
-                        slidesToShow: 1, 
-                        slidesToScroll: 1, 
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 410,
+                    settings: {
+                        centerMode: false,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
                     }
                 }
             ]
         });
-    });
-    $(document).ready(function () {
+
         $('.photo-slider').slick({
             dots: true,
             infinite: true,
@@ -419,6 +339,10 @@ initGallery();
             adaptiveHeight: false,
             autoplay: false,
             arrows: false,
+        });
+
+        $('.photo-slider').on('touchstart mousedown', function (e) {
+            e.stopPropagation(); // Останавливаем событие на внутренних слайдерах
         });
     });
     

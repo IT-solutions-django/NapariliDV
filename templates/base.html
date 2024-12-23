@@ -15,9 +15,30 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+    <!-- Метрика -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(99270864, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/99270864" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
 
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/luminous-lightbox.css' %}">
     <link rel=icon type=image/png sizes=16x16 href="{% static 'images/logo.svg' %}">
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -31,7 +52,7 @@
         </div>
         <div class="modal-feedback__image">
             <img src="{% static 'images/modal-feedback-image.png' %}" alt="">
-            
+
         </div>
         <div class="modal-feedback__image--adaptive">
             <img src="{% static 'images/modal-feedback-adaptive.png' %}" alt="">
@@ -61,7 +82,8 @@
                         <div>
                             <label for="consent" class="modal-feedback__checkbox-label">
                                 Даю своё согласие на обработку моих
-                                <a id="userAgreementLink" target="_blank" href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
+                                <a id="userAgreementLink" target="_blank"
+                                    href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
                             </label>
                         </div>
                     </div>
@@ -159,7 +181,7 @@
 
     <footer class="footer-container">
         {% if is_not_found_page %}
-            <hr class="not-found--hr">
+        <hr class="not-found--hr">
         {% endif %}
         <div class="footer__label">
             <p>Нужен дом?</p>
@@ -231,7 +253,7 @@
 <script src="{% static 'js/header.js' %}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let scrollPosition = 0; 
+        let scrollPosition = 0;
 
         document.querySelector(".header__hamburger").addEventListener("click", function () {
             this.classList.toggle("active");
@@ -295,7 +317,7 @@
             successSection.style.display = 'flex';
 
             let q = new FormData(feedbackForm),
-            o = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                o = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
             feedbackForm.reset();
 
             try {
@@ -322,28 +344,28 @@
             validatePhoneNumber()
         });
     });
-    
+
 </script>
 
 <script>
     // Анимация кнопок
-document.querySelectorAll('.animated').forEach(function(button) {
-    button.addEventListener('mousedown', function() {
-        this.classList.add('clicked');
+    document.querySelectorAll('.animated').forEach(function (button) {
+        button.addEventListener('mousedown', function () {
+            this.classList.add('clicked');
 
-        setTimeout(() => {
+            setTimeout(() => {
+                this.classList.remove('clicked');
+            }, 300);
+        });
+
+        // Убираем класс при отпускании кнопки
+        button.addEventListener('mouseup', function () {
+        });
+
+        button.addEventListener('blur', function () {
             this.classList.remove('clicked');
-        }, 300); 
+        });
     });
-
-    // Убираем класс при отпускании кнопки
-    button.addEventListener('mouseup', function() {
-    });
-
-    button.addEventListener('blur', function() {
-        this.classList.remove('clicked');
-    });
-});
 </script>
 
 {% block script %}

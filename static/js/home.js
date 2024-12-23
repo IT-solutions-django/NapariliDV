@@ -4,17 +4,17 @@ function addReviewsSpoiler() {
         let windowWidth = window.innerWidth;
 
         if (windowWidth > 990) {
-            if (t.scrollHeight > 190) {
+            if (t.scrollHeight > 599) {
                 let l = document.createElement("button");
-                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function() {
+                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function () {
                     t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
                 }), t.after(l)
             }
         }
         else {
-            if (t.scrollHeight > 200) {
+            if (t.scrollHeight > 305) {
                 let l = document.createElement("button");
-                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function() {
+                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function () {
                     t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
                 }), t.after(l)
             }

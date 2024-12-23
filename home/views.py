@@ -10,6 +10,7 @@ from projects.services import get_paginated_collection
 from contacts.forms import FeedbackForm
 from blog.models import Article
 from reviews.models import Review
+from blog.forms import ArticlesForm
 
 
 class HomeView(View): 
@@ -26,6 +27,7 @@ class HomeView(View):
         articles = Article.objects.all()
         cooperation_stages = CooperationStage.objects.all()
         reviews = Review.objects.all().order_by('-created_at')
+        articles_form = ArticlesForm(request.GET)
 
         if filter_form.is_valid():
             cd = filter_form.cleaned_data
@@ -83,6 +85,7 @@ class HomeView(View):
             'articles': articles,
             'cooperation_stages': cooperation_stages,
             'reviews': reviews,
+            'articles_form': articles_form,
         }
         return render(request, self.template_name, context)
 

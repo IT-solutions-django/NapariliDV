@@ -83,7 +83,7 @@ def update_2gis_reviews_task(self) -> None:
     two_gis_platform, _ = Platform.objects.get_or_create(name='2GIS')
 
     try:
-        reviews_data = get_2gis_reviews_data(
+        reviews_data, average_rating, reviews_count = get_2gis_reviews_data(
             api_key_2gis=TWO_GIS_API_KEY, 
             organization_id=TWO_GIS_ID,
             reviews_limit=REVIEWS_COUNT_PER_PLATFORM
@@ -111,3 +111,7 @@ def update_2gis_reviews_task(self) -> None:
                     review=new_review,
                 )
                 new_photo.save()
+
+    two_gis_platform.average_rating = average_rating
+    two_gis_platform.reviews_count = reviews_count
+    two_gis_platform.save()

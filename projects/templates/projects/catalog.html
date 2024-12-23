@@ -43,7 +43,7 @@
         
                     <div>
                         <div class="catalog__filters-label">
-                            <p>Выберите площадь (м2)</p>
+                            <p>Выберите площадь (м²)</p>
                         </div>
                         <div class="catalog__range-filter">
                             <div class="catalog__filters-number-square">
@@ -208,7 +208,7 @@
                 </div>
                 <div>
                     <div class="catalog__filters-label">
-                        <p>Выберите площадь (м2)</p>
+                        <p>Выберите площадь (м²)</p>
                     </div>
                     <div class="catalog__range-filter">
                         <div class="catalog__filters-number-square">
@@ -369,64 +369,43 @@
 </div>
 
 <div class="about">
-    <div class="contacts container">
-        <div class="contacts__small-left-column">
-            <div class="contacts__heading">
-                <h4>Контакты</h4>
-            </div>
-            <div class="contacts__info">
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-1.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <a href="{{ company_info.two_gis_profile }}">Главный офис:</a>
-                        </div>
-                        <div class="font__inter">
-                            <a href="{{ company_info.two_gis_profile }}" class="font__inter">{{ company_info.address }}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-2.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <p>Время работы:</p>
-                        </div>
-                        <div class="font__inter">
-                            <p>{{ company_info.working_mode }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contacts__block">
-                    <div>
-                        <img src="{% static 'images/contacts-icon-3.svg' %}" alt="">
-                    </div>
-                    <div>
-                        <div class="contacts__block-heading">
-                            <a href="tel:{{ company_info.phone }}">Телефон:</a>
-                        </div>
-                        <div class="font__inter">
-                            <a href="tel:{{ company_info.phone }}" class="font__inter">{{ company_info.phone }}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="contacts__big-right-column">
-            <div class="map" id="map">
-
-            </div>
-        </div>
-        
-    </div>
+    {% include 'contacts/includes/contacts_block.html' %}
 </div>
 {% endblock %}
 
 {% block script %}
+
+<script>
+    // Валидация
+    $(document).ready(function() {
+        const debounce = (func, delay) => {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
+        const validateMaxInput = (element) => {
+            const maxAttr = element.attr('max');
+            const value = parseFloat(element.val());
+
+            if (value < 0) {
+                element.val(0); 
+            } else if (maxAttr !== undefined && value > parseFloat(maxAttr)) {
+                element.val(maxAttr); 
+            }
+        };
+
+        $('.catalog__filters input[type="number"]').on('input', debounce(function(event) {
+            validateMaxInput($(this)); 
+        }, 150));
+        $('#mobileCatalogFilter input[type="number"]').on('input', debounce(function(event) {
+            validateMaxInput($(this)); 
+        }, 150));
+        
+    });
+</script>
 <script>
 // Слайдер
 $(document).ready(function () {
@@ -546,5 +525,19 @@ document.addEventListener('DOMContentLoaded', () => {
     openFiltersBtn.addEventListener("click", openFilters);
     closeFiltersBtn.addEventListener("click", closeFilters);
 });
+</script>
+
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        if (window.innerWidth < 1200) {
+            $('#mobileFiltersForm select').select2();
+        }
+        else {
+            $('select').select2();
+        }
+    })
 </script>
 {% endblock %}
