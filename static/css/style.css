@@ -1500,6 +1500,7 @@ main {
     background: linear-gradient(#F1F1F1, #CFCFCF);
     mix-blend-mode: multiply;
     margin-bottom: 15px;
+    object-position: bottom; 
 }
 .team__card img {
     border-radius: 20px;
@@ -3409,6 +3410,10 @@ footer hr,
     }
     .about-company__heading hr {
         width: 100%;
+    }
+    .team__card {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .slider-heading__want-the-house-button,
