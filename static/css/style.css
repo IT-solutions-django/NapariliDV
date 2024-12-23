@@ -87,6 +87,11 @@ main {
     }
 }
 
+input[type=radio] {
+    width: 100%;
+    
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -1124,6 +1129,12 @@ main {
     border: solid 1px rgba(225, 225, 225, 1);
     border-radius: 15px;
     background-color: white;
+}
+
+select option {
+    background-color: white;
+    padding: 5px;
+    border-radius: 20px;
 }
 
 .best-projects__select-filter select,

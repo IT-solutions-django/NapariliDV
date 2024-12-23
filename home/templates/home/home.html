@@ -1009,15 +1009,29 @@
     });
 </script>
 <script>
+    // Форма в блоке "Новости"
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('blogForm');
         const radioButtons = form.querySelectorAll('.radio-toggle');
 
         radioButtons.forEach(radio => {
             radio.addEventListener('change', function () {
-                form.submit(); // Отправка формы автоматически
+                form.submit(); 
             });
         });
     });
+</script>
+<!-- Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        if (window.innerWidth > 500 && window.innerWidth < 1200) {
+            $('#mobileFiltersForm select').select2();
+        }
+        else {
+            $('select').select2();
+        }
+    })
 </script>
 {% endblock %}
