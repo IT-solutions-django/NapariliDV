@@ -3231,6 +3231,9 @@ footer hr,
     margin: 40px 0;
 }
 
+.article .article__content {
+    margin-bottom: 90px;
+}
 .article .article__pagination-wrapper {
     display: flex;
     justify-content: right;
@@ -3709,7 +3712,8 @@ footer hr,
     .about-company-page__team__cards,
     .partners__slider,
     .certificates__slider,
-    .not-found__form {
+    .not-found__form, 
+    .article .article__content {
         margin-bottom: 40px;
     }
 
