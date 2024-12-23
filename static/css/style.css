@@ -231,7 +231,6 @@ input[type=radio] {
 }
 
 .modal-feedback__image--adaptive,
-.similar-projects--adaptive,
 .about-company__big-right-column--adaptive {
     display: none;
 }
@@ -4168,7 +4167,7 @@ footer hr,
 
     .info__small-left-column,
     .similar-projects__cards {
-        display: none
+        /* display: none */
     }
 
     .info__big-right-column {
@@ -4332,7 +4331,6 @@ footer hr,
         margin-bottom: 15px;
     }
 
-    .similar-projects--adaptive,
     .gallery-page__slide-label {
         display: flex;
         justify-content: left;
@@ -4763,6 +4761,9 @@ footer hr,
         padding: 11.5px 0;
         font-size: 14px;
         text-align: center;
+    }
+    .similar-projects__slider-item ul li span {
+        font-size: 14px;
     }
 }
 

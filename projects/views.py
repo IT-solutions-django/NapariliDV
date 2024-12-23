@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View 
+from django.db.models import F, Case, When, Value, FloatField
 from .models import (
     Project,
 )
@@ -74,9 +75,26 @@ class ProjectView(View):
     
     def get(self, request, id: int): 
         project = Project.objects.get(pk=id) 
-        similar_projects = random.choices(Project.objects.all(), k=5)
+
+        similar_projects_by_area = Project.objects.filter(
+            category=project.category
+        ).exclude(id=project.id).annotate(
+            area_diff=Case(
+                When(square__isnull=False, then=F('square') - project.square),
+                default=Value(float('inf')),
+                output_field=FloatField()
+            )
+        ).order_by('area_diff')[:5]  # Ближайшие по площади
+        
+        if not similar_projects_by_area or similar_projects_by_area.count() < 3:
+            similar_projects_by_area = Project.objects.filter(
+                category=project.category
+            ).exclude(id=project.id)[:5]
+
+        print(similar_projects_by_area)
+
         context = {
             'project': project,
-            'similar_projects': similar_projects,
+            'similar_projects': similar_projects_by_area,
         }
         return render(request, self.template_name, context)
