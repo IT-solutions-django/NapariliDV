@@ -2970,7 +2970,7 @@ footer hr {
 
 .info {
     padding-top: 60px;
-    padding-bottom: 90px;
+    padding-bottom: 60px;
 }
 
 .info__heading {
@@ -4277,7 +4277,8 @@ footer hr,
     .article .article__padination-controls {
         gap: 20px;
     }
-    .article .article__pagination-control {
+    .article .article__pagination-control, 
+    .info__paragraph {
         gap: 10px
     }
 
