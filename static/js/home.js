@@ -10,7 +10,6 @@ function addReviewsSpoiler() {
                     t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
                 }), t.after(l)
             }
-            console.log(t.scrollHeight);
         }
         else {
             if (t.scrollHeight > 305) {
@@ -19,7 +18,6 @@ function addReviewsSpoiler() {
                     t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
                 }), t.after(l)
             }
-            console.log(t.scrollHeight);
         }
     })
 }

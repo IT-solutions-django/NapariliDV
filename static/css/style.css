@@ -2019,10 +2019,7 @@ select option {
 .catalog__filters-submit-button a {
     background-color: white;
     color: #595959;
-    padding-left: 33px;
-    padding-top: 10.5px;
-    padding-bottom: 10.5px;
-    padding-right: 26px;
+    padding: 10.5px 26px;
     border: solid 1px rgba(225, 225, 225, 1);
     border-radius: 20px;
     cursor: pointer;
@@ -2263,10 +2260,13 @@ select option {
 .news__header-button button,
 .project__download-estimates,
 .project__discount button {
-    padding: 10.5px 33px 10.5px 33px;
+    padding: 10.5px 33px;
     border-radius: 20px;
     border: solid 1px #595959;
     white-space: nowrap;
+}
+.project__discount button {
+    cursor: auto;
 }
 
 .news__header-button.active a {
