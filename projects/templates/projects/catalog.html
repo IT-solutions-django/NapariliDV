@@ -400,6 +400,10 @@
         $('.catalog__filters input[type="number"]').on('input', debounce(function(event) {
             validateMaxInput($(this)); 
         }, 150));
+        $('#mobileCatalogFilter input[type="number"]').on('input', debounce(function(event) {
+            validateMaxInput($(this)); 
+        }, 150));
+        
     });
 </script>
 <script>

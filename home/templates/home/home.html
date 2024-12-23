@@ -891,6 +891,9 @@
         $('#bestProjectsForm input[type="number"]').on('input', debounce(function(event) {
             validateMaxInput($(this)); 
         }, 150));
+        $('#mobileFiltersForm input[type="number"]').on('input', debounce(function(event) {
+            validateMaxInput($(this)); 
+        }, 150));
 
         // Применение фильтров
         $('#bestProjectsForm input, #bestProjectsForm select').on('change input', function(event) {
