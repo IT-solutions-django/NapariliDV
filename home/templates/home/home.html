@@ -560,12 +560,23 @@
         </div>
         <div class="news__header-right">
             <div class="news__header-right-buttons">
-                <div class="news__header-button">
-                    <a href="{% url 'blog:blog' %}">Блог</a>
-                </div>
-                <div class="news__header-button">
-                    <a href="{% url 'blog:blog' %}">Новости</a>
-                </div>
+                <form id="blogForm" action="{% url 'blog:blog' %}">
+                    {% for article_type in articles_form.article_type %}
+                        <div class="news__header-button">
+                                {{ choice.tag }}
+                                <input 
+                                    type="radio"
+                                    name="{{ article_type.data.name }}" 
+                                    value="{{ article_type.data.value }}"
+                                    class="radio-toggle"
+                                    id="{{ article_type.id_for_label }}" 
+                                    {% if article_type.data.selected %}checked data-was-checked="true"{% endif %}
+                                >
+                                <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    <button type="submit" style="display: none;"></button>
+                </form>
             </div>
             <div class="news__header-more">
                 <a href="{% url 'blog:blog' %}">Смотреть всё</a>
@@ -995,6 +1006,18 @@
 
         openFiltersBtn.addEventListener("click", openFilters);
         closeFiltersBtn.addEventListener("click", closeFilters);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('blogForm');
+        const radioButtons = form.querySelectorAll('.radio-toggle');
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function () {
+                form.submit(); // Отправка формы автоматически
+            });
+        });
     });
 </script>
 {% endblock %}
