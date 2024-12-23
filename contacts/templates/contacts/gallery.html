@@ -101,34 +101,6 @@
                 </div>
             </div>
         {% endfor %}
-
-        <div class="article__content">
-            <div class="article__content-block">
-                <div class="article__paragraph">
-                    <div class="article__paragraph-heading">
-                        Каркасный дом БАРН
-                    </div>
-                    <div class="article__paragraph-text font__inter">
-                        Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
-        Каркасный дом - это ааааадом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="article__content">
-            <div class="article__content-block">
-                <div class="article__paragraph">
-                    <div class="article__paragraph-heading">
-                        Каркасный дом БАРН
-                    </div>
-                    <div class="article__paragraph-text font__inter">
-                        Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
-        Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     
     <div class="gallery-page__slider">
@@ -359,7 +331,7 @@ ymaps.ready(function(){
         $('#galleryForm input').on('change input', function(event) {
             let formData = $('#galleryForm').serialize();
             let gallerySliderContainer = $('.gallery-page__slider');
-            console.log(gallerySliderContainer)
+            let galleryTextSliderContainer = $('.gallery-page__text-slider');
     
             let timeout = setTimeout(function () {
                 $.ajax({
@@ -367,8 +339,8 @@ ymaps.ready(function(){
                     type: "GET",
                     data: formData,
                     success: function(response) {
-                        $('.gallery-page__slider').replaceWith(response.html);
-                        console.log(response.html)
+                        $('.gallery-page__slider').replaceWith(response.gallery_html);
+                        $('.gallery-page__text-slider').replaceWith(response.gallery_text);
 
                         // Инициализация слайдера
                         $(document).ready(function () {
@@ -407,26 +379,26 @@ ymaps.ready(function(){
             let formData = $('#galleryForm').serialize();
             let gallerySliderContainer = $('.gallery-page__slider');
 
-            timeout = setTimeout(function () {
+            let timeout = setTimeout(function () {
                 $.ajax({
                     url: "{% url 'contacts:gallery_filters' %}",  
                     type: "GET",
                     data: formData,
                     success: function(response) {
-                        gallerySliderContainer.replaceWith(response.html);
+                        $('.gallery-page__slider').replaceWith(response.gallery_html);
+                        $('.gallery-page__text-slider').replaceWith(response.gallery_text);
 
-                        // Инициализация слайдера и мобильной формы
+                        // Инициализация слайдера
                         $(document).ready(function () {
-                            initGallerySlider()
+                            initGallerySlider();
                             initMobileProject();
-                        });                        
-                        
+                        });
                     },
                     error: function(xhr, status, error) {
                         console.error("Ошибка при фильтрации:", error);
                     }
                 });
-            }, 200);
+            }, 200);    
         });
     });
 });

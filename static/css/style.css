@@ -771,7 +771,7 @@ input[type=radio] {
     height: auto !important;
 }
 .slick-dotted.slick-slider {
-    margin-bottom: -20px !important;
+    /* margin-bottom: 10px !important; */
 }
 .slider-heading hr {
     margin-top: 28px;
@@ -1699,7 +1699,7 @@ select option {
 }
 
 .gallery-page__slider {
-    margin-top: 120px;
+    margin-top: 60px;
 }
 
 .team__cards .slick-prev::before,
@@ -3702,7 +3702,6 @@ footer hr,
         height: 500px;
     }
 
-    .slick-dotted.slick-slider,
     .advantages,
     .news,
     .catalog__projects,
@@ -4202,12 +4201,12 @@ footer hr,
     }
 
     .catalog__pagination-arrow-right:hover,
-    .slider .slick-prev:hover {
+    .slider .slick-next:hover {
         background-image: url('/static/images/small-white-right-arrow.svg');
     }
 
     .catalog__pagination-arrow-left:hover,
-    .slider .slick-next:hover {
+    .slider .slick-prev:hover {
         background-image: url('/static/images/small-white-left-arrow.svg');
     }
 
@@ -4347,6 +4346,10 @@ footer hr,
 
 @media (max-width: 820px) {
 
+    .slick-dotted.slick-slider {
+        margin-bottom: 10px !important;
+    }
+
     .work-stages__info-card,
     .work-stages__image-card {
         width: 100%;
@@ -4400,7 +4403,7 @@ footer hr,
     }
 
     .slider .slick-dots {
-        display: none !important;
+        /* display: none !important; */
     }
 }
 
@@ -4430,8 +4433,10 @@ footer hr,
     }
 
     .slider .slick-dots {
-        /* bottom: 15px; */
-        display: none !important;
+        /* margin-bottom: 10px !important; */
+    }
+    .slick-dotted .slick-slider {
+        /* margin-bottom: 10px !important; */
     }
 
     .slider-image {

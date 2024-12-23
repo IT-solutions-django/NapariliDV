@@ -78,8 +78,14 @@ class GalleryPhotosAPIView(View):
         rendered_gallery_projects = render_to_string('contacts/includes/gallery_slider.html', {
             'gallery_photos': projects,
         }) 
+        rendered_text_slides = render_to_string('contacts/includes/gallery_text.html', {
+            'gallery_photos': projects,
+        })
 
-        return JsonResponse({'html': rendered_gallery_projects})
+        return JsonResponse({
+            'gallery_html': rendered_gallery_projects, 
+            'gallery_text': rendered_text_slides,
+        })
     
 
 class GalleryDetailsAPIView(View): 

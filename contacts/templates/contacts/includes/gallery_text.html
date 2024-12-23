@@ -1,0 +1,16 @@
+<div class="gallery-page__text-slider container">
+    {% for project in gallery_photos %}
+        <div class="article__content">
+            <div class="article__content-block">
+                <div class="article__paragraph">
+                    <div class="article__paragraph-heading">
+                        {{ project.name }}
+                    </div>
+                    <div class="article__paragraph-text font__inter">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
