@@ -1164,6 +1164,7 @@ select option {
 .catalog__filters-number-price {
     display: flex;
     gap: 6px;
+    align-items: flex-end;
 }
 
 .best-projects__number input {
