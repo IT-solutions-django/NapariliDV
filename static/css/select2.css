@@ -33,6 +33,9 @@
 .select2-dropdown {
     border: none !important;
 }
+.select2-container--default .select2-results__option--selected {
+    background-color: transparent !important;
+}
 
 @media (max-width: 1200px) {
     #mobileFiltersForm .select2-container--default {

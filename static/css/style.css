@@ -767,6 +767,12 @@ input[type=radio] {
     margin-bottom: 100px;
 }
 
+.slider .slick-slide {
+    height: auto !important;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: -20px !important;
+}
 .slider-heading hr {
     margin-top: 28px;
     margin-bottom: 20px;
@@ -808,10 +814,6 @@ input[type=radio] {
 .slider-heading {
     display: block;
     white-space: normal !important;
-}
-
-.slick-dotted.slick-slider {
-    margin-bottom: 100px;
 }
 
 .slider-item {
@@ -1831,6 +1833,11 @@ select option {
     .gallery-page__slider .slick-arrow {
         margin-right: 10px;
     }
+}
+
+.gallery-page .gallery-page__text-slider .slick-slide {
+    min-height: 200px;
+    height: auto;
 }
 
 .team__name,
@@ -4376,10 +4383,6 @@ footer hr,
     .slider-content-inner {
         padding: 0;
         border: none;
-    }
-
-    .slick-dotted.slick-slider {
-        margin-bottom: 20px;
     }
 
     .project__slide--adaptive,

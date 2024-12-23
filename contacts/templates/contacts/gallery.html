@@ -86,12 +86,41 @@
         </div>
     </div>
     <hr class="news-page__header-hr container">
-    <div class="container">
+    <div class="gallery-page__text-slider container">
+        {% for project in gallery_photos %}
+            <div class="article__content">
+                <div class="article__content-block">
+                    <div class="article__paragraph">
+                        <div class="article__paragraph-heading">
+                            {{ project.name }}
+                        </div>
+                        <div class="article__paragraph-text font__inter">
+                            {{ project.description|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
         <div class="article__content">
             <div class="article__content-block">
                 <div class="article__paragraph">
                     <div class="article__paragraph-heading">
-                        Внезапно, герцог графства коронован
+                        Каркасный дом БАРН
+                    </div>
+                    <div class="article__paragraph-text font__inter">
+                        Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
+        Каркасный дом - это ааааадом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="article__content">
+            <div class="article__content-block">
+                <div class="article__paragraph">
+                    <div class="article__paragraph-heading">
+                        Каркасный дом БАРН
                     </div>
                     <div class="article__paragraph-text font__inter">
                         Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций, занимаемых участниками в отношении поставленных задач
@@ -101,6 +130,7 @@
             </div>
         </div>
     </div>
+    
     <div class="gallery-page__slider">
         {% for project in gallery_photos %}
             <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
@@ -122,35 +152,42 @@
 {% block script %}
 <script>
 // Функции
-function initGallerySlider(selector) {
-    const slider = $(selector);
-    if (slider.length) {
-        slider.slick({
-            centerMode: true,
-            arrows: true,
-            infinite: true,
-            slidesToShow: 1.7,
-            slidesToScroll: 1,
-            responsive: [, 
-                {
-                    breakpoint: 1600, 
-                    settings: {
-                        slidesToShow: 1.6, 
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 1024, 
-                    settings: {
-                        slidesToShow: 1, 
-                        slidesToScroll: 1
-                    }
-                },
-            ]
-        });
-    } else {
-        console.warn(`Элемента ${selector} не существует!`);
-    }
+function initGallerySlider() {
+    const slider = $(".gallery-page__slider");
+    const textSlider = $(".gallery-page__text-slider"); 
+
+    slider.slick({
+        centerMode: true,
+        arrows: true,
+        infinite: true,
+        slidesToShow: 1.7,
+        slidesToScroll: 1,
+        asNavFor: '.gallery-page__text-slider',
+        responsive: [, 
+            {
+                breakpoint: 1600, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1024, 
+                settings: {
+                    slidesToShow: 1, 
+                    slidesToScroll: 1
+                }
+            },
+        ]
+    });
+    textSlider.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.gallery-page__slider',
+        adaptiveHeight: true,  
+    });
 }
 function initMobileSlider(selector) {
     const slider = $(selector);
@@ -285,7 +322,7 @@ function initMobileProject() {
 }
 
 $(document).ready(function () {
-    initGallerySlider('.gallery-page__slider')
+    initGallerySlider()
 });
 
 var myMap;
@@ -335,7 +372,7 @@ ymaps.ready(function(){
 
                         // Инициализация слайдера
                         $(document).ready(function () {
-                            initGallerySlider(".gallery-page__slider");
+                            initGallerySlider();
                             initMobileProject();
                         });
                     },
@@ -380,7 +417,7 @@ ymaps.ready(function(){
 
                         // Инициализация слайдера и мобильной формы
                         $(document).ready(function () {
-                            initGallerySlider(".gallery-page__slider")
+                            initGallerySlider()
                             initMobileProject();
                         });                        
                         
