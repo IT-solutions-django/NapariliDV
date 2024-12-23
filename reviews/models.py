@@ -6,6 +6,8 @@ import uuid
 class Platform(models.Model): 
     name = models.CharField('Название платформы', max_length=100)
     icon = models.FileField('Иконка', upload_to='reviews/platforms', null=True)
+    average_rating = models.FloatField('Средний рейтинг компании на платформе', default=4.9)
+    reviews_count = models.IntegerField('Количество отзывов', default=0)
 
     def __str__(self) -> str: 
         return self.name

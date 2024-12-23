@@ -7,17 +7,19 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timezone
 
 
-def get_2gis_reviews_data(api_key_2gis: str, organization_id: str, reviews_limit: int = 10) -> dict[str, Any]:
+def get_2gis_reviews_data(api_key_2gis: str, organization_id: str, reviews_limit: int = 10) -> tuple[dict[str, Any], float, int]:
     """
     Получаем информацию об отзывах определенной организации
     :param api_key_2gis: 2GIS API KEY
     :param reviews_limit: Количество отзывов в ответе (default: 10);
     :param url: Ссылка на организацию 2 gis (пример: https://2gis.ru/vladivostok/firm/70000001021276207/tab/reviews);
-    :return: Словарь с данными об отзывах организации
+    :return: Словарь с данными об отзывах организации, среднмй рейтинг компании и количество отзывов
     """
     fetched_reviews = _fetch_reviews(organization_id, api_key_2gis)
     result = _get_needed_data_format(fetched_reviews, reviews_limit)
-    return result
+    average_rating = fetched_reviews['meta']['branch_rating']
+    count_review = fetched_reviews['meta']['branch_reviews_count']
+    return result, average_rating, count_review
 
 
 def _fetch_reviews(organization_id: str, api_key_2gis: str) -> dict[str, dict]:
@@ -35,7 +37,7 @@ def _fetch_reviews(organization_id: str, api_key_2gis: str) -> dict[str, dict]:
     try:
         return session.get(
             f"https://public-api.reviews.2gis.com/2.0/branches/{organization_id}/reviews?"
-            f"limit=50&is_advertiser=false&fields=meta.branch_rating&sort_by=date_edited&"
+            f"limit=50&is_advertiser=false&fields=meta.branch_rating,meta.branch_reviews_count&sort_by=date_edited&"
             f"key={api_key_2gis}&locale=ru_RU"
         ).json()
     except Exception:
@@ -53,8 +55,6 @@ def _get_needed_data_format(
     """
 
     MIN_RATING = 4
-
-    print(fetched_data)
 
     if len(fetched_data["reviews"]) == 0:
         raise EmptyReviewList("Список отзывов пуст")
