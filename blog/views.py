@@ -70,7 +70,20 @@ class ArticleView(View):
 
     def get(self, request, article_slug: str): 
         article = Article.objects.get(slug=article_slug)
+        try:
+            previous_article = article.get_previous_by_created_at()
+        except Article.DoesNotExist:
+            previous_article = None
+
+        try:
+            next_article = article.get_next_by_created_at()
+        except Article.DoesNotExist:
+            next_article = None
         context = {
-            'article': article
+            'article': article, 
+            'previous_article': previous_article,
+            'next_article': next_article,
         }
+        print(previous_article)
+        print(next_article)
         return render(request, self.template_name, context)

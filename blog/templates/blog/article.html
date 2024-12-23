@@ -39,7 +39,7 @@
                     <div class="article__paragraph-heading">
                         {{ paragraph.title|linebreaks }}
                     </div>
-                    <div class="article__paragraph-text">
+                    <div class="article__paragraph-text font__inter">
                         {{ paragraph.content|linebreaks }}
                     </div>
                 </div>
@@ -50,7 +50,32 @@
                 {% endif %}
             </div>
         {% endfor %}
+        <div class="article__pagination-wrapper">
+            <div class="article__pagination">
+                <div class="article__padination-controls">
+                    <div class="article__pagination-control">
+                        {% if previous_article %}
+                            <a class="catalog__pagination-arrow catalog__pagination-arrow-left" href="{{ previous_article.get_absolute_url }}"></a>
+                            <p>Предыдущая</p>
+                        {% else %}
+                            <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+                            <p>Предыдущая</p>
+                        {% endif %}
+                    </div>
+                    <div class="article__pagination-control">
+                        {% if next_article %}
+                            <p>Следующая</p>
+                            <a class="catalog__pagination-arrow catalog__pagination-arrow-right" href="{{ next_article.get_absolute_url }}"></a>
+                        {% else %} 
+                            <p>Следующая</p>
+                            <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+                        {% endif %} 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
 </div>
 
 <div class="about">
