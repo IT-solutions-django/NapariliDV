@@ -68,7 +68,7 @@ class CooperationStage(models.Model):
 
 class PopularQuestion(models.Model): 
     question = models.CharField('Вопрос', max_length=150)
-    answer = models.CharField('Ответ', max_length=150)
+    answer = models.TextField('Ответ')
 
     class Meta: 
         verbose_name = 'Вопрос'
