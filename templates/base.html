@@ -5,9 +5,9 @@
 <head>
     <meta name=viewport content="width=device-width,initial-scale=1">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
-    <script src="{% static 'js/slick/slick/slick.min.js' %}" async></script>
-    <link rel="stylesheet" href="{% static 'js/slick/slick/slick.css' %}" async>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/slick/slick/slick.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'js/slick/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'js/slick/slick/slick-theme.css' %}" defer>
     <script src="{% static 'js/imask/Imask.min.js' %}" defer></script>
     
@@ -234,7 +234,7 @@
 
 <!-- Меню-бургер -->
 <script src="{% static 'js/header.js' %}"></script>
-<script>
+<script defer>
     document.addEventListener("DOMContentLoaded", function () {
         let scrollPosition = 0;
 
@@ -261,7 +261,7 @@
 </script>
 
 <!-- Модальное окно -->
-<script>
+<script defer>
     document.addEventListener('DOMContentLoaded', () => {
 
         const modal = document.getElementById('modal');
@@ -330,7 +330,7 @@
 
 </script>
 
-<script>
+<script defer>
     // Анимация кнопок
     document.querySelectorAll('.animated').forEach(function (button) {
         button.addEventListener('mousedown', function () {
@@ -352,7 +352,7 @@
 </script>
 
 <!-- Метрика -->
-<script type="text/javascript" defer>
+<script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
         m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
         m[i].l = 1 * new Date();
