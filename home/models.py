@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from home.services import convert_image_to_webp
 
 
 class Slide(models.Model): 
@@ -14,6 +15,20 @@ class Slide(models.Model):
     class Meta: 
         verbose_name = 'Слайд'
         verbose_name_plural = 'Слайды'
+
+    def save(self, *args, **kwargs):
+        # TODO
+        # if self.pk:
+        #     old_image = self.__class__.objects.filter(pk=self.pk).first().photo
+        #     if old_image and self.photo and old_image.name == self.photo.name:
+        #         super(self.__class__, self).save(*args, **kwargs)
+        #         return
+            
+        webp_image = convert_image_to_webp(self.photo)
+        if webp_image:
+            self.photo.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
 
 
 class CompanyInfo(models.Model): 
@@ -59,11 +74,28 @@ class CooperationStage(models.Model):
     number = models.CharField('Порядковый номер', max_length=2, blank=True, null=True)
     name = models.CharField('Название', max_length=80, blank=True, null=True)
     description = models.TextField('Описание', blank=True, null=True)
-    icon = models.FileField('Картинка', null=True, blank=True)
+    image = models.ImageField('Картинка', null=True, blank=True)
 
     class Meta: 
         verbose_name = 'Этап сотрудничества'
         verbose_name_plural = 'Этапы сотрудничества'
+
+    def save(self, *args, **kwargs):
+        # TODO
+        # if self.pk:
+        #     old_image = self.__class__.objects.filter(pk=self.pk).first().image
+        #     if old_image and self.image and old_image.name == self.image.name:
+        #         super(self.__class__, self).save(*args, **kwargs)
+        #         return
+
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
+
+    def __str__(self): 
+        return f'{self.number}. {self.name}' if self.name else f'Картинка "{self.image.name}"'
 
 
 class PopularQuestion(models.Model): 

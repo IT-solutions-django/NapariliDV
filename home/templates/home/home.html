@@ -395,9 +395,9 @@
         </div>
         <div class="work-stages__cards">
             {% for stage in cooperation_stages %}
-                {% if stage.icon %}
+                {% if stage.image %}
                     <div class="work-stages__image-card">
-                        <img src="{{ stage.icon.url }}" alt="">
+                        <img src="{{ stage.image.url }}" alt="">
                     </div>
                 {% else %}
                     <div class="work-stages__info-card">
