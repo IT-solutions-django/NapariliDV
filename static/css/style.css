@@ -789,6 +789,11 @@ input[type=radio] {
     right: 0px;
 }
 
+.slider-heading__want-the-house-button {
+    width: 140px;
+    height: 140px;
+}
+
 .slider-heading__want-the-house-button,
 .advantages__choose-house,
 .feedback__button,
@@ -1866,7 +1871,7 @@ select option {
 }
 
 .feedback__background {
-    background-image: url('/static/images/feedback-background.png');
+    background-image: url('/static/images/feedback-background.webp');
     height: 600px;
     background-position: center;
     background-size: cover;
