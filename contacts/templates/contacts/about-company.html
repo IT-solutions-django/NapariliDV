@@ -1,285 +1,149 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}О компании - Напарили ДВ{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}О компании - Напарили ДВ{% endblock %} {% block content %}
 <div class="breadcrumbs container font__inter">
-    <div>
-        <a href="{% url 'home:home' %}">Главная</a>
-    </div>
-    <div>
-        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
-    </div>
-    <div>
-        <a class="color__red" href="{% url 'contacts:about_company' %}">О компании</a>
-    </div>
+<div>
+<a href="{% url 'home:home' %}">Главная</a>
+</div>
+<div>
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+</div>
+<div>
+<a class=color__red href="{% url 'contacts:about_company' %}">О компании</a>
+</div>
 </div>
 <div class="about-company-page container">
-    <div class="contacts__heading">
-        <h1>О компании</h1>
-        <hr>
-    </div>
-    <div class="article__content">
-        <div class="article__content-block">
-            <div class="article__paragraph">
-                <div class="article__paragraph-heading about-company-page__heading-with-icon">
-                    <div>
-                        <div>
-                            <img src="{% static 'images/company-history.svg' %}" alt="">
-                        </div>
-                        <div class="">
-                            История компании
-                        </div>
-                    </div>
-                </div>
-                <div class="article__paragraph-text font__inter">
-                    {{ company_info.history }}
-                </div>
-            </div>
-        </div>
-        <div class="article__content-block">
-            <div class="article__paragraph">
-                <div class="article__paragraph-heading about-company-page__heading-with-icon">
-                    <div>
-                        <div>
-                            <img src="{% static 'images/company-mission.svg' %}" alt="">
-                        </div>
-                        <div class="">
-                            Миссия компании
-                        </div>
-                    </div>
-                </div>
-                <div class="article__paragraph-text font__inter">
-                    {{ company_info.mission }}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="advantages__stats">
-        <div class="advantages__stats-column">
-            <div class="advantages__stats-number">
-                <p>10</p>
-            </div>
-            <div class="advantages__stats-label">
-                Лет на рынке
-            </div>
-        </div>
-        <div class="advantages__stats-column">
-            <div class="advantages__stats-number">
-                <p>315</p>
-            </div>
-            <div class="advantages__stats-label">
-                Домов<br>построено
-            </div>
-        </div>
-        <div class="advantages__stats-column">
-            <div class="advantages__stats-number">
-                <p>3600</p>
-            </div>
-            <div class="advantages__stats-label">
-                Довольных<br> клиента
-            </div>
-        </div>
-    </div>
-    <div class="about-company__photos">
-        <div class="about-company-page__small-left-column">
-            <div>
-                <img src="{% static 'images/about-company-page1.webp' %}" alt="">
-            </div>
-            <div>
-                <p class="font__inter">Современные технологии достигли такого уровня, что начало повседневной работы по формированию позиции однозначно определяет каждого участника как способного принимать собственные решения касаемо поставленных обществом задач</p>
-            </div>
-        </div>
-        <div class="about-company-page__big-right-column">
-            <div>
-                <img src="{% static 'images/about-company-page2.webp' %}" alt="">
-            </div>
-        </div>
-    </div>
-    <div class="contacts__heading">
-        <h4>Наша команда</h4>
-        <hr>
-    </div>
-    <div class="team__description-wrapper">
-        <div class="team__description font__inter">
-            Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! 
-        </div>
-    </div>
-    <div class="about-company-page__team__cards">
-        {% for worker in workers %}
-            <div class="team__card">
-                <div>
-                    <img src="{{ worker.photo.url }}" alt="">
-                </div>
-                <div class="team-card__name">
-                    <p>{{ worker.first_name }} {{ worker.last_name }}</p>
-                </div>
-                <hr>
-                <div class="team__role">
-                    <p>{{ worker.role }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="contacts__heading">
-        <h4>Партнеры</h4>
-        <hr>
-    </div>
-    <div class="partners__slider">
-        {% for partner in partners %}
-            <div class="partners__card">
-                <img src="{{ partner.image.url }}" alt="">
-            </div>
-        {% endfor %}
-    </div>
-    <div class="contacts__heading">
-        <h4>Сертификаты</h4>
-        <hr>
-    </div> 
-    <div class="certificates__slider">
-        {% for certificate in certificates %}
-            <div class="certificate__card">
-                <img src="{{ certificate.photo.url }}" alt="">
-            </div>
-        {% endfor %}
-    </div>
+<div class=contacts__heading>
+<h1>О компании</h1>
+<hr>
 </div>
-
-
-<div class="about">
-    {% include 'contacts/includes/contacts_block.html' %}
+<div class=article__content>
+<div class=article__content-block>
+<div class=article__paragraph>
+<div class="article__paragraph-heading about-company-page__heading-with-icon">
+<div>
+<div>
+<img src="{% static 'images/company-history.svg' %}" alt="">
 </div>
-{% endblock %}
-
-{% block script %}
-<script>
-$(document).ready(function () {
-    $('.partners__slider').slick({
-        arrows: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1, 
-        responsive: [
-            {
-                breakpoint: 1024, 
-                settings: {
-                    slidesToShow: 3, 
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 768, 
-                settings: {
-                    centerMode: true,
-                    slidesToShow: 1, 
-                    slidesToScroll: 1
-                }
-            }, 
-            {
-                breakpoint: 576, 
-                settings: {
-                    centerMode: true,
-                    slidesToShow: 1, 
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
-});
-$(document).ready(function () {
-    $('.certificates__slider').slick({
-        arrows: true,
-        infinite: true,
-        slidesToScroll: 1, 
-        variableWidth: true,
-    });
-});
-
-
-var myMap;
-ymaps.ready(function(){
-    myMap = new ymaps.Map("map", {
-        center: [43.157062, 131.926061], 
-        zoom: 16, 
-        controls: []
-    });
-    var o = new ymaps.control.ZoomControl({
-          options: {
-              position: {
-                  right: 10,
-                  top: 50
-              },
-              size: "small"
-          }
-      });
-    myMap.controls.add(o);
-    myMap.behaviors.disable("scrollZoom");
-    var s = new ymaps.Placemark([43.157062, 131.926061], {
-              hintContent: "Волгоградская улица, 7А",
-              balloonContent: "Волгоградская улица, 7А"
-          }, {
-              iconLayout: "default#image",
-              iconImageHref: `/static/images/pin.svg`,
-              iconImageSize: [50, 50],
-              iconImageOffset: [-15, -42]
-          });
-    myMap.geoObjects.add(s);
-}); 
-</script>
-
-<script>
-    // Инициализация слайдера для мобильных устройств
-    function initializeSlick() {
-        if (window.innerWidth < 990) {
-            if (!$('.about-company-page__team__cards').hasClass('slick-initialized')) {
-                $('.about-company-page__team__cards').slick({
-                    arrows: true,
-                    infinite: true,
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    centerMode: true,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 1
-                            }
-                        },
-                        {
-                            breakpoint: 768,
-                            settings: {
-                                centerMode: true,
-                                slidesToShow: 2,
-                                slidesToScroll: 1
-                            }
-                        },
-                        {
-                            breakpoint: 576,
-                            settings: {
-                                centerMode: true,
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                            }
-                        }
-                    ]
-                });
-            }
-        } else {
-            if ($('.about-company-page__team__cards').hasClass('slick-initialized')) {
-                $('.about-company-page__team__cards').slick('unslick');
-            }
-        }
-    }
-
-    $(document).ready(function () {
-        initializeSlick();
-
-        $(window).on('resize', function () {
-            initializeSlick();
-        });
-    });
-</script>
-
+<div>
+История компании
+</div>
+</div>
+</div>
+<div class="article__paragraph-text font__inter">
+{{ company_info.history }}
+</div>
+</div>
+</div>
+<div class=article__content-block>
+<div class=article__paragraph>
+<div class="article__paragraph-heading about-company-page__heading-with-icon">
+<div>
+<div>
+<img src="{% static 'images/company-mission.svg' %}" alt="">
+</div>
+<div>
+Миссия компании
+</div>
+</div>
+</div>
+<div class="article__paragraph-text font__inter">
+{{ company_info.mission }}
+</div>
+</div>
+</div>
+</div>
+<div class=advantages__stats>
+<div class=advantages__stats-column>
+<div class=advantages__stats-number>
+<p>10</p>
+</div>
+<div class=advantages__stats-label>
+Лет на рынке
+</div>
+</div>
+<div class=advantages__stats-column>
+<div class=advantages__stats-number>
+<p>315</p>
+</div>
+<div class=advantages__stats-label>
+Домов<br>построено
+</div>
+</div>
+<div class=advantages__stats-column>
+<div class=advantages__stats-number>
+<p>3600</p>
+</div>
+<div class=advantages__stats-label>
+Довольных<br> клиента
+</div>
+</div>
+</div>
+<div class=about-company__photos>
+<div class=about-company-page__small-left-column>
+<div>
+<img src="{% static 'images/about-company-page1.webp' %}" alt="">
+</div>
+<div>
+<p class=font__inter>Современные технологии достигли такого уровня, что начало повседневной работы по формированию позиции однозначно определяет каждого участника как способного принимать собственные решения касаемо поставленных обществом задач</p>
+</div>
+</div>
+<div class=about-company-page__big-right-column>
+<div>
+<img src="{% static 'images/about-company-page2.webp' %}" alt="">
+</div>
+</div>
+</div>
+<div class=contacts__heading>
+<h4>Наша команда</h4>
+<hr>
+</div>
+<div class=team__description-wrapper>
+<div class="team__description font__inter">
+Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали!
+</div>
+</div>
+<div class=about-company-page__team__cards>
+{% for worker in workers %}
+<div class=team__card>
+<div>
+<img src="{{ worker.photo.url }}" alt="">
+</div>
+<div class=team-card__name>
+<p>{{ worker.first_name }} {{ worker.last_name }}</p>
+</div>
+<hr>
+<div class=team__role>
+<p>{{ worker.role }}</p>
+</div>
+</div>
+{% endfor %}
+</div>
+<div class=contacts__heading>
+<h4>Партнеры</h4>
+<hr>
+</div>
+<div class=partners__slider>
+{% for partner in partners %}
+<div class=partners__card>
+<img src="{{ partner.image.url }}" alt="">
+</div>
+{% endfor %}
+</div>
+<div class=contacts__heading>
+<h4>Сертификаты</h4>
+<hr>
+</div>
+<div class=certificates__slider>
+{% for certificate in certificates %}
+<div class=certificate__card>
+<img src="{{ certificate.photo.url }}" alt="">
+</div>
+{% endfor %}
+</div>
+</div>
+<div class=about>
+{% include 'contacts/includes/contacts_block.html' %}
+</div>
+{% endblock %} {% block script %}
+<script>var myMap;$(document).ready((function(){$(".partners__slider").slick({arrows:!0,infinite:!0,slidesToShow:3,slidesToScroll:1,responsive:[{breakpoint:1024,settings:{slidesToShow:3,slidesToScroll:1}},{breakpoint:768,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]})})),$(document).ready((function(){$(".certificates__slider").slick({arrows:!0,infinite:!0,slidesToScroll:1,variableWidth:!0})})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var o=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(o),myMap.behaviors.disable("scrollZoom");var e=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[50,50],iconImageOffset:[-15,-42]});myMap.geoObjects.add(e)}))</script>
+<script>function initializeSlick(){window.innerWidth<990?$(".about-company-page__team__cards").hasClass("slick-initialized")||$(".about-company-page__team__cards").slick({arrows:!0,infinite:!0,slidesToShow:4,slidesToScroll:1,centerMode:!0,responsive:[{breakpoint:1024,settings:{slidesToShow:3,slidesToScroll:1}},{breakpoint:768,settings:{centerMode:!0,slidesToShow:2,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]}):$(".about-company-page__team__cards").hasClass("slick-initialized")&&$(".about-company-page__team__cards").slick("unslick")}$(document).ready((function(){initializeSlick(),$(window).on("resize",(function(){initializeSlick()}))}))</script>
 {% endblock %}

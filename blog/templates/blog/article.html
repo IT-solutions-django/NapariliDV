@@ -1,158 +1,109 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Новости - Напарили ДВ{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Новости - Напарили ДВ{% endblock %} {% block content %}
 <div class="breadcrumbs container font__inter">
-    <div>
-        <a href="{% url 'home:home' %}">Главная</a>
-    </div>
-    <div>
-        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
-    </div>
-    <div>
-        <a href="{% url 'blog:blog' %}">Новости</a>
-    </div>
-    <div>
-        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
-    </div>
-    <div>
-        <a class="color__red" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-    </div>
+<div>
+<a href="{% url 'home:home' %}">Главная</a>
+</div>
+<div>
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+</div>
+<div>
+<a href="{% url 'blog:blog' %}">Новости</a>
+</div>
+<div>
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+</div>
+<div>
+<a class=color__red href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+</div>
 </div>
 <div class="article container">
-    <div class="article__header">
-        <div class="article__heading">
-            <h1>{{ article.title }}</h1>
-        </div>
-        <hr class="article__header-hr--adaptive">
-        <div class="article__date">
-            <i>{{ article.created_at|date:"d.m.Y" }}</i>
-        </div>
-    </div>
-    <hr class="article__header-hr">
-    <div class="article__content">
-        {% for paragraph in article.paragraphs.all %}
-            <div class="article__content-block">
-                <div class="article__paragraph">
-                    <div class="article__paragraph-heading">
-                        {{ paragraph.title|linebreaks }}
-                    </div>
-                    <div class="article__paragraph-text font__inter">
-                        {{ paragraph.content|linebreaks }}
-                    </div>
-                </div>
-                {% if paragraph.image %}
-                    <div class="article__image">
-                        <img src="{{ paragraph.image.url }}" alt="">
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-        <div class="article__pagination-wrapper">
-            <div class="article__pagination">
-                <div class="article__padination-controls">
-                    <div class="article__pagination-control">
-                        {% if previous_article %}
-                            <a class="catalog__pagination-arrow catalog__pagination-arrow-left" href="{{ previous_article.get_absolute_url }}"></a>
-                            <p>Предыдущая</p>
-                        {% else %}
-                            <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
-                            <p>Предыдущая</p>
-                        {% endif %}
-                    </div>
-                    <div class="article__pagination-control">
-                        {% if next_article %}
-                            <p>Следующая</p>
-                            <a class="catalog__pagination-arrow catalog__pagination-arrow-right" href="{{ next_article.get_absolute_url }}"></a>
-                        {% else %} 
-                            <p>Следующая</p>
-                            <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
-                        {% endif %} 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="similar-articles">
-        <div class="work-stages__heading">
-            <h4>Читайте также</h4>
-            <hr>
-        </div>
-        <div class="news__cards">
-            {% for article in similar_articles %}
-                <div class="news__card">
-                    <div class="news__card-image">
-                        <img src="{{ article.image.url }}" alt="">
-                    </div>
-                    <div class="news__card-text-container">
-                        <div class="best-projects__card-heading">
-                            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                        </div>
-                        <hr>
-                        <div class="news__card-description">
-                            <p class="font__inter">{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
-                        </div>
-                        <div class="news__card-date">
-                            <i>{{ article.created_at|date:"d.m.Y" }}</i>
-                        </div>
-                    </div>
-                    <div class="news-page__read-button">
-                        <a href="{{ article.get_absolute_url }}"><button>Читать</button></a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+<div class=article__header>
+<div class=article__heading>
+<h1>{{ article.title }}</h1>
 </div>
-
-<div class="about">
-    {% include 'contacts/includes/contacts_block.html' %}
+<hr class=article__header-hr--adaptive>
+<div class=article__date>
+<i>{{ article.created_at|date:"d.m.Y" }}</i>
 </div>
-{% endblock %}
-
-{% block script %}
-<script>
-    $(document).ready(function () {
-    $('.photo-slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        adaptiveHeight: false,
-        autoplay: false,
-    });
-});
-
-var myMap;
-ymaps.ready(function(){
-    myMap = new ymaps.Map("map", {
-        center: [43.157062, 131.926061], 
-        zoom: 16, 
-        controls: []
-    });
-    var o = new ymaps.control.ZoomControl({
-          options: {
-              position: {
-                  right: 10,
-                  top: 50
-              },
-              size: "small"
-          }
-      });
-    myMap.controls.add(o);
-    myMap.behaviors.disable("scrollZoom");
-    var s = new ymaps.Placemark([43.157062, 131.926061], {
-              hintContent: "Волгоградская улица, 7А",
-              balloonContent: "Волгоградская улица, 7А"
-          }, {
-              iconLayout: "default#image",
-              iconImageHref: `/static/images/pin.svg`,
-              iconImageSize: [30, 42],
-              iconImageOffset: [-15, -42]
-          });
-    myMap.geoObjects.add(s);
-}); 
-</script>
-{% endblock %}
+</div>
+<hr class=article__header-hr>
+<div class=article__content>
+{% for paragraph in article.paragraphs.all %}
+<div class=article__content-block>
+<div class=article__paragraph>
+<div class=article__paragraph-heading>
+{{ paragraph.title|linebreaks }}
+</div>
+<div class="article__paragraph-text font__inter">
+{{ paragraph.content|linebreaks }}
+</div>
+</div>
+{% if paragraph.image %}
+<div class=article__image>
+<img src="{{ paragraph.image.url }}" alt="">
+</div>
+{% endif %}
+</div>
+{% endfor %}
+<div class=article__pagination-wrapper>
+<div class=article__pagination>
+<div class=article__padination-controls>
+<div class=article__pagination-control>
+{% if previous_article %}
+<a class="catalog__pagination-arrow catalog__pagination-arrow-left" href="{{ previous_article.get_absolute_url }}"></a>
+<p>Предыдущая</p>
+{% else %}
+<a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+<p>Предыдущая</p>
+{% endif %}
+</div>
+<div class=article__pagination-control>
+{% if next_article %}
+<p>Следующая</p>
+<a class="catalog__pagination-arrow catalog__pagination-arrow-right" href="{{ next_article.get_absolute_url }}"></a>
+{% else %}
+<p>Следующая</p>
+<a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=similar-articles>
+<div class=work-stages__heading>
+<h4>Читайте также</h4>
+<hr>
+</div>
+<div class=news__cards>
+{% for article in similar_articles %}
+<div class=news__card>
+<div class=news__card-image>
+<img src="{{ article.image.url }}" alt="">
+</div>
+<div class=news__card-text-container>
+<div class=best-projects__card-heading>
+<a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+</div>
+<hr>
+<div class=news__card-description>
+<p class=font__inter>{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
+</div>
+<div class=news__card-date>
+<i>{{ article.created_at|date:"d.m.Y" }}</i>
+</div>
+</div>
+<div class=news-page__read-button>
+<a href="{{ article.get_absolute_url }}"><button>Читать</button></a>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+<div class=about>
+{% include 'contacts/includes/contacts_block.html' %}
+</div>
+{% endblock %} {% block script %}
+<script>var myMap;$(document).ready((function(){$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1})})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var o=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(o),myMap.behaviors.disable("scrollZoom");var a=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[30,42],iconImageOffset:[-15,-42]});myMap.geoObjects.add(a)}))</script>
+{% endblock %} 
