@@ -819,15 +819,9 @@
 
     // Ответы на вопросы
     document.addEventListener('DOMContentLoaded', () => {
-        let checkboxes = document.querySelectorAll('.tab input');
-
-        checkboxes.forEach(checkbox => {
+        document.querySelectorAll('.tab input').forEach(checkbox => {
             checkbox.addEventListener('click', function () {
-                let parent = this.parentNode;
-
-                (!parent.classList.contains('selected')) ?
-                    parent.classList.add('selected') :
-                    parent.classList.remove('selected');
+                this.parentNode.classList.toggle('selected');
             });
         });
     });
