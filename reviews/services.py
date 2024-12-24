@@ -79,7 +79,7 @@ def _get_needed_data_format(
     }
 
 
-def get_vl_reviews_data():
+def get_vl_reviews_data() -> tuple[dict[str, Any], float, int]:
     url = "https://www.vl.ru/commentsgate/ajax/thread/company/naparili-dv/embedded"
 
     params = {
@@ -163,7 +163,6 @@ def get_vl_reviews_data():
             time_tag = review.find('span', class_='time')
             time_text = time_tag.text 
             created_at = convert_to_datetime(time_text)
-            print(created_at)
 
             if star_rating >= 4:
                 reviews.append({
@@ -174,12 +173,22 @@ def get_vl_reviews_data():
                     'created_at': created_at,
                 })
 
-        return reviews
+        reviews_count_block = soup.find('div', class_='cmt-thread-subscription')
+        reviews_count = reviews_count_block.find('span',class_='count').text
+
+        api_review_avg = 'https://www.vl.ru/ajax/company-history-votes?companyId=444287'
+        response = requests.get(api_review_avg, headers=headers)
+
+        data = response.json()
+        average_rating_history: dict = data["history"]
+        average_rating = list(average_rating_history.values())[0]
+
+        return reviews, average_rating, reviews_count
     else:
         print(f"Ошибка: {response.status_code}")
 
 
-def get_yandex_reviews_data():
+def get_yandex_reviews_data() -> tuple[dict[str, Any], float, int]:
     url = 'https://yandex.ru/maps/org/naparili_dv/68956168702/reviews/?ll=131.926107%2C43.156871&z=17'
     
     headers = {
@@ -198,19 +207,23 @@ def get_yandex_reviews_data():
         'Sec-Fetch-User': '?1',
         'Priority': 'u=0, i',
     }
-    response = requests.get(url, headers=headers).text
 
+    response = requests.get(url, headers=headers).text
     soup = BeautifulSoup(response, "html.parser")
+    meta_block = soup.find('div', class_='business-summary-rating-badge-view')
+
+    rating_raw = meta_block.find('div', class_='business-summary-rating-badge-view__rating').text
+    average_rating = float(rating_raw.split('\xa0')[1].replace(',', '.'))
+
+    reviews_count_raw = meta_block.find('span', class_='business-rating-amount-view').text 
+    reviews_count = int(reviews_count_raw.split()[0])
 
     review_blocks = soup.findAll('div', class_='business-reviews-card-view__review')
-
     reviews = []
     for review_block in review_blocks: 
         author = review_block.find('div', class_='business-review-view__author-name').find('span').text 
         text = review_block.find('span', class_='business-review-view__body-text').text
         stars = len(review_block.find('div', class_='business-rating-badge-view__stars').findAll('span'))
-        if stars < 4: 
-            continue
 
         created_at_str = review_block.find('span', class_='business-review-view__date').find('span').text 
         created_at = convert_to_datetime(created_at_str)
@@ -230,7 +243,8 @@ def get_yandex_reviews_data():
             'created_at': created_at,
             'photos': photos,
         })
-    return reviews
+
+    return reviews, average_rating, reviews_count
 
 
 def convert_to_datetime(datetime_str: str) -> datetime: 
