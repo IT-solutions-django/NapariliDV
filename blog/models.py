@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from home.services import convert_image_to_webp
 
 
 class ArticleType(models.Model):
@@ -25,6 +26,24 @@ class Article(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Блог'
 
+
+    def save(self, *args, **kwargs):
+        # TODO
+        # if self.pk:
+        #     old_image = self.__class__.objects.filter(pk=self.pk).first().image
+        #     if old_image and self.image and old_image.name == self.image.name:
+        #         super(self.__class__, self).save(*args, **kwargs)
+        #         return
+
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
+
+        for paragraph in self.paragraphs.all():  # TODO После конвертации всех имеющихся фото в WEBP этот код можно будет убрать
+            paragraph.save() 
+        
+        super(self.__class__, self).save(*args, **kwargs)
+
     def __str__(self) -> str: 
         return self.title
     
@@ -38,3 +57,10 @@ class Paragraph(models.Model):
     content = models.TextField('Содержание')
     image = models.ImageField('Картинка', upload_to='blog', null=True, blank=True) 
     article = models.ForeignKey(verbose_name='Статья/Новость', to=Article, on_delete=models.CASCADE, related_name='paragraphs')
+
+    def save(self, *args, **kwargs):
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)

@@ -26,7 +26,7 @@ def update_vl_reviews_task(self) -> None:
     REVIEWS_COUNT_PER_PLATFORM = 10
     vl_platform, _ = Platform.objects.get_or_create(name='VL')
     try: 
-        reviews_data = get_vl_reviews_data()
+        reviews_data, average_rating, reviews_count = get_vl_reviews_data()
     except Exception as e:
         print(f'Произошла ошибка при получении отзывов с VL.ru: {e}') 
         return
@@ -43,13 +43,17 @@ def update_vl_reviews_task(self) -> None:
         )
         new_review.save()
 
+    vl_platform.average_rating = average_rating
+    vl_platform.reviews_count = reviews_count
+    vl_platform.save()
+
 
 @shared_task(bind=True, max_retries=5)
 def update_yandex_reviews_task(self) -> None:
     REVIEWS_COUNT_PER_PLATFORM = 10
     yandex_platform, _ = Platform.objects.get_or_create(name='Яндекс Карты')
     try: 
-        reviews_data = get_yandex_reviews_data()
+        reviews_data, average_rating, reviews_count = get_yandex_reviews_data()
     except Exception as e:
         print(f'Произошла ошибка при получении отзывов с Яндекс.Карт: {e}') 
         return
@@ -72,6 +76,10 @@ def update_yandex_reviews_task(self) -> None:
                     review=new_review,
                 )
                 new_photo.save()
+
+        yandex_platform.average_rating = average_rating
+        yandex_platform.reviews_count = reviews_count
+        yandex_platform.save()
 
 
 

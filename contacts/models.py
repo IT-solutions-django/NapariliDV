@@ -1,5 +1,5 @@
 from django.db import models
-from projects.models import Category
+from home.services import convert_image_to_webp
 
 
 class Worker(models.Model): 
@@ -14,11 +14,23 @@ class Worker(models.Model):
 
     def __str__(self): 
         return f'{self.last_name} {self.first_name}, {self.role}'
+    
+    def save(self, *args, **kwargs):
+        # TODO
+        # if self.pk:
+        #     old_image = self.__class__.objects.filter(pk=self.pk).first().photo
+        #     if old_image and self.photo and old_image.name == self.photo.name:
+        #         super(self.__class__, self).save(*args, **kwargs)
+        #         return
+            
+        webp_image = convert_image_to_webp(self.photo)
+        if webp_image:
+            self.photo.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
 
 
 class PrivacyPolicy(models.Model): 
-    title = models.CharField('Политика конфиденциальности', default='Политика конфиденциальности', max_length=80)
-
     class Meta: 
         verbose_name = 'Политика конфиденциальности'
         verbose_name_plural = 'Политика конфиденциальности'
@@ -46,7 +58,7 @@ class PrivacyPolicyParagraph(models.Model):
 class Request(models.Model): 
     name = models.CharField('Имя', max_length=25)
     phone = models.CharField('Телефон', max_length=18)
-    created_at = models.DateTimeField('Дата и время публикации', auto_now_add=True)
+    created_at = models.DateTimeField('Дата и время создания', auto_now_add=True)
     is_closed = models.BooleanField('Обработано', default=False)
 
     class Meta: 
@@ -63,3 +75,44 @@ class CertificatePhoto(models.Model):
     class Meta: 
         verbose_name = 'Фото сертификата'
         verbose_name_plural = 'Сертификаты'
+
+    def save(self, *args, **kwargs):
+        # TODO
+        # if self.pk:
+        #     old_image = self.__class__.objects.filter(pk=self.pk).first().photo
+        #     if old_image and self.photo and old_image.name == self.photo.name:
+        #         super(self.__class__, self).save(*args, **kwargs)
+        #         return
+            
+        webp_image = convert_image_to_webp(self.photo)
+        if webp_image:
+            self.photo.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Сертификат {self.pk}'
+    
+
+class PartnerImage(models.Model): 
+    image = models.ImageField('Фото', upload_to='contacts/certificates') 
+
+    class Meta: 
+        verbose_name = 'Логотип'
+        verbose_name_plural = 'Партнеры'
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().image
+            if old_image and self.image and old_image.name == self.image.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
+
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Партнер {self.pk}'

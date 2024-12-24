@@ -4,19 +4,20 @@ from .models import (
     Request, 
     PrivacyPolicy, 
     PrivacyPolicyParagraph, 
-    CertificatePhoto
+    CertificatePhoto, 
+    PartnerImage,
 )
 from .filters import IsClosed
 
 
 @admin.register(Worker)
 class WorkerAdmin(admin.ModelAdmin): 
-    list_display = ['last_name', 'first_name']
+    list_display = ['last_name', 'first_name', 'role', 'photo']
 
 
 @admin.register(Request)
 class RequestAdmin(admin.ModelAdmin): 
-    list_display = ['name', 'phone', 'is_closed']
+    list_display = ['name', 'phone', 'created_at', 'is_closed']
     list_filter = [
         IsClosed
     ]
@@ -30,12 +31,16 @@ class PrivacyPolicyParagraphInline(admin.TabularInline):
 
 
 @admin.register(PrivacyPolicy)
-class ArticleAdmin(admin.ModelAdmin): 
-    list_display = ['title']
-    search_fields = ['title']
+class PrivacyPolicyAdmin(admin.ModelAdmin): 
+    list_display = ['__str__']
     inlines = [PrivacyPolicyParagraphInline]
 
 
 @admin.register(CertificatePhoto)
 class CertificatePhotoAdmin(admin.ModelAdmin): 
-    list_display = ['pk', 'photo']
+    list_display = ['__str__', 'photo']
+
+
+@admin.register(PartnerImage)
+class PartnerImageAdmin(admin.ModelAdmin): 
+    list_display = ['__str__', 'image']

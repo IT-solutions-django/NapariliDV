@@ -15,8 +15,8 @@ class CompanyInfoAdmin(admin.ModelAdmin):
 
 @admin.register(CooperationStage)
 class CooperationStageAdmin(admin.ModelAdmin): 
-    list_display = ['name']
-    search_fields = ['name']
+    list_display = ['__str__']
+    search_fields = ['__str__']
 
 
 @admin.register(PopularQuestion)

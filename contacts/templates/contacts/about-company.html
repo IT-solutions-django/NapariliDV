@@ -127,21 +127,11 @@
         <hr>
     </div>
     <div class="partners__slider">
-        <div class="partners__card">
-            <img src="{% static 'images/partners-yandex.png' %}" alt="">
-        </div>
-        <div class="partners__card">
-            <img src="{% static 'images/partners-yandex.png' %}" alt="">
-        </div>
-        <div class="partners__card">
-            <img src="{% static 'images/partners-yandex.png' %}" alt="">
-        </div>
-        <div class="partners__card">
-            <img src="{% static 'images/partners-yandex.png' %}" alt="">
-        </div>
-        <div class="partners__card">
-            <img src="{% static 'images/partners-yandex.png' %}" alt="">
-        </div>
+        {% for partner in partners %}
+            <div class="partners__card">
+                <img src="{{ partner.image.url }}" alt="">
+            </div>
+        {% endfor %}
     </div>
     <div class="contacts__heading">
         <h4>Сертификаты</h4>

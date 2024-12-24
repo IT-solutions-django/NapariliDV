@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load price_filters %}
+{% load float_dot_filters %}
 
 {% block title %}Напарили ДВ{% endblock %}
 
@@ -394,9 +395,9 @@
         </div>
         <div class="work-stages__cards">
             {% for stage in cooperation_stages %}
-                {% if stage.icon %}
+                {% if stage.image %}
                     <div class="work-stages__image-card">
-                        <img src="{{ stage.icon.url }}" alt="">
+                        <img src="{{ stage.image.url }}" alt="">
                     </div>
                 {% else %}
                     <div class="work-stages__info-card">
@@ -525,7 +526,7 @@
                                 <img src="{{ review.platform.icon.url }}" alt="">
                             </div>
                             <div class="reviews__platform-stats font__inter">
-                                <p>5.0 (230)</p>
+                                <p>{{ review.platform.average_rating|float_dot_format }} ({{ review.platform.reviews_count }})</p>
                             </div>
                         </div>
                     </div>
