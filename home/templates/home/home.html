@@ -3,7 +3,7 @@
 <div id=mobileCatalogFilter>
 <div class=mobile-catalog__close-button id=closeMobileFilter>
 <button>
-<img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
+<img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
 </button>
 </div>
 <div class=mobile-catalog__heading>
@@ -90,7 +90,7 @@
 <div class="slider-heading__want-the-house-button animated">
 <span class=circle></span>
 <button class=openModal>
-<img src="{% static 'images/want-the-house.webp' %}" alt="">
+<img src="{% static 'images/want-the-house.webp' %}" alt="Хочу такой дом">
 </button>
 </div>
 </div>
@@ -170,7 +170,7 @@
 <div class="advantages__details-row advantages__details-row-with-images">
 <div class=advantages__details-big-left-column>
 <div>
-<img src=static/images/advantages1.webp alt="">
+<img src=static/images/advantages1.webp alt="Фото проекта">
 </div>
 </div>
 <div class=advantages__details-small-right-column>
@@ -183,12 +183,12 @@
 </div>
 </div>
 <div>
-<img src=static/images/advantages1.webp alt="">
+<img src=static/images/advantages1.webp alt="Фото проекта">
 </div>
 <div class="advantages__choose-house animated">
 <button>
 <a target=_blank href="{% url 'projects:catalog' %}">
-<img src=static/images/choose-house-button.svg alt="">
+<img src=static/images/choose-house-button.svg alt="Выбрать дом">
 </a>
 </button>
 </div>
@@ -211,7 +211,7 @@
 </div>
 <div>
 <button id=openMobileFilters>
-<img src="{% static 'images/filters-icon.svg' %}" alt="">
+<img src="{% static 'images/filters-icon.svg' %}" alt="Фильтры">
 </button>
 </div>
 </div>
@@ -313,7 +313,7 @@
 <div>
 <div class=about-company__row>
 <div class=about-company__photo>
-<img src=static/images/about-company.webp alt="">
+<img src=static/images/about-company.webp alt="Фото проекта">
 </div>
 <div class=about-company__textblock>
 <div>
@@ -325,7 +325,7 @@
 </div>
 </div>
 <div class=about-company__big-right-column--adaptive>
-<img src=static/images/about-company2.webp alt="">
+<img src=static/images/about-company2.webp alt="Фото проекта">
 </div>
 <div class=about-company__more-detailed>
 <a href="{% url 'contacts:about_company' %}">Подробнее</a>
@@ -336,7 +336,7 @@
 </div>
 <div class=about-company__big-right-column>
 <div>
-<img src=static/images/about-company2.webp alt="">
+<img src=static/images/about-company2.webp alt="О компании">
 </div>
 </div>
 </div>
@@ -348,7 +348,7 @@
 <div class=work-stages__cards>
 {% for stage in cooperation_stages %} {% if stage.image %}
 <div class=work-stages__image-card>
-<img src="{{ stage.image.url }}" alt="">
+<img src="{{ stage.image.url }}" alt="Этап сотрудничества">
 </div>
 {% else %}
 <div class=work-stages__info-card>
@@ -376,7 +376,7 @@
 {% for worker in workers %}
 <div class=team__slider-item>
 <div>
-<img src="{{ worker.photo.url }}" alt="">
+<img src="{{ worker.photo.url }}" alt="Фото сотрудника">
 </div>
 <div class=team__name>
 <p>{{ worker.first_name }} {{ worker.last_name }}</p>
@@ -419,7 +419,7 @@
 </div>
 <div class="feedback__button animated">
 <button>
-<img src=static/images/send.svg alt="">
+<img src=static/images/send.svg alt="Отправить">
 </button>
 </div>
 </form>
@@ -439,7 +439,7 @@
 <div>
 <div class=reviews__card-header>
 <div>
-<img src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}" alt="">
+<img src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}" alt="Аватар">
 </div>
 <div class=reviews__card-author-name>
 <p>{{ review.author }}</p>
@@ -456,7 +456,7 @@
 <div class=reviews__card-images>
 {% for photo in review.photos.all %}
 <div class=reviews__card-image>
-<img src="{{ photo.url }}" alt="">
+<img src="{{ photo.url }}" alt="Фото отзыва">
 </div>
 {% endfor %}
 </div>
@@ -464,11 +464,11 @@
 <div>
 <div class=reviews__card-details>
 <div class=reviews__card-stars>
-<img src="static/images/five-stars — копия.svg" alt="">
+<img src="static/images/five-stars — копия.svg" alt="Звезды">
 </div>
 <div class=reviews__platform>
 <div>
-<img src="{{ review.platform.icon.url }}" alt="">
+<img src="{{ review.platform.icon.url }}" alt="Иконка платформы">
 </div>
 <div class="reviews__platform-stats font__inter">
 <p>{{ review.platform.average_rating|float_dot_format }} ({{ review.platform.reviews_count }})</p>
@@ -489,7 +489,7 @@
 <div class=gallery__slider>
 {% for project in gallery_photos %}
 <div class=gallery__photo>
-<img src="{{ project.gallery_photo.url }}" alt="">
+<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
 </div>
 {% endfor %}
 </div>
@@ -526,7 +526,7 @@
 <div class=news__content>
 <div class=news__small-left-column>
 <div class=news__photo>
-<img src="{{ article.image.url }}" alt="">
+<img src="{{ article.image.url }}" alt="Фото">
 </div>
 </div>
 <div class=news__big-right-column>
@@ -548,7 +548,7 @@
 <div class="news__read-button animated">
 <a href="{{ article.get_absolute_url }}">
 <button>
-<img src="{% static 'images/read-news.svg' %}" alt="">
+<img src="{% static 'images/read-news.svg' %}" alt="Читать">
 </button>
 </a>
 </div>

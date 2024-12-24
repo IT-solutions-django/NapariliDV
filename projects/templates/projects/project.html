@@ -4,13 +4,13 @@
 <a href="{% url 'home:home' %}">Главная</a>
 </div>
 <div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
 </div>
 <div>
 <a href="{% url 'projects:catalog' %}">Каталог</a>
 </div>
 <div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
 </div>
 <div>
 <a class=color__red href="{{ project.get_absolute_url }}">{{ project.name }}</a>
@@ -22,7 +22,7 @@
 {% for photo in project.photos.all %}
 <div>
 <a href="{{ photo.image.url }}">
-<img src="{{ photo.image.url }}" alt="">
+<img src="{{ photo.image.url }}" alt="Фото проекта">
 </a>
 </div>
 {% endfor %}
@@ -30,7 +30,7 @@
 <div class=project__slider-nav>
 {% for photo in project.photos.all %}
 <div class=project__slide>
-<img src="{{ photo.image.url }}" alt="">
+<img src="{{ photo.image.url }}" alt="Фото проекта">
 </div>
 {% endfor %}
 </div>
@@ -64,7 +64,7 @@
 {% for photo in project.photos.all %}
 <div class=project__slide--adaptive>
 <a href="{{ photo.image.url }}">
-<img src="{{ photo.image.url }}" alt="">
+<img src="{{ photo.image.url }}" alt="Фото проекта">
 </a>
 </div>
 {% endfor %}
@@ -85,7 +85,7 @@
 </div>
 <div class="project__order-button animated openModal">
 <button>
-<img src="{% static 'images/order.svg' %}" alt="">
+<img src="{% static 'images/order.svg' %}" alt="Заказать">
 </button>
 </div>
 </div>
@@ -114,7 +114,7 @@
 <div class=photo-slider>
 {% for photo in project.photos.all %}
 <div class="similar-projects__card-image photo-slider-item">
-<img src="{{ photo.image.url }}" alt="">
+<img src="{{ photo.image.url }}" alt="Фото проекта">
 </div>
 {% endfor %}
 </div>

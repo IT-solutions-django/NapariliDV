@@ -3,7 +3,7 @@
 <div id=mobileGalleryProject>
 <div class=mobile-catalog__close-button id=closeMobileProject>
 <button>
-<img src="{% static 'images/mobile-filters-close.svg' %}" alt="">
+<img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
 </button>
 </div>
 <div class="mobile-gallery__heading mobile-container">
@@ -34,7 +34,7 @@
 <div class=gallery__slider>
 {% for project in gallery_photos %}
 <div class=gallery__photo>
-<img src="{{ project.gallery_photo.url }}" alt="">
+<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
 </div>
 {% endfor %}
 </div>
@@ -47,7 +47,7 @@
 <a href="{% url 'home:home' %}">Главная</a>
 </div>
 <div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
 </div>
 <div>
 <a class=color__red href="{% url 'contacts:gallery' %}">Галерея</a>
@@ -91,7 +91,7 @@
 <div class=gallery-page__slider>
 {% for project in gallery_photos %}
 <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
-<img src="{{ project.gallery_photo.url }}" alt="">
+<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
 <div class=gallery-page__slide-label>
 <p>{{ project.name }}</p>
 </div>
