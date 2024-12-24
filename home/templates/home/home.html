@@ -925,6 +925,15 @@
                         setTimeout(() => {
                             cardsContainer.removeClass('fade-in');
                         }, 500);
+
+                        // Обновление кнопок, открывающих модальное окно
+                        const openModalButtons = document.querySelectorAll('.openModal');
+                        openModalButtons.forEach((button) => {
+                            button.addEventListener('click', () => {
+                                modal.style.display = 'flex';
+                            });
+                        });
+
                     },
                     error: function(xhr, status, error) {
                         console.error("Ошибка при фильтрации:", error);
