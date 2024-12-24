@@ -1,234 +1,83 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Новости - Напарили ДВ{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Новости - Напарили ДВ{% endblock %} {% block content %}
 <div class="breadcrumbs container font__inter">
-    <div>
-        <a href="{% url 'home:home' %}">Главная</a>
-    </div>
-    <div>
-        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
-    </div>
-    <div>
-        <a class="color__red" href="{% url 'blog:blog' %}">Новости</a>
-    </div>
+<div>
+<a href="{% url 'home:home' %}">Главная</a>
+</div>
+<div>
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+</div>
+<div>
+<a class=color__red href="{% url 'blog:blog' %}">Новости</a>
+</div>
 </div>
 <div class="news container">
-    <div class="news-page__header">
-        <div class="news__heading">
-            <h1>{{ page_title }}</h1>
-        </div>
-        <hr class="news-page__header-hr--adaptive">
-        <div class="news__header-right-buttons">
-            <form id="blogForm" action="{% url 'blog:blog' %}">
-                    {% for article_type in form.article_type %}
-                    <div class="news__header-button">
-                            {{ choice.tag }}
-                            <input 
-                                type="radio"
-                                name="{{ article_type.data.name }}" 
-                                value="{{ article_type.data.value }}"
-                                class="radio-toggle"
-                                id="{{ article_type.id_for_label }}" 
-                                {% if article_type.data.selected %}checked data-was-checked="true"{% endif %}
-                            >
-                            <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
-                        </div>
-                    {% endfor %}
-                <button type="submit" style="display: none;"></button>
-            </form>
-        </div>
-    </div>
-    <hr class="news-page__header-hr">
-    <div class="news__cards">
-        {% for article in articles %}
-            <div class="news__card">
-                <div class="news__card-image">
-                    <img src="{{ article.image.url }}" alt="">
-                </div>
-                <div class="news__card-text-container">
-                    <div class="best-projects__card-heading">
-                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-                    </div>
-                    <hr>
-                    <div class="news__card-description">
-                        <p class="font__inter">{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
-                    </div>
-                    <div class="news__card-date">
-                        <i>{{ article.created_at|date:"d.m.Y" }}</i>
-                    </div>
-                </div>
-                <div class="news-page__read-button">
-                    <a href="{{ article.get_absolute_url }}"><button>Читать</button></a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="catalog__pagination">
-        <div class="catalog__pagination-controls">
-            {% if articles.has_previous %}
-                <a href="?page={{ query_params }}&page={{ articles.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left pagination-link"></a>
-            {% else %}
-                <a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
-            {% endif %}
-            <div>
-                <p>{{ articles.number }} из {{ articles.paginator.num_pages }}</p>
-            </div>
-            {% if articles.has_next %}
-                <a href="?page={{ articles.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right pagination-link"></a>
-            {% else %}
-                <a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
-            {% endif %}
-        </div>
-    </div>
+<div class=news-page__header>
+<div class=news__heading>
+<h1>{{ page_title }}</h1>
 </div>
-
-<div class="about">
-    {% include 'contacts/includes/contacts_block.html' %}
+<hr class=news-page__header-hr--adaptive>
+<div class=news__header-right-buttons>
+<form id=blogForm action="{% url 'blog:blog' %}">
+{% for article_type in form.article_type %}
+<div class=news__header-button>
+{{ choice.tag }}
+<input type=radio name="{{ article_type.data.name }}" value="{{ article_type.data.value }}" class=radio-toggle id="{{ article_type.id_for_label }}" {% if article_type.data.selected %}checked data-was-checked=true {% endif %}>
+<label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
 </div>
-{% endblock %}
-
-{% block script %}
-<script>
-    $(document).ready(function () {
-    $('.photo-slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        adaptiveHeight: false,
-        autoplay: false,
-    });
-});
-
-var myMap;
-ymaps.ready(function(){
-    myMap = new ymaps.Map("map", {
-        center: [43.157062, 131.926061], 
-        zoom: 16, 
-        controls: []
-    });
-    var o = new ymaps.control.ZoomControl({
-          options: {
-              position: {
-                  right: 10,
-                  top: 50
-              },
-              size: "small"
-          }
-      });
-    myMap.controls.add(o);
-    myMap.behaviors.disable("scrollZoom");
-    var s = new ymaps.Placemark([43.157062, 131.926061], {
-              hintContent: "Волгоградская улица, 7А",
-              balloonContent: "Волгоградская улица, 7А"
-          }, {
-              iconLayout: "default#image",
-              iconImageHref: `/static/images/pin.svg`,
-              iconImageSize: [30, 42],
-              iconImageOffset: [-15, -42]
-          });
-    myMap.geoObjects.add(s);
-}); 
-</script>
-
-<script>
-    // Сохранение фильтров при пагинации
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.catalog__pagination a').forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                let formData = $('#blogForm').serialize(); 
-                const url = new URL(link.href + "&" + formData);
-                window.location.href = url.toString();
-            });
-        });
-    });
-    </script>
-
-<script>
-    // Сброс input radio
-    document.addEventListener("DOMContentLoaded", function () {
-    const radioButtons = document.querySelectorAll('.radio-toggle');
-
-    radioButtons.forEach(function (radio) {
-        radio.addEventListener('click', function () {
-            if (this.dataset.wasChecked === "true") {
-                this.checked = false;
-                this.dataset.wasChecked = "false";
-            } else {
-                this.dataset.wasChecked = "true";
-            }
-
-            radioButtons.forEach(function (otherRadio) {
-                if (otherRadio !== radio && otherRadio.name == radio.name) {
-                    otherRadio.dataset.wasChecked = "false";
-                }
-            });
-
-            // Применение новых фильтров
-            let formData = $('#blogForm').serialize();
-            let cardsContainer = $('.news__cards');
-            let paginationContainer = $('.catalog__pagination');
-
-            timeout = setTimeout(function () {
-                $.ajax({
-                    url: "{% url 'blog:filter_blog_api' %}",  
-                    type: "GET",
-                    data: formData,
-                    success: function(response) {
-                        cardsContainer.html(response.html);
-                        paginationContainer.html(response.pagination)
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Ошибка при фильтрации:", error);
-                    }
-                });
-            }, 200);
-        });
-    });
-});
-</script>
-
-<script>
-// Фильтрация новостей/статей
-$(document).ready(function() {
-    $('#blogForm input').on('change input', function(event) {
-        let formData = $('#blogForm').serialize();
-
-        let cardsContainer = $('.news__cards');
-
-        timeout = setTimeout(function () {
-            $.ajax({
-                url: "{% url 'blog:filter_blog_api' %}",  
-                type: "GET",
-                data: formData,
-                success: function(response) {
-                    cardsContainer.html(response.html);
-                    console.log(response.html)
-
-                    // Добавление к новым ссылкам обработчиков для сохранения текущих фильтров
-                    document.querySelectorAll('.catalog__pagination a').forEach(link => {
-                        link.addEventListener('click', event => {
-                            event.preventDefault();
-
-                            let formData = $('#blogForm').serialize(); 
-                
-                            const url = new URL(link.href + "&" + formData);
-                            console.log(url.toString())
-                            window.location.href = url.toString();
-                    });
-                });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Ошибка при фильтрации:", error);
-                }
-            });
-        }, 200);  
-
-    });
-});
-</script>
+{% endfor %}
+<button type=submit style=display:none></button>
+</form>
+</div>
+</div>
+<hr class=news-page__header-hr>
+<div class=news__cards>
+{% for article in articles %}
+<div class=news__card>
+<div class=news__card-image>
+<img src="{{ article.image.url }}" alt="">
+</div>
+<div class=news__card-text-container>
+<div class=best-projects__card-heading>
+<a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+</div>
+<hr>
+<div class=news__card-description>
+<p class=font__inter>{{ article.paragraphs.all.0.content|truncatechars_html:200 }}</p>
+</div>
+<div class=news__card-date>
+<i>{{ article.created_at|date:"d.m.Y" }}</i>
+</div>
+</div>
+<div class=news-page__read-button>
+<a href="{{ article.get_absolute_url }}"><button>Читать</button></a>
+</div>
+</div>
+{% endfor %}
+</div>
+<div class=catalog__pagination>
+<div class=catalog__pagination-controls>
+{% if articles.has_previous %}
+<a href="?page={{ query_params }}&page={{ articles.previous_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-left pagination-link"></a>
+{% else %}
+<a class="catalog__pagination-arrow catalog__pagination-arrow-left catalog__pagination-disabled"></a>
+{% endif %}
+<div>
+<p>{{ articles.number }} из {{ articles.paginator.num_pages }}</p>
+</div>
+{% if articles.has_next %}
+<a href="?page={{ articles.next_page_number }}" class="catalog__pagination-arrow catalog__pagination-arrow-right pagination-link"></a>
+{% else %}
+<a class="catalog__pagination-arrow catalog__pagination-arrow-right catalog__pagination-disabled"></a>
+{% endif %}
+</div>
+</div>
+</div>
+<div class=about>
+{% include 'contacts/includes/contacts_block.html' %}
+</div>
+{% endblock %} {% block script %}
+<script>var myMap;$(document).ready((function(){$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1})})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var o=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(o),myMap.behaviors.disable("scrollZoom");var a=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[30,42],iconImageOffset:[-15,-42]});myMap.geoObjects.add(a)}))</script>
+<script>document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".catalog__pagination a").forEach((e=>{e.addEventListener("click",(t=>{t.preventDefault();let n=$("#blogForm").serialize();const o=new URL(e.href+"&"+n);window.location.href=o.toString()}))}))}))</script>
+<script>document.addEventListener("DOMContentLoaded",(function(){const e=document.querySelectorAll(".radio-toggle");e.forEach((function(t){t.addEventListener("click",(function(){"true"===this.dataset.wasChecked?(this.checked=!1,this.dataset.wasChecked="false"):this.dataset.wasChecked="true",e.forEach((function(e){e!==t&&e.name==t.name&&(e.dataset.wasChecked="false")}));let a=$("#blogForm").serialize(),n=$(".news__cards"),o=$(".catalog__pagination");timeout=setTimeout((function(){$.ajax({url:"{% url 'blog:filter_blog_api' %}",type:"GET",data:a,success:function(e){n.html(e.html),o.html(e.pagination)},error:function(e,t,a){console.error("Ошибка при фильтрации:",a)}})}),200)}))}))}))</script>
+<script>$(document).ready((function(){$("#blogForm input").on("change input",(function(o){let e=$("#blogForm").serialize(),t=$(".news__cards");timeout=setTimeout((function(){$.ajax({url:"{% url 'blog:filter_blog_api' %}",type:"GET",data:e,success:function(o){t.html(o.html),console.log(o.html),document.querySelectorAll(".catalog__pagination a").forEach((o=>{o.addEventListener("click",(e=>{e.preventDefault();let t=$("#blogForm").serialize();const n=new URL(o.href+"&"+t);console.log(n.toString()),window.location.href=n.toString()}))}))},error:function(o,e,t){console.error("Ошибка при фильтрации:",t)}})}),200)}))}))</script>
 {% endblock %}
