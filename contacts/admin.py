@@ -4,7 +4,8 @@ from .models import (
     Request, 
     PrivacyPolicy, 
     PrivacyPolicyParagraph, 
-    CertificatePhoto
+    CertificatePhoto, 
+    PartnerImage,
 )
 from .filters import IsClosed
 
@@ -16,7 +17,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
 @admin.register(Request)
 class RequestAdmin(admin.ModelAdmin): 
-    list_display = ['name', 'phone', 'is_closed']
+    list_display = ['name', 'phone', 'created_at', 'is_closed']
     list_filter = [
         IsClosed
     ]
@@ -38,3 +39,8 @@ class PrivacyPolicyAdmin(admin.ModelAdmin):
 @admin.register(CertificatePhoto)
 class CertificatePhotoAdmin(admin.ModelAdmin): 
     list_display = ['__str__', 'photo']
+
+
+@admin.register(PartnerImage)
+class PartnerImageAdmin(admin.ModelAdmin): 
+    list_display = ['__str__', 'image']

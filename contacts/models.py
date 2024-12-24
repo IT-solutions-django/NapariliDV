@@ -58,7 +58,7 @@ class PrivacyPolicyParagraph(models.Model):
 class Request(models.Model): 
     name = models.CharField('Имя', max_length=25)
     phone = models.CharField('Телефон', max_length=18)
-    created_at = models.DateTimeField('Дата и время публикации', auto_now_add=True)
+    created_at = models.DateTimeField('Дата и время создания', auto_now_add=True)
     is_closed = models.BooleanField('Обработано', default=False)
 
     class Meta: 
@@ -92,3 +92,27 @@ class CertificatePhoto(models.Model):
 
     def __str__(self):
         return f'Сертификат {self.pk}'
+    
+
+class PartnerImage(models.Model): 
+    image = models.ImageField('Фото', upload_to='contacts/certificates') 
+
+    class Meta: 
+        verbose_name = 'Логотип'
+        verbose_name_plural = 'Партнеры'
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().image
+            if old_image and self.image and old_image.name == self.image.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
+
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Партнер {self.pk}'
