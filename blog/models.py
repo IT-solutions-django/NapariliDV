@@ -28,19 +28,15 @@ class Article(models.Model):
 
 
     def save(self, *args, **kwargs):
-        # TODO
-        # if self.pk:
-        #     old_image = self.__class__.objects.filter(pk=self.pk).first().image
-        #     if old_image and self.image and old_image.name == self.image.name:
-        #         super(self.__class__, self).save(*args, **kwargs)
-        #         return
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().image
+            if old_image and self.image and old_image.name == self.image.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
 
         webp_image = convert_image_to_webp(self.image)
         if webp_image:
             self.image.save(webp_image.name, webp_image, save=False)
-
-        for paragraph in self.paragraphs.all():  # TODO После конвертации всех имеющихся фото в WEBP этот код можно будет убрать
-            paragraph.save() 
         
         super(self.__class__, self).save(*args, **kwargs)
 

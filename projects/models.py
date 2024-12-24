@@ -74,19 +74,15 @@ class Project(models.Model):
         verbose_name_plural = 'Проекты'
 
     def save(self, *args, **kwargs):
-        # TODO
-        # if self.pk:
-        #     old_image = self.__class__.objects.filter(pk=self.pk).first().gallery_photo
-        #     if old_image and self.gallery_photo and old_image.name == self.gallery_photo.name:
-        #         super(self.__class__, self).save(*args, **kwargs)
-        #         return
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().gallery_photo
+            if old_image and self.gallery_photo and old_image.name == self.gallery_photo.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
             
         webp_image = convert_image_to_webp(self.gallery_photo)
         if webp_image:
             self.gallery_photo.save(webp_image.name, webp_image, save=False)
-
-        for project_photo in self.photos.all():  # TODO После конвертации всех имеющихся фото в WEBP этот код можно будет убрать
-            project_photo.save()  
         
         super(self.__class__, self).save(*args, **kwargs)
 
@@ -106,12 +102,11 @@ class ProjectPhoto(models.Model):
         verbose_name_plural = 'Фото проекта'
 
     def save(self, *args, **kwargs):
-        # TODO
-        # if self.pk:
-        #     old_image = self.__class__.objects.filter(pk=self.pk).first().image
-        #     if old_image and self.image and old_image.name == self.image.name:
-        #         super(self.__class__, self).save(*args, **kwargs)
-        #         return
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().image
+            if old_image and self.image and old_image.name == self.image.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
 
         webp_image = convert_image_to_webp(self.image)
         if webp_image:

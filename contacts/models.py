@@ -16,12 +16,11 @@ class Worker(models.Model):
         return f'{self.last_name} {self.first_name}, {self.role}'
     
     def save(self, *args, **kwargs):
-        # TODO
-        # if self.pk:
-        #     old_image = self.__class__.objects.filter(pk=self.pk).first().photo
-        #     if old_image and self.photo and old_image.name == self.photo.name:
-        #         super(self.__class__, self).save(*args, **kwargs)
-        #         return
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().photo
+            if old_image and self.photo and old_image.name == self.photo.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
             
         webp_image = convert_image_to_webp(self.photo)
         if webp_image:
@@ -77,12 +76,11 @@ class CertificatePhoto(models.Model):
         verbose_name_plural = 'Сертификаты'
 
     def save(self, *args, **kwargs):
-        # TODO
-        # if self.pk:
-        #     old_image = self.__class__.objects.filter(pk=self.pk).first().photo
-        #     if old_image and self.photo and old_image.name == self.photo.name:
-        #         super(self.__class__, self).save(*args, **kwargs)
-        #         return
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().photo
+            if old_image and self.photo and old_image.name == self.photo.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
             
         webp_image = convert_image_to_webp(self.photo)
         if webp_image:
