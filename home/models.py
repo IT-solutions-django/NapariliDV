@@ -74,7 +74,7 @@ class CooperationStage(models.Model):
     number = models.CharField('Порядковый номер', max_length=2, blank=True, null=True)
     name = models.CharField('Название', max_length=80, blank=True, null=True)
     description = models.TextField('Описание', blank=True, null=True)
-    image = models.ImageField('Картинка', null=True, blank=True)
+    image = models.ImageField('Картинка', null=True, blank=True, upload_to='home/cooperation_stages')
 
     class Meta: 
         verbose_name = 'Этап сотрудничества'

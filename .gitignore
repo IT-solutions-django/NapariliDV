@@ -165,6 +165,9 @@ media/projects/*
 media/articles/*
 media/blog/*
 media/contacts/*
+media/gallery/*
+media/home/*
+media/reviews/*
 
 celerybeat-schedule.bak
 celerybeat-schedule.dat
