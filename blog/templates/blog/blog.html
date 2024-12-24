@@ -4,7 +4,7 @@
 <a href="{% url 'home:home' %}">Главная</a>
 </div>
 <div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
 </div>
 <div>
 <a class=color__red href="{% url 'blog:blog' %}">Новости</a>
@@ -34,7 +34,7 @@
 {% for article in articles %}
 <div class=news__card>
 <div class=news__card-image>
-<img src="{{ article.image.url }}" alt="">
+<img src="{{ article.image.url }}" alt="Фото статьи">
 </div>
 <div class=news__card-text-container>
 <div class=best-projects__card-heading>

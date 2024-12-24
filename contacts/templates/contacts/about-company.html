@@ -4,7 +4,7 @@
 <a href="{% url 'home:home' %}">Главная</a>
 </div>
 <div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="">
+<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
 </div>
 <div>
 <a class=color__red href="{% url 'contacts:about_company' %}">О компании</a>
@@ -21,7 +21,7 @@
 <div class="article__paragraph-heading about-company-page__heading-with-icon">
 <div>
 <div>
-<img src="{% static 'images/company-history.svg' %}" alt="">
+<img src="{% static 'images/company-history.svg' %}" alt="Иконка">
 </div>
 <div>
 История компании
@@ -38,7 +38,7 @@
 <div class="article__paragraph-heading about-company-page__heading-with-icon">
 <div>
 <div>
-<img src="{% static 'images/company-mission.svg' %}" alt="">
+<img src="{% static 'images/company-mission.svg' %}" alt="Иконка">
 </div>
 <div>
 Миссия компании
@@ -80,7 +80,7 @@
 <div class=about-company__photos>
 <div class=about-company-page__small-left-column>
 <div>
-<img src="{% static 'images/about-company-page1.webp' %}" alt="">
+<img src="{% static 'images/about-company-page1.webp' %}" alt="Фото проекта">
 </div>
 <div>
 <p class=font__inter>Современные технологии достигли такого уровня, что начало повседневной работы по формированию позиции однозначно определяет каждого участника как способного принимать собственные решения касаемо поставленных обществом задач</p>
@@ -88,7 +88,7 @@
 </div>
 <div class=about-company-page__big-right-column>
 <div>
-<img src="{% static 'images/about-company-page2.webp' %}" alt="">
+<img src="{% static 'images/about-company-page2.webp' %}" alt="Фото проекта">
 </div>
 </div>
 </div>
@@ -105,7 +105,7 @@
 {% for worker in workers %}
 <div class=team__card>
 <div>
-<img src="{{ worker.photo.url }}" alt="">
+<img src="{{ worker.photo.url }}" alt="Фото сотрудника">
 </div>
 <div class=team-card__name>
 <p>{{ worker.first_name }} {{ worker.last_name }}</p>
@@ -124,7 +124,7 @@
 <div class=partners__slider>
 {% for partner in partners %}
 <div class=partners__card>
-<img src="{{ partner.image.url }}" alt="">
+<img src="{{ partner.image.url }}" alt="Иконка компании-партнера">
 </div>
 {% endfor %}
 </div>
@@ -135,7 +135,7 @@
 <div class=certificates__slider>
 {% for certificate in certificates %}
 <div class=certificate__card>
-<img src="{{ certificate.photo.url }}" alt="">
+<img src="{{ certificate.photo.url }}" alt="Фото сертификата">
 </div>
 {% endfor %}
 </div>
