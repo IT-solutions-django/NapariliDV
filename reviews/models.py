@@ -8,6 +8,7 @@ class Platform(models.Model):
     icon = models.FileField('Иконка', upload_to='reviews/platforms', null=True)
     average_rating = models.FloatField('Средний рейтинг компании на платформе', default=4.9)
     reviews_count = models.IntegerField('Количество отзывов', default=0)
+    url = models.URLField('Ссылка на профиль компании')
 
     def __str__(self) -> str: 
         return self.name
@@ -41,3 +42,18 @@ class Review(models.Model):
 class ReviewPhoto(models.Model): 
     url = models.URLField('Фото отзыва')
     review = models.ForeignKey(verbose_name='Отзыв', to=Review, on_delete=models.CASCADE, related_name='photos')
+
+
+class VideoReview(models.Model): 
+    url = models.URLField('Ссылка на видео')
+    title = models.CharField('Название', max_length=200) 
+    preview_url = models.URLField('Ссылка на превью')
+    created_at = models.DateTimeField('Дата и время публикации')
+
+    def __str__(self) -> str: 
+        return f'Видеоотзыв { self.title[:20] }'
+    
+    class Meta: 
+        verbose_name = 'Видео отзыв'
+        verbose_name_plural = 'Видео отзывы'
+        ordering = ['-created_at']
