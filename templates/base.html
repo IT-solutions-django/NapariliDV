@@ -42,9 +42,9 @@
         </div>
         <div class="modal-feedback__form-section">
             <div class="modal-feedback__header">
-                <h5>Заполните обратную форму</h5>
+                <h5>Хотите построить дом мечты?</h5>
                 <hr>
-                <p>И наш менеджер свяжется с Вами<br> в ближайшее время!</p>
+                <p>Оставьте заявку и наш менеджер свяжется<br>с вами для уточнения всех деталей</p>
             </div>
             <form id="modalFeedbackForm" class="modal-feedback__form">
                 {% csrf_token %}
@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <label for="consent" class="modal-feedback__checkbox-label">
-                                Даю своё согласие на обработку моих
+                                Даю своё согласие на обработку моих<br>
                                 <a id="userAgreementLink" target="_blank"
                                     href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
                             </label>

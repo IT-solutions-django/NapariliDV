@@ -995,7 +995,11 @@ input[type=radio] {
 }
 
 .advantages__textblock {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    width: calc((100% - 2 * 20px) / 3);
+}
+.advantages__details-small-right-column .advantages__textblock {
+    width: 100%;
 }
 
 .advantages__choose-house {
@@ -3755,6 +3759,7 @@ footer hr,
     .advantages__textblock {
         font-size: 14px;
         margin-bottom: 15px;
+        width: 100%;
     }
 
     .best-projects,
