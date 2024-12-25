@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+from loguru import logger
 
 load_dotenv()
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'projects',
     'contacts',
     'blog',
+    'amocrm',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +164,13 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json' 
 CELERY_RESULT_serializer = 'json' 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+
+# Loguru 
+logger.add("logs/logs.log", 
+           format='{time} {level} {message}', 
+           rotation="10 MB", 
+           retention="7 days",
+           compression="zip", 
+           level="DEBUG", 
+           enqueue=True)
