@@ -1,107 +1,315 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Галерея - Напарили ДВ{% endblock %} {% block content %}
 <div id=mobileGalleryOverlay>
-<div id=mobileGalleryProject>
-<div class=mobile-catalog__close-button id=closeMobileProject>
-<button>
-<img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
-</button>
-</div>
-<div class="mobile-gallery__heading mobile-container">
-<h4>Каркасный дом БАРН</h4>
-<hr>
-</div>
-<div class=mobile-container>
-<div class="article__paragraph-text font__inter">
-<p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций</p>
-<p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
-</div>
-</div>
-<div>
-<div class=best-projects__card-content>
-<ul class=table-of-contents>
-<li><span>Этажи</span><span>1</span></li>
-<li><span>Площадь</span><span>204,0 м2</span></li>
-<li><span>Количество спален</span><span>3</span></li>
-<li><span>Количество санузлов</span><span>2</span></li>
-<li><span>Материал</span><span>Каркас</span></li>
-<li><span>Кровля</span><span>Металлочерепица</span></li>
-<li><span>Стоимость</span><span>от 5 300 000 р</span></li>
-</ul>
-</div>
-</div>
-<div>
-<div class=gallery>
-<div class=gallery__slider>
-{% for project in gallery_photos %}
-<div class=gallery__photo>
-<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
-</div>
-{% endfor %}
-</div>
-</div>
-</div>
-</div>
+    <div id=mobileGalleryProject>
+        <div class=mobile-catalog__close-button id=closeMobileProject>
+            <button>
+                <img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
+            </button>
+        </div>
+        <div class="mobile-gallery__heading mobile-container">
+            <h4>Каркасный дом БАРН</h4>
+            <hr>
+        </div>
+        <div class=mobile-container>
+            <div class="article__paragraph-text font__inter">
+                <p>Однозначно, сторонники тоталитаризма в науке заблокированы в рамках своих собственных рациональных
+                    ограничений. Кстати, акционеры крупнейших компаний призывают нас к новым свершениям, которые, в свою
+                    очередь, должны быть объявлены нарушающими общечеловеческие нормы этики и морали! Предварительные
+                    выводы неутешительны: глубокий уровень погружения однозначно фиксирует необходимость позиций</p>
+                <p>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь
+                    заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В,
+                    утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил
+                    «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пиро</p>
+            </div>
+        </div>
+        <div>
+            <div class=best-projects__card-content>
+                <ul class=table-of-contents>
+                    <li><span>Этажи</span><span>1</span></li>
+                    <li><span>Площадь</span><span>204,0 м2</span></li>
+                    <li><span>Количество спален</span><span>3</span></li>
+                    <li><span>Количество санузлов</span><span>2</span></li>
+                    <li><span>Материал</span><span>Каркас</span></li>
+                    <li><span>Кровля</span><span>Металлочерепица</span></li>
+                    <li><span>Стоимость</span><span>от 5 300 000 р</span></li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class=gallery>
+                <div class=gallery__slider>
+                    {% for project in gallery_photos %}
+                    <div class=gallery__photo>
+                        <img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="breadcrumbs container font__inter">
-<div>
-<a href="{% url 'home:home' %}">Главная</a>
-</div>
-<div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
-</div>
-<div>
-<a class=color__red href="{% url 'contacts:gallery' %}">Галерея</a>
-</div>
+    <div>
+        <a href="{% url 'home:home' %}">Главная</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
+    </div>
+    <div>
+        <a class=color__red href="{% url 'contacts:gallery' %}">Галерея</a>
+    </div>
 </div>
 <div class=gallery-page>
-<div class="news-page__header container">
-<div class=news__heading>
-<h1>Галерея</h1>
-</div>
-<hr class=news-page__header-hr--adaptive>
-<div class=news__header-right-buttons>
-<form id=galleryForm action="{% url 'blog:blog' %}">
-{% for category in filter_form.category %}
-<div class=news__header-button>
-{{ choice.tag }}
-<input type=radio name="{{ category.data.name }}" value="{{ category.data.value }}" class=radio-toggle id="{{ category.id_for_label }}" {% if category.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ category.id_for_label }}">{{ category.choice_label }}</label>
-</div>
-{% endfor %}
-</form>
-</div>
-</div>
-<hr class="news-page__header-hr container">
-<div class="gallery-page__text-slider container">
-{% for project in gallery_photos %}
-<div class=article__content>
-<div class=article__content-block>
-<div class=article__paragraph>
-<div class=article__paragraph-heading>
-{{ project.name }}
-</div>
-<div class="article__paragraph-text font__inter">
-{{ project.description|linebreaks }}
-</div>
-</div>
-</div>
-</div>
-{% endfor %}
-</div>
-<div class=gallery-page__slider>
-{% for project in gallery_photos %}
-<div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
-<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
-<div class=gallery-page__slide-label>
-<p>{{ project.name }}</p>
-</div>
-</div>
-{% endfor %}
-</div>
+    <div class="news-page__header container">
+        <div class=news__heading>
+            <h1>
+                {{ heading }}
+            </h1>
+        </div>
+        <hr class=news-page__header-hr--adaptive>
+        <div class=news__header-right-buttons>
+            <form id=galleryForm action="{% url 'blog:blog' %}">
+                {% for category in filter_form.category %}
+                <div class=news__header-button>
+                    {{ choice.tag }}
+                    <input type=radio name="{{ category.data.name }}" value="{{ category.data.value }}"
+                        class=radio-toggle id="{{ category.id_for_label }}" {% if category.data.selected %}checked
+                        data-was-checked=true {% endif %}>
+                    <label for="{{ category.id_for_label }}">{{ category.choice_label }}</label>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+    <hr class="news-page__header-hr container">
+    <div class="gallery-page__text-slider container">
+        {% for project in gallery_photos %}
+        <div class=article__content>
+            <div class=article__content-block>
+                <div class=article__paragraph>
+                    <div class=article__paragraph-heading>
+                        {{ project.name }}
+                    </div>
+                    <div class="article__paragraph-text font__inter">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class=gallery-page__slider>
+        {% for project in gallery_photos %}
+        <div class="gallery-page__photo openMobileProject" data-project-id="{{ project.id }}">
+            <img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
+            <div class=gallery-page__slide-label>
+                <p>{{ project.name }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 <div class=about>
-{% include 'contacts/includes/contacts_block.html' %}
+    {% include 'contacts/includes/contacts_block.html' %}
 </div>
-{% endblock %} {% block script %}
-<script>function initGallerySlider(){const e=$(".gallery-page__slider"),t=$(".gallery-page__text-slider");e.slick({centerMode:!0,arrows:!0,infinite:!0,slidesToShow:1.7,slidesToScroll:1,asNavFor:".gallery-page__text-slider",responsive:[,{breakpoint:1600,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:1024,settings:{slidesToShow:1,slidesToScroll:1}}]}),t.slick({slidesToShow:1,slidesToScroll:1,arrows:!1,fade:!0,asNavFor:".gallery-page__slider",adaptiveHeight:!0})}function initMobileSlider(e){const t=$(e);t.length?t.slick({centerMode:!0,arrows:!0,infinite:!0,slidesToShow:3,slidesToScroll:1,responsive:[{breakpoint:1200,settings:{slidesToShow:2,slidesToScroll:1}},{breakpoint:1024,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:768,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]}):console.warn(`Элемента ${e} не существует!`)}function initMobileProject(){const e=document.querySelectorAll(".openMobileProject"),t=document.getElementById("mobileGalleryProject"),l=document.getElementById("mobileGalleryOverlay"),o=document.getElementById("closeMobileProject");function i(){if(window.innerWidth>990)return;t.style.display="flex",l.style.display="flex",document.body.classList.add("scroll-disabled");const e=event.target.closest(".openMobileProject").dataset.projectId;console.log(e),$.ajax({url:`${window.origin}/contacts/api/gallery-details/${e}/`,method:"GET",dataType:"json",success:function(e){t.innerHTML=e.html,initMobileSlider(".gallery__slider"),document.querySelectorAll(".openModal").forEach((e=>{e.addEventListener("click",(()=>{modal.style.display="flex"}))})),document.querySelectorAll(".animated").forEach((function(e){e.addEventListener("mousedown",(function(){this.classList.add("clicked"),setTimeout((()=>{this.classList.remove("clicked")}),300)})),e.addEventListener("mouseup",(function(){})),e.addEventListener("blur",(function(){this.classList.remove("clicked")}))}));const l=document.getElementById("closeMobileProject");l&&l.addEventListener("click",n)},error:function(e,t,l){console.error("Ошибка загрузки данных:",l)}}),$(document).ready((function(){initMobileSlider(".gallery__slider")}))}function n(){t.style.display="none",l.style.display="none",document.body.classList.remove("scroll-disabled")}e.forEach((function(e){e.addEventListener("click",i)})),o&&o.addEventListener("click",n)}var myMap;$(document).ready((function(){initGallerySlider()})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var e=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(e),myMap.behaviors.disable("scrollZoom");var t=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[50,50],iconImageOffset:[-15,-42]});myMap.geoObjects.add(t)})),$(document).ready((function(){$("#galleryForm input").on("change input",(function(e){let t=$("#galleryForm").serialize();$(".gallery-page__slider"),$(".gallery-page__text-slider"),setTimeout((function(){$.ajax({url:"{% url 'contacts:gallery_filters' %}",type:"GET",data:t,success:function(e){$(".gallery-page__slider").replaceWith(e.gallery_html),$(".gallery-page__text-slider").replaceWith(e.gallery_text),$(document).ready((function(){initGallerySlider(),initMobileProject()}))},error:function(e,t,l){console.error("Ошибка при фильтрации:",l)}})}),200)}))})),document.addEventListener("DOMContentLoaded",(function(){const e=document.querySelectorAll(".radio-toggle");e.forEach((function(t){t.addEventListener("click",(function(){"true"===this.dataset.wasChecked?(this.checked=!1,this.dataset.wasChecked="false"):this.dataset.wasChecked="true",e.forEach((function(e){e!==t&&e.name==t.name&&(e.dataset.wasChecked="false")}));let l=$("#galleryForm").serialize();$(".gallery-page__slider"),setTimeout((function(){$.ajax({url:"{% url 'contacts:gallery_filters' %}",type:"GET",data:l,success:function(e){$(".gallery-page__slider").replaceWith(e.gallery_html),$(".gallery-page__text-slider").replaceWith(e.gallery_text),$(document).ready((function(){initGallerySlider(),initMobileProject()}))},error:function(e,t,l){console.error("Ошибка при фильтрации:",l)}})}),200)}))}))})),document.addEventListener("DOMContentLoaded",(function(){initMobileProject()}))</script>
+{% endblock %} 
+{% block script %}
+<script> 
+
+function initGallerySlider() {
+    const e = $(".gallery-page__slider"),
+        t = $(".gallery-page__text-slider");
+    e.slick({
+        centerMode: !0,
+        arrows: !0,
+        infinite: !0,
+        slidesToShow: 1.7,
+        slidesToScroll: 1,
+        asNavFor: ".gallery-page__text-slider",
+        responsive: [, {
+            breakpoint: 1600,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }, {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }]
+    }), t.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: !1,
+        fade: !0,
+        asNavFor: ".gallery-page__slider",
+        adaptiveHeight: !0
+    })
+}
+
+function initMobileSlider(e) {
+    const t = $(e);
+    t.length ? t.slick({
+        centerMode: !0,
+        arrows: !0,
+        infinite: !0,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [{
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        }, {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }, {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }, {
+            breakpoint: 576,
+            settings: {
+                centerMode: !0,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }]
+    }) : console.warn(`Элемента ${e} не существует!`)
+}
+
+function initMobileProject() {
+    const e = document.querySelectorAll(".openMobileProject"),
+        t = document.getElementById("mobileGalleryProject"),
+        l = document.getElementById("mobileGalleryOverlay"),
+        o = document.getElementById("closeMobileProject");
+
+    function i() {
+        if (window.innerWidth > 990) return;
+        t.style.display = "flex", l.style.display = "flex", document.body.classList.add("scroll-disabled");
+        const e = event.target.closest(".openMobileProject").dataset.projectId;
+        console.log(e), $.ajax({
+            url: `${window.origin}/contacts/api/gallery-details/${e}/`,
+            method: "GET",
+            dataType: "json",
+            success: function(e) {
+                t.innerHTML = e.html, initMobileSlider(".gallery__slider"), document.querySelectorAll(".openModal").forEach((e => {
+                    e.addEventListener("click", (() => {
+                        modal.style.display = "flex"
+                    }))
+                })), document.querySelectorAll(".animated").forEach((function(e) {
+                    e.addEventListener("mousedown", (function() {
+                        this.classList.add("clicked"), setTimeout((() => {
+                            this.classList.remove("clicked")
+                        }), 300)
+                    })), e.addEventListener("mouseup", (function() {})), e.addEventListener("blur", (function() {
+                        this.classList.remove("clicked")
+                    }))
+                }));
+                const l = document.getElementById("closeMobileProject");
+                l && l.addEventListener("click", n)
+            },
+            error: function(e, t, l) {
+                console.error("Ошибка загрузки данных:", l)
+            }
+        }), $(document).ready((function() {
+            initMobileSlider(".gallery__slider")
+        }))
+    }
+
+    function n() {
+        t.style.display = "none", l.style.display = "none", document.body.classList.remove("scroll-disabled")
+    }
+    e.forEach((function(e) {
+        e.addEventListener("click", i)
+    })), o && o.addEventListener("click", n)
+}
+var myMap;
+$(document).ready((function() {
+    initGallerySlider()
+})), ymaps.ready((function() {
+    myMap = new ymaps.Map("map", {
+        center: [43.157062, 131.926061],
+        zoom: 16,
+        controls: []
+    });
+    var e = new ymaps.control.ZoomControl({
+        options: {
+            position: {
+                right: 10,
+                top: 50
+            },
+            size: "small"
+        }
+    });
+    myMap.controls.add(e), myMap.behaviors.disable("scrollZoom");
+    var t = new ymaps.Placemark([43.157062, 131.926061], {
+        hintContent: "Волгоградская улица, 7А",
+        balloonContent: "Волгоградская улица, 7А"
+    }, {
+        iconLayout: "default#image",
+        iconImageHref: "/static/images/pin.svg",
+        iconImageSize: [50, 50],
+        iconImageOffset: [-15, -42]
+    });
+    myMap.geoObjects.add(t)
+})), $(document).ready((function() {
+    $("#galleryForm input").on("change input", (function(e) {
+        let t = $("#galleryForm").serialize();
+        $(".gallery-page__slider"), $(".gallery-page__text-slider"), setTimeout((function() {
+            $.ajax({
+                url: "{% url 'contacts:gallery_filters' %}",
+                type: "GET",
+                data: t,
+                success: function(e) {
+                    $(".gallery-page__slider").replaceWith(e.gallery_html), $(".gallery-page__text-slider").replaceWith(e.gallery_text);
+                    $("h1").text(e.page_heading);
+                    $(document).ready((function() {
+                        initGallerySlider(), initMobileProject()
+                    }))
+                },
+                error: function(e, t, l) {
+                    console.error("Ошибка при фильтрации:", l)
+                }
+            })
+        }), 200)
+    }))
+})), document.addEventListener("DOMContentLoaded", (function() {
+    const e = document.querySelectorAll(".radio-toggle");
+    e.forEach((function(t) {
+        t.addEventListener("click", (function() {
+            "true" === this.dataset.wasChecked ? (this.checked = !1, this.dataset.wasChecked = "false") : this.dataset.wasChecked = "true", e.forEach((function(e) {
+                e !== t && e.name == t.name && (e.dataset.wasChecked = "false")
+            }));
+            let l = $("#galleryForm").serialize();
+            $(".gallery-page__slider"), setTimeout((function() {
+                $.ajax({
+                    url: "{% url 'contacts:gallery_filters' %}",
+                    type: "GET",
+                    data: l,
+                    success: function(e) {
+                        $(".gallery-page__slider").replaceWith(e.gallery_html), $(".gallery-page__text-slider").replaceWith(e.gallery_text);
+                        $("h1").text(e.page_heading);
+                        $(document).ready((function() {
+                            initGallerySlider(), initMobileProject()
+                        }))
+                    },
+                    error: function(e, t, l) {
+                        console.error("Ошибка при фильтрации:", l)
+                    }
+                })
+            }), 200)
+        }))
+    }))
+})), document.addEventListener("DOMContentLoaded", (function() {
+    initMobileProject()
+})) </script>
 {% endblock %}

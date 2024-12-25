@@ -1,597 +1,611 @@
-{% extends 'base.html' %} {% load static %} {% load price_filters %} {% load float_dot_filters %} {% block title %}Напарили ДВ{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load price_filters %} {% load float_dot_filters %} 
+
+{% block title %}Напарили ДВ{% endblock %} 
+
+{% block content %}
 <div id=mobileCatalogFilterOverlay>
-<div id=mobileCatalogFilter>
-<div class=mobile-catalog__close-button id=closeMobileFilter>
-<button>
-<img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
-</button>
-</div>
-<div class=mobile-catalog__heading>
-<h4>Выбрать дом по параметрам</h4>
-<hr>
-</div>
-<form id=mobileFiltersForm action=/#bestProjects>
-<div>
-<div class=catalog__filters-parameters>
-<div>
-<div class=catalog__filters-label>
-<p>{{ filter_form.materials.label }}</p>
-</div>
-<div class=catalog__select-filter>
-{{ filter_form.materials }}
-</div>
-</div>
-<div>
-<div class=catalog__filters-label>
-<p>Выберите стоимость</p>
-</div>
-<div class=catalog__range-filter>
-<div class=catalog__filters-number-price>
-<label for=min-price>От</label>
-{{ filter_form.price_min }}
-</div>
-<div class=catalog__filters-number-price>
-<label for=max-price>До</label>
-{{ filter_form.price_max }}
-</div>
-</div>
-</div>
-</div>
-<hr>
-<div class=catalog__filters-living-info>
-<div class=catalog__filters-radio-block>
-<div class=catalog__filters-label>
-<p>Этажей</p>
-</div>
-<div class=catalog__radio-group>
-{% for floor in filter_form.floors_quantity %}
-<div class=catalog__radio-button>
-<input type=radio name="{{ floor.data.name }}" value="{{ floor.data.value }}" class=radio-toggle id="{{ floor.id_for_label }}" {% if floor.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
-</div>
-{% endfor %}
-</div>
-</div>
-<div class=catalog__filters-radio-block>
-<div class=catalog__filters-label>
-<p>Количество спален</p>
-</div>
-<div class=catalog__radio-group>
-{% for bedroom in filter_form.bedrooms_quantity %}
-<div class=catalog__radio-button>
-<input type=radio name="{{ bedroom.data.name }}" value="{{ bedroom.data.value }}" class=radio-toggle id="{{ bedroom.id_for_label }}" {% if bedroom.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
-</div>
-{% endfor %}
-</div>
-</div>
-</div>
-</div>
-<div>
-<div class=mobile-catalog__submit-button>
-<button>Применить</button>
-</div>
-</div>
-</form>
-</div>
+    <div id=mobileCatalogFilter>
+        <div class=mobile-catalog__close-button id=closeMobileFilter>
+            <button>
+                <img src="{% static 'images/mobile-filters-close.svg' %}" alt="Закрыть">
+            </button>
+        </div>
+        <div class=mobile-catalog__heading>
+            <h4>Выбрать дом по параметрам</h4>
+            <hr>
+        </div>
+        <form id=mobileFiltersForm action=/#bestProjects>
+            <div>
+                <div class=catalog__filters-parameters>
+                    <div>
+                        <div class=catalog__filters-label>
+                            <p>{{ filter_form.materials.label }}</p>
+                        </div>
+                        <div class=catalog__select-filter>
+                            {{ filter_form.materials }}
+                        </div>
+                    </div>
+                    <div>
+                        <div class=catalog__filters-label>
+                            <p>Выберите стоимость</p>
+                        </div>
+                        <div class=catalog__range-filter>
+                            <div class=catalog__filters-number-price>
+                                <label for=min-price>От</label>
+                                {{ filter_form.price_min }}
+                            </div>
+                            <div class=catalog__filters-number-price>
+                                <label for=max-price>До</label>
+                                {{ filter_form.price_max }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class=catalog__filters-living-info>
+                    <div class=catalog__filters-radio-block>
+                        <div class=catalog__filters-label>
+                            <p>Этажей</p>
+                        </div>
+                        <div class=catalog__radio-group>
+                            {% for floor in filter_form.floors_quantity %}
+                            <div class=catalog__radio-button>
+                                <input type=radio name="{{ floor.data.name }}" value="{{ floor.data.value }}"
+                                    class=radio-toggle id="{{ floor.id_for_label }}" {% if floor.data.selected %}checked
+                                    data-was-checked=true {% endif %}>
+                                <label for="{{ floor.id_for_label }}">{{ floor.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class=catalog__filters-radio-block>
+                        <div class=catalog__filters-label>
+                            <p>Количество спален</p>
+                        </div>
+                        <div class=catalog__radio-group>
+                            {% for bedroom in filter_form.bedrooms_quantity %}
+                            <div class=catalog__radio-button>
+                                <input type=radio name="{{ bedroom.data.name }}" value="{{ bedroom.data.value }}"
+                                    class=radio-toggle id="{{ bedroom.id_for_label }}" {% if bedroom.data.selected %}checked data-was-checked=true {% endif %}>
+                                <label for="{{ bedroom.id_for_label }}">{{ bedroom.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class=mobile-catalog__submit-button>
+                    <button>Применить</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <div class=slider>
-{% for slide in slides %}
-<div class=slider-item>
-<div class="slider-heading container">
-{% if forloop.first %}
-<h1>{{ slide.title }}</h1>
-{% else %}
-<h2>{{ slide.title }}</h2>
-{% endif %}
-<hr>
-<div class=slider-heading__promo>
-{{ slide.description|linebreaks }}
-<div class="slider-heading__want-the-house-button animated">
-<span class=circle></span>
-<button class=openModal>
-<img src="{% static 'images/want-the-house.webp' %}" alt="Хочу такой дом">
-</button>
-</div>
-</div>
-</div>
-<img class=slider-image src="{{ slide.photo.url }}" alt="{{ slide.title }}">
-<div class=slider-content>
-<div class=slider-content-inner>
-<ul class=table-of-contents>
-<li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
-<li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
-<li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
-<li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
-</ul>
-</div>
-</div>
-</div>
-{% endfor %}
+    {% for slide in slides %}
+    <div class=slider-item>
+        <div class="slider-heading container">
+            {% if forloop.first %}
+            <h1>{{ slide.title }}</h1>
+            {% else %}
+            <h2>{{ slide.title }}</h2>
+            {% endif %}
+            <hr>
+            <div class=slider-heading__promo>
+                {{ slide.description|linebreaks }}
+                <div class="slider-heading__want-the-house-button animated">
+                    <span class=circle></span>
+                    <button class=openModal>
+                        <img src="{% static 'images/want-the-house.webp' %}" alt="Хочу такой дом">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <img class=slider-image src="{{ slide.photo.url }}" alt="{{ slide.title }}">
+        <div class=slider-content>
+            <div class=slider-content-inner>
+                <ul class=table-of-contents>
+                    <li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
+                    <li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
+                    <li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
+                    <li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 <div class="advantages container">
-<div class=advantages__heading>
-<h3>Наши преимущества</h3>
-<hr>
-</div>
-<div class=advantages__stats>
-<div class=advantages__stats-column>
-<div class=advantages__stats-number>
-<p>10</p>
-</div>
-<div class=advantages__stats-label>
-Лет на рынке
-</div>
-</div>
-<div class=advantages__stats-column>
-<div class=advantages__stats-number>
-<p>315</p>
-</div>
-<div class=advantages__stats-label>
-Домов<br>построено
-</div>
-</div>
-<div class=advantages__stats-column>
-<div class=advantages__stats-number>
-<p>3600</p>
-</div>
-<div class=advantages__stats-label>
-Довольных<br> клиента
-</div>
-</div>
-</div>
-<div class=advantages__details>
-<div class=advantages__details-row>
-<div class=advantages__textblock>
-<div class=advantages__details-heading>
-<p>100% «под ключ»</p>
-</div>
-<div>
-<p class=font__inter>Не следует, однако, забывать, что внедрение современных методик говорит о возможностях системы обучения кадров, соответствующей насущным потребностям</p>
-</div>
-</div>
-<div class=advantages__textblock>
-<div class=advantages__details-heading>
-<p>100% «под ключ»</p>
-</div>
-<div>
-<p>Не следует, однако, забывать, что внедрение современных методик говорит о возможностях системы обучения кадров, соответствующей насущным потребностям</p>
-</div>
-</div>
-<div class=advantages__textblock>
-<div class=advantages__details-heading>
-<p>100% «под ключ»</p>
-</div>
-<div>
-<p>Не следует, однако, забывать, что внедрение современных методик говорит о возможностях системы обучения кадров, соответствующей насущным потребностям</p>
-</div>
-</div>
-</div>
-<div class="advantages__details-row advantages__details-row-with-images">
-<div class=advantages__details-big-left-column>
-<div>
-<img src=static/images/advantages1.webp alt="Фото проекта">
-</div>
-</div>
-<div class=advantages__details-small-right-column>
-<div class=advantages__textblock>
-<div class=advantages__details-heading>
-<p>100% «под ключ»</p>
-</div>
-<div>
-<p>Не следует, однако, забывать, что внедрение современных методик говорит о возможностях системы обучения кадров, соответствующей насущным потребностям</p>
-</div>
-</div>
-<div>
-<img src=static/images/advantages1.webp alt="Фото проекта">
-</div>
-<div class="advantages__choose-house animated">
-<button>
-<a target=_blank href="{% url 'projects:catalog' %}">
-<img src=static/images/choose-house-button.svg alt="Выбрать дом">
-</a>
-</button>
-</div>
-</div>
-</div>
-</div>
+    <div class=advantages__heading>
+        <h3>Наши преимущества</h3>
+        <hr>
+    </div>
+    <div class=advantages__stats>
+        <div class=advantages__stats-column>
+            <div class=advantages__stats-number>
+                <p>10</p>
+            </div>
+            <div class=advantages__stats-label>
+                Лет на рынке
+            </div>
+        </div>
+        <div class=advantages__stats-column>
+            <div class=advantages__stats-number>
+                <p>315</p>
+            </div>
+            <div class=advantages__stats-label>
+                Домов<br>построено
+            </div>
+        </div>
+        <div class=advantages__stats-column>
+            <div class=advantages__stats-number>
+                <p>3600</p>
+            </div>
+            <div class=advantages__stats-label>
+                Довольных<br> клиента
+            </div>
+        </div>
+    </div>
+    <div class=advantages__details>
+        <div class=advantages__details-row>
+            <div class=advantages__textblock>
+                <div class=advantages__details-heading>
+                    <p>Индивидуальные планировки</p>
+                </div>
+                <div>
+                    <p class=font__inter>С учетом ваших пожеланий и работы нашего дизайнера</p>
+                </div>
+            </div>
+            <div class=advantages__textblock>
+                <div class=advantages__details-heading>
+                    <p>Подробный договор и смета</p>
+                </div>
+                <div>
+                    <p>Стоимость материалов, работ и подробный план фиксируются в договоре</p>
+                </div>
+            </div>
+            <div class=advantages__textblock>
+                <div class=advantages__details-heading>
+                    <p>Строительство «под ключ»</p>
+                </div>
+                <div>
+                    <p>Поможем вам на всех этапах: от строительства до внутренней отделки</p>
+                </div>
+            </div>
+        </div>
+        <div class="advantages__details-row advantages__details-row-with-images">
+            <div class=advantages__details-big-left-column>
+                <div>
+                    <img src=static/images/advantages1.webp alt="Фото проекта">
+                </div>
+            </div>
+            <div class=advantages__details-small-right-column>
+                <div class=advantages__textblock>
+                    <div class=advantages__details-heading>
+                        <p>Контроль строительства</p>
+                    </div>
+                    <div>
+                        <p>Независимая проверка на каждом этапе строительства и приемка в конце работ
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <img src=static/images/advantages0.webp alt="Фото проекта">
+                </div>
+                <div class="advantages__choose-house animated">
+                    <button>
+                        <a target=_blank href="{% url 'projects:catalog' %}">
+                            <img src=static/images/choose-house-button.svg alt="Выбрать дом">
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="best-projects container">
-<div id=bestProjects class=best-projects__header>
-<div class=best-projects__heading>
-<h4>Топ 12 проектов</h4>
-</div>
-<div class=best-projects__to-catalog>
-<a target=_blank href="{% url 'projects:catalog' %}">В каталог</a>
-</div>
-</div>
-<div class=best-projects__filters-adaptive>
-<div>
-<p>Выбрать дом по параметрам</p>
-</div>
-<div>
-<button id=openMobileFilters>
-<img src="{% static 'images/filters-icon.svg' %}" alt="Фильтры">
-</button>
-</div>
-</div>
-<div class=best-projects__filters>
-<form id=bestProjectsForm action=/#bestProjects>
-<div class=best-projects__filters-form>
-<div>
-<div class=best-projects__radio-filter>
-<label for="" class=best-projects__filters-label>Количество спален</label>
-<div class=best-projects__radio-group>
-{% for bedroom in filter_form.bedrooms_quantity %}
-<div class=best-projects__radio-button>
-<input type=radio name="{{ bedroom.data.name }}" value="{{ bedroom.data.value }}" class=radio-toggle id="{{ bedroom.id_for_label }}_" {% if bedroom.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ bedroom.id_for_label }}_">{{ bedroom.choice_label }}</label>
-</div>
-{% endfor %}
-</div>
-</div>
-<div class=best-projects__radio-filter>
-<label for="" class=best-projects__filters-label>Этажей</label>
-<div class=best-projects__radio-group>
-{% for floor in filter_form.floors_quantity %}
-<div class=best-projects__radio-button>
-<input type=radio name="{{ floor.data.name }}" value="{{ floor.data.value }}" class=radio-toggle id="{{ floor.id_for_label }}_" {% if floor.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ floor.id_for_label }}_">{{ floor.choice_label }}</label>
-</div>
-{% endfor %}
-</div>
-</div>
-</div>
-<div>
-<div class=best-projects__select-filter>
-{{ filter_form.materials }}
-</div>
-<div class=best-projects__number-filter>
-<div class=best-projects__number>
-<label for=min-price>От</label>
-{{ filter_form.price_min }}
-</div>
-<div class=best-projects__number>
-<label for=max-price>До</label>
-{{ filter_form.price_max }}
-</div>
-</div>
-</div>
-</div>
-</form>
-</div>
-<div class=best-projects__cards>
-{% for project in best_projects %}
-<div class=best-projects__card>
-<div class=photo-slider>
-{% for photo in project.photos.all %}
-<div class="best-projects__card-image photo-slider-item">
-<img src="{{ photo.image.url }}" alt="Фото проекта">
-</div>
-{% endfor %}
-</div>
-<div class=best-projects__card-text-container>
-<div class=best-projects__card-heading>
-<a target=_blank href="{{ project.get_absolute_url }}">{{ project.name }}</a>
-</div>
-<hr>
-<div class=best-projects__card-content>
-<ul class=table-of-contents>
-<li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-<li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-<li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
-<li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
-</ul>
-</div>
-</div>
-<div class="best-projects__order-button openModal">
-<button>Заказать строительство</button>
-</div>
-<div class=best-projects__more-button>
-<a target=_blank href="{{ project.get_absolute_url }}">Узнать подробнее</a>
-</div>
-</div>
-{% empty %}
-<div class=catalog__not-found>
-<p>Ничего не найдено...</p>
-</div>
-{% endfor %}
-<div class=best-projects__to-catalog--adaptive>
-<a target=_blank href="{% url 'projects:catalog' %}">
-В каталог
-</a>
-</div>
-</div>
+    <div id=bestProjects class=best-projects__header>
+        <div class=best-projects__heading>
+            <h4>Топ 12 проектов</h4>
+        </div>
+        <div class=best-projects__to-catalog>
+            <a target=_blank href="{% url 'projects:catalog' %}">В каталог</a>
+        </div>
+    </div>
+    <div class=best-projects__filters-adaptive>
+        <div>
+            <p>Выбрать дом по параметрам</p>
+        </div>
+        <div>
+            <button id=openMobileFilters>
+                <img src="{% static 'images/filters-icon.svg' %}" alt="Фильтры">
+            </button>
+        </div>
+    </div>
+    <div class=best-projects__filters>
+        <form id=bestProjectsForm action=/#bestProjects>
+            <div class=best-projects__filters-form>
+                <div>
+                    <div class=best-projects__radio-filter>
+                        <label for="" class=best-projects__filters-label>Количество спален</label>
+                        <div class=best-projects__radio-group>
+                            {% for bedroom in filter_form.bedrooms_quantity %}
+                            <div class=best-projects__radio-button>
+                                <input type=radio name="{{ bedroom.data.name }}" value="{{ bedroom.data.value }}"
+                                    class=radio-toggle id="{{ bedroom.id_for_label }}_" {% if bedroom.data.selected %}checked data-was-checked=true {% endif %}>
+                                <label for="{{ bedroom.id_for_label }}_">{{ bedroom.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class=best-projects__radio-filter>
+                        <label for="" class=best-projects__filters-label>Этажей</label>
+                        <div class=best-projects__radio-group>
+                            {% for floor in filter_form.floors_quantity %}
+                            <div class=best-projects__radio-button>
+                                <input type=radio name="{{ floor.data.name }}" value="{{ floor.data.value }}"
+                                    class=radio-toggle id="{{ floor.id_for_label }}_" {% if floor.data.selected %}checked data-was-checked=true {% endif %}>
+                                <label for="{{ floor.id_for_label }}_">{{ floor.choice_label }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class=best-projects__select-filter>
+                        {{ filter_form.materials }}
+                    </div>
+                    <div class=best-projects__number-filter>
+                        <div class=best-projects__number>
+                            <label for=min-price>От</label>
+                            {{ filter_form.price_min }}
+                        </div>
+                        <div class=best-projects__number>
+                            <label for=max-price>До</label>
+                            {{ filter_form.price_max }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class=best-projects__cards>
+        {% for project in best_projects %}
+        <div class=best-projects__card>
+            <div class=photo-slider>
+                {% for photo in project.photos.all %}
+                <div class="best-projects__card-image photo-slider-item">
+                    <img src="{{ photo.image.url }}" alt="Фото проекта">
+                </div>
+                {% endfor %}
+            </div>
+            <div class=best-projects__card-text-container>
+                <div class=best-projects__card-heading>
+                    <a target=_blank href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                </div>
+                <hr>
+                <div class=best-projects__card-content>
+                    <ul class=table-of-contents>
+                        <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                        <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                        <li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
+                        <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="best-projects__order-button openModal">
+                <button>Заказать строительство</button>
+            </div>
+            <div class=best-projects__more-button>
+                <a target=_blank href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class=catalog__not-found>
+            <p>Ничего не найдено...</p>
+        </div>
+        {% endfor %}
+        <div class=best-projects__to-catalog--adaptive>
+            <a target=_blank href="{% url 'projects:catalog' %}">
+                В каталог
+            </a>
+        </div>
+    </div>
 </div>
 <div class=about>
-<div class="about-company container">
-<div class=about-company__big-left-column>
-<div class=about-company__heading>
-<h4>О компании</h4>
-<hr>
-</div>
-<div>
-<div class=about-company__row>
-<div class=about-company__photo>
-<img src=static/images/about-company.webp alt="Фото проекта">
-</div>
-<div class=about-company__textblock>
-<div>
-<div class=about-company__details-heading>
-<h5>{{ company_info.subheader|linebreaks }}</h5>
-</div>
-<div class=about-company__details-text>
-<p class=font__inter>{{ company_info.description|linebreaks }}</p>
-</div>
-</div>
-<div class=about-company__big-right-column--adaptive>
-<img src=static/images/about-company2.webp alt="Фото проекта">
-</div>
-<div class=about-company__more-detailed>
-<a href="{% url 'contacts:about_company' %}">Подробнее</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=about-company__big-right-column>
-<div>
-<img src=static/images/about-company2.webp alt="О компании">
-</div>
-</div>
-</div>
-<div class="work-stages container">
-<div class=work-stages__heading>
-<h4>Этапы работы</h4>
-<hr>
-</div>
-<div class=work-stages__cards>
-{% for stage in cooperation_stages %} {% if stage.image %}
-<div class=work-stages__image-card>
-<img src="{{ stage.image.url }}" alt="Этап сотрудничества">
-</div>
-{% else %}
-<div class=work-stages__info-card>
-<div class=work-stages__card-header>
-<div class=work-stages__card-number>
-{{ stage.number }}
-</div>
-<div>
-<p class=work-stages__card-heading>{{ stage.name }}</p>
-</div>
-</div>
-<p>{{ stage.description }}</p>
-</div>
-{% endif %} {% endfor %}
-</div>
-</div>
-<div class=team>
-<div class=container>
-<div class=team__heading>
-<h4>Наша команда</h4>
-<hr>
-</div>
-</div>
-<div class=team__cards>
-{% for worker in workers %}
-<div class=team__slider-item>
-<div>
-<img src="{{ worker.photo.url }}" alt="Фото сотрудника">
-</div>
-<div class=team__name>
-<p>{{ worker.first_name }} {{ worker.last_name }}</p>
-</div>
-<hr>
-<div class=team__role>
-<p>{{ worker.role }}</p>
-</div>
-</div>
-{% endfor %}
-</div>
-</div>
+    <div class="about-company container">
+        <div class=about-company__big-left-column>
+            <div class=about-company__heading>
+                <h4>О компании</h4>
+                <hr>
+            </div>
+            <div>
+                <div class=about-company__row>
+                    <div class=about-company__photo>
+                        <img src=static/images/about-company.webp alt="Фото проекта">
+                    </div>
+                    <div class=about-company__textblock>
+                        <div>
+                            <div class=about-company__details-heading>
+                                <h5>{{ company_info.subheader|linebreaks }}</h5>
+                            </div>
+                            <div class="about-company__details-text font__inter">
+                                <p class=font__inter>{{ company_info.description|linebreaks }}</p>
+                            </div>
+                        </div>
+                        <div class=about-company__big-right-column--adaptive>
+                            <img src=static/images/about-company2.webp alt="Фото проекта">
+                        </div>
+                        <div class=about-company__more-detailed>
+                            <a href="{% url 'contacts:about_company' %}">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=about-company__big-right-column>
+            <div>
+                <img src=static/images/about-company2.webp alt="О компании">
+            </div>
+        </div>
+    </div>
+    <div class="work-stages container">
+        <div class=work-stages__heading>
+            <h4>Этапы работы</h4>
+            <hr>
+        </div>
+        <div class=work-stages__cards>
+            {% for stage in cooperation_stages %} {% if stage.image %}
+            <div class=work-stages__image-card>
+                <img src="{{ stage.image.url }}" alt="Этап сотрудничества">
+            </div>
+            {% else %}
+            <div class=work-stages__info-card>
+                <div class=work-stages__card-header>
+                    <div class=work-stages__card-number>
+                        {{ stage.number }}
+                    </div>
+                    <div>
+                        <p class=work-stages__card-heading>{{ stage.name }}</p>
+                    </div>
+                </div>
+                <p>{{ stage.description }}</p>
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+    <div class=team>
+        <div class=container>
+            <div class=team__heading>
+                <h4>Наша команда</h4>
+                <hr>
+            </div>
+        </div>
+        <div class=team__cards>
+            {% for worker in workers %}
+            <div class=team__slider-item>
+                <div>
+                    <img src="{{ worker.photo.url }}" alt="Фото сотрудника">
+                </div>
+                <div class=team__name>
+                    <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+                </div>
+                <hr>
+                <div class=team__role>
+                    <p>{{ worker.role }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <div class=feedback>
-<div class=feedback__background>
-<div class="feedback__row container">
-<div class=feedback__column>
-<div class=feedback__form>
-<div class=feedback__heading>
-<p>Остались вопросы?</p>
-</div>
-<form action="" id=feedbackForm>
-{% csrf_token %}
-<div class="feedback__input feedback__name-input">
-{{ feedback_form.name }}
-</div>
-<div class=feedback__input>
-{{ feedback_form.phone }}
-</div>
-<div class=feedback__agreement>
-<div class=feedback__checkbox-wrap>
-<input type=checkbox id=consent name=consent required>
-</div>
-<div>
-<label for=consent class=feedback__checkbox-label>
-Даю своё согласие на обработку моих
-<a id=userAgreementLink target=_blank href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
-</label>
-</div>
-</div>
-<div class="feedback__button animated">
-<button>
-<img src=static/images/send.svg alt="Отправить">
-</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
+    <div class=feedback__background>
+        <div class="feedback__row container">
+            <div class=feedback__column>
+                <div class=feedback__form>
+                    <div class=feedback__heading>
+                        <p>Остались вопросы?</p>
+                    </div>
+                    <form action="" id=feedbackForm>
+                        {% csrf_token %}
+                        <div class="feedback__input feedback__name-input">
+                            {{ feedback_form.name }}
+                        </div>
+                        <div class=feedback__input>
+                            {{ feedback_form.phone }}
+                        </div>
+                        <div class=feedback__agreement>
+                            <div class=feedback__checkbox-wrap>
+                                <input type=checkbox id=consent name=consent required>
+                            </div>
+                            <div>
+                                <label for=consent class=feedback__checkbox-label>
+                                    Даю своё согласие на обработку моих
+                                    <a id=userAgreementLink target=_blank
+                                        href="{% url 'contacts:privacy_policy' %}">персональных данных</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="feedback__button animated">
+                            <button>
+                                <img src=static/images/send.svg alt="Отправить">
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="reviews container">
-<div class=reviews__heading>
-<h4>Отзывы наших клиентов</h4>
-<hr>
-</div>
-<div class=reviews__slider>
-{% for review in reviews %}
-<div class=reviews__card style=display:flex;flex-direction:column;justify-content:space-between>
-<div>
-<div class=reviews__card-header>
-<div>
-<img src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}" alt="Аватар">
-</div>
-<div class=reviews__card-author-name>
-<p>{{ review.author }}</p>
-</div>
-</div>
-<div class="reviews__card-text font__inter">
-{{ review.content }}
-</div>
-<div>
-<i class=reviews__card-date>{{ review.created_at|date:"d.m.Y" }}</i>
-</div>
-</div>
-{% if review.photos.all %}
-<div class=reviews__card-images>
-{% for photo in review.photos.all %}
-<div class=reviews__card-image>
-<img src="{{ photo.url }}" alt="Фото отзыва">
-</div>
-{% endfor %}
-</div>
-{% endif %}
-<div>
-<div class=reviews__card-details>
-<div class=reviews__card-stars>
-<img src="static/images/five-stars — копия.svg" alt="Звезды">
-</div>
-<div class=reviews__platform>
-<div>
-<img src="{{ review.platform.icon.url }}" alt="Иконка платформы">
-</div>
-<div class="reviews__platform-stats font__inter">
-<p>{{ review.platform.average_rating|float_dot_format }} ({{ review.platform.reviews_count }})</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-{% endfor %}
-</div>
+    <div class=reviews__heading>
+        <h4>Отзывы наших клиентов</h4>
+        <hr>
+    </div>
+    <div class=reviews__slider>
+        {% for review in reviews %}
+        <div class=reviews__card style=display:flex;flex-direction:column;justify-content:space-between>
+            <div>
+                <div class=reviews__card-header>
+                    <div>
+                        <img src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}"
+                            alt="Аватар">
+                    </div>
+                    <div class=reviews__card-author-name>
+                        <p>{{ review.author }}</p>
+                    </div>
+                </div>
+                <div class="reviews__card-text font__inter">
+                    {{ review.content }}
+                </div>
+                <div>
+                    <i class=reviews__card-date>{{ review.created_at|date:"d.m.Y" }}</i>
+                </div>
+            </div>
+            {% if review.photos.all %}
+            <div class=reviews__card-images>
+                {% for photo in review.photos.all %}
+                <div class=reviews__card-image>
+                    <img src="{{ photo.url }}" alt="Фото отзыва">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div>
+                <div class=reviews__card-details>
+                    <div class=reviews__card-stars>
+                        <img src="static/images/five-stars — копия.svg" alt="Звезды">
+                    </div>
+                    <div class=reviews__platform>
+                        <div>
+                            <img src="{{ review.platform.icon.url }}" alt="Иконка платформы">
+                        </div>
+                        <div class="reviews__platform-stats font__inter">
+                            <p>{{ review.platform.average_rating|float_dot_format }} ({{ review.platform.reviews_count }})</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 <div class=gallery>
-<div class=container>
-<div class=gallery__heading>
-<h4>Фотогалерея</h4>
-</div>
-</div>
-<div class=gallery__slider>
-{% for project in gallery_photos %}
-<div class=gallery__photo>
-<img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
-</div>
-{% endfor %}
-</div>
+    <div class=container>
+        <div class=gallery__heading>
+            <h4>Фотогалерея</h4>
+        </div>
+    </div>
+    <div class=gallery__slider>
+        {% for project in gallery_photos %}
+        <div class=gallery__photo>
+            <img src="{{ project.gallery_photo.url }}" alt="Фото проекта">
+        </div>
+        {% endfor %}
+    </div>
 </div>
 <div class="news container">
-<div class=news__header>
-<div class=news__header-left>
-<div class=news__heading>
-<h4>Наши новости</h4>
-</div>
-</div>
-<div class=news__header-right>
-<div class=news__header-right-buttons>
-<form id=blogForm action="{% url 'blog:blog' %}">
-{% for article_type in articles_form.article_type %}
-<div class=news__header-button>
-{{ choice.tag }}
-<input type=radio name="{{ article_type.data.name }}" value="{{ article_type.data.value }}" class=radio-toggle id="{{ article_type.id_for_label }}" {% if article_type.data.selected %}checked data-was-checked=true {% endif %}>
-<label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
-</div>
-{% endfor %}
-<button type=submit style=display:none></button>
-</form>
-</div>
-<div class=news__header-more>
-<a href="{% url 'blog:blog' %}">Смотреть всё</a>
-</div>
-</div>
-</div>
-<div class=news__list>
-<hr>
-{% for article in articles %}
-<div>
-<div class=news__content>
-<div class=news__small-left-column>
-<div class=news__photo>
-<img src="{{ article.image.url }}" alt="Фото">
-</div>
-</div>
-<div class=news__big-right-column>
-<div class=news__new-heading>
-<a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-</div>
-<div class="news__new-text font__inter">
-{{ article.paragraphs.all.0.content|truncatechars_html:100 }}
-</div>
-<div class=news__info>
-<div class=news__date>
-<i>{{ article.created_at|date:"d.m.Y" }}</i>
-</div>
-<div class=news__read-button-adaptive>
-<a href="{{ article.get_absolute_url }}">Читать далее</a>
-</div>
-</div>
-</div>
-<div class="news__read-button animated">
-<a href="{{ article.get_absolute_url }}">
-<button>
-<img src="{% static 'images/read-news.svg' %}" alt="Читать">
-</button>
-</a>
-</div>
-</div>
-</div>
-{% if not forloop.last %}
-<hr>
-{% endif %} {% endfor %}
-</div>
-<div class=news__read-all--adaptive>
-<a href="{% url 'blog:blog' %}">Смотреть всё</a>
-</div>
+    <div class=news__header>
+        <div class=news__header-left>
+            <div class=news__heading>
+                <h4>Наши новости</h4>
+            </div>
+        </div>
+        <div class=news__header-right>
+            <div class=news__header-right-buttons>
+                <form id=blogForm action="{% url 'blog:blog' %}">
+                    {% for article_type in articles_form.article_type %}
+                    <div class=news__header-button>
+                        {{ choice.tag }}
+                        <input type=radio name="{{ article_type.data.name }}" value="{{ article_type.data.value }}"
+                            class=radio-toggle id="{{ article_type.id_for_label }}" {% if article_type.data.selected  %}checked data-was-checked=true {% endif %}>
+                        <label for="{{ article_type.id_for_label }}">{{ article_type.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                    <button type=submit style=display:none></button>
+                </form>
+            </div>
+            <div class=news__header-more>
+                <a href="{% url 'blog:blog' %}">Смотреть всё</a>
+            </div>
+        </div>
+    </div>
+    <div class=news__list>
+        <hr>
+        {% for article in articles %}
+        <div>
+            <div class=news__content>
+                <div class=news__small-left-column>
+                    <div class=news__photo>
+                        <img src="{{ article.image.url }}" alt="Фото">
+                    </div>
+                </div>
+                <div class=news__big-right-column>
+                    <div class=news__new-heading>
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </div>
+                    <div class="news__new-text font__inter">
+                        {{ article.paragraphs.all.0.content|truncatechars_html:100 }}
+                    </div>
+                    <div class=news__info>
+                        <div class=news__date>
+                            <i>{{ article.created_at|date:"d.m.Y" }}</i>
+                        </div>
+                        <div class=news__read-button-adaptive>
+                            <a href="{{ article.get_absolute_url }}">Читать далее</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="news__read-button animated">
+                    <a href="{{ article.get_absolute_url }}">
+                        <button>
+                            <img src="{% static 'images/read-news.svg' %}" alt="Читать">
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %} {% endfor %}
+    </div>
+    <div class=news__read-all--adaptive>
+        <a href="{% url 'blog:blog' %}">Смотреть всё</a>
+    </div>
 </div>
 <div class=information>
-<div class="answers container">
-<div class=answers__heading>
-<h4>Ответы на вопросы</h4>
-</div>
-<div class=half>
-{% for question in popular_questions %}
-<div class=tab>
-<input id="tab-{{ question.pk }}" type=checkbox name=tabs>
-<div class=tab-label>
-<label for="tab-{{ question.pk }}">{{ question.question }}</label>
-</div>
-<hr>
-<div class=tab-content>
-<p>{{ question.answer }}</p>
-</div>
-</div>
-{% endfor %}
-</div>
-</div>
-{% include 'contacts/includes/contacts_block.html' %}
+    <div class="answers container">
+        <div class=answers__heading>
+            <h4>Ответы на вопросы</h4>
+        </div>
+        <div class=half>
+            {% for question in popular_questions %}
+            <div class=tab>
+                <input id="tab-{{ question.pk }}" type=checkbox name=tabs>
+                <div class=tab-label>
+                    <label for="tab-{{ question.pk }}">{{ question.question }}</label>
+                </div>
+                <hr>
+                <div class=tab-content>
+                    <p class="font__inter">{{ question.answer }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% include 'contacts/includes/contacts_block.html' %}
 </div>
 {% endblock %} {% block script %}
 <script src="{% static 'js/home.js' %}" defer></script>
-<script>var myMap;$(document).ready((function(){$(".slider").slick({dots:!0,infinite:!0,speed:500,arrows:0,slidesToShow:1,adaptiveHeight:!0,autoplay:!1})})),$(document).ready((function(){$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1})})),$(document).ready((function(){$(".team__cards").slick({arrows:!0,infinite:!0,slidesToShow:4,slidesToScroll:1,centerMode:!0,responsive:[{breakpoint:1024,settings:{slidesToShow:3,slidesToScroll:1}},{breakpoint:768,settings:{centerMode:!0,slidesToShow:2,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]})})),$(document).ready((function(){$(".reviews__slider").slick({arrows:!0,infinite:!0,slidesToShow:3,slidesToScroll:1,responsive:[{breakpoint:1024,settings:{slidesToShow:3,slidesToScroll:1}},{breakpoint:768,settings:{slidesToShow:2,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]})})),$(document).ready((function(){$(".gallery__slider").slick({centerMode:!0,arrows:!0,infinite:!0,slidesToShow:3,slidesToScroll:1,responsive:[,{breakpoint:1200,settings:{slidesToShow:2,slidesToScroll:1}},{breakpoint:1024,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:768,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}}]})})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var e=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(e),myMap.behaviors.disable("scrollZoom");var o=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[30,42],iconImageOffset:[-15,-42]});myMap.geoObjects.add(o)})),document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".tab input").forEach((e=>{e.addEventListener("click",(function(){this.parentNode.classList.toggle("selected")}))}))}));var feedbackForm=document.getElementById("feedbackForm"),phoneInput=feedbackForm.querySelector('input[type="tel"]'),phoneMask=IMask(phoneInput,{mask:"+{7} (000) 000 00 00"});const successSection=document.getElementById("modalSuccess");function validatePhoneNumber(){return phoneInput.value.replace(/\D/g,"").length<11?(phoneInput.setCustomValidity("Необходимо минимум 11 цифр"),!1):(phoneInput.setCustomValidity(""),!0)}phoneInput.addEventListener("input",(function(){validatePhoneNumber()})),feedbackForm.addEventListener("submit",(async function(e){e.preventDefault();let o=new FormData(feedbackForm),t=document.querySelector('input[name="csrfmiddlewaretoken"]').value;feedbackForm.reset(),successSection.style.display="flex";try{(await fetch(`${window.location.origin}/contacts/api/save-request/`,{method:"POST",body:o,headers:{"X-CSRFToken":t}})).status}catch(e){console.error("Ошибка запроса:",e)}}))</script>
-<script>$(document).ready((function(){const e=(e,t)=>{let o;return function(...s){clearTimeout(o),o=setTimeout((()=>e.apply(this,s)),t)}},t=e=>{const t=e.attr("max"),o=parseFloat(e.val());o<0?e.val(0):void 0!==t&&o>parseFloat(t)&&e.val(t)};$('#bestProjectsForm input[type="number"]').on("input",e((function(e){t($(this))}),150)),$('#mobileFiltersForm input[type="number"]').on("input",e((function(e){t($(this))}),150)),$("#bestProjectsForm input, #bestProjectsForm select").on("change input",(function(e){let t=$("#bestProjectsForm").serialize(),o=$(".best-projects__cards");o.addClass("fade-out"),timeout=setTimeout((function(){$.ajax({url:"{% url 'home:best_projects_filter' %}",type:"GET",data:t,success:function(e){o.html(e.html),o.removeClass("fade-out").addClass("fade-in"),$(document).ready((function(){$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1})})),setTimeout((()=>{o.removeClass("fade-in")}),500);document.querySelectorAll(".openModal").forEach((e=>{e.addEventListener("click",(()=>{modal.style.display="flex"}))}))},error:function(e,t,o){console.error("Ошибка при фильтрации:",o)}})}),200)}))}))</script>
-<script>document.addEventListener("DOMContentLoaded",(function(){const e=document.querySelectorAll(".radio-toggle");e.forEach((function(t){t.addEventListener("click",(function(){"true"===this.dataset.wasChecked?(this.checked=!1,this.dataset.wasChecked="false"):this.dataset.wasChecked="true",e.forEach((function(e){e!==t&&e.name==t.name&&(e.dataset.wasChecked="false")}));let s=$("#bestProjectsForm").serialize(),a=$(".best-projects__cards");a.addClass("fade-out"),timeout=setTimeout((function(){$.ajax({url:"{% url 'home:best_projects_filter' %}",type:"GET",data:s,success:function(e){a.html(e.html),a.removeClass("fade-out").addClass("fade-in"),$(document).ready((function(){$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1})})),setTimeout((()=>{a.removeClass("fade-in")}),500)},error:function(e,t,s){console.error("Ошибка при фильтрации:",s)}})}),200)}))}))}))</script>
-<script>document.addEventListener("DOMContentLoaded",(function(){const e=document.getElementById("openMobileFilters"),t=document.getElementById("closeMobileFilter"),l=document.getElementById("mobileCatalogFilter"),n=document.getElementById("mobileCatalogFilterOverlay");let o=0;function d(){return window.innerWidth<=500}e.addEventListener("click",(function(){d()&&(o=window.scrollY,document.body.style.top=`-${o}px`,document.body.classList.add("scroll-disabled")),l.style.display="flex",n.style.display="flex"})),t.addEventListener("click",(function(){l.style.display="none",n.style.display="none",d()&&(document.body.classList.remove("scroll-disabled"),document.body.style.top="",window.scrollTo(0,o))}))}))</script>
-<script>document.addEventListener("DOMContentLoaded",(function(){const e=document.getElementById("blogForm");e.querySelectorAll(".radio-toggle").forEach((t=>{t.addEventListener("change",(function(){e.submit()}))}))}))</script>
+<script>var myMap; $(document).ready((function () { $(".slider").slick({ dots: !0, infinite: !0, speed: 500, arrows: 0, slidesToShow: 1, adaptiveHeight: !0, autoplay: !1 }) })), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), $(document).ready((function () { $(".team__cards").slick({ arrows: !0, infinite: !0, slidesToShow: 4, slidesToScroll: 1, centerMode: !0, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { centerMode: !0, slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".reviews__slider").slick({ arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".gallery__slider").slick({ centerMode: !0, arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [, { breakpoint: 1200, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 1024, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), ymaps.ready((function () { myMap = new ymaps.Map("map", { center: [43.157062, 131.926061], zoom: 16, controls: [] }); var e = new ymaps.control.ZoomControl({ options: { position: { right: 10, top: 50 }, size: "small" } }); myMap.controls.add(e), myMap.behaviors.disable("scrollZoom"); var o = new ymaps.Placemark([43.157062, 131.926061], { hintContent: "Волгоградская улица, 7А", balloonContent: "Волгоградская улица, 7А" }, { iconLayout: "default#image", iconImageHref: "/static/images/pin.svg", iconImageSize: [30, 42], iconImageOffset: [-15, -42] }); myMap.geoObjects.add(o) })), document.addEventListener("DOMContentLoaded", (() => { document.querySelectorAll(".tab input").forEach((e => { e.addEventListener("click", (function () { this.parentNode.classList.toggle("selected") })) })) })); var feedbackForm = document.getElementById("feedbackForm"), phoneInput = feedbackForm.querySelector('input[type="tel"]'), phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" }); const successSection = document.getElementById("modalSuccess"); function validatePhoneNumber() { return phoneInput.value.replace(/\D/g, "").length < 11 ? (phoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (phoneInput.setCustomValidity(""), !0) } phoneInput.addEventListener("input", (function () { validatePhoneNumber() })), feedbackForm.addEventListener("submit", (async function (e) { e.preventDefault(); let o = new FormData(feedbackForm), t = document.querySelector('input[name="csrfmiddlewaretoken"]').value; feedbackForm.reset(), successSection.style.display = "flex"; try { (await fetch(`${window.location.origin}/contacts/api/save-request/`, { method: "POST", body: o, headers: { "X-CSRFToken": t } })).status } catch (e) { console.error("Ошибка запроса:", e) } }))</script>
+<script>$(document).ready((function () { const e = (e, t) => { let o; return function (...s) { clearTimeout(o), o = setTimeout((() => e.apply(this, s)), t) } }, t = e => { const t = e.attr("max"), o = parseFloat(e.val()); o < 0 ? e.val(0) : void 0 !== t && o > parseFloat(t) && e.val(t) }; $('#bestProjectsForm input[type="number"]').on("input", e((function (e) { t($(this)) }), 150)), $('#mobileFiltersForm input[type="number"]').on("input", e((function (e) { t($(this)) }), 150)), $("#bestProjectsForm input, #bestProjectsForm select").on("change input", (function (e) { let t = $("#bestProjectsForm").serialize(), o = $(".best-projects__cards"); o.addClass("fade-out"), timeout = setTimeout((function () { $.ajax({ url: "{% url 'home:best_projects_filter' %}", type: "GET", data: t, success: function (e) { o.html(e.html), o.removeClass("fade-out").addClass("fade-in"), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), setTimeout((() => { o.removeClass("fade-in") }), 500); document.querySelectorAll(".openModal").forEach((e => { e.addEventListener("click", (() => { modal.style.display = "flex" })) })) }, error: function (e, t, o) { console.error("Ошибка при фильтрации:", o) } }) }), 200) })) }))</script>
+<script>document.addEventListener("DOMContentLoaded", (function () { const e = document.querySelectorAll(".radio-toggle"); e.forEach((function (t) { t.addEventListener("click", (function () { "true" === this.dataset.wasChecked ? (this.checked = !1, this.dataset.wasChecked = "false") : this.dataset.wasChecked = "true", e.forEach((function (e) { e !== t && e.name == t.name && (e.dataset.wasChecked = "false") })); let s = $("#bestProjectsForm").serialize(), a = $(".best-projects__cards"); a.addClass("fade-out"), timeout = setTimeout((function () { $.ajax({ url: "{% url 'home:best_projects_filter' %}", type: "GET", data: s, success: function (e) { a.html(e.html), a.removeClass("fade-out").addClass("fade-in"), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), setTimeout((() => { a.removeClass("fade-in") }), 500) }, error: function (e, t, s) { console.error("Ошибка при фильтрации:", s) } }) }), 200) })) })) }))</script>
+<script>document.addEventListener("DOMContentLoaded", (function () { const e = document.getElementById("openMobileFilters"), t = document.getElementById("closeMobileFilter"), l = document.getElementById("mobileCatalogFilter"), n = document.getElementById("mobileCatalogFilterOverlay"); let o = 0; function d() { return window.innerWidth <= 500 } e.addEventListener("click", (function () { d() && (o = window.scrollY, document.body.style.top = `-${o}px`, document.body.classList.add("scroll-disabled")), l.style.display = "flex", n.style.display = "flex" })), t.addEventListener("click", (function () { l.style.display = "none", n.style.display = "none", d() && (document.body.classList.remove("scroll-disabled"), document.body.style.top = "", window.scrollTo(0, o)) })) }))</script>
+<script>document.addEventListener("DOMContentLoaded", (function () { const e = document.getElementById("blogForm"); e.querySelectorAll(".radio-toggle").forEach((t => { t.addEventListener("change", (function () { e.submit() })) })) }))</script>
 <link href=https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css rel=stylesheet>
 <script src=https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js defer></script>
-<script defer>$(document).ready((function(){window.innerWidth>500&&window.innerWidth<1200?$("#mobileFiltersForm select").select2():$("select").select2()}))</script>
+<script
+    defer>$(document).ready((function () { window.innerWidth > 500 && window.innerWidth < 1200 ? $("#mobileFiltersForm select").select2() : $("select").select2() }))</script>
 {% endblock %}

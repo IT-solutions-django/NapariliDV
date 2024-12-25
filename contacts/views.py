@@ -8,6 +8,7 @@ from .models import (
     CertificatePhoto,
     PartnerImage,
 )
+from projects.models import Category
 from .forms import FeedbackForm, GalleryFilterForm
 from projects.models import Project
 
@@ -24,7 +25,25 @@ class GalleryView(View):
 
     def get(self, request): 
         filter_form = GalleryFilterForm(request.GET)
+
+        heading = 'Галерея'
+        if filter_form.is_valid():
+            category_id = filter_form.cleaned_data.get('category')
+
+            if category_id:
+                category = Category.objects.get(id=category_id)
+                match category.name:
+                    case 'Дома':
+                        heading = 'Галерея домов'
+                    case 'Коттеджи':
+                        heading = 'Галерея коттеджей'
+                    case 'Бани':
+                        heading = 'Галерея бань'
+                    case _:
+                        heading = 'Галерея'
+
         context = {
+            'heading': heading,
             'gallery_photos': Project.objects.filter(is_in_gallery=True),
             'filter_form': filter_form,
         }
@@ -71,12 +90,25 @@ class GalleryPhotosAPIView(View):
         projects = Project.objects.filter(is_in_gallery=True)
         filter_form = GalleryFilterForm(request.GET)
 
+        heading = 'Галерея'
+
         if filter_form.is_valid():
             cd = filter_form.cleaned_data 
 
             category = cd.get('category') 
             if category: 
                 projects = projects.filter(category__id=category)
+
+                category = Category.objects.get(id=category)
+                match category.name:
+                    case 'Дома':
+                        heading = 'Галерея домов'
+                    case 'Коттеджи':
+                        heading = 'Галерея коттеджей'
+                    case 'Бани':
+                        heading = 'Галерея бань'
+                    case _:
+                        heading = 'Галерея'
 
         rendered_gallery_projects = render_to_string('contacts/includes/gallery_slider.html', {
             'gallery_photos': projects,
@@ -88,6 +120,7 @@ class GalleryPhotosAPIView(View):
         return JsonResponse({
             'gallery_html': rendered_gallery_projects, 
             'gallery_text': rendered_text_slides,
+            'page_heading': heading,
         })
     
 
