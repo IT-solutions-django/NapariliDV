@@ -1,1 +1,26 @@
-function addReviewsSpoiler(){document.querySelectorAll(".reviews__card").forEach(e=>{let t=e.querySelector(".reviews__card-text");if(window.innerWidth>990){if(t.scrollHeight>599){let n=document.createElement("button");n.classList.add("review-card__toggle","active"),n.innerText="Читать полностью",n.addEventListener("click",function(){t.classList.contains("expanded")?(t.classList.remove("expanded"),n.innerText="Читать полностью"):(t.classList.add("expanded"),n.innerText="Свернуть")}),t.after(n)}}else if(t.scrollHeight>305){let i=document.createElement("button");i.classList.add("review-card__toggle","active"),i.innerText="Читать полностью",i.addEventListener("click",function(){t.classList.contains("expanded")?(t.classList.remove("expanded"),i.innerText="Читать полностью"):(t.classList.add("expanded"),i.innerText="Свернуть")}),t.after(i)}})}document.addEventListener("DOMContentLoaded",()=>{addReviewsSpoiler()});
+function addReviewsSpoiler() {
+    document.querySelectorAll(".reviews__card").forEach(e => {
+        let t = e.querySelector(".reviews__card-text");
+        let windowWidth = window.innerWidth;
+
+        if (windowWidth > 990) {
+            if (t.scrollHeight > 599) {
+                let l = document.createElement("button");
+                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function () {
+                    t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
+                }), t.after(l)
+            }
+        }
+        else {
+            if (t.scrollHeight > 305) {
+                let l = document.createElement("button");
+                l.classList.add("review-card__toggle", "active"), l.innerText = "Читать полностью", l.addEventListener("click", function () {
+                    t.classList.contains("expanded") ? (t.classList.remove("expanded"), l.innerText = "Читать полностью") : (t.classList.add("expanded"), l.innerText = "Свернуть")
+                }), t.after(l)
+            }
+        }
+    })
+}
+document.addEventListener("DOMContentLoaded", () => {
+    addReviewsSpoiler();
+});

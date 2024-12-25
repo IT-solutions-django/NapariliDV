@@ -1,1 +1,43 @@
-var didScroll,lastScrollTop=0,delta=5,navbarHeight=document.querySelector("header").offsetHeight;function hasScrolled(){var e=window.pageYOffset||document.documentElement.scrollTop;if(!(Math.abs(lastScrollTop-e)<=delta)){if(e>lastScrollTop&&e>navbarHeight){document.querySelector("header").classList.remove("nav-down"),document.querySelector("header").classList.add("nav-up");let l=document.getElementById("navbarNav");l&&l.classList.remove("show")}else e+window.innerHeight<document.body.scrollHeight&&(document.querySelector("header").classList.remove("nav-up"),document.querySelector("header").classList.add("nav-down"));lastScrollTop=e}}window.addEventListener("scroll",function(){didScroll=!0}),setInterval(function(){didScroll&&(hasScrolled(),didScroll=!1)},150);
+var didScroll;    
+var lastScrollTop = 0;    
+var delta = 5;    
+var navbarHeight = document.querySelector('header').offsetHeight;    
+
+window.addEventListener('scroll', function() {        
+    didScroll = true;    
+});    
+
+setInterval(function() {        
+    if (didScroll) {            
+        hasScrolled();            
+        didScroll = false;        
+    }    
+}, 150);    
+
+function hasScrolled() {        
+    var st = window.pageYOffset || document.documentElement.scrollTop;  
+
+    // Проверяем, изменился ли scroll больше, чем delta
+    if(Math.abs(lastScrollTop - st) <= delta)            
+        return;        
+
+    // Скрыть хедер при прокрутке вниз
+    if (st > lastScrollTop && st > navbarHeight){            
+        document.querySelector('header').classList.remove('nav-down');
+        document.querySelector('header').classList.add('nav-up'); 
+
+        // Закрываем мобильное меню, если оно открыто
+        const navbarNav = document.getElementById('navbarNav');
+        if (navbarNav) {
+            navbarNav.classList.remove('show');
+        }
+    } 
+    // Показать хедер при прокрутке вверх
+    else {            
+        if(st + window.innerHeight < document.body.scrollHeight) {                
+            document.querySelector('header').classList.remove('nav-up');
+            document.querySelector('header').classList.add('nav-down');            
+        }        
+    }     
+    lastScrollTop = st;    
+}

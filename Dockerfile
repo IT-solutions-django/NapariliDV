@@ -8,7 +8,10 @@ RUN pip install -r requirements.txt
 
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc netcat-openbsd postgresql-client \
-    && pip install psycopg2
+    && pip install psycopg2 \ 
+    && apt install nodejs npm -y \
+    && npm install -g uglify-js \
+    && npm install -g uglifycss 
 
 COPY . . 
 
