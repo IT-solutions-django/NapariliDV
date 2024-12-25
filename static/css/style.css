@@ -2217,6 +2217,7 @@ select option {
     align-items: center;
     position: relative;
     margin-bottom: 40px;
+    gap: 20px
 }
 
 .news-page__header-hr--adaptive,
@@ -4504,6 +4505,7 @@ footer hr,
     .article__header {
         flex-direction: column;
         align-items: start;
+        gap: 0
     }
 
     .news-page__header {
@@ -4793,10 +4795,18 @@ footer hr,
     .gallery-page__slide-label {
         height: 36px;
     }
+    .team__slider-item img, 
+    .team__card img {
+        height: 300px;
+    }
 }
 
 @media (max-width: 340px) {
     .header__phone-adaptive {
         font-size: 11.5px;
+    }
+    .team__slider-item img, 
+    .team__card img {
+        height: 260px;
     }
 }

@@ -3,6 +3,7 @@ from django.views import View
 from django.db.models import F, Case, When, Value, FloatField
 from .models import (
     Project,
+    Category,
 )
 from .services import get_paginated_collection
 import random
@@ -16,12 +17,26 @@ class CatalogView(View):
         projects = Project.objects.all() 
         form = CatalogFiltersForm(request.GET)
 
+        heading = 'Каталог проектов с фото'
+
         if form.is_valid():
             cd = form.cleaned_data
             
             selected_categories = cd.get('categories')
             if selected_categories:
                 projects = projects.filter(category__id__in=selected_categories)
+
+            if len(selected_categories) == 1: 
+                (category_id,) = selected_categories
+                category_name = Category.objects.get(pk=category_id).name 
+                match category_name: 
+                    case 'Дома': 
+                        heading = f'Каталог проектов домов с фото'
+                    case 'Бани': 
+                        heading = f'Каталог проектов бань с фото'
+                    case 'Коттеджи': 
+                        heading = f'Каталог проектов коттеджей с фото'
+
 
             selected_materials = cd.get('materials')
             if selected_materials:
@@ -64,6 +79,7 @@ class CatalogView(View):
         context = {
             'form': form,
             'projects': projects,
+            'page_heading': heading,
         }
 
         return render(request, self.template_name, context)
