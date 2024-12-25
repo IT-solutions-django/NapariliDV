@@ -2217,6 +2217,7 @@ select option {
     align-items: center;
     position: relative;
     margin-bottom: 40px;
+    gap: 20px
 }
 
 .news-page__header-hr--adaptive,
@@ -4504,6 +4505,7 @@ footer hr,
     .article__header {
         flex-direction: column;
         align-items: start;
+        gap: 0
     }
 
     .news-page__header {

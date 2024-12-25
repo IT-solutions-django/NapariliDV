@@ -17,7 +17,7 @@ class CatalogView(View):
         projects = Project.objects.all() 
         form = CatalogFiltersForm(request.GET)
 
-        heading = 'Каталог проектов'
+        heading = 'Каталог проектов с фото'
 
         if form.is_valid():
             cd = form.cleaned_data
@@ -31,11 +31,11 @@ class CatalogView(View):
                 category_name = Category.objects.get(pk=category_id).name 
                 match category_name: 
                     case 'Дома': 
-                        heading = f'Каталог проектов домов'
+                        heading = f'Каталог проектов домов с фото'
                     case 'Бани': 
-                        heading = f'Каталог проектов бань'
+                        heading = f'Каталог проектов бань с фото'
                     case 'Коттеджи': 
-                        heading = f'Каталог проектов коттеджей'
+                        heading = f'Каталог проектов коттеджей с фото'
 
 
             selected_materials = cd.get('materials')

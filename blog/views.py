@@ -16,7 +16,6 @@ class BlogView(View):
 
     def get(self, request): 
         articles = Article.objects.all()
-        page_title = 'Новости'
 
         form = ArticlesForm(request.GET)
 
@@ -31,8 +30,6 @@ class BlogView(View):
 
         context = {
             'articles': articles,
-            'page_title': page_title,
-
             'form': form,
         }
         return render(request, self.template_name, context)
