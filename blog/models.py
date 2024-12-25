@@ -49,7 +49,7 @@ class Article(models.Model):
     
 
 class Paragraph(models.Model): 
-    title = models.TextField('Заголовок') 
+    title = models.TextField('Заголовок', null=True, blank=True) 
     content = models.TextField('Содержание')
     image = models.ImageField('Картинка', upload_to='blog', null=True, blank=True) 
     article = models.ForeignKey(verbose_name='Статья/Новость', to=Article, on_delete=models.CASCADE, related_name='paragraphs')
