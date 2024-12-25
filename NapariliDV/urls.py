@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static 
 from django.conf import settings
+from django.urls import re_path
+from django.views.static import serve
 
 from home.views import handler404
 
@@ -31,6 +33,15 @@ urlpatterns = [
     path('contacts/', include('contacts.urls', namespace='contacts')),
 
     path('not-found/', handler404, name='not-found'),
+
+    re_path(r'^sitemap\.xml$', serve, {
+        'document_root': settings.BASE_DIR,
+        'path': 'sitemap.xml',
+    }),
+    re_path(r'^robots\.txt$', serve, {
+        'document_root': settings.BASE_DIR,
+        'path': 'robots.txt',
+    }),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
