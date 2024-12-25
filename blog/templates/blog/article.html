@@ -1,7 +1,12 @@
 {% extends 'base.html' %} {% load static %}
 {% load markdown_filters %}
 
-{% block title %}Новости - Напарили ДВ{% endblock %} {% block content %}
+{% block title %} {{ article.title }} | Напарили ДВ {% endblock %} 
+{% block meta_title %} {{ article.title }} | Напарили ДВ {% endblock %} 
+{% block description %} Узнайте больше о строительстве на нашем сайте - новости, статьи. Актуальная тема - {{ article.title|lower }}. Оставьте заявку на нашем сайте и мы проконсультируем вас по вопросам строительства дома, бани или коттеджа! {% endblock %} 
+{% block meta_description %} Какие использовать материалы? Сколько стоит строительство? Какие этапы строительства? Это и многое другое вы можете узнать в блоге на нашем сайте. Хотите построить дом? Оставьте заявку для подробной консультации! {% endblock %} 
+
+{% block content %}
 <div class="breadcrumbs container font__inter">
     <div>
         <a href="{% url 'home:home' %}">Главная</a>
@@ -39,7 +44,7 @@
                     {{ paragraph.title|linebreaks }}
                 </div>
                 {% endif %}
-                <div class="article__paragraph-text font__inter" {% if not paragraph.title %}style="max-width: 100%" {% endif %}>
+                <div class="article__paragraph-text font__inter" {% if not paragraph.title %}style="max-width: 100%" {%endif %}>
                     {{ paragraph.content|markdown }}
                 </div>
             </div>

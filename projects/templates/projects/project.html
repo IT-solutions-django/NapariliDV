@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% load price_filters %} {% block title %} {{ project.name }} {% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load price_filters %} 
+
+{% block title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %} 
+{% block meta_title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %} 
+{% block description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы составим уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в ближайшее время! {% endblock %} 
+{% block meta_description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы составим уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в ближайшее время! {% endblock %} 
+
+{% block content %}
 <div class="breadcrumbs container font__inter">
 <div>
 <a href="{% url 'home:home' %}">Главная</a>
