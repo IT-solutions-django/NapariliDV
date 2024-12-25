@@ -3275,6 +3275,16 @@ footer hr,
     flex-direction: column;
     gap: 20px;
 }
+.article__paragraph-text a {
+    color: #FF1A1A;
+}
+
+.article__paragraph-text em {
+    font-style: normal;
+    color: #FF1A1A;
+    cursor: pointer;
+}
+
 
 .article__image img {
     border-radius: 20px;
