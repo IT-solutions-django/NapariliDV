@@ -237,8 +237,8 @@
 </body>
 
 <!-- Меню-бургер -->
-<script src="{% static 'js/header.js' %}"></script>
-<script>
+<script src="{% static 'js/header.js' %}" defer></script>
+<script defer>
     document.addEventListener("DOMContentLoaded", function () {
         let scrollPosition = 0;
 
@@ -265,7 +265,7 @@
 </script>
 
 <!-- Модальное окно -->
-<script>
+<script defer>
     document.addEventListener('DOMContentLoaded', () => {
 
         const modal = document.getElementById('modal');
@@ -334,7 +334,7 @@
 
 </script>
 
-<script>
+<script defer>
     // Анимация кнопок
     document.querySelectorAll('.animated').forEach(function (button) {
         button.addEventListener('mousedown', function () {
@@ -356,7 +356,7 @@
 </script>
 
 <!-- Метрика -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     (function (m, e, t, r, i, k, a) {
         m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
         m[i].l = 1 * new Date();
