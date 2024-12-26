@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+from loguru import logger
 
 load_dotenv()
 
@@ -28,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^p^kjrv-g!ycb&f)ut8=wrcbyp*)y$=0j0t61igb9*olt8^ufb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'projects',
     'contacts',
     'blog',
+    'amocrm',
 ]
 
 MIDDLEWARE = [
@@ -148,8 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# REDIS_HOST = 'localhost' 
-REDIS_HOST = 'redis' 
+REDIS_HOST = 'localhost' 
+# REDIS_HOST = 'redis' 
 
 REDIS_PORT = '6379' 
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
@@ -162,3 +164,13 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json' 
 CELERY_RESULT_serializer = 'json' 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+
+# Loguru 
+logger.add("logs/logs.log", 
+           format='{time} {level} {message}', 
+           rotation="10 MB", 
+           retention="7 days",
+           compression="zip", 
+           level="DEBUG", 
+           enqueue=True)

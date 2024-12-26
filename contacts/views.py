@@ -11,6 +11,7 @@ from .models import (
 from projects.models import Category
 from .forms import FeedbackForm, GalleryFilterForm
 from projects.models import Project
+from amocrm.services import crm
 
 
 class ContactsView(View): 
@@ -81,6 +82,7 @@ class SaveRequestView(View):
         form: FeedbackForm = FeedbackForm(request.POST) 
         if form.is_valid(): 
             new_request = form.save() 
+            crm.create_lead(f'Заявка с сайта | {new_request.phone}')
             return JsonResponse({'status': 'ok'}, status=200)
         return JsonResponse({'status': 'error'}, status=400)
     

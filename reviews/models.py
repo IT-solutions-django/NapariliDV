@@ -1,13 +1,15 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 import uuid
+from home.models import convert_image_to_webp
 
 
 class Platform(models.Model): 
     name = models.CharField('Название платформы', max_length=100)
-    icon = models.FileField('Иконка', upload_to='reviews/platforms', null=True)
+    icon = models.ImageField('Иконка', upload_to='reviews/platforms', null=True)
     average_rating = models.FloatField('Средний рейтинг компании на платформе', default=4.9)
     reviews_count = models.IntegerField('Количество отзывов', default=0)
+    url = models.URLField('Ссылка на профиль компании')
 
     def __str__(self) -> str: 
         return self.name
@@ -15,6 +17,19 @@ class Platform(models.Model):
     class Meta:
         verbose_name = 'Платформа'
         verbose_name_plural = 'Платформы с отзывами'
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().icon
+            if old_image and self.icon and old_image.name == self.icon.name:
+                super(self.__class__, self).save(*args, **kwargs)
+                return
+
+        webp_image = convert_image_to_webp(self.icon)
+        if webp_image:
+            self.icon.save(webp_image.name, webp_image, save=False)
+        
+        super(self.__class__, self).save(*args, **kwargs)
 
 
 class Review(models.Model): 
@@ -41,3 +56,18 @@ class Review(models.Model):
 class ReviewPhoto(models.Model): 
     url = models.URLField('Фото отзыва')
     review = models.ForeignKey(verbose_name='Отзыв', to=Review, on_delete=models.CASCADE, related_name='photos')
+
+
+class VideoReview(models.Model): 
+    url = models.URLField('Ссылка на видео')
+    title = models.CharField('Название', max_length=200) 
+    preview_url = models.URLField('Ссылка на превью')
+    created_at = models.DateTimeField('Дата и время публикации')
+
+    def __str__(self) -> str: 
+        return f'Видеоотзыв { self.title[:20] }'
+    
+    class Meta: 
+        verbose_name = 'Видео отзыв'
+        verbose_name_plural = 'Видео отзывы'
+        ordering = ['-created_at']

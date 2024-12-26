@@ -11,6 +11,7 @@ from contacts.forms import FeedbackForm
 from blog.models import Article
 from reviews.models import Review
 from blog.forms import ArticlesForm
+from reviews.models import Platform, VideoReview
 
 
 class HomeView(View): 
@@ -28,6 +29,8 @@ class HomeView(View):
         cooperation_stages = CooperationStage.objects.all()
         reviews = Review.objects.all().order_by('-created_at')
         articles_form = ArticlesForm(request.GET)
+        review_platforms = Platform.objects.all()
+        video_reviews = VideoReview.objects.all()
 
         if filter_form.is_valid():
             cd = filter_form.cleaned_data
@@ -85,7 +88,9 @@ class HomeView(View):
             'articles': articles,
             'cooperation_stages': cooperation_stages,
             'reviews': reviews,
+            'video_reviews': video_reviews,
             'articles_form': articles_form,
+            'review_platforms': review_platforms,
         }
         return render(request, self.template_name, context)
 

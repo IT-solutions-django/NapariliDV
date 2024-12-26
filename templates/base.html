@@ -14,7 +14,7 @@
     <script src="{% static 'js/slick/slick/slick.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'js/slick/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'js/slick/slick/slick-theme.css' %}">
-    <script src="{% static 'js/imask/Imask.min.js' %}"></script>
+    <script src="{% static 'js/imask/Imask.min.js' %}" defer></script>
     
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,8 @@
 
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/select2.css' %}" defer>
-    <link rel="stylesheet" href="{% static 'css/luminous-lightbox.css' %}" defer>
+
+    <link rel="preload" href="{% static 'css/select2.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <link rel=icon type=image/png sizes=16x16 href="{% static 'images/logo.svg' %}">
 </head>
