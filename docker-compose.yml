@@ -37,6 +37,7 @@ services:
       - './db:/db'
       - ./static:/var/www/static
       - ./media:/media
+      - ./amocrm_tokens:/amocrm_tokens
     networks:
       - dev
     depends_on:
