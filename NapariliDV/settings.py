@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^p^kjrv-g!ycb&f)ut8=wrcbyp*)y$=0j0t61igb9*olt8^ufb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -150,8 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# REDIS_HOST = 'localhost' 
-REDIS_HOST = 'redis' 
+REDIS_HOST = 'localhost' 
+# REDIS_HOST = 'redis' 
 
 REDIS_PORT = '6379' 
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
