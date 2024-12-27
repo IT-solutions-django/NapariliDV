@@ -508,9 +508,15 @@ input[type=radio] {
     white-space: nowrap;
     align-self: center;
 }
+.header__menu-link.active a {
+    font-family: 'Involve 500', sans-serif;
+    font-weight: 500;
+    color: #FF1A1A;
+}
 
 .header__menu-link:hover,
-.nav__link:hover {
+.nav__link:hover, 
+.best-projects__more-button a:hover {
     color: #FF1A1A
 }
 
@@ -580,6 +586,7 @@ input[type=radio] {
     font-weight: 500;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .header__call-button p:hover {
@@ -799,7 +806,32 @@ input[type=radio] {
 .modal-feedback__send,
 .modal-feedback__back,
 .news__read-button {
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease;
+}
+
+.slider-heading__want-the-house-button:hover,
+.advantages__choose-house:hover,
+.feedback__button:hover,
+.footer__button button:hover,
+.project__order-button:hover,
+.modal-feedback__send:hover,
+.modal-feedback__back:hover,
+.news__read-button:hover {
+    animation: pulse-hover 1.2s;
+}
+
+@keyframes pulse-hover {
+    0% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(255, 26, 26, 0.6);
+    }
+    70% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 20px rgba(54, 82, 217, 0);
+    }
+    100% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(54, 82, 217, 0);
+    }
 }
 
 .clicked {
@@ -1102,6 +1134,11 @@ input[type=radio] {
     user-select: none;
     line-height: 40px;
     text-align: center;
+    transition: all 0.3s ease;
+}
+.best-projects__radio-button label:hover,
+.catalog__radio-button label:hover {
+    color: red
 }
 
 .best-projects__radio-button input[type=radio]:checked+label,
@@ -1185,7 +1222,8 @@ select option {
 }
 
 .catalog__filters-number-square input {
-    max-width: 50px;
+    max-width: 60px;
+    font-size: 15px;
 }
 
 .catalog__filters-number-price input {
@@ -1298,6 +1336,7 @@ select option {
     border: solid 1px #595959;
     border-radius: 20px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .best-projects__order-button button:hover,
@@ -1316,6 +1355,24 @@ select option {
     background-image: url('/static/images/right-gray-arrow.svg');
     background-repeat: no-repeat;
     background-position: right center;
+    transition: all 0.3s ease;
+}
+
+.best-projects__more-button a,
+.similar-projects__more-button a, 
+.footer__link a, 
+.news__header-more a, 
+.best-projects__card-heading a {
+    transition: all 0.2s ease;
+} 
+
+.best-projects__card-heading a {
+    display: block;
+    width: 100%;
+}
+
+.best-projects__card-heading a:hover {
+    color:#FF1A1A
 }
 
 .best-projects__card-content li span:first-child,
@@ -1443,6 +1500,10 @@ select option {
     color: white;
     padding: 9px 45px;
     border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.about-company__more-detailed a:hover {
+    background-color: #6d6d6d;
 }
 
 .about-company__row {
@@ -1734,6 +1795,7 @@ select option {
     right: 60px;
     left: auto;
     background-image: url('/static/images/left-gray-arrow.svg');
+    transition: all 0.3s ease;
 }
 
 .slider .slick-prev {
@@ -1751,6 +1813,7 @@ select option {
 .video-reviews__videos .slick-next {
     right: 0px;
     background-image: url('/static/images/right-gray-arrow.svg');
+    transition: all 0.2s ease;
 }
 
 .slider .slick-next {
@@ -2030,6 +2093,7 @@ select option {
     border: solid 1px rgba(225, 225, 225, 1);
     border-radius: 20px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .catalog__filters-submit-button button:hover,
@@ -2120,15 +2184,9 @@ select option {
     display: flex;
     gap: 20px;
 }
-/* .video-reviews__video.slick-slide.slick-active {
-    height: 100%;
-    margin-right: 20px;
-    max-width: 300px !important;
-    width: 200px;
+.video-reviews__platform-info a:hover {
+    color: #FF1A1A;
 }
-.video-reviews__videos .slick-track {
-    max-height: 349px !important;
-} */
 .video-reviews__video {
     cursor: pointer;
 }
@@ -2673,6 +2731,7 @@ select option {
     display: block;
     margin-top: 18px;
     background-color: white;
+    transition: all 0.3s ease;
 }
 
 .contacts-page__small-right-column {
@@ -2824,6 +2883,10 @@ footer {
 .footer__links {
     display: flex;
     gap: 40px;
+}
+.footer__link a:hover, 
+#userAgreementLink:hover {
+    color: #FF1A1A;
 }
 
 .footer__column,
@@ -2991,7 +3054,7 @@ footer hr {
 
 .catalog__range-filter {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     position: relative;
 }
 
@@ -4746,10 +4809,6 @@ footer hr,
     .news__header-button button {
         font-size: 14px;
         padding: 7.5px 22px;
-    }
-
-    .partners__card {
-        height: 92px;
     }
 
     .about-company__big-right-column--adaptive,

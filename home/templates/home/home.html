@@ -103,7 +103,7 @@
                 <div class="slider-heading__want-the-house-button animated">
                     <span class=circle></span>
                     <button class=openModal>
-                        <img src="{% static 'images/want-the-house.webp' %}" alt="Хочу такой дом">
+                        <img src="{% static 'images/want-the-house.svg' %}" alt="Хочу такой дом">
                     </button>
                 </div>
             </div>
@@ -282,7 +282,7 @@
             <div class=photo-slider>
                 {% for photo in project.photos.all %}
                 <div class="best-projects__card-image photo-slider-item">
-                    <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
+                    <a href="{{ project.get_absolute_url }}"><img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта"></a>
                 </div>
                 {% endfor %}
             </div>
