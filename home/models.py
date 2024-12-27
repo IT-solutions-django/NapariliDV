@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 from home.services import convert_image_to_webp
 
 
@@ -16,12 +19,32 @@ class Slide(models.Model):
         verbose_name = 'Слайд'
         verbose_name_plural = 'Слайды'
 
+    def resize_image(self, image, width=1000):
+        """Уменьшает ширину изображения до 1000 пикселей, сохраняя пропорции"""
+        img = Image.open(image)
+        if img.width > width:
+            ratio = width / img.width
+            new_height = int(img.height * ratio)
+            img = img.resize((width, new_height), Image.Resampling.LANCZOS)
+
+            temp_file = BytesIO()
+            img_format = img.format  # Оригинальный формат изображения
+            if not img_format:  # Если формат не распознан
+                img_format = 'JPEG'  # Устанавливаем JPEG как безопасный вариант
+            img.save(temp_file, format=img_format)
+            temp_file.seek(0)
+            return ContentFile(temp_file.read(), name=image.name)
+        return image
+
     def save(self, *args, **kwargs):
         if self.pk:
             old_image = self.__class__.objects.filter(pk=self.pk).first().photo
             if old_image and self.photo and old_image.name == self.photo.name:
                 super(self.__class__, self).save(*args, **kwargs)
                 return
+            
+        if self.photo:
+            self.photo = self.resize_image(self.photo)
             
         webp_image = convert_image_to_webp(self.photo)
         if webp_image:

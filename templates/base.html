@@ -22,10 +22,10 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/reset.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <link rel="preload" href="{% static 'css/select2.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="{% static 'css/select2.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
     <link rel=icon type=image/png sizes=16x16 href="{% static 'images/logo.svg' %}">
 </head>
@@ -237,7 +237,7 @@
 </body>
 
 <!-- Меню-бургер -->
-<script src="{% static 'js/header.min.js' %}" defer></script>
+<script src="{% static 'js/header.js' %}" defer></script>
 <script defer>
     document.addEventListener("DOMContentLoaded", function () {
         let scrollPosition = 0;
