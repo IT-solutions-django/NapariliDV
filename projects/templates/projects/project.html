@@ -71,7 +71,7 @@
 {% for photo in project.photos.all %}
 <div class=project__slide--adaptive>
 <a href="{{ photo.image.url }}">
-<img src="{{ photo.image.url }}" alt="Фото проекта">
+<img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
 </a>
 </div>
 {% endfor %}
@@ -121,7 +121,7 @@
 <div class=photo-slider>
 {% for photo in project.photos.all %}
 <div class="similar-projects__card-image photo-slider-item">
-<img src="{{ photo.image.url }}" alt="Фото проекта">
+<img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
 </div>
 {% endfor %}
 </div>

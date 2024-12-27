@@ -77,9 +77,12 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="mobile-catalog__buttons">
                 <div class=mobile-catalog__submit-button>
                     <button>Применить</button>
+                </div>
+                <div class=mobile-catalog__reset-button>
+                    <a href="{{ request.path }}?reload=true#bestProjects">Сбросить всё</a>
                 </div>
             </div>
         </form>
@@ -100,7 +103,7 @@
                 <div class="slider-heading__want-the-house-button animated">
                     <span class=circle></span>
                     <button class=openModal>
-                        <img src="{% static 'images/want-the-house.webp' %}" alt="Хочу такой дом">
+                        <img src="{% static 'images/want-the-house.svg' %}" alt="Хочу такой дом">
                     </button>
                 </div>
             </div>
@@ -279,7 +282,7 @@
             <div class=photo-slider>
                 {% for photo in project.photos.all %}
                 <div class="best-projects__card-image photo-slider-item">
-                    <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
+                    <a href="{{ project.get_absolute_url }}"><img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта"></a>
                 </div>
                 {% endfor %}
             </div>
@@ -495,7 +498,7 @@
         {% endfor %}
     </div>
 </div>
-<div class="reviews container">
+<!-- <div class="reviews container">
     <div class=reviews__heading>
         <h4>Отзывы наших клиентов</h4>
         <hr>
@@ -511,7 +514,7 @@
                         <div class="video-reviews__platform-rating">
                             <img loading="lazy" src="{% static 'images/five-stars — копия.svg' %}" alt="5 звезд">
                             <div>
-                                <p class="font__inter">5.0 (230)</p>
+                                <p class="font__inter">{{ platform.average_rating }} ({{ platform.reviews_count }})</p>
                             </div>
                         </div>
                         <div class="font__inter">
@@ -535,8 +538,87 @@
             
         </div>
     </div>
+</div> -->
+<!-- <div class="reviews container">
+    <div class=reviews__heading>
+        <h4>Отзывы наших клиентов</h4>
+        <hr>
+    </div>
+    <div class="video-reviews__content">
+        <div class="video-reviews__platforms">
+            {% for platform in review_platforms %}
+                <div class="video-reviews__platform">
+                    <div class="video-reviews__platform-icon">
+                        <img loading="lazy" src="{{ platform.icon.url }}" alt="Иконка">
+                    </div>
+                    <div class="video-reviews__platform-info">
+                        <div class="video-reviews__platform-rating">
+                            <img loading="lazy" src="{% static 'images/five-stars — копия.svg' %}" alt="5 звезд">
+                            <div>
+                                <p class="font__inter">{{ platform.average_rating }} ({{ platform.reviews_count }})</p>
+                            </div>
+                        </div>
+                        <div class="font__inter">
+                            <a href="{{ platform.url }}">Мы на {{ platform.name }} -></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div style="
+        max-width: 800px;
+        max-width: calc((100% - 30px) - 295px);
+        display: inline-block;
+        transform: translateY(0px);
+        ">
+            <div class=reviews__slider>
+                {% for review in reviews %}
+                <div class=reviews__card style=display:flex;flex-direction:column;justify-content:space-between>
+                    <div>
+                        <div class=reviews__card-header>
+                            <div>
+                                <img loading="lazy" src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}"
+                                    alt="Аватар">
+                            </div>
+                            <div class=reviews__card-author-name>
+                                <p>{{ review.author }}</p>
+                            </div>
+                        </div>
+                        <div class="reviews__card-text font__inter">
+                            {{ review.content }}
+                        </div>
+                    </div>
+                    {% if review.photos.all %}
+                    <div class=reviews__card-images>
+                        {% for photo in review.photos.all %}
+                        <div class=reviews__card-image>
+                            <img loading="lazy" src="{{ photo.url }}" alt="Фото отзыва">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div>
+                        <div class=reviews__card-details>
+                            <div class=reviews__card-stars style="max-width: 80px;">
+                                <img loading="lazy" src="static/images/five-stars — копия.svg" alt="Звезды">
+                            </div>
+                            <div class=reviews__platform>
+                                <div>
+                                    <img loading="lazy" src="{{ review.platform.icon.url }}" alt="Иконка платформы">
+                                </div>
+                                <div class="reviews__platform-stats font__inter">
+                                    <p style="font-size: 14px;">{{ review.created_at|date:"d.m.Y" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div> -->
 
-</div>
 <div class=gallery>
     <div class=container>
         <div class=gallery__heading>
@@ -642,9 +724,18 @@
     </div>
     {% include 'contacts/includes/contacts_block.html' %}
 </div>
-{% endblock %} {% block script %}
+{% endblock %} 
+
+{% block script %}
 <script src="{% static 'js/home.js' %}" defer></script>
-<script>var myMap; $(document).ready((function () { $(".slider").slick({ dots: !0, infinite: !0, speed: 500, arrows: 0, slidesToShow: 1, adaptiveHeight: !0, autoplay: !1 }) })), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), $(document).ready((function () { $(".team__cards").slick({ arrows: !0, infinite: !0, slidesToShow: 4, slidesToScroll: 1, centerMode: !0, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { centerMode: !0, slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".reviews__slider").slick({ arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".gallery__slider").slick({ centerMode: !0, arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [, { breakpoint: 1200, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 1024, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), ymaps.ready((function () { myMap = new ymaps.Map("map", { center: [43.157062, 131.926061], zoom: 16, controls: [] }); var e = new ymaps.control.ZoomControl({ options: { position: { right: 10, top: 50 }, size: "small" } }); myMap.controls.add(e), myMap.behaviors.disable("scrollZoom"); var o = new ymaps.Placemark([43.157062, 131.926061], { hintContent: "Волгоградская улица, 7А", balloonContent: "Волгоградская улица, 7А" }, { iconLayout: "default#image", iconImageHref: "/static/images/pin.svg", iconImageSize: [30, 42], iconImageOffset: [-15, -42] }); myMap.geoObjects.add(o) })), document.addEventListener("DOMContentLoaded", (() => { document.querySelectorAll(".tab input").forEach((e => { e.addEventListener("click", (function () { this.parentNode.classList.toggle("selected") })) })) })); var feedbackForm = document.getElementById("feedbackForm"), phoneInput = feedbackForm.querySelector('input[type="tel"]'), phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" }); const successSection = document.getElementById("modalSuccess"); function validatePhoneNumber() { return phoneInput.value.replace(/\D/g, "").length < 11 ? (phoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (phoneInput.setCustomValidity(""), !0) } phoneInput.addEventListener("input", (function () { validatePhoneNumber() })), feedbackForm.addEventListener("submit", (async function (e) { e.preventDefault(); let o = new FormData(feedbackForm), t = document.querySelector('input[name="csrfmiddlewaretoken"]').value; feedbackForm.reset(), successSection.style.display = "flex"; try { (await fetch(`${window.location.origin}/contacts/api/save-request/`, { method: "POST", body: o, headers: { "X-CSRFToken": t } })).status } catch (e) { console.error("Ошибка запроса:", e) } }))</script>
+
+<script>var myMap; $(document).ready((function () { $(".slider").slick({ dots: !0, infinite: !0, speed: 500, arrows: 0, slidesToShow: 1, adaptiveHeight: !0, autoplay: !1 }) })), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), $(document).ready((function () { $(".team__cards").slick({ arrows: !0, infinite: !0, slidesToShow: 4, slidesToScroll: 1, centerMode: !0, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { centerMode: !0, slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".reviews__slider").slick({ arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), $(document).ready((function () { $(".gallery__slider").slick({ centerMode: !0, arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [, { breakpoint: 1200, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 1024, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }] }) })), ymaps.ready((function () { myMap = new ymaps.Map("map", { center: [43.157062, 131.926061], zoom: 16, controls: [] }); var e = new ymaps.control.ZoomControl({ options: { position: { right: 10, top: 50 }, size: "small" } }); myMap.controls.add(e), myMap.behaviors.disable("scrollZoom"); var o = new ymaps.Placemark([43.157062, 131.926061], { hintContent: "Волгоградская улица, 7А", balloonContent: "Волгоградская улица, 7А" }, { iconLayout: "default#image", iconImageHref: "/static/images/pin.svg", iconImageSize: [30, 42], iconImageOffset: [-15, -42] }); myMap.geoObjects.add(o) })), document.addEventListener("DOMContentLoaded", (() => { document.querySelectorAll(".tab input").forEach((e => { e.addEventListener("click", (function () { this.parentNode.classList.toggle("selected") })) })) })); var feedbackForm = document.getElementById("feedbackForm"), 
+
+phoneInput = feedbackForm.querySelector('input[type="tel"]');
+console.log(phoneInput);
+phoneMask = IMask(phoneInput, { mask: "+{7} (000) 000 00 00" }); 
+
+const successSection = document.getElementById("modalSuccess"); function validatePhoneNumber() { return phoneInput.value.replace(/\D/g, "").length < 11 ? (phoneInput.setCustomValidity("Необходимо минимум 11 цифр"), !1) : (phoneInput.setCustomValidity(""), !0) } phoneInput.addEventListener("input", (function () { validatePhoneNumber() })), feedbackForm.addEventListener("submit", (async function (e) { e.preventDefault(); let o = new FormData(feedbackForm), t = document.querySelector('input[name="csrfmiddlewaretoken"]').value; feedbackForm.reset(), successSection.style.display = "flex"; try { (await fetch(`${window.location.origin}/contacts/api/save-request/`, { method: "POST", body: o, headers: { "X-CSRFToken": t } })).status } catch (e) { console.error("Ошибка запроса:", e) } }))</script>
 <script defer>$(document).ready((function () { const e = (e, t) => { let o; return function (...s) { clearTimeout(o), o = setTimeout((() => e.apply(this, s)), t) } }, t = e => { const t = e.attr("max"), o = parseFloat(e.val()); o < 0 ? e.val(0) : void 0 !== t && o > parseFloat(t) && e.val(t) }; $('#bestProjectsForm input[type="number"]').on("input", e((function (e) { t($(this)) }), 150)), $('#mobileFiltersForm input[type="number"]').on("input", e((function (e) { t($(this)) }), 150)), $("#bestProjectsForm input, #bestProjectsForm select").on("change input", (function (e) { let t = $("#bestProjectsForm").serialize(), o = $(".best-projects__cards"); o.addClass("fade-out"), timeout = setTimeout((function () { $.ajax({ url: "{% url 'home:best_projects_filter' %}", type: "GET", data: t, success: function (e) { o.html(e.html), o.removeClass("fade-out").addClass("fade-in"), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), setTimeout((() => { o.removeClass("fade-in") }), 500); document.querySelectorAll(".openModal").forEach((e => { e.addEventListener("click", (() => { modal.style.display = "flex" })) })) }, error: function (e, t, o) { console.error("Ошибка при фильтрации:", o) } }) }), 200) })) }))</script>
 <script defer>document.addEventListener("DOMContentLoaded", (function () { const e = document.querySelectorAll(".radio-toggle"); e.forEach((function (t) { t.addEventListener("click", (function () { "true" === this.dataset.wasChecked ? (this.checked = !1, this.dataset.wasChecked = "false") : this.dataset.wasChecked = "true", e.forEach((function (e) { e !== t && e.name == t.name && (e.dataset.wasChecked = "false") })); let s = $("#bestProjectsForm").serialize(), a = $(".best-projects__cards"); a.addClass("fade-out"), timeout = setTimeout((function () { $.ajax({ url: "{% url 'home:best_projects_filter' %}", type: "GET", data: s, success: function (e) { a.html(e.html), a.removeClass("fade-out").addClass("fade-in"), $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), setTimeout((() => { a.removeClass("fade-in") }), 500) }, error: function (e, t, s) { console.error("Ошибка при фильтрации:", s) } }) }), 200) })) })) }))</script>
 <script defer>document.addEventListener("DOMContentLoaded", (function () { const e = document.getElementById("openMobileFilters"), t = document.getElementById("closeMobileFilter"), l = document.getElementById("mobileCatalogFilter"), n = document.getElementById("mobileCatalogFilterOverlay"); let o = 0; function d() { return window.innerWidth <= 500 } e.addEventListener("click", (function () { d() && (o = window.scrollY, document.body.style.top = `-${o}px`, document.body.classList.add("scroll-disabled")), l.style.display = "flex", n.style.display = "flex" })), t.addEventListener("click", (function () { l.style.display = "none", n.style.display = "none", d() && (document.body.classList.remove("scroll-disabled"), document.body.style.top = "", window.scrollTo(0, o)) })) }))</script>
@@ -653,7 +744,6 @@
 <script src=https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js defer></script>
 <script
     defer>$(document).ready((function () { window.innerWidth > 500 && window.innerWidth < 1200 ? $("#mobileFiltersForm select").select2() : $("select").select2() }))</script>
-
 <script defer>
     // $(document).ready((function() {
     //     $(".video-reviews__videos").slick({
@@ -727,7 +817,6 @@
         })
         }
     }))
-
     
 </script>
 {% endblock %}

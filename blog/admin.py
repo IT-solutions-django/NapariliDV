@@ -15,13 +15,7 @@ class ParagraphInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin): 
-    list_display = ['title', 'article_type', 'created_at']
+    list_display = ['title', 'created_at']
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ParagraphInline]
-
-
-@admin.register(ArticleType)
-class ArticleTypeAdmin(admin.ModelAdmin): 
-    list_display = ['name']
-    search_fields = ['name']

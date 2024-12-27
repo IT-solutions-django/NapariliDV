@@ -14,7 +14,7 @@
     <script src="{% static 'js/slick/slick/slick.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'js/slick/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static 'js/slick/slick/slick-theme.css' %}">
-    <script src="{% static 'js/imask/Imask.min.js' %}" defer></script>
+    <script src="{% static 'js/imask/Imask.min.js' %}"></script>
     
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,19 +130,19 @@
 
                 <div class="header__nav">
                     <div class="header__menu">
-                        <div class="header__menu-link">
+                        <div class="header__menu-link {% if request.path == '/projects/catalog' %}active{% endif %}">
                             <a href="{% url 'projects:catalog' %}">Каталог</a>
                         </div>
-                        <div class="header__menu-link">
+                        <div class="header__menu-link {% if request.path == '/contacts/about/' %}active{% endif %}">
                             <a href="{% url 'contacts:about_company' %}">О компании</a>
                         </div>
-                        <div class="header__menu-link">
+                        <div class="header__menu-link {% if request.path == '/contacts/gallery/' %}active{% endif %}">
                             <a href="{% url 'contacts:gallery' %}">Галерея</a>
                         </div>
-                        <div class="header__menu-link">
+                        <div class="header__menu-link {% if request.path == '/blog/' %}active{% endif %}">
                             <a href="{% url 'blog:blog' %}">Новости</a>
                         </div>
-                        <div class="header__menu-link">
+                        <div class="header__menu-link {% if request.path == '/contacts/' %}active{% endif %}">
                             <a href="{% url 'contacts:contacts' %}">Контакты</a>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                 </div>
             </div>
             <div class="footer-right-column">
-                <div>
+                <div class="footer__link">
                     <a href="{% url 'contacts:about_company' %}">Партнёры и сертификаты</a>
                 </div>
                 <div class="footer__phone">
@@ -374,6 +374,9 @@
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/99270864" style="position:absolute; left:-9999px;" alt="" /></div>
 </noscript>
+
+<!-- <meta name="google-site-verification" content="L2Xl9lbLZUu0yUK_w8AzADqbSvHTdb-izDTrtBOuzAE" /> -->
+<!-- <meta name="yandex-verification" content="a28ecb51273f5a74" /> -->
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 {% block script %}

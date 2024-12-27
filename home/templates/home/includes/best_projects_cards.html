@@ -5,7 +5,7 @@
     <div class="photo-slider">
         {% for photo in project.photos.all %}
         <div class="best-projects__card-image photo-slider-item">
-            <img src="{{ photo.image.url }}" alt="Фото проекта">
+            <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
         </div>
         {% endfor %}
     </div>

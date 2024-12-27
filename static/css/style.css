@@ -369,6 +369,12 @@ input[type=radio] {
     overflow-x: hidden;
     border-radius: 10px;
 }
+@media (max-width: 400px) {
+    #mobileCatalogFilter input {
+        font-size: 13px;
+    }
+}
+
 
 #mobileGalleryProject {
     padding: 0;
@@ -502,9 +508,21 @@ input[type=radio] {
     white-space: nowrap;
     align-self: center;
 }
+.header__menu-link a:hover {
+    transition: all 0.1s ease;
+}
+.header__menu-link a:hover {
+    color: #FF1A1A;
+}
+.header__menu-link.active a {
+    font-family: 'Involve 500', sans-serif;
+    font-weight: 500;
+    color: #FF1A1A;
+}
 
 .header__menu-link:hover,
-.nav__link:hover {
+.nav__link:hover, 
+.best-projects__more-button a:hover {
     color: #FF1A1A
 }
 
@@ -574,6 +592,7 @@ input[type=radio] {
     font-weight: 500;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .header__call-button p:hover {
@@ -793,7 +812,32 @@ input[type=radio] {
 .modal-feedback__send,
 .modal-feedback__back,
 .news__read-button {
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease;
+}
+
+.slider-heading__want-the-house-button:hover,
+.advantages__choose-house:hover,
+.feedback__button:hover,
+.footer__button button:hover,
+.project__order-button:hover,
+.modal-feedback__send:hover,
+.modal-feedback__back:hover,
+.news__read-button:hover {
+    animation: pulse-hover 1.2s;
+}
+
+@keyframes pulse-hover {
+    0% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(255, 26, 26, 0.6);
+    }
+    70% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 20px rgba(54, 82, 217, 0);
+    }
+    100% {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(54, 82, 217, 0);
+    }
 }
 
 .clicked {
@@ -1096,6 +1140,11 @@ input[type=radio] {
     user-select: none;
     line-height: 40px;
     text-align: center;
+    transition: all 0.3s ease;
+}
+.best-projects__radio-button label:hover,
+.catalog__radio-button label:hover {
+    color: red
 }
 
 .best-projects__radio-button input[type=radio]:checked+label,
@@ -1167,10 +1216,7 @@ select option {
 
 .best-projects__number input {
     max-width: 80px;
-}
-
-.best-projects__number input {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .best-projects__to-catalog--adaptive {
@@ -1182,7 +1228,8 @@ select option {
 }
 
 .catalog__filters-number-square input {
-    max-width: 50px;
+    max-width: 60px;
+    font-size: 15px;
 }
 
 .catalog__filters-number-price input {
@@ -1199,7 +1246,7 @@ select option {
 }
 
 .news__cards {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-bottom: 40px;
 }
 
@@ -1295,6 +1342,7 @@ select option {
     border: solid 1px #595959;
     border-radius: 20px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .best-projects__order-button button:hover,
@@ -1313,6 +1361,24 @@ select option {
     background-image: url('/static/images/right-gray-arrow.svg');
     background-repeat: no-repeat;
     background-position: right center;
+    transition: all 0.3s ease;
+}
+
+.best-projects__more-button a,
+.similar-projects__more-button a, 
+.footer__link a, 
+.news__header-more a, 
+.best-projects__card-heading a {
+    transition: all 0.2s ease;
+} 
+
+.best-projects__card-heading a {
+    display: block;
+    width: 100%;
+}
+
+.best-projects__card-heading a:hover {
+    color:#FF1A1A
 }
 
 .best-projects__card-content li span:first-child,
@@ -1440,6 +1506,10 @@ select option {
     color: white;
     padding: 9px 45px;
     border-radius: 20px;
+    transition: all 0.3s ease;
+}
+.about-company__more-detailed a:hover {
+    background-color: #6d6d6d;
 }
 
 .about-company__row {
@@ -1650,14 +1720,14 @@ select option {
 
 .gallery-page__slide-label {
     position: absolute;
-    height: 42px;
+    min-height: 42px;
     font-size: 14px;
     border: solid 1px #B7B7B7;
     color: white;
     width: 100%;
     bottom: 0px;
     display: flex;
-    padding: 0 20px;
+    padding: 6px 20px;
     align-items: center;
     border-radius: 0 0 15px 15px;
     backdrop-filter: blur(60px);
@@ -1731,6 +1801,7 @@ select option {
     right: 60px;
     left: auto;
     background-image: url('/static/images/left-gray-arrow.svg');
+    transition: all 0.3s ease;
 }
 
 .slider .slick-prev {
@@ -1748,6 +1819,7 @@ select option {
 .video-reviews__videos .slick-next {
     right: 0px;
     background-image: url('/static/images/right-gray-arrow.svg');
+    transition: all 0.2s ease;
 }
 
 .slider .slick-next {
@@ -2027,6 +2099,7 @@ select option {
     border: solid 1px rgba(225, 225, 225, 1);
     border-radius: 20px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .catalog__filters-submit-button button:hover,
@@ -2079,17 +2152,23 @@ select option {
     margin-bottom: 100px;
 }
 .video-reviews__content {
-    display: flex;
+    /* display: flex;
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 40px; */
+    display: block;
+
 }
 .video-reviews__platforms {
     min-width: 295px;
     width: 295px;
-    display: flex;
+    height: 374px;
+    display: inline-flex;
     flex-direction: column; 
-    gap: 20px;
+    margin-right: 18px;
+    transform: translateY(26px);
     justify-content: space-between;
+
+    /* max-width: ; */
 }
 .video-reviews__platform {
     border-radius: 20px;
@@ -2117,15 +2196,9 @@ select option {
     display: flex;
     gap: 20px;
 }
-/* .video-reviews__video.slick-slide.slick-active {
-    height: 100%;
-    margin-right: 20px;
-    max-width: 300px !important;
-    width: 200px;
+.video-reviews__platform-info a:hover {
+    color: #FF1A1A;
 }
-.video-reviews__videos .slick-track {
-    max-height: 349px !important;
-} */
 .video-reviews__video {
     cursor: pointer;
 }
@@ -2186,15 +2259,20 @@ select option {
 
 .reviews__card-text {
     display: -webkit-box;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 10;
+    /* -webkit-line-clamp: 10; */
     margin-bottom: 8px;
+
+    max-height: calc(1.168em * 10); 
+    transition: max-height 0.3s ease; 
+
 }
 
 .reviews__card-text.expanded {
-    -webkit-line-clamp: inherit;
+    max-height: 100vh; 
+    /* -webkit-line-clamp: inherit; */
 }
 
 .review-card__toggle {
@@ -2489,7 +2567,7 @@ select option {
     float: left;
     width: 100%;
     padding: 0 1em;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
 }
 
 .tab {
@@ -2670,6 +2748,7 @@ select option {
     display: block;
     margin-top: 18px;
     background-color: white;
+    transition: all 0.3s ease;
 }
 
 .contacts-page__small-right-column {
@@ -2822,6 +2901,10 @@ footer {
     display: flex;
     gap: 40px;
 }
+.footer__link a:hover, 
+#userAgreementLink:hover {
+    color: #FF1A1A;
+}
 
 .footer__column,
 .footer-right-column {
@@ -2942,12 +3025,19 @@ footer hr {
     line-height: 40px;
 }
 
-.mobile-catalog__submit-button button {
+.mobile-catalog__submit-button button, 
+.mobile-catalog__reset-button a {
+    display: block;
     padding: 13.5px 0px;
     border: solid 1px #595959;
     border-radius: 20px;
     text-align: center;
     width: 100%;
+}
+.mobile-catalog__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
 }
 
 .catalog__filters-categories {
@@ -2981,7 +3071,7 @@ footer hr {
 
 .catalog__range-filter {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     position: relative;
 }
 
@@ -3619,6 +3709,7 @@ footer hr,
         background-position: right center;
     }
     .video-reviews__content {
+        display: flex;
         flex-direction: column;
     }
     .video-reviews__platforms {
@@ -3879,12 +3970,14 @@ footer hr,
 
     .best-projects,
     .feedback,
-    .half,
     .similar-projects,
     .gallery__slider,
     .reviews,
     .contacts {
         margin-bottom: 40px;
+    }
+    .half {
+        margin-bottom: 22px;
     }
 
     .best-projects__header,
@@ -4037,7 +4130,8 @@ footer hr,
     }
 
     .reviews__card-text {
-        -webkit-line-clamp: 6;
+        max-height: calc(1em * 6); 
+        /* -webkit-line-clamp: 6; */
     }
 
     .reviews__card-date {
@@ -4627,7 +4721,7 @@ footer hr,
     }
 
     .news__cards {
-        margin-top: 20px;
+        margin-top: 0px;
         margin-bottom: 20px;
     }
 
@@ -4675,7 +4769,7 @@ footer hr,
     }
 
     .news-page__header-hr--adaptive {
-        margin-bottom: 28px;
+        margin-bottom: 0px;
     }
 
     .article__image img {
@@ -4734,10 +4828,6 @@ footer hr,
     .news__header-button button {
         font-size: 14px;
         padding: 7.5px 22px;
-    }
-
-    .partners__card {
-        height: 92px;
     }
 
     .about-company__big-right-column--adaptive,
@@ -4903,7 +4993,7 @@ footer hr,
     }
 
     .gallery-page__slide-label {
-        height: 36px;
+        min-height: 36px;
     }
     .team__slider-item img, 
     .team__card img {
