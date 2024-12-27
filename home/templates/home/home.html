@@ -498,7 +498,7 @@
         {% endfor %}
     </div>
 </div>
-<div class="reviews container">
+<!-- <div class="reviews container">
     <div class=reviews__heading>
         <h4>Отзывы наших клиентов</h4>
         <hr>
@@ -538,8 +538,87 @@
             
         </div>
     </div>
+</div> -->
+<!-- <div class="reviews container">
+    <div class=reviews__heading>
+        <h4>Отзывы наших клиентов</h4>
+        <hr>
+    </div>
+    <div class="video-reviews__content">
+        <div class="video-reviews__platforms">
+            {% for platform in review_platforms %}
+                <div class="video-reviews__platform">
+                    <div class="video-reviews__platform-icon">
+                        <img loading="lazy" src="{{ platform.icon.url }}" alt="Иконка">
+                    </div>
+                    <div class="video-reviews__platform-info">
+                        <div class="video-reviews__platform-rating">
+                            <img loading="lazy" src="{% static 'images/five-stars — копия.svg' %}" alt="5 звезд">
+                            <div>
+                                <p class="font__inter">5.0 (230)</p>
+                            </div>
+                        </div>
+                        <div class="font__inter">
+                            <a href="{{ platform.url }}">Мы на {{ platform.name }} -></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div style="
+        max-width: 800px;
+        max-width: calc((100% - 30px) - 295px);
+        display: inline-block;
+        transform: translateY(0px);
+        ">
+            <div class=reviews__slider>
+                {% for review in reviews %}
+                <div class=reviews__card style=display:flex;flex-direction:column;justify-content:space-between>
+                    <div>
+                        <div class=reviews__card-header>
+                            <div>
+                                <img loading="lazy" src="{% if review.author_avatar %}{{ review.author_avatar }}{% else %}{% static 'images/user.webp' %}{% endif %}"
+                                    alt="Аватар">
+                            </div>
+                            <div class=reviews__card-author-name>
+                                <p>{{ review.author }}</p>
+                            </div>
+                        </div>
+                        <div class="reviews__card-text font__inter">
+                            {{ review.content }}
+                        </div>
+                    </div>
+                    {% if review.photos.all %}
+                    <div class=reviews__card-images>
+                        {% for photo in review.photos.all %}
+                        <div class=reviews__card-image>
+                            <img loading="lazy" src="{{ photo.url }}" alt="Фото отзыва">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div>
+                        <div class=reviews__card-details>
+                            <div class=reviews__card-stars style="max-width: 80px;">
+                                <img loading="lazy" src="static/images/five-stars — копия.svg" alt="Звезды">
+                            </div>
+                            <div class=reviews__platform>
+                                <div>
+                                    <img loading="lazy" src="{{ review.platform.icon.url }}" alt="Иконка платформы">
+                                </div>
+                                <div class="reviews__platform-stats font__inter">
+                                    <p style="font-size: 14px;">{{ review.created_at|date:"d.m.Y" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div> -->
 
-</div>
 <div class=gallery>
     <div class=container>
         <div class=gallery__heading>

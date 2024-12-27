@@ -2146,17 +2146,23 @@ select option {
     margin-bottom: 100px;
 }
 .video-reviews__content {
-    display: flex;
+    /* display: flex;
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 40px; */
+    display: block;
+
 }
 .video-reviews__platforms {
     min-width: 295px;
     width: 295px;
-    display: flex;
+    height: 374px;
+    display: inline-flex;
     flex-direction: column; 
-    gap: 20px;
+    margin-right: 18px;
+    transform: translateY(26px);
     justify-content: space-between;
+
+    /* max-width: ; */
 }
 .video-reviews__platform {
     border-radius: 20px;
@@ -2247,13 +2253,13 @@ select option {
 
 .reviews__card-text {
     display: -webkit-box;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     -webkit-box-orient: vertical;
     overflow: hidden;
     /* -webkit-line-clamp: 10; */
     margin-bottom: 8px;
 
-    max-height: calc(1em * 10); 
+    max-height: calc(1.168em * 10); 
     transition: max-height 0.3s ease; 
 
 }
@@ -3697,6 +3703,7 @@ footer hr,
         background-position: right center;
     }
     .video-reviews__content {
+        display: flex;
         flex-direction: column;
     }
     .video-reviews__platforms {
@@ -4117,7 +4124,8 @@ footer hr,
     }
 
     .reviews__card-text {
-        -webkit-line-clamp: 6;
+        max-height: calc(1em * 6); 
+        /* -webkit-line-clamp: 6; */
     }
 
     .reviews__card-date {
