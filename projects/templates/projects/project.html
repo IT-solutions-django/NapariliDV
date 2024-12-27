@@ -150,7 +150,7 @@
 </div>
 </div>
 {% include 'contacts/includes/contacts_block.html' %} {% endblock %} {% block script %}
-<link rel="preload" href="{% static 'css/luminous-lightbox.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="{% static 'css/luminous-lightbox.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <script type=module src="{% static 'js/luminous-lightbox/luminous-lightbox.js' %}"></script>
 <style class=lum-base-styles>@keyframes lum-noop{0%{zoom:1}}.lum-lightbox{position:fixed;display:none;top:0;right:0;bottom:0;left:0}.lum-lightbox.lum-open{display:block;z-index:1000000}.lum-lightbox.lum-closing,.lum-lightbox.lum-opening{animation:lum-noop 1ms}.lum-lightbox-inner{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden}.lum-lightbox-loader{display:none}.lum-lightbox-inner img{max-width:100%;max-height:100%}.lum-lightbox-image-wrapper{vertical-align:middle;display:table-cell;text-align:center;background-color:rgba(0,0,0,.5)}.lum-img{object-fit:cover!important;width:85vw}@media (max-width:990px){.lum-img{width:100vw}}</style>
 <script type=module>import{L as LuminousGallery}from"/static/js/luminous-lightbox/luminous-lightbox.js";function initGallery(){var l=document.querySelectorAll(".project__current-slide a");const e={showCloseButton:!0};l.length>0&&new LuminousGallery(l,e);var o=document.querySelectorAll(".project__slide--adaptive a");console.log(o),l.length>0&&new LuminousGallery(o)}initGallery()</script>
