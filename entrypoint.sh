@@ -6,13 +6,14 @@ python manage.py collectstatic --noinput
 
 echo "Происходит минификация CSS-файлов..."
 for file in /var/www/static/css/*.css; do
-    uglifycss "$file" > "${file%.css}.min.css"
+    uglifycss "$file" > temp.css
+    mv temp.css "$file"
     echo "Файл $file минифицирован"
 done
 
 echo "Происходит минификация JS-файлов..."
 for file in /var/www/static/js/*.js; do
-    uglifyjs "$file" -o "${file%.js}.min.js" --compress --mangle
+    uglifyjs "$file" --compress --mangle -o "$file"
     echo "Файл $file минифицирован"
 done
 
