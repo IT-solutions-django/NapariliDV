@@ -20,7 +20,7 @@ class Article(models.Model):
     created_at = models.DateTimeField('Дата и время публикации', auto_now_add=True)
     image = models.ImageField('Фото', upload_to='articles', null=True)
     slug = models.SlugField('Слаг')
-    article_type = models.ForeignKey(verbose_name='Тип', to=ArticleType, on_delete=models.CASCADE)
+    # article_type = models.ForeignKey(verbose_name='Тип', to=ArticleType, on_delete=models.CASCADE)
 
     class Meta: 
         verbose_name = 'Статья'

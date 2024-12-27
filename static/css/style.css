@@ -1240,7 +1240,7 @@ select option {
 }
 
 .news__cards {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-bottom: 40px;
 }
 
@@ -4715,7 +4715,7 @@ footer hr,
     }
 
     .news__cards {
-        margin-top: 20px;
+        margin-top: 0px;
         margin-bottom: 20px;
     }
 
@@ -4763,7 +4763,7 @@ footer hr,
     }
 
     .news-page__header-hr--adaptive {
-        margin-bottom: 28px;
+        margin-bottom: 0px;
     }
 
     .article__image img {
