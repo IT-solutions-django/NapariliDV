@@ -2250,12 +2250,17 @@ select option {
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 10;
+    /* -webkit-line-clamp: 10; */
     margin-bottom: 8px;
+
+    max-height: calc(1em * 10); 
+    transition: max-height 0.3s ease; 
+
 }
 
 .reviews__card-text.expanded {
-    -webkit-line-clamp: inherit;
+    max-height: 100vh; 
+    /* -webkit-line-clamp: inherit; */
 }
 
 .review-card__toggle {

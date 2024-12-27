@@ -21,6 +21,7 @@ function addReviewsSpoiler() {
         }
     })
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     addReviewsSpoiler();
 });
