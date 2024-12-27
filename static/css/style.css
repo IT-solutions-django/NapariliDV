@@ -508,6 +508,12 @@ input[type=radio] {
     white-space: nowrap;
     align-self: center;
 }
+.header__menu-link a:hover {
+    transition: all 0.1s ease;
+}
+.header__menu-link a:hover {
+    color: #FF1A1A;
+}
 .header__menu-link.active a {
     font-family: 'Involve 500', sans-serif;
     font-weight: 500;
