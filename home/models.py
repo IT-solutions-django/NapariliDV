@@ -19,7 +19,7 @@ class Slide(models.Model):
         verbose_name = 'Слайд'
         verbose_name_plural = 'Слайды'
 
-    def resize_image(self, image, width=1000):
+    def resize_image(self, image, width=1400):
         """Уменьшает ширину изображения до 1000 пикселей, сохраняя пропорции"""
         img = Image.open(image)
         if img.width > width:
@@ -28,9 +28,9 @@ class Slide(models.Model):
             img = img.resize((width, new_height), Image.Resampling.LANCZOS)
 
             temp_file = BytesIO()
-            img_format = img.format  # Оригинальный формат изображения
-            if not img_format:  # Если формат не распознан
-                img_format = 'JPEG'  # Устанавливаем JPEG как безопасный вариант
+            img_format = img.format 
+            if not img_format:  
+                img_format = 'JPEG'
             img.save(temp_file, format=img_format)
             temp_file.seek(0)
             return ContentFile(temp_file.read(), name=image.name)
