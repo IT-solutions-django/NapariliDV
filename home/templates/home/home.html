@@ -514,7 +514,7 @@
                         <div class="video-reviews__platform-rating">
                             <img loading="lazy" src="{% static 'images/five-stars — копия.svg' %}" alt="5 звезд">
                             <div>
-                                <p class="font__inter">5.0 (230)</p>
+                                <p class="font__inter">{{ platform.average_rating }} ({{ platform.reviews_count }})</p>
                             </div>
                         </div>
                         <div class="font__inter">
@@ -555,7 +555,7 @@
                         <div class="video-reviews__platform-rating">
                             <img loading="lazy" src="{% static 'images/five-stars — копия.svg' %}" alt="5 звезд">
                             <div>
-                                <p class="font__inter">5.0 (230)</p>
+                                <p class="font__inter">{{ platform.average_rating }} ({{ platform.reviews_count }})</p>
                             </div>
                         </div>
                         <div class="font__inter">

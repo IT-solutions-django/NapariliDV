@@ -131,7 +131,7 @@
 <div class=partners__slider>
 {% for partner in partners %}
 <div class=partners__card>
-<img src="{{ partner.image.url }}" alt="Иконка компании-партнера">
+<img loading="lazy" src="{{ partner.image.url }}" alt="Иконка компании-партнера">
 </div>
 {% endfor %}
 </div>
@@ -142,7 +142,7 @@
 <div class=certificates__slider>
 {% for certificate in certificates %}
 <div class=certificate__card>
-<img src="{{ certificate.photo.url }}" alt="Фото сертификата">
+<img loading="lazy" src="{{ certificate.photo.url }}" alt="Фото сертификата">
 </div>
 {% endfor %}
 </div>

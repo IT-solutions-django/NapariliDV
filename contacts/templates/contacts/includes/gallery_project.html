@@ -32,7 +32,7 @@
         <div class="gallery__slider">
             {% for photo in project.photos.all %}
                 <div class="gallery__photo">
-                    <img src="{{ photo.image.url }}" alt="Фото проекта">
+                    <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
                 </div>
             {% endfor %}
         </div>

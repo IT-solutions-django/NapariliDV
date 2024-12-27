@@ -286,7 +286,7 @@
             <div class=photo-slider>
                 {% for photo in project.photos.all %}
                 <div class="best-projects__card-image photo-slider-item">
-                    <a href="{{ project.get_absolute_url }}"><img src="{{ photo.image.url }}" alt="Фото проекта"></a>
+                    <a href="{{ project.get_absolute_url }}"><img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта"></a>
                 </div>
                 {% endfor %}
             </div>
