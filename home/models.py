@@ -27,6 +27,14 @@ class Slide(models.Model):
             new_height = int(img.height * ratio)
             img = img.resize((width, new_height), Image.Resampling.LANCZOS)
 
+            
+            if img.mode in ('RGBA', 'LA'):
+                background = Image.new("RGB", img.size, (255, 255, 255))
+                background.paste(img, mask=img.split()[3])  
+                img = background
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
+
             temp_file = BytesIO()
             img_format = img.format 
             if not img_format:  
