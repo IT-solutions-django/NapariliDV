@@ -369,6 +369,12 @@ input[type=radio] {
     overflow-x: hidden;
     border-radius: 10px;
 }
+@media (max-width: 400px) {
+    #mobileCatalogFilter input {
+        font-size: 13px;
+    }
+}
+
 
 #mobileGalleryProject {
     padding: 0;
@@ -1167,10 +1173,7 @@ select option {
 
 .best-projects__number input {
     max-width: 80px;
-}
-
-.best-projects__number input {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .best-projects__to-catalog--adaptive {
@@ -1650,14 +1653,14 @@ select option {
 
 .gallery-page__slide-label {
     position: absolute;
-    height: 42px;
+    min-height: 42px;
     font-size: 14px;
     border: solid 1px #B7B7B7;
     color: white;
     width: 100%;
     bottom: 0px;
     display: flex;
-    padding: 0 20px;
+    padding: 6px 20px;
     align-items: center;
     border-radius: 0 0 15px 15px;
     backdrop-filter: blur(60px);
@@ -2489,7 +2492,7 @@ select option {
     float: left;
     width: 100%;
     padding: 0 1em;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
 }
 
 .tab {
@@ -2942,12 +2945,19 @@ footer hr {
     line-height: 40px;
 }
 
-.mobile-catalog__submit-button button {
+.mobile-catalog__submit-button button, 
+.mobile-catalog__reset-button a {
+    display: block;
     padding: 13.5px 0px;
     border: solid 1px #595959;
     border-radius: 20px;
     text-align: center;
     width: 100%;
+}
+.mobile-catalog__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
 }
 
 .catalog__filters-categories {
@@ -3879,12 +3889,14 @@ footer hr,
 
     .best-projects,
     .feedback,
-    .half,
     .similar-projects,
     .gallery__slider,
     .reviews,
     .contacts {
         margin-bottom: 40px;
+    }
+    .half {
+        margin-bottom: 22px;
     }
 
     .best-projects__header,
@@ -4903,7 +4915,7 @@ footer hr,
     }
 
     .gallery-page__slide-label {
-        height: 36px;
+        min-height: 36px;
     }
     .team__slider-item img, 
     .team__card img {
