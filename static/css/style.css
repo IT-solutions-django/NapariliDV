@@ -1741,14 +1741,16 @@ select option {
 .similar-projects__cards .slick-arrow,
 .gallery-page__slider .slick-arrow,
 .partners__slider .slick-arrow,
-.certificates__slider .slick-arrow, 
-.video-reviews__content .slick-arrow {
+.certificates__slider .slick-arrow {
     top: -80px;
     background-color: white;
     width: 40px;
     height: 40px;
     border: solid 1px #B7B7B7;
     border-radius: 50%;
+}
+.video-reviews__content .slick-arrow {
+    display: none;
 }
 
 .slider .slick-arrow {
@@ -2158,14 +2160,22 @@ select option {
     display: block;
 
 }
+.mini-reviews {
+    max-width: 800px;
+    max-width: calc((100% - 30px) - 295px);
+    display: inline-block;
+    transform: translateY(0px);
+}
+
 .video-reviews__platforms {
     min-width: 295px;
     width: 295px;
-    height: 374px;
+    height: 307.59px;
     display: inline-flex;
     flex-direction: column; 
     margin-right: 18px;
-    transform: translateY(26px);
+    transform: translateY(40px);
+    /* margin-top: 40px; */
     justify-content: space-between;
 
     /* max-width: ; */
@@ -2173,8 +2183,8 @@ select option {
 .video-reviews__platform {
     border-radius: 20px;
     border: solid 1px #B7B7B7; 
-    padding: 26px 15px;
-    display: flex;
+    padding: 22px 15px;
+    display: flex !important;
     gap: 10px;
     justify-content: space-between;
     width: 100%;
@@ -2236,6 +2246,10 @@ select option {
     border: solid 1px #B7B7B7;
     padding: 20px;
     margin-right: 20px;
+
+    display:flex !important;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .reviews__card-header {
@@ -2263,9 +2277,9 @@ select option {
     -webkit-box-orient: vertical;
     overflow: hidden;
     /* -webkit-line-clamp: 10; */
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
-    max-height: calc(1.168em * 10); 
+    max-height: calc(1em * 7.6); 
     transition: max-height 0.3s ease; 
 
 }
@@ -2276,7 +2290,7 @@ select option {
 }
 
 .review-card__toggle {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: #666;
 }
 
@@ -3715,6 +3729,7 @@ footer hr,
     .video-reviews__platforms {
         flex-direction: row;
         width: 100%;
+        height: auto;
     }
     .video-reviews__videos {
         height: 400px;
@@ -3728,6 +3743,13 @@ footer hr,
     .video-reviews__video,
     .video-reviews__slide-label {
         width: calc((100% - 2 * 20px) / 3);
+    }
+    .mini-reviews {
+        margin-top: 20px;
+        max-width: 100%;
+    }
+    .video-reviews__platform {
+        width: calc((100% - 2 * 10px) / 3);
     }
 }
 
@@ -4533,6 +4555,13 @@ footer hr,
     .article .article__pagination-wrapper {
         justify-content: center;
     }
+    .video-reviews__platform-rating img {
+        width: 100px;
+    }
+    .video-reviews__platform-rating p,
+    .video-reviews__platform-label a {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 820px) {
@@ -4597,6 +4626,18 @@ footer hr,
     .video-reviews__video,
     .video-reviews__slide-label {
         width: calc((100% - 2 * 20px) / 2);
+    }
+    .video-reviews__platform-icon, 
+    .video-reviews__platform-icon img {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+    }
+    .video-reviews__platform {
+        justify-content: space-around;
+    }
+    .video-reviews__platform-rating img {
+        width: 70px;
     }
 }
 
@@ -4845,7 +4886,20 @@ footer hr,
         margin-right: 20px;
     }
 }
+@media (max-width: 676px) {
+    .video-reviews__platform-icon, 
+    .video-reviews__platform-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    .video-reviews__platform-rating img {
+        width: 100px;
+    }
+    .video-reviews__platform {
+        justify-content: center;
+    }
 
+}
 @media (max-width: 576px) {
     .best-projects__radio-group {
         gap: 10px
@@ -4998,6 +5052,17 @@ footer hr,
     .team__slider-item img, 
     .team__card img {
         height: 300px;
+    }
+    .video-reviews__platform-icon, 
+    .video-reviews__platform-icon img {
+        width: 30px;
+        height: 30px;
+    }
+    .video-reviews__platform-rating img {
+        width: 70px;
+    }
+    .video-reviews__platform-rating p {
+        font-size: 12px;
     }
 }
 
