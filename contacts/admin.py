@@ -12,7 +12,7 @@ from .filters import IsClosed
 
 @admin.register(Worker)
 class WorkerAdmin(admin.ModelAdmin): 
-    list_display = ['last_name', 'first_name', 'role', 'photo']
+    list_display = ['name', 'role', 'photo']
 
 
 @admin.register(Request)
