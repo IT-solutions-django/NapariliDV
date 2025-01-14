@@ -1726,19 +1726,23 @@ select option {
 .team__card img {
     border-radius: 20px;
     height: 360px;
-    object-fit: contain;
-    background: linear-gradient(#F1F1F1, #CFCFCF);
+
+    object-fit: cover;
+    object-position: 50% 5%;
     mix-blend-mode: multiply;
     margin-bottom: 15px;
-    object-position: bottom;
 }
 
 .team__card img {
     border-radius: 20px;
     height: 328px;
     width: 100%;
-    object-fit: contain;
-    background: linear-gradient(#F1F1F1, #CFCFCF);
+
+
+    object-fit: cover;
+    object-position: 50% top;
+    width: 100%;
+
     mix-blend-mode: multiply;
     margin-bottom: 15px;
 }
