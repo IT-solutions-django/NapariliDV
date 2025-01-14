@@ -19,8 +19,8 @@ class Slide(models.Model):
         verbose_name = 'Слайд'
         verbose_name_plural = 'Слайды'
 
-    def resize_image(self, image, width=1400):
-        """Уменьшает ширину изображения до 1000 пикселей, сохраняя пропорции"""
+    def resize_image(self, image, width=2000):
+        """Уменьшает ширину изображения пикселей, сохраняя пропорции"""
         img = Image.open(image)
         if img.width > width:
             ratio = width / img.width
