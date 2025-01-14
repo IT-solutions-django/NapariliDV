@@ -453,6 +453,10 @@ input[type=radio] {
     margin-top: 30px;
 }
 
+#mobileCatalogFilter label {
+    font-size: 14px;
+}
+
 .catalog__not-found {
     text-align: center;
     width: 100%;
@@ -1105,6 +1109,10 @@ input[type=radio] {
     gap: 30px;
 }
 
+.best-projects__number label {
+    font-size: 14px;
+}
+
 .best-projects__radio-group,
 .catalog__radio-group {
     display: flex;
@@ -1202,6 +1210,13 @@ select option {
     background-position: right center;
 }
 
+#mobileCatalogFilter .best-projects__number-filter, 
+#mobileCatalogFilter .best-catalog__range-filter, 
+#mobileCatalogFilter .catalog__range-filter {
+    gap: 10px;
+}
+
+
 .best-projects__number-filter,
 .catalog__range-filter {
     padding: 10px 20px;
@@ -1209,7 +1224,7 @@ select option {
     border-radius: 15px;
     background-color: white;
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 
 .best-projects__number,
@@ -1218,6 +1233,17 @@ select option {
     display: flex;
     gap: 6px;
     align-items: flex-end;
+}
+
+/* .best-projects__number:first-child {
+    padding-right: 4px;
+    border-right: solid 1px black;
+} */
+
+.double-number-filter-divider {
+    /* height: 100%;  */
+    width: 1px !important; 
+    background-color: rgba(225, 225, 225, 1);
 }
 
 .best-projects__number input {
@@ -1235,11 +1261,12 @@ select option {
 
 .catalog__filters-number-square input {
     max-width: 60px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .catalog__filters-number-price input {
     max-width: 100px;
+    font-size: 14px;
 }
 
 .best-projects__cards,
@@ -3089,11 +3116,11 @@ footer hr {
     margin-bottom: 10px;
 }
 
-.catalog__range-filter {
+/* .catalog__range-filter {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     position: relative;
-}
+} */
 
 .catalog__filters-living-info {
     display: flex;
@@ -4672,10 +4699,6 @@ footer hr,
         height: 660px;
     }
 
-    .slider .slick-dots {}
-
-    .slick-dotted .slick-slider {}
-
     .slider-image {
         height: 300px;
     }
@@ -5012,6 +5035,12 @@ footer hr,
 
     .similar-projects__slider-item ul li span {
         font-size: 14px;
+    }
+
+    #mobileCatalogFilter .best-projects__number-filter, 
+    #mobileCatalogFilter .best-catalog__range-filter, 
+    #mobileCatalogFilter .catalog__range-filter {
+        gap: 6px;
     }
 }
 
