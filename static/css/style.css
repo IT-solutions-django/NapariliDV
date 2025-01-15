@@ -1633,6 +1633,9 @@ select option {
     margin-left: 10px;
     margin-right: 10px;
 }
+.certificate__card img {
+    max-height: 100% !important;
+}
 
 .work-stages {
     margin-bottom: 40px;
