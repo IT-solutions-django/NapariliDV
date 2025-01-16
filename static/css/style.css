@@ -1640,7 +1640,7 @@ select option {
 .about-company__image2 {
     object-fit: cover;
     max-height: 400px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .work-stages {
@@ -3102,7 +3102,9 @@ footer hr {
 }
 
 .catalog__filters-categories {
-    gap: 30px;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 20px;
 }
 
 .catalog__filters-parameters {
