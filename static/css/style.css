@@ -2472,6 +2472,7 @@ select option {
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .news__header-right-buttons {
@@ -4942,6 +4943,9 @@ footer hr,
         padding: 15px;
         margin-left: 20px;
         margin-right: 20px;
+    }
+    .news__header-right-buttons {
+        margin-top: 12px;
     }
 }
 @media (max-width: 676px) {
