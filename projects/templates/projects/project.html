@@ -1,158 +1,232 @@
-{% extends 'base.html' %} {% load static %} {% load price_filters %} 
+{% extends 'base.html' %} {% load static %} {% load price_filters %}
 
-{% block title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %} 
-{% block meta_title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %} 
-{% block description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы составим уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в ближайшее время! {% endblock %} 
-{% block meta_description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы составим уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в ближайшее время! {% endblock %} 
+{% block title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %}
+{% block meta_title %} {{ project.name }} - проект с фото, ценами и схемой | Напарили ДВ {% endblock %}
+{% block description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы составим
+уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в ближайшее
+время! {% endblock %}
+{% block meta_description %} Проект дома {{ project.name }} - это уникальный объект типа {{ project.category }}. Мы
+составим уникальный проект дома для вашего участка и согласуем объемы и площадь. Оставьте заявку и мы свяжемся с вами в
+ближайшее время! {% endblock %}
 
 {% block content %}
 <div class="breadcrumbs container font__inter">
-<div>
-<a href="{% url 'home:home' %}">Главная</a>
-</div>
-<div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
-</div>
-<div>
-<a href="{% url 'projects:catalog' %}">Каталог</a>
-</div>
-<div>
-<img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
-</div>
-<div>
-<a class=color__red href="{{ project.get_absolute_url }}">{{ project.name }}</a>
-</div>
+    <div>
+        <a href="{% url 'home:home' %}">Главная</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
+    </div>
+    <div>
+        <a href="{% url 'projects:catalog' %}">Каталог</a>
+    </div>
+    <div>
+        <img src="{% static 'images/right-gray-arrow.svg' %}" alt="Стрелка">
+    </div>
+    <div>
+        <a class=color__red href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+    </div>
 </div>
 <div class="project container">
-<div class=project__slider>
-<div class=project__current-slide href="">
-{% for photo in project.photos.all %}
-<div>
-<a href="{{ photo.image.url }}">
-<img src="{{ photo.image.url }}" alt="Фото проекта">
-</a>
-</div>
-{% endfor %}
-</div>
-<div class=project__slider-nav>
-{% for photo in project.photos.all %}
-<div class=project__slide>
-<img src="{{ photo.image.url }}" alt="Фото проекта">
-</div>
-{% endfor %}
-</div>
-</div>
-<div class=project__details>
-<div class=project__buttons-group>
-{% if project.estimates %}
-<a href="{{ project.estimates.url }}" class=project__download-estimates>
-<button>Скачать смету</button>
-</a>
-{% endif %}
-<div class=project__discount>
-<button>Скидка 5%</button>
-</div>
-</div>
-<div class="project__heading container">
-<h1>{{ project.name }}</h1>
-<hr>
-</div>
-<div class="project__buttons-group--adaptive container">
-{% if project.estimates %}
-<a href="{{ project.estimates.url }}" class=project__download-estimates--adaptive>
-<button>Скачать смету</button>
-</a>
-{% endif %}
-<div class=project__discount--adaptive>
-<button>Скидка 5%</button>
-</div>
-</div>
-<div class=project__slider--adaptive>
-{% for photo in project.photos.all %}
-<div class=project__slide--adaptive>
-<a href="{{ photo.image.url }}">
-<img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
-</a>
-</div>
-{% endfor %}
-</div>
-<div class="project__parameters container">
-<ul class=table-of-contents>
-<li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
-<li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-<li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-<li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-<li><span>Материал</span><span>{{ project.material }}</span></li>
-<li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
-<li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
-</ul>
-</div>
-<div class="project__credit container">
-<div>Дом подходит под ипотеку,<br> или кредит</div>
-</div>
-<div class="project__order-button animated openModal">
-<button>
-<img src="{% static 'images/order.svg' %}" alt="Заказать">
-</button>
-</div>
-</div>
+    <div class=project__slider>
+        <div class=project__current-slide href="">
+            {% for photo in project.photos.all %}
+            <div>
+                <a href="{{ photo.image.url }}">
+                    <img src="{{ photo.image.url }}" alt="Фото проекта">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class=project__slider-nav>
+            {% for photo in project.photos.all %}
+            <div class=project__slide>
+                <img src="{{ photo.image.url }}" alt="Фото проекта">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class=project__details>
+        <div class=project__buttons-group>
+            {% if project.estimates %}
+            <a href="{{ project.estimates.url }}" class=project__download-estimates>
+                <button>Скачать смету</button>
+            </a>
+            {% endif %}
+            <div class=project__discount>
+                <button>Скидка 5%</button>
+            </div>
+        </div>
+        <div class="project__heading container">
+            <h1>{{ project.name }}</h1>
+            <hr>
+        </div>
+        <div class="project__buttons-group--adaptive container">
+            {% if project.estimates %}
+            <a href="{{ project.estimates.url }}" class=project__download-estimates--adaptive>
+                <button>Скачать смету</button>
+            </a>
+            {% endif %}
+            <div class=project__discount--adaptive>
+                <button>Скидка 5%</button>
+            </div>
+        </div>
+        <div class=project__slider--adaptive>
+            {% for photo in project.photos.all %}
+            <div class=project__slide--adaptive>
+                <a href="{{ photo.image.url }}">
+                    <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="project__parameters container">
+            <ul class=table-of-contents>
+                <li><span>Этажи</span><span>{{ project.floors_quantity }}</span></li>
+                <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                <li><span>Материал</span><span>{{ project.material }}</span></li>
+                <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+            </ul>
+        </div>
+        <div class="project__credit container">
+            <div>Дом подходит под ипотеку,<br> или кредит</div>
+        </div>
+        <div class="project__order-button animated openModal">
+            <button>
+                <img src="{% static 'images/order.svg' %}" alt="Заказать">
+            </button>
+        </div>
+    </div>
 </div>
 <div class="info container">
-<div class=info__heading>
-<p>Каркасные дома</p>
-<hr>
-</div>
-<div class=info__row>
-<div class=info__paragraph>
-<p class=font__inter>Каркасные дома - одни из самых известных на рынке загородного жилья. Основное преимущество данной технологии - скорость и доступность строительства</p>
-<p class=font__inter>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В, утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пирог</p>
-<p class=font__inter>Как и любая технология, каркас со временем пережил несколько трансформации. Сегодня более половины строящихся частных домов возводятся по каркасной технологии. Это могут быть и загородные дома, и коттеджи с современным интерьером, которые подходят для круглогодичного проживания</p>
-<p class=font__inter>Читайте больше о каркасных домах <a class='color__red' href="{% url 'blog:blog' %}">в нашем блоге -></a></p>
-</div>
-</div>
+    <div class=info__heading>
+        <p>Каркасные дома</p>
+        <hr>
+    </div>
+    <div class=info__row>
+        <div class=info__paragraph>
+            <p class=font__inter>Каркасные дома - одни из самых известных на рынке загородного жилья. Основное
+                преимущество данной технологии - скорость и доступность строительства</p>
+            <p class=font__inter>Каркасный дом - это дом, в основе которого есть несущий деревянный каркас. Он в свою
+                очередь заполняется современными материалами для влаго-, ветро- и теплозащиты: Изоспан А, изоспин В,
+                утеплитель Технониколь, и обшивается отделочными материалами (панели «Доке, имитация бруса, Данил
+                «Ханья»). По завершении работ стена каркасного дома напоминает слоеный пирог</p>
+            <p class=font__inter>Как и любая технология, каркас со временем пережил несколько трансформации. Сегодня
+                более половины строящихся частных домов возводятся по каркасной технологии. Это могут быть и загородные
+                дома, и коттеджи с современным интерьером, которые подходят для круглогодичного проживания</p>
+            <p class=font__inter>Читайте больше о каркасных домах <a class='color__red' href="{% url 'blog:blog' %}">в
+                    нашем блоге -></a></p>
+        </div>
+    </div>
 </div>
 <div class="similar-projects container">
-<div>
-<h4 class=similar-projects__heading>Похожие проекты</h4>
-</div>
-<div class=similar-projects__cards>
-{% for project in similar_projects %}
-<div class=similar-projects__slider-item>
-<div class=photo-slider>
-{% for photo in project.photos.all %}
-<div class="similar-projects__card-image photo-slider-item">
-<img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
-</div>
-{% endfor %}
-</div>
-<div class=similar-projects__card-text-container>
-<div class=similar-projects__card-heading>
-<a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
-</div>
-<hr>
-<div class=similar-projects__card-content>
-<ul class=table-of-contents>
-<li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-<li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-<li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-<li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
-</ul>
-</div>
-</div>
-<div class="similar-projects__order-button openModal">
-<button>Заказать строительство</button>
-</div>
-<div class=similar-projects__more-button>
-<a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
-</div>
-</div>
-{% endfor %}
-</div>
+    <div>
+        <h4 class=similar-projects__heading>Похожие проекты</h4>
+    </div>
+    <div class=similar-projects__cards>
+        {% for project in similar_projects %}
+        <div class=similar-projects__slider-item>
+            <div class=photo-slider>
+                {% for photo in project.photos.all %}
+                <div class="similar-projects__card-image photo-slider-item">
+                    <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
+                </div>
+                {% endfor %}
+            </div>
+            <div class=similar-projects__card-text-container>
+                <div class=similar-projects__card-heading>
+                    <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+                </div>
+                <hr>
+                <div class=similar-projects__card-content>
+                    <ul class=table-of-contents>
+                        <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
+                        <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                        <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                        <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="similar-projects__order-button openModal">
+                <button>Заказать строительство</button>
+            </div>
+            <div class=similar-projects__more-button>
+                <a href="{{ project.get_absolute_url }}">Узнать подробнее</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% include 'contacts/includes/contacts_block.html' %} {% endblock %} {% block script %}
-<link rel="preload" href="{% static 'css/luminous-lightbox.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="{% static 'css/luminous-lightbox.css' %}" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
 <script type=module src="{% static 'js/luminous-lightbox/luminous-lightbox.js' %}"></script>
-<style class=lum-base-styles>@keyframes lum-noop{0%{zoom:1}}.lum-lightbox{position:fixed;display:none;top:0;right:0;bottom:0;left:0}.lum-lightbox.lum-open{display:block;z-index:1000000}.lum-lightbox.lum-closing,.lum-lightbox.lum-opening{animation:lum-noop 1ms}.lum-lightbox-inner{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden}.lum-lightbox-loader{display:none}.lum-lightbox-inner img{max-width:100%;max-height:100%}.lum-lightbox-image-wrapper{vertical-align:middle;display:table-cell;text-align:center;background-color:rgba(0,0,0,.5)}.lum-img{object-fit:cover!important;width:85vw}@media (max-width:990px){.lum-img{width:100vw}}</style>
-<script type=module>import{L as LuminousGallery}from"/static/js/luminous-lightbox/luminous-lightbox.js";function initGallery(){var l=document.querySelectorAll(".project__current-slide a");const e={showCloseButton:!0};l.length>0&&new LuminousGallery(l,e);var o=document.querySelectorAll(".project__slide--adaptive a");console.log(o),l.length>0&&new LuminousGallery(o)}initGallery()</script>
-<script>var myMap;$(".project__current-slide").slick({slidesToShow:1,slidesToScroll:1,arrows:!0,fade:!0,asNavFor:".project__slider-nav"}),$(".project__slider-nav").slick({slidesToShow:3,slidesToScroll:1,asNavFor:".project__current-slide",dots:!1,arrows:!1,focusOnSelect:!0}),$(".project__slider--adaptive").slick({centerMode:!0,slidesToShow:1,slidesToScroll:1,dots:!1,arrows:!1,focusOnSelect:!0,responsive:[{breakpoint:1200,settings:{slidesToShow:2,slidesToScroll:1}},{breakpoint:820,settings:{slidesToShow:1,slidesToScroll:1}},{breakpoint:576,settings:{slidesToShow:1,slidesToScroll:1}}]}),$(document).ready((function(){$(".similar-projects__cards").slick({arrows:!0,infinite:!0,slidesToShow:3,slidesToScroll:1,responsive:[{breakpoint:1024,settings:{slidesToShow:2,slidesToScroll:1}},{breakpoint:768,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}},{breakpoint:576,settings:{centerMode:!0,slidesToShow:1,slidesToScroll:1}},{breakpoint:410,settings:{centerMode:!1,slidesToShow:1,slidesToScroll:1}}]}),$(".photo-slider").slick({dots:!0,infinite:!0,speed:500,slidesToShow:1,adaptiveHeight:!1,autoplay:!1,arrows:!1}),$(".photo-slider").on("touchstart mousedown",(function(o){o.stopPropagation()}))})),ymaps.ready((function(){myMap=new ymaps.Map("map",{center:[43.157062,131.926061],zoom:16,controls:[]});var o=new ymaps.control.ZoomControl({options:{position:{right:10,top:50},size:"small"}});myMap.controls.add(o),myMap.behaviors.disable("scrollZoom");var s=new ymaps.Placemark([43.157062,131.926061],{hintContent:"Волгоградская улица, 7А",balloonContent:"Волгоградская улица, 7А"},{iconLayout:"default#image",iconImageHref:"/static/images/pin.svg",iconImageSize:[30,42],iconImageOffset:[-15,-42]});myMap.geoObjects.add(s)}))</script>
+<style class=lum-base-styles>
+    @keyframes lum-noop {
+        0% {
+            zoom: 1
+        }
+    }
+
+    .lum-lightbox {
+        position: fixed;
+        display: none;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0
+    }
+
+    .lum-lightbox.lum-open {
+        display: block;
+        z-index: 1000000
+    }
+
+    .lum-lightbox.lum-closing,
+    .lum-lightbox.lum-opening {
+        animation: lum-noop 1ms
+    }
+
+    .lum-lightbox-inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden
+    }
+
+    .lum-lightbox-loader {
+        display: none
+    }
+
+    .lum-lightbox-inner img {
+        max-width: 100%;
+        max-height: 100%
+    }
+
+    .lum-lightbox-image-wrapper {
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .5)
+    }
+
+    .lum-img {
+        object-fit: cover !important;
+        width: 85vw
+    }
+
+    @media (max-width:990px) {
+        .lum-img {
+            width: 100vw
+        }
+    }
+</style>
+<script
+    type=module>import{L as LuminousGallery}from"/static/js/luminous-lightbox/luminous-lightbox.js";function initGallery(){var l=document.querySelectorAll(".project__current-slide a");const e={showCloseButton:!0};l.length>0&&new LuminousGallery(l,e);var o=document.querySelectorAll(".project__slide--adaptive a");console.log(o),l.length>0&&new LuminousGallery(o)}initGallery()</script>
+<script>var myMap; $(".project__current-slide").slick({ slidesToShow: 1, slidesToScroll: 1, arrows: !0, fade: !0, asNavFor: ".project__slider-nav" }), $(".project__slider-nav").slick({ slidesToShow: 3, slidesToScroll: 1, asNavFor: ".project__current-slide", dots: !1, arrows: !1, focusOnSelect: !0 }), $(".project__slider--adaptive").slick({ centerMode: !0, slidesToShow: 1, slidesToScroll: 1, dots: !1, arrows: !1, focusOnSelect: !0, responsive: [{ breakpoint: 1200, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 820, settings: { slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 576, settings: { slidesToShow: 1, slidesToScroll: 1 } }] }), $(document).ready((function () { $(".similar-projects__cards").slick({ arrows: !0, infinite: !0, slidesToShow: 3, slidesToScroll: 1, responsive: [{ breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } }, { breakpoint: 768, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 576, settings: { centerMode: !0, slidesToShow: 1, slidesToScroll: 1 } }, { breakpoint: 410, settings: { centerMode: !1, slidesToShow: 1, slidesToScroll: 1 } }] }), $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1, arrows: !1 }), $(".photo-slider").on("touchstart mousedown", (function (o) { o.stopPropagation() })) })), ymaps.ready((function () { myMap = new ymaps.Map("map", { center: [43.157062, 131.926061], zoom: 16, controls: [] }); var o = new ymaps.control.ZoomControl({ options: { position: { right: 10, top: 50 }, size: "small" } }); myMap.controls.add(o), myMap.behaviors.disable("scrollZoom"); var s = new ymaps.Placemark([43.157062, 131.926061], { hintContent: "Волгоградская улица, 7А", balloonContent: "Волгоградская улица, 7А" }, { iconLayout: "default#image", iconImageHref: "/static/images/pin.svg", iconImageSize: [30, 42], iconImageOffset: [-15, -42] }); myMap.geoObjects.add(s) }))</script>
 {% endblock %}
