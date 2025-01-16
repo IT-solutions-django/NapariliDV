@@ -30,7 +30,7 @@ class ProjectPhotoInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin): 
-    list_display = ['id', 'name', 'description', 'square', 'price']
+    list_display = ['id', 'name', 'description', 'square', 'price', 'category']
 
     inlines = [
         ProjectPhotoInline,
