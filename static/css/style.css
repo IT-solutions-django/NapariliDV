@@ -2474,6 +2474,15 @@ select option {
     align-items: center;
 }
 
+.news__header-right-buttons {
+    flex-wrap: wrap;
+}
+#galleryForm {
+    row-gap: 10px;
+    max-width: 400px;
+    flex-wrap: wrap;
+}
+
 .news__header-button a,
 .news__header-button button,
 .project__download-estimates,
@@ -2482,6 +2491,10 @@ select option {
     border-radius: 20px;
     border: solid 1px #595959;
     white-space: nowrap;
+}
+
+.news__header-button label {
+    display: block;
 }
 
 .project__discount button {
