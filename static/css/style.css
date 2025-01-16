@@ -2472,7 +2472,6 @@ select option {
     display: flex;
     gap: 20px;
     align-items: center;
-    justify-content: flex-end;
 }
 
 .news__header-right-buttons {
@@ -2482,6 +2481,7 @@ select option {
     row-gap: 10px;
     max-width: 400px;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .news__header-button a,
