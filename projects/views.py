@@ -102,10 +102,15 @@ class ProjectView(View):
             )
         ).order_by('area_diff')[:5]  # Ближайшие по площади
         
-        if not similar_projects_by_area or similar_projects_by_area.count() < 3:
+        if not similar_projects_by_area or similar_projects_by_area.count() < 3: # Если таких нет, то выводим из той же категории
             similar_projects_by_area = Project.objects.filter(
                 category=project.category
             ).exclude(id=project.id)[:5]
+
+        if not similar_projects_by_area: # Если и таких нет, выводим 5 случайных
+            ids = [i.id for i in Project.objects.all()] 
+            random.shuffle(ids)
+            similar_projects_by_area = [Project.objects.get(id=i) for i in ids[:5]]
 
         print(similar_projects_by_area)
 
