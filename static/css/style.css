@@ -3428,15 +3428,17 @@ footer hr,
     display: none;
 }
 
-.project__order-button {
-    position: absolute;
+.project__order-button-area {
     position: relative;
 }
 
-.project__order-button button {
+.project__order-button {
+    /* position: absolute;
+    position: relative; */
     position: absolute;
+    top: 55px;
+    /* bottom: 0px; */
     right: 0px;
-    top: -10px
 }
 
 .similar-projects {
@@ -4495,10 +4497,10 @@ footer hr,
         right: 0px;
     }
 
-    .project__order-button button {
+    .project__order-button {
         position: absolute;
-        bottom: 50px;
-        transform: translateY(-5px);
+        /* bottom: 200px; */
+        transform: translateY(-26px);
     }
 
     .project__credit div {
@@ -4904,7 +4906,7 @@ footer hr,
         font-size: 14px;
     }
 
-    .project__order-button button {
+    .project__order-button {
         transform: translateY(-58px);
     }
 
