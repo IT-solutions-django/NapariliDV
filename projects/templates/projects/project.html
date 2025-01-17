@@ -86,18 +86,24 @@
                 <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
                 <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
                 <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-                <li><span>Материал</span><span>{{ project.material }}</span></li>
-                <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+                {% if project.material %}
+                    <li><span>Материал</span><span>{{ project.material }}</span></li>   
+                {% endif %}
+                {% if project.roof_type %}
+                    <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
+                {% endif %}
                 <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
             </ul>
         </div>
-        <div class="project__credit container">
-            <div>Дом подходит под ипотеку,<br> или кредит</div>
-        </div>
-        <div class="project__order-button animated openModal">
-            <button>
-                <img src="{% static 'images/order.svg' %}" alt="Заказать">
-            </button>
+        <div class="project__order-button-area">
+            <div class="project__credit container">
+                <div>Дом подходит под ипотеку,<br> или кредит</div>
+            </div>
+            <div class="project__order-button animated openModal">
+                <button>
+                    <img src="{% static 'images/order-button.svg' %}" alt="Заказать">
+                </button>
+            </div>
         </div>
     </div>
 </div>
