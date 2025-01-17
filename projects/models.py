@@ -6,6 +6,7 @@ from home.services import convert_image_to_webp
 
 class Category(models.Model): 
     name = models.CharField('Название', max_length=100)
+    description = models.TextField('Описание')
 
     class Meta: 
         verbose_name = 'Категория'
