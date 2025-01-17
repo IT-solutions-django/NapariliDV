@@ -59,13 +59,17 @@ class Project(models.Model):
         verbose_name='Материал', 
         to=Material, 
         on_delete=models.CASCADE, 
-        related_name='material_projects'
+        related_name='material_projects', 
+        null=True, 
+        blank=True,
     )
     roof_type = models.ForeignKey(
         verbose_name='Тип кровли', 
         to=RoofType, 
         on_delete=models.CASCADE, 
-        related_name='roof_type_projects'
+        related_name='roof_type_projects', 
+        null=True, 
+        blank=True,
     )
 
     class Meta: 
