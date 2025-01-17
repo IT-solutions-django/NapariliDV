@@ -3274,6 +3274,9 @@ footer hr,
     flex-direction: column;
     gap: 20px;
 }
+.info__paragraph a {
+    color:rgba(255, 26, 26, 1);
+}
 
 .project {
     display: flex;
