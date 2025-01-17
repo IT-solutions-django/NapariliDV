@@ -1402,7 +1402,8 @@ select option {
 .similar-projects__more-button a, 
 .footer__link a, 
 .news__header-more a, 
-.best-projects__card-heading a {
+.best-projects__card-heading a, 
+.similar-projects__card-heading a {
     transition: all 0.2s ease;
 } 
 
@@ -1411,7 +1412,9 @@ select option {
     width: 100%;
 }
 
-.best-projects__card-heading a:hover {
+.best-projects__card-heading a:hover, 
+.similar-projects__card-heading a:hover, 
+.similar-projects__more-button a:hover {
     color:#FF1A1A
 }
 
