@@ -283,9 +283,11 @@
         <div class=best-projects__card>
             <div class=photo-slider>
                 {% for photo in project.photos.all %}
-                <div class="best-projects__card-image photo-slider-item">
-                    <a href="{{ project.get_absolute_url }}"><img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта"></a>
-                </div>
+                    {% if forloop.counter <= 2 or forloop.revcounter <= 2 %}
+                        <div class="best-projects__card-image photo-slider-item">
+                            <a href="{{ project.get_absolute_url }}"><img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта"></a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <div class=best-projects__card-text-container>
