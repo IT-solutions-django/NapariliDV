@@ -124,13 +124,13 @@
 </div>
 {% endfor %}
 </div>
-<div class=contacts__heading>
+<div id="partnersBlock" class=contacts__heading>
 <h4>Партнеры</h4>
 <hr>
 </div>
 <div class=partners__slider>
 {% for partner in partners %}
-<a class=partners__card href="{{ partner.url }}">
+<a class=partners__card href="{{ partner.url }}" target="_blank">
     <img loading="lazy" src="{{ partner.image.url }}" alt="Иконка компании-партнера">
 </a>
 {% endfor %}
