@@ -129,25 +129,16 @@
         {% for project in similar_projects %}
         <div class=similar-projects__slider-item>
             <div class=photo-slider>
-                {% with project.photos.all|slice:":2" as first_photos %}
-                {% with project.photos.all.reverse|slice:":2" as last_photos %}
-                    {% for photo in first_photos %}
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <a href="{{ project.get_absolute_url }}">
-                            <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
-                        </a>
-                    </div>
-                    {% endfor %}
-                    {% for photo in last_photos %}
-                    <div class="similar-projects__card-image photo-slider-item">
-                        <a href="{{ project.get_absolute_url }}">
-                            <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
-                        </a>
-                    </div>
-                    {% endfor %}
-                {{ last_photos.count }}
-                {% endwith %}
-                {% endwith %}
+                {% for photo in project.photos.all %}
+                    {% if forloop.counter <= 2 or forloop.revcounter <= 2 %}
+                        <div class="similar-projects__card-image photo-slider-item">
+                            <a href="{{ project.get_absolute_url }}">
+                                <img loading="lazy" src="{{ photo.image.url }}" alt="Фото проекта">
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
             </div>
             <div class=similar-projects__card-text-container>
                 <div class=similar-projects__card-heading>

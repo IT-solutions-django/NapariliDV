@@ -1634,9 +1634,9 @@ select option {
     transition: all 0.3s ease;
 }
 
-.partners__card:hover img {
+/* .partners__card:hover img {
     transform: scale(1.08);
-}
+} */
 
 .partners__card img {
     object-fit: contain;
@@ -1647,7 +1647,7 @@ select option {
     min-height: 30%;
     height: 100px;
 
-    /* transition: all 0.4s ease; */
+    transition: all 0.4s ease;
 }
 
 .certificate__card {
