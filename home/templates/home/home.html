@@ -426,7 +426,7 @@
                         </div>
                         <div class=feedback__agreement>
                             <div class=feedback__checkbox-wrap>
-                                <input type=checkbox id=consent name=consent required>
+                                <input checked type=checkbox id=consent name=consent required>
                             </div>
                             <div>
                                 <label for=consent class=feedback__checkbox-label>
@@ -571,12 +571,14 @@
             <div class=news__content>
                 <div class=news__small-left-column>
                     <div class=news__photo>
-                        <img loading="lazy" src="{{ article.image.url }}" alt="Фото">
+                        <a href="{{ article.get_absolute_url }}">
+                            <img loading="lazy" src="{{ article.image.url }}" alt="Фото">
+                        </a>
                     </div>
                 </div>
                 <div class=news__big-right-column>
                     <div class=news__new-heading>
-                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                        <a class="hover-red" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                     </div>
                     <div class="news__new-text font__inter">
                         {{ article.paragraphs.all.0.content|truncatechars_html:100 }}
@@ -586,7 +588,7 @@
                             <i>{{ article.created_at|date:"d.m.Y" }}</i>
                         </div>
                         <div class=news__read-button-adaptive>
-                            <a href="{{ article.get_absolute_url }}">Читать далее</a>
+                            <a class="hover-red" href="{{ article.get_absolute_url }}">Читать далее</a>
                         </div>
                     </div>
                 </div>

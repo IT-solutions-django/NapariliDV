@@ -27,7 +27,7 @@
                             {{ category.tag }}
                         </div>
                         <div>
-                            <label for=consent>
+                            <label for="{{ category.id_for_label }}">
                                 {{ category.choice_label }}
                             </label>
                         </div>
@@ -163,7 +163,7 @@
         </div>
     </div>
     <div class=catalog__filters>
-        <form action="">
+        <form id="desktopForm" action="">
             <div class=catalog__filters-categories>
                 {% for category in form.categories %}
                 <div class=catalog__filters-category>
@@ -171,7 +171,7 @@
                         {{ category.tag }}
                     </div>
                     <div>
-                        <label for=consent>
+                        <label for="{{ category.id_for_label  }}">
                             {{ category.choice_label }}
                         </label>
                     </div>
@@ -353,9 +353,38 @@
 <script defer>$(document).ready((function () { const t = (t, n) => { let e; return function (...i) { clearTimeout(e), e = setTimeout((() => t.apply(this, i)), n) } }, n = t => { const n = t.attr("max"), e = parseFloat(t.val()); e < 0 ? t.val(0) : void 0 !== n && e > parseFloat(n) && t.val(n) }; $('.catalog__filters input[type="number"]').on("input", t((function (t) { n($(this)) }), 150)), $('#mobileCatalogFilter input[type="number"]').on("input", t((function (t) { n($(this)) }), 150)) }))</script>
 <script>var myMap; $(document).ready((function () { $(".photo-slider").slick({ dots: !0, infinite: !0, speed: 500, slidesToShow: 1, adaptiveHeight: !1, autoplay: !1 }) })), ymaps.ready((function () { myMap = new ymaps.Map("map", { center: [43.157062, 131.926061], zoom: 16, controls: [] }); var o = new ymaps.control.ZoomControl({ options: { position: { right: 10, top: 50 }, size: "small" } }); myMap.controls.add(o), myMap.behaviors.disable("scrollZoom"); var a = new ymaps.Placemark([43.157062, 131.926061], { hintContent: "Волгоградская улица, 7А", balloonContent: "Волгоградская улица, 7А" }, { iconLayout: "default#image", iconImageHref: "/static/images/pin.svg", iconImageSize: [30, 42], iconImageOffset: [-15, -42] }); myMap.geoObjects.add(a) }))</script>
 <script>document.addEventListener("DOMContentLoaded", (() => { document.querySelectorAll(".catalog__pagination-controls a").forEach((e => { e.addEventListener("click", (a => { a.preventDefault(); const n = new URL(e.href); new URLSearchParams(window.location.search).forEach(((e, a) => { n.searchParams.has(a) || n.searchParams.set(a, e) })), window.location.href = n.toString() })) })) }))</script>
-<script>document.addEventListener("DOMContentLoaded", (function () { const e = document.querySelectorAll(".radio-toggle"); console.log(e), e.forEach((function (t) { t.addEventListener("click", (function () { console.log("да"), "true" === this.dataset.wasChecked ? (this.checked = !1, this.dataset.wasChecked = "false") : this.dataset.wasChecked = "true", e.forEach((function (e) { e !== t && (e.dataset.wasChecked = "false") })) })) })) }))</script>
+<script>document.addEventListener("DOMContentLoaded", (function () { const e = document.querySelectorAll(".radio-toggle"); e.forEach((function (t) { t.addEventListener("click", (function () { console.log("да"), "true" === this.dataset.wasChecked ? (this.checked = !1, this.dataset.wasChecked = "false") : this.dataset.wasChecked = "true", e.forEach((function (e) { e !== t && (e.dataset.wasChecked = "false") })) })) })) }))</script>
 <script>document.addEventListener("DOMContentLoaded", (function () { const e = document.getElementById("openMobileFilters"), t = document.getElementById("closeMobileFilter"), l = document.getElementById("mobileCatalogFilter"), n = document.getElementById("mobileCatalogFilterOverlay"); e.addEventListener("click", (function () { l.style.display = "flex", n.style.display = "flex", document.querySelector("body").classList.toggle("scroll-disabled") })), t.addEventListener("click", (function () { l.style.display = "none", n.style.display = "none", document.querySelector("body").classList.toggle("scroll-disabled") })) }))</script>
 <link href=https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css rel=stylesheet>
 <script src=https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js defer></script>
 <script defer>$(document).ready((function () { window.innerWidth < 1200 ? $("#mobileFiltersForm select").select2() : $("select").select2() }))</script>
+<script>
+    // Обработка нажатий на label чекбоксов
+    // Десктоп
+    const categoriesChackboxes = document.querySelectorAll("#desktopForm .catalog__filters-categories label");
+    categoriesChackboxes.forEach(label => {
+        label.addEventListener('click', event  => {
+            event.preventDefault();
+            const label_for = label.getAttribute('for');
+            var checkbox = document.querySelector('#desktopForm').querySelector(`#${label_for}`);
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    });
+
+    // Мобильная версия
+    const mobileCategoriesChackboxes = document.querySelectorAll("#mobileCatalogFilter .catalog__filters-categories label");
+    mobileCategoriesChackboxes.forEach(label => {
+        label.addEventListener('click', event  => {
+            event.preventDefault();
+            const label_for = label.getAttribute('for');
+            var checkbox = document.querySelector('#mobileCatalogFilter').querySelector(`#${label_for}`);
+            console.log(checkbox)
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    });
+</script>
 {% endblock %}

@@ -502,6 +502,22 @@ input[type=radio] {
     text-transform: uppercase;
     font-family: 'Involve 600', sans-serif;
     font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.header__company-name a:hover {
+    color: #FF1A1A;
+}
+
+.hover-red, 
+.contacts-link {
+    transition: all 0.3s ease;
+}
+
+.hover-red:hover,
+.contacts-link:hover {
+    color: #FF1A1A;
 }
 
 .header__row {
@@ -616,6 +632,16 @@ input[type=radio] {
     font-family: 'Involve 600', sans-serif;
     font-weight: 600;
     white-space: nowrap;
+}
+
+.header__phone a, 
+.header__phone-adaptive a {
+    transition: all 0.3s ease;
+}
+
+.header__phone a:hover, 
+.header__phone-adaptive a:hover {
+    color: #FF1A1A;
 }
 
 .header__phone-adaptive {
@@ -826,6 +852,20 @@ input[type=radio] {
     border-radius: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease;
+}
+
+.news__read-button {
+    transform: scale(0.7); 
+    opacity: 0; 
+    position: absolute;
+    right: 0px;
+    top: 130px;
+    transition: transform 0.4s ease;
+}
+.news__content:hover .news__read-button {
+    display: block; 
+    transform: scale(1); 
+    opacity: 1;
 }
 
 .slider-heading__want-the-house-button:hover,
@@ -2577,10 +2617,6 @@ select option {
     background-color: #F8F8F8;
 }
 
-.news__content:hover .news__read-button {
-    display: block;
-}
-
 .news__photo,
 .news__photo img {
     border-radius: 20px;
@@ -2629,12 +2665,6 @@ select option {
     justify-content: space-between;
 }
 
-.news__read-button {
-    display: none;
-    position: absolute;
-    right: 0px;
-    top: 130px
-}
 
 .news__read-button-adaptive {
     display: none;
@@ -2705,6 +2735,8 @@ select option {
     max-height: 0;
     overflow: hidden;
     background: white;
+
+    transition: all 0.15s;
 }
 
 .selected {
@@ -3213,6 +3245,8 @@ footer hr {
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center center;
+
+    transition: all 0.2s ease;
 }
 
 .catalog__pagination-arrow-left {
