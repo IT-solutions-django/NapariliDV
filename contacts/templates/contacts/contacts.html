@@ -75,7 +75,7 @@
 <a href="mailto:{{ company_info.email }}">Почта:</a>
 </div>
 <div>
-<a href="mailto:{{ company_info.email }}">naparili.dv@mail.ru</a>
+<a href="mailto:{{ company_info.email }}">{{ company_info.email }}</a>
 </div>
 </div>
 </div>
@@ -84,13 +84,13 @@
 <hr class=contacts-page__info-hr--adaptive>
 <div class=contacts-page__small-right-column>
 <div class=contacts-page__juridical>
-ООО АЛЬЯНССТРОЙСЕРВИС
+{{ company_info.full_name }}
 </div>
 <div class=contacts-page__juridical>
-ИНН/КПП 2536327428
+{{ company_info.inn }}
 </div>
 <div class=contacts-page__juridical>
-ОГРН 1212500007961
+{{ company_info.ogrn }}
 </div>
 </div>
 </div>

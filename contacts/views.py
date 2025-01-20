@@ -6,7 +6,7 @@ from .models import (
     PrivacyPolicy, 
     Worker,
     CertificatePhoto,
-    PartnerImage,
+    Partner,
 )
 from projects.models import Category
 from .forms import FeedbackForm, GalleryFilterForm
@@ -57,7 +57,7 @@ class AboutCompanyView(View):
     def get(self, request): 
         workers = Worker.objects.all()
         certificates = CertificatePhoto.objects.all()
-        partners = PartnerImage.objects.all()
+        partners = Partner.objects.all()
         context = {
             'workers': workers,
             'certificates': certificates,

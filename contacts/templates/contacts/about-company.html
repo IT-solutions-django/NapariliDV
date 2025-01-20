@@ -130,9 +130,9 @@
 </div>
 <div class=partners__slider>
 {% for partner in partners %}
-<div class=partners__card>
-<img loading="lazy" src="{{ partner.image.url }}" alt="Иконка компании-партнера">
-</div>
+<a class=partners__card href="{{ partner.url }}">
+    <img loading="lazy" src="{{ partner.image.url }}" alt="Иконка компании-партнера">
+</a>
 {% endfor %}
 </div>
 <div class=contacts__heading>

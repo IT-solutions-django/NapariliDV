@@ -1627,6 +1627,8 @@ select option {
 
 .partners__card img {
     margin: auto auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .certificate__card {
