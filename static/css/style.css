@@ -502,6 +502,20 @@ input[type=radio] {
     text-transform: uppercase;
     font-family: 'Involve 600', sans-serif;
     font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.header__company-name a:hover {
+    color: #FF1A1A;
+}
+
+.contacts-link {
+    transition: all 0.3s ease;
+}
+
+.contacts-link:hover {
+    color: #FF1A1A;
 }
 
 .header__row {
@@ -616,6 +630,16 @@ input[type=radio] {
     font-family: 'Involve 600', sans-serif;
     font-weight: 600;
     white-space: nowrap;
+}
+
+.header__phone a, 
+.header__phone-adaptive a {
+    transition: all 0.3s ease;
+}
+
+.header__phone a:hover, 
+.header__phone-adaptive a:hover {
+    color: #FF1A1A;
 }
 
 .header__phone-adaptive {
