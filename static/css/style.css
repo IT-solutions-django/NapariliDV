@@ -510,10 +510,12 @@ input[type=radio] {
     color: #FF1A1A;
 }
 
+.hover-red, 
 .contacts-link {
     transition: all 0.3s ease;
 }
 
+.hover-red:hover,
 .contacts-link:hover {
     color: #FF1A1A;
 }
