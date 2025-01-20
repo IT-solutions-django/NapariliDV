@@ -169,6 +169,20 @@
     onload="this.onload=null;this.rel='stylesheet'">
 <script type=module src="{% static 'js/luminous-lightbox/luminous-lightbox.js' %}"></script>
 <style class=lum-base-styles>
+    .lum-img {
+        max-height: 90vh !important;
+        max-width: 1200px !important;
+    }
+    @media (max-width: 1200px) {
+        .lum-img {
+            max-width: 100% !important;
+        }
+    }
+    @media (max-width: 990px) {
+        .lum-gallery-button {
+            display: none !important;
+        }
+    }
     @keyframes lum-noop {
         0% {
             zoom: 1
