@@ -1641,7 +1641,7 @@ select option {
     min-height: 30%;
     height: 100px;
 
-    transition: all 0.4s ease;
+    /* transition: all 0.4s ease; */
 }
 
 .certificate__card {
