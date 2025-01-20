@@ -1623,12 +1623,25 @@ select option {
     margin-left: 10px;
     margin-right: 10px;
     display: flex !important;
+    padding: 10px 15px;
+
+    transition: all 0.3s ease;
+}
+
+.partners__card:hover img {
+    transform: scale(1.08);
 }
 
 .partners__card img {
+    object-fit: contain;
     margin: auto auto;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
+    min-width: 30%;
+    min-height: 30%;
+    height: 100px;
+
+    transition: all 0.4s ease;
 }
 
 .certificate__card {
