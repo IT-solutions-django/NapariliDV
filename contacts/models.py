@@ -91,8 +91,9 @@ class CertificatePhoto(models.Model):
         return f'Сертификат {self.pk}'
     
 
-class PartnerImage(models.Model): 
+class Partner(models.Model): 
     image = models.ImageField('Фото', upload_to='contacts/certificates') 
+    url = models.URLField('Ссылка на сайт', max_length=500)
 
     class Meta: 
         verbose_name = 'Логотип'

@@ -5,7 +5,7 @@ from .models import (
     PrivacyPolicy, 
     PrivacyPolicyParagraph, 
     CertificatePhoto, 
-    PartnerImage,
+    Partner,
 )
 from .filters import IsClosed
 
@@ -41,6 +41,6 @@ class CertificatePhotoAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'photo']
 
 
-@admin.register(PartnerImage)
+@admin.register(Partner)
 class PartnerImageAdmin(admin.ModelAdmin): 
     list_display = ['__str__', 'image']
