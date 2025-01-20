@@ -92,25 +92,12 @@ class CertificatePhoto(models.Model):
     
 
 class Partner(models.Model): 
-    image = models.ImageField('Фото', upload_to='contacts/certificates') 
+    image = models.FileField('Фото', upload_to='contacts/certificates') 
     url = models.URLField('Ссылка на сайт', max_length=500)
 
     class Meta: 
         verbose_name = 'Логотип'
         verbose_name_plural = 'Партнеры'
-
-    def save(self, *args, **kwargs):
-        if self.pk:
-            old_image = self.__class__.objects.filter(pk=self.pk).first().image
-            if old_image and self.image and old_image.name == self.image.name:
-                super(self.__class__, self).save(*args, **kwargs)
-                return
-
-        webp_image = convert_image_to_webp(self.image)
-        if webp_image:
-            self.image.save(webp_image.name, webp_image, save=False)
-        
-        super(self.__class__, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'Партнер {self.pk}'
