@@ -1049,6 +1049,12 @@ input[type=radio] {
     width: 100%;
 }
 
+.advantages__details-small-right-column img {
+    max-height: 287px;
+    object-fit: cover;
+    object-position: 50% 35%;
+}
+
 .advantages__textblock {
     margin-bottom: 40px;
     width: calc((100% - 2 * 20px) / 3);
@@ -1714,6 +1720,8 @@ select option {
     border-radius: 20px;
     height: 100%;
     width: 100%;
+    object-position: 50% 20%;
+    max-height: 200px;
 }
 
 .team {
