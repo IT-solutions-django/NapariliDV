@@ -303,7 +303,8 @@ input[type=radio] {
         padding-top: 20px;
     }
 
-    .modal-feedback__form input, 
+    .modal-feedback__form input,
+    .modal-feedback__form textarea,
     .feedback__form input {
         padding: 15px 20px;
         font-size: 14px;
