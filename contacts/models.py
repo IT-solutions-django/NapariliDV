@@ -56,6 +56,7 @@ class PrivacyPolicyParagraph(models.Model):
 class Request(models.Model): 
     name = models.CharField('Имя', max_length=25)
     phone = models.CharField('Телефон', max_length=18)
+    message = models.TextField('Сообщение', max_length=200, null=True, blank=True)
     created_at = models.DateTimeField('Дата и время создания', auto_now_add=True)
     is_closed = models.BooleanField('Обработано', default=False)
 

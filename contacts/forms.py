@@ -6,10 +6,11 @@ from projects.models import Category
 class FeedbackForm(forms.ModelForm): 
     class Meta:
         model = Request
-        fields = ['name', 'phone']
+        fields = ['name', 'phone', 'message']
         labels = {
             'name': 'Имя',
             'phone': 'Телефон',
+            'message': 'Сообщение'
         }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -19,6 +20,10 @@ class FeedbackForm(forms.ModelForm):
                 'type': 'tel', 
                 'placeholder': '+7'
             }),
+            'message': forms.Textarea(attrs={
+                'placeholder': 'Сообщение',
+                'rows': 3
+            })
         }
 
 
