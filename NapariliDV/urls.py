@@ -20,8 +20,25 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import re_path
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import (
+    HomeViewSitemap,
+    StaticViewSitemap, 
+    OtherStatisViewSitemap,
+    ProjectViewSitemap, 
+    BlogViewSitemap,
+)
 
 from home.views import handler404
+
+
+sitemaps = {
+    'home': HomeViewSitemap,
+    'static': StaticViewSitemap,
+    'other_static': OtherStatisViewSitemap,
+    'projects': ProjectViewSitemap,
+    'blog': BlogViewSitemap,
+}
 
 
 urlpatterns = [
@@ -34,14 +51,17 @@ urlpatterns = [
 
     path('not-found/', handler404, name='not-found'),
 
-    re_path(r'^sitemap\.xml$', serve, {
-        'document_root': settings.BASE_DIR,
-        'path': 'sitemap.xml',
-    }),
     re_path(r'^robots\.txt$', serve, {
         'document_root': settings.BASE_DIR,
         'path': 'robots.txt',
     }),
+    
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+)
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
