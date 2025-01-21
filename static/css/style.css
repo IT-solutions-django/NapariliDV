@@ -149,6 +149,9 @@ input[type=radio] {
 .modal-feedback__image--adaptive img {
     border-radius: 20px 0px 0px 20px;
 }
+.modal-feedback__image img {
+    height: 100%;
+}
 
 .modal-content .modal-feedback__form-section {
     padding: 60px 40px 30px 30px;
@@ -208,13 +211,24 @@ input[type=radio] {
     padding: 20px 20px 21px 20px;
     width: 100%;
 }
+.modal-feedback__form textarea {
+    outline: solid 1px #595959;
+    border-radius: 20px;
+    padding: 20px 20px 21px 20px;
+    width: 100%;
+}
 
-.modal-feedback__form input:focus {
+.modal-feedback__form input:focus, 
+.modal-feedback__form textarea:focus {
     border-color: #FF1A1A;
     color: #FF1A1A;
 }
+.modal-feedback__form textarea:focus {
+    outline-color: #FF1A1A;
+}
 
-.modal-feedback__form input:focus::placeholder {
+.modal-feedback__form input:focus::placeholder, 
+.modal-feedback__form textarea:focus::placeholder {
     color: #FF1A1A;
 }
 
@@ -289,7 +303,8 @@ input[type=radio] {
         padding-top: 20px;
     }
 
-    .modal-feedback__form input {
+    .modal-feedback__form input, 
+    .feedback__form input {
         padding: 15px 20px;
         font-size: 14px;
         max-width: 500px;

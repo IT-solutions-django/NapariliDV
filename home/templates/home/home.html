@@ -305,7 +305,7 @@
                 </div>
             </div>
             <div class="best-projects__order-button openModal">
-                <button>Заказать строительство</button>
+                <button class="orderButton" data-project-name="{{ project.name }}">Заказать строительство</button>
             </div>
             <div class=best-projects__more-button>
                 <a target=_blank href="{{ project.get_absolute_url }}">Узнать подробнее</a>
@@ -714,6 +714,23 @@ const successSection = document.getElementById("modalSuccess"); function validat
         })
         }
     }))
+
+    function initPrescriptionMessageInModal() {
+        const orderButtons = document.querySelectorAll(".orderButton"); 
+        console.log(orderButtons)
+        const messageField = document.getElementById("id_message"); 
+        orderButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                console.log('Нажатие')
+                const projectName = button.getAttribute("data-project-name");
+                messageField.value = `Я заинтересовался проектом ${projectName}`;
+        });
+
+        }) 
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        initPrescriptionMessageInModal();
+    });
     
 </script>
 {% endblock %}
