@@ -299,8 +299,10 @@
                     <ul class=table-of-contents>
                         <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
                         <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                        <li><span>Количество санузлов</span><span>{{ bathrooms.quantity }}</span></li>
-                        <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                        <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                        {% if project.price %}
+                            <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
