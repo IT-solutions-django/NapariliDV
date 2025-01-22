@@ -42,7 +42,7 @@ class Project(models.Model):
     name = models.CharField('Название', max_length=100)
     description = models.TextField('Описание')
     square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
-    price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
+    price = models.DecimalField('Цена', decimal_places=2, max_digits=12, null=True, blank=True)
     bedrooms_quantity = models.SmallIntegerField('Количество спален', default=1)
     floors_quantity = models.SmallIntegerField('Количество этажей', validators=[MinValueValidator(0.0)], default=1)
     bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)

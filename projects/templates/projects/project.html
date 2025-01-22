@@ -95,7 +95,9 @@
                 {% if project.roof_type %}
                     <li><span>Кровля</span><span>{{ project.roof_type }}</span></li>
                 {% endif %}
-                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                {% if project.price %}
+                    <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                {% endif %}
             </ul>
         </div>
         <div class="project__order-button-area">
@@ -150,7 +152,9 @@
                         <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
                         <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
                         <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-                        <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                        {% if project.price %}
+                            <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
