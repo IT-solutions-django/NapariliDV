@@ -1715,6 +1715,7 @@ select option {
 }
 .certificate__card img {
     max-height: 100% !important;
+    border-radius: 20px;
 }
 
 .about-company__image2 {
