@@ -92,30 +92,20 @@ class ProjectView(View):
     def get(self, request, id: int): 
         project = Project.objects.get(pk=id) 
 
-        similar_projects_by_area = Project.objects.filter(
-            category=project.category
-        ).exclude(id=project.id).annotate(
-            area_diff=Case(
-                When(square__isnull=False, then=F('square') - project.square),
-                default=Value(float('inf')),
-                output_field=FloatField()
-            )
-        ).order_by('area_diff')[:5]  # Ближайшие по площади
-        
-        if not similar_projects_by_area or similar_projects_by_area.count() < 3: # Если таких нет, то выводим из той же категории
-            similar_projects_by_area = Project.objects.filter(
-                category=project.category
-            ).exclude(id=project.id)[:5]
+        category_ids = list(Project.objects.filter(category=project.category).exclude(id=id).values_list('id', flat=True)) 
+        material_ids = list(Project.objects.filter(category=project.category).exclude(id=id).values_list('id', flat=True)) 
+        all_projects_ids = list(Project.objects.all().exclude(id=id).values_list('id', flat=True)) 
 
-        if not similar_projects_by_area or similar_projects_by_area.count() < 3: # Если и таких нет, выводим 5 случайных
-            ids = [i.id for i in Project.objects.all()] 
-            random.shuffle(ids)
-            similar_projects_by_area = [Project.objects.get(id=i) for i in ids[:5]]
+        ids = category_ids if len(category_ids) >= 3 else material_ids if len(material_ids) >= 3 else all_projects_ids
+        ids_len = len(ids)
 
-        print(similar_projects_by_area)
+        similar_projects_ids = random.sample(ids, min(6, ids_len))
+        if id in similar_projects_ids:
+            similar_projects_ids.remove(id) 
+        similar_projects = Project.objects.filter(id__in=similar_projects_ids)
 
         context = {
             'project': project,
-            'similar_projects': similar_projects_by_area,
+            'similar_projects': similar_projects,
         }
         return render(request, self.template_name, context)
