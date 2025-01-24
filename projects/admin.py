@@ -31,7 +31,7 @@ class ProjectPhotoInline(admin.TabularInline):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin): 
     list_display = ['name', 'category', 'square', 'price', 'material', 'roof_type', 'bedrooms_quantity', 'bathrooms_quantity']
-    list_filter = ['category', 'material', 'roof_type']
+    list_filter = ['category', 'material', 'roof_type', 'is_in_gallery']
 
 
     inlines = [
