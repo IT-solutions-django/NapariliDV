@@ -88,9 +88,11 @@ class SaveRequestView(View):
                 new_request: Request = form.save() 
                 crm.create_lead(f'Заявка с сайта | {new_request.phone}')
 
+                email_content = f'Телефон: {new_request.phone}\nИмя: {new_request.name}\nСообщение: {new_request.message}'
+
                 self.send_email(
                     subject=f'Заявка с сайта | {new_request.phone} | {new_request.name}', 
-                    content=new_request.message
+                    content=email_content
                 )
             except Exception as e: 
                 logger.error('Ошибка при сохранении заявки')
@@ -107,7 +109,6 @@ class SaveRequestView(View):
             'content': content,
         }
         response = requests.post(url, data=data) 
-        print(response.json())
     
 
 class GalleryPhotosAPIView(View): 
