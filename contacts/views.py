@@ -7,11 +7,14 @@ from .models import (
     Worker,
     CertificatePhoto,
     Partner,
+    Request,
 )
 from projects.models import Category
 from .forms import FeedbackForm, GalleryFilterForm
 from projects.models import Project
 from amocrm.services import crm
+import requests
+from loguru import logger
 
 
 class ContactsView(View): 
@@ -80,11 +83,32 @@ class PrivacyPolicyView(View):
 class SaveRequestView(View): 
     def post(self, request): 
         form: FeedbackForm = FeedbackForm(request.POST) 
-        if form.is_valid(): 
-            new_request = form.save() 
-            crm.create_lead(f'Заявка с сайта | {new_request.phone}')
+        if form.is_valid():
+            try: 
+                new_request: Request = form.save() 
+                crm.create_lead(f'Заявка с сайта | {new_request.phone}')
+
+                email_content = f'Телефон: {new_request.phone}\nИмя: {new_request.name}\nСообщение: {new_request.message}'
+
+                self.send_email(
+                    subject=f'Заявка с сайта | {new_request.phone} | {new_request.name}', 
+                    content=email_content
+                )
+            except Exception as e: 
+                logger.error('Ошибка при сохранении заявки')
+
             return JsonResponse({'status': 'ok'}, status=200)
         return JsonResponse({'status': 'error'}, status=400)
+    
+    def send_email(self, subject: str, content: str) -> None: 
+        recipient = 'naparilidv@mail.ru'
+        url = 'https://sendemail.space/send-email/'
+        data = {
+            'recipient': recipient, 
+            'subject': subject, 
+            'content': content,
+        }
+        response = requests.post(url, data=data) 
     
 
 class GalleryPhotosAPIView(View): 
