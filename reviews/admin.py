@@ -3,7 +3,6 @@ from .models import (
     Review,
     Platform, 
     ReviewPhoto,
-    VideoReview,
 )
 
 
@@ -23,8 +22,3 @@ class ReviewAdmin(admin.ModelAdmin):
 @admin.register(Platform)
 class PlatformAdmin(admin.ModelAdmin): 
     list_display = ['name']
-
-
-@admin.register(VideoReview)
-class VideoReviewAdmin(admin.ModelAdmin): 
-    list_display = ['url', 'title']
