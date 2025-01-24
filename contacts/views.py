@@ -101,7 +101,7 @@ class SaveRequestView(View):
         return JsonResponse({'status': 'error'}, status=400)
     
     def send_email(self, subject: str, content: str) -> None: 
-        recipient = 'naparilidv@mail.ru'
+        recipient = 'naparili.dv@yandex.ru'
         url = 'https://sendemail.space/send-email/'
         data = {
             'recipient': recipient, 
