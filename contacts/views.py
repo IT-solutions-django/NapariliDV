@@ -102,11 +102,13 @@ class SaveRequestView(View):
     
     def send_email(self, subject: str, content: str) -> None: 
         recipient = 'naparili.dv@yandex.ru'
+        ip = '109.68.215.19'
         url = 'https://sendemail.space/send-email/'
         data = {
             'recipient': recipient, 
             'subject': subject, 
             'content': content,
+            'ip': ip,
         }
         response = requests.post(url, data=data) 
     
