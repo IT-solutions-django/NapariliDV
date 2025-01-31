@@ -21,9 +21,4 @@ app.conf.beat_schedule = {
         'task': 'reviews.tasks.update_yandex_reviews_task',
         'schedule': crontab(minute='*/30'), 
     },
-
-    'refresh_amocrm_tokens': {
-        'task': 'amocrm.tasks.refresh_tokens_task',
-        'schedule': crontab(minute='*/30'),  
-    },
 }
