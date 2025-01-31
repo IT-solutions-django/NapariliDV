@@ -99,7 +99,7 @@
             <div class=slider-heading__promo>
                 <div class="slider-heading__want-the-house-button animated">
                     <button class=openModal>
-                        <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
+                        <img loading="lazy" src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
                     </button>
                 </div>
             </div>
@@ -111,14 +111,14 @@
             </div>
             <div class="slider-heading__want-the-house-button--adaptive animated">
                 <button class=openModal>
-                    <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
+                    <img loading="lazy" src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
                 </button>
             </div>
         </div>
-        <img class=slider-image src="{% static 'images/new-main-slide-1.png' %}" alt="Слайд">
+        <img class=slider-image src="{% static 'images/new-main-slide-1 (1).webp' %}" alt="Слайд">
         <div class=slider-content--upper>
             <div class=slider-content-inner>
-                <p><span class="color__red" style="font-weight: 500; font-family: 'Involve 500', sans-serif; font-size: 20px;">Готовый дом</span> для проживания в поселке “Тавричанка”. В стоимость входят: дом, участок, септик, электричество и скважина с насосом. 
+                <p><span class="color__red font__involve-medium">Готовый дом</span> для проживания в поселке “Тавричанка”. В стоимость входят: дом, участок, септик, электричество и скважина с насосом. 
                     Предложение дотупно <span class="color__red font__involve-medium">до 10 февраля</span></p>
             </div>
         </div>
@@ -159,7 +159,7 @@
                 </button>
             </div>
         </div>
-        <img class=slider-image src="{% static 'images/new-main-slide-2.png' %}" alt="Слайд">
+        <img class=slider-image src="{% static 'images/new-main-slide-2 (1).webp' %}" alt="Слайд">
         <div class=slider-content--upper>
             <div class=slider-content-inner>
                 <p class="color__red" style="font-weight: 500; font-family: 'Involve 500', sans-serif; margin-bottom: 8px; font-size: 20px;">Бесплатная баня к вашему дому</p>
@@ -197,7 +197,7 @@
                 </button>
             </div>
         </div>
-        <img style="object-position: top;" class=slider-image src="{% static 'images/new-main-slide-3.png' %}" alt="Слайд">
+        <img style="object-position: top;" class=slider-image src="{% static 'images/new-main-slide-3.webp' %}" alt="Слайд">
         <div class="slider-content--upper" style="font-size: 20px;">
             <div class=slider-content-inner>
                 <p class="color__red font__involve-medium" style="margin-bottom: 8px;">
@@ -388,8 +388,12 @@
                 <div class=best-projects__card-content>
                     <ul class=table-of-contents>
                         <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-                        <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                        <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                        {% if project.bedrooms_quantity > 0 %}
+                            <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                        {% endif %}
+                        {% if project.bathrooms_quantity > 0 %}
+                            <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                        {% endif %}
                         {% if project.price %}
                             <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
                         {% endif %}
