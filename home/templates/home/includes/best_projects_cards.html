@@ -21,9 +21,15 @@
         <div class="best-projects__card-content">
             <ul class="table-of-contents">
                 <li><span>Площадь</span><span>{{ project.square }} м²</span></li>
-                <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
-                <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
-                <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                {% if project.bedrooms_quantity > 0 %}
+                    <li><span>Количество спален</span><span>{{ project.bedrooms_quantity }}</span></li>
+                {% endif %}
+                {% if project.bathrooms_quantity > 0 %}
+                    <li><span>Количество санузлов</span><span>{{ project.bathrooms_quantity }}</span></li>
+                {% endif %}
+                {% if project.price %}
+                    <li><span>Стоимость</span><span>от {{ project.price|price_format }} р</span></li>
+                {% endif %}
             </ul>
         </div>
     </div>
