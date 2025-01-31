@@ -22,6 +22,11 @@
     src: url('/static/fonts/Involve-Regular.otf') format('opentype');
 }
 
+.font__involve-medium {
+    font-family: 'Involve 500', sans-serif; 
+    font-weight: 500;
+}
+
 .font__inter {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -250,8 +255,10 @@ input[type=radio] {
 }
 
 .modal-feedback__image--adaptive,
-.about-company__big-right-column--adaptive {
+.about-company__big-right-column--adaptive, 
+.slider-content--upper--adaptive {
     display: none;
+    position: relative;
 }
 
 .modal-feedback__image--adaptive img {
@@ -328,6 +335,7 @@ input[type=radio] {
         height: 32px;
         top: -12px;
         right: -12px;
+        z-index: 10;
     }
 
     .modal-feedback__form {
@@ -689,7 +697,7 @@ input[type=radio] {
 .header__nav {
     width: 100%;
     display: flex;
-    gap: 10%;
+    gap: 30px;
     justify-content: space-between;
 }
 
@@ -836,8 +844,9 @@ input[type=radio] {
 .slick-dotted.slick-slider {}
 
 .slider-heading hr {
+    display: none;
     margin-top: 28px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .slider-heading__promo {
@@ -936,7 +945,7 @@ input[type=radio] {
 .slider-content {
     position: absolute;
     bottom: -20px;
-    right: 17vw;
+    right: 10vw;
     transform: translateY(-50%);
     color: rgba(89, 89, 89, 1);
     background: white;
@@ -946,6 +955,25 @@ input[type=radio] {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.slider-content--upper {
+    position: absolute;
+    /* top: 360px; */
+    top: calc(50px + 50% - 50px);
+    left: 10vw;
+    transform: translateY(-50%);
+    color: rgba(89, 89, 89, 1);
+    background: white;
+    padding: 5px;
+    border-radius: 20px;
+    width: 430px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.slider-content--upper-big {
+    top: 480px;
+    left: 10vw;
+    width: 480px;
+}
 .slider-content-inner {
     width: 100%;
     padding: 25px;
@@ -987,9 +1015,9 @@ input[type=radio] {
 }
 
 .slider-heading {
-    font-size: 80px;
+    font-size: 68px;
     padding-top: 35px;
-    padding-bottom: 28px;
+    padding-bottom: 57px;
     font-family: 'Involve 500', sans-serif;
     font-weight: 500;
     white-space: nowrap;
@@ -1022,6 +1050,10 @@ input[type=radio] {
     height: 1em;
     line-height: 1em;
     border-bottom: 2px dotted rgba(163, 163, 163, 1);
+}
+
+.slider-heading__want-the-house-button  {
+    top: -110px
 }
 
 .slider-heading__want-the-house-button a,
@@ -3935,6 +3967,9 @@ footer hr,
     .reviews__platform-stats {
         font-size: 13px;
     }
+    .slider-heading__want-the-house-button {
+        top: 20px;
+    }
 }
 
 @media (max-width: 990px) {
@@ -4229,7 +4264,9 @@ footer hr,
     }
 
     .slider-heading__want-the-house-button {
-        bottom: -75px
+        /* bottom: -20px */
+        bottom: auto;
+        top: -10px
     }
 
     #mobileGalleryProject .slider-heading__want-the-house-button {
@@ -4244,7 +4281,7 @@ footer hr,
 
     .slider-heading hr {
         margin-top: 14px;
-        margin-bottom: 14px;
+        /* margin-bottom: 14px; */
     }
 
     .advantages__choose-house {
@@ -4521,9 +4558,6 @@ footer hr,
         margin-bottom: 20px;
     }
 
-    .info__small-left-column,
-    .similar-projects__cards {}
-
     .info__big-right-column {
         width: 100%;
         gap: 20px;
@@ -4727,15 +4761,48 @@ footer hr,
     .slider-item {
         height: 886px;
     }
+    .slider-heading {
+        padding-bottom: 0px;
+        font-size: 39px;
+    }
+    .slider-content--upper 
+    , .slider-heading__want-the-house-button 
+    {
+        display: none;
+    }
+    .slider-content--upper--adaptive, 
+    .slider-heading__want-the-house-button--adaptive {
+        display: block;
+    }
+    .slider-heading__want-the-house-button--adaptive {
+        position: absolute;
+        right: 0;
+        bottom: -60px;
+        width: 115px;
+        height: 115px;
+    }
+    .slider-content-inner--upper--adaptive {
+        padding: 20px 15px 50px;
+    }
+    .slider-content-inner--upper--adaptive p, 
+    .slider-content-inner--upper--adaptive span{
+        font-size: 15px !important;
+    }
+    .slider-heading__want-the-house-button {
+        margin-top: 100px;
+    }
+    .slider-heading hr {
+        display: block;
+    }
 
-    .slider-content {
-        width: 100%;
+    .slider-content 
+    {
         width: calc(100% - 2 * 10px);
         height: 136px;
         position: inherit;
         right: auto;
         bottom: auto;
-        margin-top: 76px;
+        margin-top: 100px;
         margin-left: 10px;
         margin-right: 10px;
         border: solid 1px #B7B7B7;
