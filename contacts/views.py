@@ -86,7 +86,6 @@ class SaveRequestView(View):
         if form.is_valid():
             try: 
                 new_request: Request = form.save() 
-                crm.create_lead(f'Заявка с сайта | {new_request.phone}')
 
                 email_content = f'Телефон: {new_request.phone}\nИмя: {new_request.name}\nСообщение: {new_request.message}'
 
