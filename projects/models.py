@@ -110,19 +110,18 @@ class Layout(models.Model):
         verbose_name = 'Планировка'
         verbose_name_plural = 'Планировки'
 
-    # def save(self, *args, **kwargs):
-    #     if self.pk:
-    #         old_image = self.__class__.objects.filter(pk=self.pk).first().image
-    #         if old_image and self.image and old_image.name == self.image.name:
-    #             super().save(*args, **kwargs)
-    #             return
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_image = self.__class__.objects.filter(pk=self.pk).first().image
+            if old_image and self.image and old_image.name == self.image.name:
+                super().save(*args, **kwargs)
+                return
 
-    #     webp_image = convert_image_to_webp(self.image)
-    #     if webp_image:
-    #         self.image.save(webp_image.name, webp_image, save=False)
+        webp_image = convert_image_to_webp(self.image)
+        if webp_image:
+            self.image.save(webp_image.name, webp_image, save=False)
 
-    #     def __str__(self) -> str: 
-    #         return f'{self.image}'
+        super().save(*args, **kwargs)  
 
 
 class ProjectPhoto(models.Model): 
