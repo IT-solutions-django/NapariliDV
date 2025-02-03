@@ -95,6 +95,34 @@ class Project(models.Model):
     
     def get_absolute_url(self): 
         return reverse('projects:project', args=[self.id])
+    
+
+class Layout(models.Model): 
+    name = models.CharField('Название', max_length=50)
+    image = models.ImageField('Изображение', upload_to='laoyouts') 
+    area = models.FloatField('Площадь')
+    size = models.CharField('Габариты', max_length=120)
+    ceiling_height = models.CharField('Высота потолков', max_length=120)
+    seasonality = models.CharField('Сезонность', max_length=120)
+    project = models.ForeignKey(verbose_name='Проект', to=Project, on_delete=models.CASCADE, related_name='layouts')
+
+    class Meta: 
+        verbose_name = 'Планировка'
+        verbose_name_plural = 'Планировки'
+
+    # def save(self, *args, **kwargs):
+    #     if self.pk:
+    #         old_image = self.__class__.objects.filter(pk=self.pk).first().image
+    #         if old_image and self.image and old_image.name == self.image.name:
+    #             super().save(*args, **kwargs)
+    #             return
+
+    #     webp_image = convert_image_to_webp(self.image)
+    #     if webp_image:
+    #         self.image.save(webp_image.name, webp_image, save=False)
+
+    #     def __str__(self) -> str: 
+    #         return f'{self.image}'
 
 
 class ProjectPhoto(models.Model): 
