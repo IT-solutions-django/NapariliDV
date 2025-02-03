@@ -168,6 +168,7 @@ media/contacts/*
 media/gallery/*
 media/home/*
 media/reviews/*
+media/laoyoust/*
 
 celerybeat-schedule.bak
 celerybeat-schedule.dat
