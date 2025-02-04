@@ -89,12 +89,12 @@ class CatalogView(View):
 class ProjectView(View): 
     template_name = 'projects/project.html'
     
-    def get(self, request, id: int): 
-        project = Project.objects.get(pk=id) 
+    def get(self, request, project_slug: str): 
+        project = Project.objects.get(slug=project_slug) 
 
-        category_ids = list(Project.objects.filter(category=project.category).exclude(id=id).values_list('id', flat=True)) 
-        material_ids = list(Project.objects.filter(category=project.category).exclude(id=id).values_list('id', flat=True)) 
-        all_projects_ids = list(Project.objects.all().exclude(id=id).values_list('id', flat=True)) 
+        category_ids = list(Project.objects.filter(category=project.category).exclude(id=project.id).values_list('id', flat=True)) 
+        material_ids = list(Project.objects.filter(category=project.category).exclude(id=project.id).values_list('id', flat=True)) 
+        all_projects_ids = list(Project.objects.all().exclude(id=project.id).values_list('id', flat=True)) 
 
         ids = category_ids if len(category_ids) >= 3 else material_ids if len(material_ids) >= 3 else all_projects_ids
         ids_len = len(ids)

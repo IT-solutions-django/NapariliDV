@@ -44,6 +44,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'square', 'price', 'material', 'roof_type', 'bedrooms_quantity', 'bathrooms_quantity']
     list_filter = ['category', 'material', 'roof_type', 'is_in_gallery']
     search_fields = ['name']
+    prepopulated_fields = {'slug': ('name',)}
 
 
     inlines = [

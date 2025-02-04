@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% load price_filters %} {% load float_dot_filters %} 
+{% load markdown_filters %}
 
 {% block title %} Строительство каркасных домов под ключ с ценами в Приморском крае | Напарили ДВ {% endblock %} 
 {% block meta_title %} Строительство каркасных домов под ключ с ценами в Приморском крае | Напарили ДВ {% endblock %} 
@@ -90,128 +91,50 @@
     </div>
 </div>
 <div class=slider>
-    
-    <!-- Первый слайд -->
-    <div class=slider-item>
-        <div class="slider-heading container">
-            <h1>Выгодное предложение</h1>
-            <hr>
-            <div class=slider-heading__promo>
-                <div class="slider-heading__want-the-house-button animated">
+    {% for slide in slides %}
+        <div class=slider-item>
+            <div class="slider-heading container">
+                <h1>{{ slide.title }}</h1>
+                <hr>
+                <div class=slider-heading__promo>
+                    <div class="slider-heading__want-the-house-button animated">
+                        <button class=openModal>
+                            <img loading="lazy" src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class=slider-content--upper--adaptive>
+                <div class=slider-content-inner--upper--adaptive>
+                    {{ slide.description|markdown }}
+                </div>
+                <div class="slider-heading__want-the-house-button--adaptive animated">
                     <button class=openModal>
                         <img loading="lazy" src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
                     </button>
                 </div>
             </div>
-        </div>
-        <div class=slider-content--upper--adaptive>
-            <div class=slider-content-inner--upper--adaptive>
-                <p><span class="color__red font__involve-medium">Готовый дом</span> для проживания в поселке “Тавричанка”. В стоимость входят: дом, участок, септик, электричество и скважина с насосом. 
-                    Предложение дотупно <span class="color__red font__involve-medium">до 10 февраля</span></p>
-            </div>
-            <div class="slider-heading__want-the-house-button--adaptive animated">
-                <button class=openModal>
-                    <img loading="lazy" src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
-                </button>
-            </div>
-        </div>
-        <img class=slider-image src="{% static 'images/new-main-slide-1 (1).webp' %}" alt="Слайд">
-        <div class=slider-content--upper>
-            <div class=slider-content-inner>
-                <p><span class="color__red font__involve-medium">Готовый дом</span> для проживания в поселке “Тавричанка”. В стоимость входят: дом, участок, септик, электричество и скважина с насосом. 
-                    Предложение дотупно <span class="color__red font__involve-medium">до 10 февраля</span></p>
-            </div>
-        </div>
-        <div class=slider-content>
-            <div class=slider-content-inner>
-                <ul class=table-of-contents>
-                    <li><span>Площадь</span><span>63 м²</span></li>
-                    <li><span>Количество спален</span><span>1</span></li>
-                    <li><span>Количество санузлов</span><span>1</span></li>
-                    <li><span>Стоимость</span><span>от 6 500 000 р</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Второй слайд -->
-    <div class=slider-item>
-        <div class="slider-heading container">
-            
-            <h1>Баня в подарок</h1>
-            <hr>
-            <div class=slider-heading__promo>
-                <div class="slider-heading__want-the-house-button animated">
-                    <button class=openModal>
-                        <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
-                    </button>
+            <img class=slider-image src="{% static 'images/new-main-slide-1 (1).webp' %}" alt="Слайд">
+            <div class=slider-content--upper>
+                <div class=slider-content-inner>
+                    {{ slide.description|markdown }}
                 </div>
             </div>
-        </div>
-        <div class=slider-content--upper--adaptive>
-            <div class=slider-content-inner--upper--adaptive>
-                <p class="color__red font__involve-medium">Бесплатная баня к вашему дому</p>
-                <p>Приобретая дом от компании “Напарили ДВ”, вы получаете строительстов бани абсолютно бесплатно. Предложение доступно <span class="color__red font__involve-medium">до 28 февраля</span></p>
-            </div>
-            <div class="slider-heading__want-the-house-button--adaptive animated">
-                <button class=openModal>
-                    <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
-                </button>
-            </div>
-        </div>
-        <img class=slider-image src="{% static 'images/new-main-slide-2 (1).webp' %}" alt="Слайд">
-        <div class=slider-content--upper>
-            <div class=slider-content-inner>
-                <p class="color__red" style="font-weight: 500; font-family: 'Involve 500', sans-serif; margin-bottom: 8px; font-size: 20px;">Бесплатная баня к вашему дому</p>
-                <p>Приобретая дом от компании “Напарили ДВ”, вы получаете строительстов бани абсолютно бесплатно. Предложение доступно <span class="color__red font__involve-medium">до 28 февраля</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Третий слайд -->
-    <div class=slider-item>
-        <div class="slider-heading container">
-            <h1>Ипотека для участников СВО</h1>
-            <hr>
-            <div class=slider-heading__promo>
-                <div class="slider-heading__want-the-house-button animated">
-                    <button class=openModal>
-                        <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
-                    </button>
+            {% if slide.square and slide.bedrooms_quantity and slide.bathrooms_quantity and slide.price %}
+                <div class=slider-content>
+                    <div class=slider-content-inner>
+                        <ul class=table-of-contents>
+                            <li><span>Площадь</span><span>{{ slide.square }} м²</span></li>
+                            <li><span>Количество спален</span><span>{{ slide.bedrooms_quantity }}</span></li>
+                            <li><span>Количество санузлов</span><span>{{ slide.bathrooms_quantity }}</span></li>
+                            <li><span>Стоимость</span><span>от {{ slide.price|price_format }} р</span></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
-        <div class="slider-content--upper--adaptive">
-            <div class=slider-content-inner--upper--adaptive>
-                <p class="color__red font__involve-medium" style="margin-bottom: 8px;">
-                    Выгодная ипотека для участников СВО
-                </p>
-                <p>Ставка: <span class="font__involve-medium">2%</span> </p>
-                <p>Сумма ипотеки: <span class="font__involve-medium">до 9 млн. руб.</span> </p>
-                <p>Срок Ипотеки: <span class="font__involve-medium">до 20 лет.</span> </p>
-                <p><span class="color__red font__involve-medium">Быстрое одобрение</span> по 3 документам: паспорт, СНИЛС, справка об участии в СВО</p>
-            </div>
-            <div class="slider-heading__want-the-house-button--adaptive animated">
-                <button class=openModal>
-                    <img src="{% static 'images/want-to-get.svg' %}" alt="Хочу получить">
-                </button>
-            </div>
-        </div>
-        <img style="object-position: top;" class=slider-image src="{% static 'images/new-main-slide-3.webp' %}" alt="Слайд">
-        <div class="slider-content--upper" style="font-size: 20px;">
-            <div class=slider-content-inner>
-                <p class="color__red font__involve-medium" style="margin-bottom: 8px;">
-                    Выгодная ипотека для участников СВО
-                </p>
-                <p style="margin-bottom: 8px;">Ставка: <span class="font__involve-medium">2%</span> </p>
-                <p style="margin-bottom: 8px;">Сумма ипотеки: <span class="font__involve-medium">до 9 млн. руб.</span> </p>
-                <p style="margin-bottom: 8px;">Срок Ипотеки: <span class="font__involve-medium">до 20 лет.</span> </p>
-                <span class="color__red font__involve-medium">Быстрое одобрение</span> по 3 документам: паспорт, СНИЛС, справка об участии в СВО
-                </p>
-            </div>
-        </div>
-    </div>
-   
+    {% endfor %}
+
 </div>
 <div class="advantages container">
     <div class=advantages__heading>

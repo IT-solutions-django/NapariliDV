@@ -41,7 +41,9 @@
 {% for article in articles %}
 <div class=news__card>
 <div class=news__card-image>
-<img src="{{ article.image.url }}" alt="Фото статьи">
+    <a href="{{ article.get_absolute_url }}">
+        <img src="{{ article.image.url }}" alt="Фото статьи">
+    </a>
 </div>
 <div class=news__card-text-container>
 <div class=best-projects__card-heading>

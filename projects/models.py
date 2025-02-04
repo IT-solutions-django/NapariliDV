@@ -50,6 +50,7 @@ class Project(models.Model):
     is_the_best = models.BooleanField('Входит в топ', default=False)
     is_in_gallery = models.BooleanField('Отображается в галерее', default=False)
     gallery_photo = models.ImageField('Фото в галерее', upload_to='gallery', blank=True, null=True)
+    slug = models.SlugField(verbose_name='Слаг', max_length=500)
     category = models.ForeignKey(
         verbose_name='Категория', 
         to=Category, 
@@ -94,7 +95,7 @@ class Project(models.Model):
         return f'{self.name} | {self.price} р'
     
     def get_absolute_url(self): 
-        return reverse('projects:project', args=[self.id])
+        return reverse('projects:project', args=[self.slug])
     
 
 class Layout(models.Model): 

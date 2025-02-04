@@ -840,8 +840,26 @@ input[type=radio] {
 .slider .slick-slide {
     height: auto !important;
 }
+.slider-item em {
+    font-style: normal;
+    color: #FF1A1A;
+    font-family: 'Involve 500', sans-serif;
+    font-weight: 500;
+}
 
-.slick-dotted.slick-slider {}
+.slider-item strong {
+    font-family: 'Involve 500', sans-serif;
+    font-weight: 500; 
+    margin-bottom: 8px;
+    display: block;
+    font-size: 20px;
+}
+@media (max-width: 900px) {
+    .slider-item strong {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+}
 
 .slider-heading hr {
     display: none;
@@ -1410,6 +1428,7 @@ select option {
 
 .news__card-image img {
     height: 300px;
+    cursor: pointer;
 }
 
 .best-projects__card-heading,
@@ -5339,6 +5358,26 @@ footer hr,
     }
     .video-reviews__platform-rating p {
         font-size: 12px;
+    }
+    .modal-feedback__header h5 {
+        font-size: 14px;
+    }
+    .modal-feedback__header p {
+        font-size: 12px;
+    }
+    .modal-feedback__form input, .modal-feedback__form textarea, .feedback__form input {
+        font-size: 12px;
+        padding: 15px 18px
+    }
+    .modal-feedback__success-header hr, .modal-feedback__header hr {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .modal-feedback__image--adaptive img {
+        max-height: 200px;
+    }
+    .modal-feedback__inputs {
+        gap: 10px;
     }
 }
 
