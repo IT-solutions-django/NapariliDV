@@ -10,10 +10,10 @@ class Slide(models.Model):
     title = models.CharField('Заголовок', max_length=80)
     description = models.TextField('Описание') 
     photo = models.ImageField('Фото', upload_to='home/slides')
-    square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)])
-    bedrooms_quantity = models.SmallIntegerField('Количество спален', default=1)
-    bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], default=1)
-    price = models.DecimalField('Цена', decimal_places=2, max_digits=12)
+    square = models.FloatField('Площадь', validators=[MinValueValidator(0.0)], null=True, blank=True)
+    bedrooms_quantity = models.SmallIntegerField('Количество спален', null=True, blank=True)
+    bathrooms_quantity = models.SmallIntegerField('Количество санузлов', validators=[MinValueValidator(0.0)], null=True, blank=True)
+    price = models.DecimalField('Цена', decimal_places=2, max_digits=12, null=True, blank=True)
 
     class Meta: 
         verbose_name = 'Слайд'
