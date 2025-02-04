@@ -5340,6 +5340,26 @@ footer hr,
     .video-reviews__platform-rating p {
         font-size: 12px;
     }
+    .modal-feedback__header h5 {
+        font-size: 14px;
+    }
+    .modal-feedback__header p {
+        font-size: 12px;
+    }
+    .modal-feedback__form input, .modal-feedback__form textarea, .feedback__form input {
+        font-size: 12px;
+        padding: 15px 18px
+    }
+    .modal-feedback__success-header hr, .modal-feedback__header hr {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .modal-feedback__image--adaptive img {
+        max-height: 200px;
+    }
+    .modal-feedback__inputs {
+        gap: 10px;
+    }
 }
 
 @media (max-width: 340px) {
