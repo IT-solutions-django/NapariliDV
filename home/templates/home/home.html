@@ -114,7 +114,7 @@
                     </button>
                 </div>
             </div>
-            <img class=slider-image src="{% static 'images/new-main-slide-1 (1).webp' %}" alt="Слайд">
+            <img class=slider-image src="{{ slide.photo.url }}" alt="Слайд">
             <div class=slider-content--upper>
                 <div class=slider-content-inner>
                     {{ slide.description|markdown }}
