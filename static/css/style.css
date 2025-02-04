@@ -1428,6 +1428,7 @@ select option {
 
 .news__card-image img {
     height: 300px;
+    cursor: pointer;
 }
 
 .best-projects__card-heading,
