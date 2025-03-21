@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY requirements.txt requirements.txt 
-RUN pip install --default-timeout=100 -i https://mirrors.aliyun.com/pypi/simple -r requirements.txt 
+RUN cat requirements.txt | xargs -n 1 pip install --default-timeout=200
 
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc netcat-openbsd postgresql-client \
