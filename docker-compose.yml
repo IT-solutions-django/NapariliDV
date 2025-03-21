@@ -40,6 +40,9 @@ services:
       - dev
     depends_on:
       - redis
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
 
 networks:
   dev:
